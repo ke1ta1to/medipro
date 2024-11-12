@@ -3,5 +3,8 @@
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
         "lib/**/*.jar"
-    ]
+    ],
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java"
+    },
 }
