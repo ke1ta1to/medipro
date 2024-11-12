@@ -25,6 +25,8 @@ medipro/
 
 - **resources/**: 画像、サウンド、フォントなどの外部リソースを配置。ファイルのロードや管理が容易になる。
 
-## その他
+## 初期構成
 
-- [Project Manager for Java](https://github.com/microsoft/vscode-java-dependency?tab=readme-ov-file#project-manager-for-java)を使用してプロジェクトを管理します。
+1. [Project Manager for Java](https://github.com/microsoft/vscode-java-dependency?tab=readme-ov-file#project-manager-for-java)を使用してプロジェクトを管理します。README を読んでおいてください。
+2. 必要な拡張機能があります。VSCodeの拡張機能タブの検索に`@recommended`を入れて、全て入っているか確認してください。
+3. 起動するには`F5`を押してください。自動でコンパイルして立ち上がってきます。
