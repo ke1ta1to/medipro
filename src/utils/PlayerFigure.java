@@ -1,24 +1,29 @@
 package utils;
 
-
 public class PlayerFigure {
-    private int x,y;//中心の座標
-    public void setX(int x){
+    private int x, y;// 中心の座標
+
+    public void setX(int x) {
         this.x = x;
     }
-    public void setY(int y){
+
+    public void setY(int y) {
         this.y = y;
     }
-    void MoveRight(){
+
+    void MoveRight() {
         x++;
     }
-    void MoveLeft(){
+
+    void MoveLeft() {
         x--;
     }
-    void MoveUp(){
+
+    void MoveUp() {
         y++;
     }
-    void MoveDown(){
+
+    void MoveDown() {
         y--;
     }
 }

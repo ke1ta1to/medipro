@@ -6,10 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import model.EditorModel;
 
-public class TextEditorPanel extends JPanel implements ActionListener{
+public class TextEditorPanel extends JPanel implements ActionListener {
     private JTextArea textArea;
     private JButton RunButton;
-    public TextEditorPanel(){
+
+    public TextEditorPanel() {
         textArea = new JTextArea();
         JScrollPane scrollPane = new JScrollPane(textArea);
         RunButton = new JButton("RUN");
@@ -19,11 +20,12 @@ public class TextEditorPanel extends JPanel implements ActionListener{
 
         setLayout(new BorderLayout());
         add(scrollPane, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH); 
+        add(buttonPanel, BorderLayout.SOUTH);
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == RunButton){
+        if (e.getSource() == RunButton) {
             EditorModel logic = new EditorModel();
             logic.showtext(textArea.getText());
         }

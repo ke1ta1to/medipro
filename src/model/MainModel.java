@@ -1,10 +1,8 @@
 package model;
 
-public class MainModel{
-    void init(){
-        
+public class MainModel {
+    void init() {
+
     }
-    
+
 }
-
-
