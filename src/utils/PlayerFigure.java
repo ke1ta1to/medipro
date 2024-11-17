@@ -11,19 +11,21 @@ public class PlayerFigure {
         this.y = y;
     }
 
-    void MoveRight() {
+    public void MoveRight() {
         x++;
+        System.out.println("Move Right");
     }
 
-    void MoveLeft() {
+    public void MoveLeft() {
         x--;
+        System.out.println("Move Left");
     }
 
-    void MoveUp() {
+    public void MoveUp() {
         y++;
     }
 
-    void MoveDown() {
+    public void MoveDown() {
         y--;
     }
 }
