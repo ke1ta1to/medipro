@@ -3,7 +3,7 @@ package view;
 import javax.swing.*;
 
 import model.EditorModel;
-import utils.PlayerFigure;
+import model.PlayerModel;
 
 import java.awt.*;
 
@@ -15,8 +15,8 @@ public class MainFrame extends JFrame {
     setLayout(new GridLayout(1, 2));
     getContentPane().setBackground(Color.BLUE);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    PlayerFigure playerFigure = new PlayerFigure();
-    EditorModel editorModel = new EditorModel(playerFigure);
+    PlayerModel playerModel = new PlayerModel();
+    EditorModel editorModel = new EditorModel(playerModel);
     TextEditorPanel texteditor = new TextEditorPanel(editorModel);
     add(texteditor);
     add(new JPanel());

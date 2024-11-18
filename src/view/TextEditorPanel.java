@@ -12,7 +12,7 @@ public class TextEditorPanel extends JPanel implements ActionListener {
     private JButton RunButton;
     EditorModel editorModel;
 
-    public TextEditorPanel(EditorModel editorModel){
+    public TextEditorPanel(EditorModel editorModel) {
         this.editorModel = editorModel;
 
         textArea = new JTextArea();
@@ -20,7 +20,7 @@ public class TextEditorPanel extends JPanel implements ActionListener {
 
         RunButton = new JButton("RUN");
         RunButton.addActionListener(this);
-        
+
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(RunButton);
 
@@ -33,7 +33,6 @@ public class TextEditorPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == RunButton) {
             String text = textArea.getText();
-            //System.out.println(text);
             editorModel.compiletext(text);
         }
     }

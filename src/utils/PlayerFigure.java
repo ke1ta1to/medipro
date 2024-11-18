@@ -28,4 +28,5 @@ public class PlayerFigure {
     public void MoveDown() {
         y--;
     }
+
 }
