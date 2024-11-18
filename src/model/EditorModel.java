@@ -36,6 +36,14 @@ public class EditorModel {
         } else if (word[0].equals("jump")) {
             System.out.println("jump\n");
             playerModel.boolJump();
+        } else if (word[0].equals("hook")) {
+            if (word[1].equals("left")) {
+                playerModel.boolHookLeft();
+            } else if (word[1].equals("right")) {
+                playerModel.boolHookRight();
+            } else {
+                System.out.println("compile Error");
+            }
         } else {
             System.out.println("compile Error");
         }

@@ -9,13 +9,22 @@ public class PlayerModel {
     boolean IsMoveLeft;
     boolean IsMoveRight;
     boolean IsJump;
+    boolean IsHookLeft;
+    boolean IsHookRight;
+
+    private void falseBool() {
+        IsMoveLeft = false;
+        IsMoveRight = false;
+        IsJump = false;
+        IsHookLeft = false;
+        IsHookRight = false;
+    }
 
     public void init() {
         player = new PlayerFigure();
         player.setX(X);
         player.setY(Y);
-        IsMoveLeft = false;
-        IsMoveRight = false;
+        falseBool();
     }
 
     public void boolMoveLeft() {
@@ -32,9 +41,15 @@ public class PlayerModel {
 
     public void boolPlayerWait(int num) {
         // n秒待つ
-        IsMoveLeft = false;
-        IsMoveRight = false;
-        IsJump = false;
+        falseBool();
+    }
+
+    public void boolHookLeft() {
+        IsHookLeft = true;
+    }
+
+    public void boolHookRight() {
+        IsHookRight = true;
     }
 
     // どこかにboolがtrueならutilsを呼び出すものを作る。
