@@ -32,6 +32,7 @@ public class EditorModel {
         } else if (word[0].equals("wait")) {
             System.out.println("wait " + word[1] + "\n");
             int num = Integer.parseInt(word[1]);
+            //このプログラムだけをn*1000ミリ秒止めたい
             playerModel.boolPlayerWait(num);
         } else if (word[0].equals("jump")) {
             System.out.println("jump\n");

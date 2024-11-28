@@ -4,14 +4,20 @@ import utils.PlayerFigure;
 
 //どこかでStartPosを定義する。
 public class PlayerModel {
-    int X, Y;
+    public int X, Y;
     PlayerFigure player;
-    boolean IsMoveLeft;
-    boolean IsMoveRight;
-    boolean IsJump;
-    boolean IsHookLeft;
-    boolean IsHookRight;
+    public boolean IsMoveLeft;
+    public boolean IsMoveRight;
+    public boolean IsJump;
+    public boolean IsHookLeft;
+    public boolean IsHookRight;
 
+    public PlayerModel(PlayerFigure player, int x, int y){
+        this.X = x;
+        this.Y = y;
+        this.player = player;
+        init();
+    }
     private void falseBool() {
         IsMoveLeft = false;
         IsMoveRight = false;
@@ -22,26 +28,27 @@ public class PlayerModel {
 
     public void init() {
         player = new PlayerFigure();
-        player.setX(X);
-        player.setY(Y);
         falseBool();
     }
 
     public void boolMoveLeft() {
         IsMoveLeft = true;
+        IsMoveRight = false;
     }
 
     public void boolMoveRight() {
+        System.out.println("Move Right");
         IsMoveRight = true;
+        IsMoveLeft = false;
     }
 
-    public void boolJump() {
+    public void boolJump(){
         IsJump = true;
     }
 
-    public void boolPlayerWait(int num) {
-        // n秒待つ
+    public void boolPlayerWait(int num){
         falseBool();
+
     }
 
     public void boolHookLeft() {
