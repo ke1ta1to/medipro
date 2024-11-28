@@ -1,11 +1,15 @@
 package view;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
 import model.EditorModel;
-import utils.PlayerFigure;
 
 public class TextEditorPanel extends JPanel implements ActionListener {
     private JTextArea textArea;
@@ -33,7 +37,7 @@ public class TextEditorPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == RunButton) {
             String text = textArea.getText();
-            editorModel.compiletext(text);
+            editorModel.compileText(text);
         }
     }
 }

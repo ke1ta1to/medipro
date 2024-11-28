@@ -4,59 +4,61 @@ import utils.PlayerFigure;
 
 //どこかでStartPosを定義する。
 public class PlayerModel {
-    public int X, Y;
+    public int x, y;
     PlayerFigure player;
-    public boolean IsMoveLeft;
-    public boolean IsMoveRight;
-    public boolean IsJump;
-    public boolean IsHookLeft;
-    public boolean IsHookRight;
+    public boolean isMoveLeft;
+    public boolean isMoveRight;
+    public boolean isJump;
+    public boolean isHookLeft;
+    public boolean isHookRight;
 
     public PlayerModel(PlayerFigure player, int x, int y){
-        this.X = x;
-        this.Y = y;
+        this.x = x;
+        this.y = y;
         this.player = player;
         init();
     }
-    private void falseBool() {
-        IsMoveLeft = false;
-        IsMoveRight = false;
-        IsJump = false;
-        IsHookLeft = false;
-        IsHookRight = false;
+/**
+ * boolをすべてfalseに変更する関数
+ */
+    private void disableAll() {
+        isMoveLeft = false;
+        isMoveRight = false;
+        isJump = false;
+        isHookLeft = false;
+        isHookRight = false;
     }
 
     public void init() {
         player = new PlayerFigure();
-        falseBool();
+        disableAll();
     }
 
     public void boolMoveLeft() {
-        IsMoveLeft = true;
-        IsMoveRight = false;
+        isMoveLeft = true;
+        isMoveRight = false;
     }
 
     public void boolMoveRight() {
-        System.out.println("Move Right");
-        IsMoveRight = true;
-        IsMoveLeft = false;
+        //System.out.println("Move Right");
+        isMoveRight = true;
+        isMoveLeft = false;
     }
 
     public void boolJump(){
-        IsJump = true;
+        isJump = true;
     }
 
     public void boolPlayerWait(int num){
-        falseBool();
-
+        disableAll();
     }
 
     public void boolHookLeft() {
-        IsHookLeft = true;
+        isHookLeft = true;
     }
 
     public void boolHookRight() {
-        IsHookRight = true;
+        isHookRight = true;
     }
 
     // どこかにboolがtrueならutilsを呼び出すものを作る。
