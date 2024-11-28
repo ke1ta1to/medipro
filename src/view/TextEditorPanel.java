@@ -1,22 +1,29 @@
 package view;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
 import model.EditorModel;
 
 public class TextEditorPanel extends JPanel implements ActionListener {
     private JTextArea textArea;
-    private JButton RunButton;
+    private JButton runButton;
 
     public TextEditorPanel() {
         textArea = new JTextArea();
-        JScrollPane scrollPane = new JScrollPane(textArea);
-        RunButton = new JButton("RUN");
-        RunButton.addActionListener(this);
+        runButton = new JButton("RUN");
+        runButton.addActionListener(this);
+        
         JPanel buttonPanel = new JPanel();
-        buttonPanel.add(RunButton);
+        buttonPanel.add(runButton);
+
+        JScrollPane scrollPane = new JScrollPane(textArea);
 
         setLayout(new BorderLayout());
         add(scrollPane, BorderLayout.CENTER);
@@ -25,7 +32,7 @@ public class TextEditorPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == RunButton) {
+        if (e.getSource() == runButton) {
             EditorModel logic = new EditorModel();
             logic.showtext(textArea.getText());
         }

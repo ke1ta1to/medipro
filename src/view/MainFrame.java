@@ -1,8 +1,10 @@
 package view;
 
-import java.awt.Color;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;  
+import java.awt.GridLayout;  
+
+import javax.swing.JFrame;  
+import javax.swing.JPanel;  
 
 public class MainFrame extends JFrame {
 
