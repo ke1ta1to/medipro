@@ -1,7 +1,8 @@
-import view.MainFrame;
+import view.GameFrame;
 
 public class App {
-    public static void main(String[] args) throws Exception {
-        new MainFrame();
+
+    public static void main(String[] args) {
+        new GameFrame();
     }
 }
