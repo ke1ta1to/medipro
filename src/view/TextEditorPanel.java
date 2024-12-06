@@ -10,16 +10,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import model.EditorModel;
+import utils.PlayerFigure;
 
 public class TextEditorPanel extends JPanel implements ActionListener {
     private JTextArea textArea;
     private JButton runButton;
 
     public TextEditorPanel() {
+
         textArea = new JTextArea();
         runButton = new JButton("RUN");
         runButton.addActionListener(this);
-        
+
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(runButton);
 
@@ -37,5 +39,4 @@ public class TextEditorPanel extends JPanel implements ActionListener {
             logic.showtext(textArea.getText());
         }
     }
-
 }

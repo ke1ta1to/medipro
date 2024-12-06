@@ -4,7 +4,10 @@ import java.awt.Color;
 import java.awt.GridLayout;  
 
 import javax.swing.JFrame;  
-import javax.swing.JPanel;  
+import javax.swing.JPanel;
+
+import model.EditorModel;
+import utils.PlayerFigure;  
 
 public class MainFrame extends JFrame {
 
@@ -14,7 +17,9 @@ public class MainFrame extends JFrame {
     setLayout(new GridLayout(1, 2));
     getContentPane().setBackground(Color.BLUE);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    TextEditorPanel texteditor = new TextEditorPanel();
+    PlayerFigure playerFigure = new PlayerFigure();
+    EditorModel editorModel = new EditorModel(playerFigure);
+    TextEditorPanel texteditor = new TextEditorPanel(editorModel);
     add(texteditor);
     add(new JPanel());
     setVisible(true);

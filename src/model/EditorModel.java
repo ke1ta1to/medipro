@@ -1,4 +1,5 @@
 package model;
+import utils.PlayerFigure;
 
 public class EditorModel {
     private PlayerModel playerModel;
