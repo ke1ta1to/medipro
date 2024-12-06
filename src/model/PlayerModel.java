@@ -31,7 +31,8 @@ public class PlayerModel {
 
     public void init() {
         player = new PlayerFigure();
-        disableAll();
+        player.setX(x);
+        player.setY(y);
     }
 
     public void boolMoveLeft() {

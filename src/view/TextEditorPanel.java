@@ -13,7 +13,7 @@ import model.EditorModel;
 
 public class TextEditorPanel extends JPanel implements ActionListener {
     private JTextArea textArea;
-    private JButton RunButton;
+    private JButton runButton;
     EditorModel editorModel;
 
     public TextEditorPanel(EditorModel editorModel) {
@@ -22,20 +22,22 @@ public class TextEditorPanel extends JPanel implements ActionListener {
         textArea = new JTextArea();
         JScrollPane scrollPane = new JScrollPane(textArea);
 
-        RunButton = new JButton("RUN");
-        RunButton.addActionListener(this);
+        runButton = new JButton("RUN");
+        runButton.addActionListener(this);
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.add(RunButton);
+        buttonPanel.add(runButton);
+
+        JScrollPane scrollPanel = new JScrollPane(textArea);
 
         setLayout(new BorderLayout());
-        add(scrollPane, BorderLayout.CENTER);
+        add(scrollPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == RunButton) {
+        if (e.getSource() == runButton) {
             String text = textArea.getText();
             editorModel.compileText(text);
         }

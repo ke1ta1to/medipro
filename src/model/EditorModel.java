@@ -7,39 +7,49 @@ public class EditorModel {
         this.playerModel = playerModel;
     }
 
-    /**
-     * 文字列を改行ごとに分ける関数。
+    /**  
+     * 取得した文字列を"\n"で分離するプログラム
+     * 
+     * @param text 表示するテキスト  取得する文字列
      */
     public void compileText(String text) {
         String[] EditorText = text.split("\n", 0);
+        // System.out.println("行数: " + EditorText.length);
         for (String line : EditorText) {
+            // System.out.println("中身: " + line);
             compile(line);
         }
     }
-    /**
-     * splitした文字列のコンパイル関数
-     * @param text
-     */
+
     public void compile(String text) {
         if (text.isEmpty()) {
-            //空白文字なら無視
-            return;
+            return;// 空文字列なら無視
         }
-        if (text.equals("move left")) {
-            playerModel.boolMoveLeft();
-        }else if (text.equals("move right")){
-            playerModel.boolMoveRight();
-        } else if (text.equals("wait")) {
-            //System.out.println("wait " + word[1] + "\n");
-            int num = Integer.parseInt("1");
-            //このプログラムだけをn*1000ミリ秒止めたい!!
+        String[] word = text.split(" ");
+        if (word[0].equals("move")) {
+            if (word[1].equals("left")) {
+                playerModel.boolMoveLeft();
+            } else if (word[1].equals("right")) {
+                playerModel.boolMoveRight();
+            } else {
+                System.out.println("compile Error");
+            }
+        } else if (word[0].equals("wait")) {
+            System.out.println("wait " + word[1] + "\n");
+            int num = Integer.parseInt(word[1]);
+            //このプログラムだけをn*1000ミリ秒止めたい
             playerModel.boolPlayerWait(num);
-        } else if (text.equals("jump")) {
+        } else if (word[0].equals("jump")) {
+            System.out.println("jump\n");
             playerModel.boolJump();
-        } else if (text.equals("hook left")) {
-            playerModel.boolHookLeft();
-        } else if (text.equals("hook right")) {
-            playerModel.boolHookRight();
+        } else if (word[0].equals("hook")) {
+            if (word[1].equals("left")) {
+                playerModel.boolHookLeft();
+            } else if (word[1].equals("right")) {
+                playerModel.boolHookRight();
+            } else {
+                System.out.println("compile Error");
+            }
         } else {
             System.out.println("compile Error");
         }

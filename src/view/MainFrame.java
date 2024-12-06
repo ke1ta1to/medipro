@@ -1,13 +1,14 @@
 package view;
 
-import java.awt.Color;
-import java.awt.GridLayout;
+import java.awt.Color;  
+import java.awt.GridLayout;  
 
-import javax.swing.JFrame;
+import javax.swing.JFrame;  
+import javax.swing.JPanel;
 
 import model.EditorModel;
 import model.PlayerModel;
-import utils.PlayerFigure;
+import utils.PlayerFigure;  
 
 public class MainFrame extends JFrame {
 
