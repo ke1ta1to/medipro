@@ -10,23 +10,27 @@ public class PlayerFigure {
     public void setY(int y) {
         this.y = y;
     }
-
-    public void MoveRight() {
+    public int getX(){
+        return x;
+    }
+    public int getY(){
+        return y;
+    }
+    public void moveRight() {
         x++;
-        System.out.println("Move Right");
+        //System.out.println("Move Right");
     }
 
-    public void MoveLeft() {
+    public void moveLeft() {
         x--;
-        System.out.println("Move Left");
+        //System.out.println("Move Left");
     }
 
-    public void MoveUp() {
+    public void moveUp() {
         y++;
     }
 
-    public void MoveDown() {
+    public void moveDown() {
         y--;
     }
-
 }
