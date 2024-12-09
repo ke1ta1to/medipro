@@ -1,8 +1,14 @@
-import view.GameFrame;
+import view.game.GameFrame;
 
 public class App {
 
+    private static GameFrame gameFrame;
+
     public static void main(String[] args) {
-        new GameFrame();
+        gameFrame = new GameFrame();
+    }
+
+    public static GameFrame getGameFrame() {
+        return gameFrame;
     }
 }
