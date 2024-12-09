@@ -1,4 +1,4 @@
-package view.game;
+package views.game;
 
 import java.awt.CardLayout;
 

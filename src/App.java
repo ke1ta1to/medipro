@@ -1,4 +1,4 @@
-import view.game.GameFrame;
+import views.game.GameFrame;
 
 public class App {
 

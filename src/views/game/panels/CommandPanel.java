@@ -1,4 +1,4 @@
-package view.game.panels;
+package views.game.panels;
 
 import java.awt.Color;
 import java.awt.Dimension;

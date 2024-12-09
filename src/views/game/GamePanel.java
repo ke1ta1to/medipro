@@ -1,11 +1,11 @@
-package view.game;
+package views.game;
 
 import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 
-import view.game.panels.CommandPanel;
-import view.game.panels.GameCanvas;
+import views.game.panels.CommandPanel;
+import views.game.panels.GameCanvas;
 
 public class GamePanel extends JPanel {
 

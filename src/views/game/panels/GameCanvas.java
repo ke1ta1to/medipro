@@ -1,4 +1,4 @@
-package view.game.panels;
+package views.game.panels;
 
 import javax.swing.JPanel;
 
