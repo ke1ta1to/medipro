@@ -1,0 +1,29 @@
+package models;
+
+import models.commands.CommandHandler;
+import models.commands.LeftCommand;
+import models.commands.RightCommand;
+import models.entities.Player;
+
+public class GameModel {
+
+  private CommandHandler commandHandler;
+  private Player player;
+
+  public GameModel(Player player) {
+    commandHandler = new CommandHandler();
+    this.player = player;
+    commandHandler.register("right", new RightCommand(player));
+    commandHandler.register("left", new LeftCommand(player));
+
+  }
+
+  public CommandHandler getCommandHandler() {
+    return commandHandler;
+  }
+
+  public Player getPlayer() {
+    return player;
+  }
+
+}
