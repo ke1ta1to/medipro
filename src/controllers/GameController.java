@@ -12,7 +12,7 @@ public class GameController implements ActionListener {
   private Player player;
   int index = 0;
 
-  String inputs = "right\nleft";
+  String inputs = "right\nstop";
   String[] lines = inputs.split("\n");
 
   public GameController(GameModel model, Player player) {

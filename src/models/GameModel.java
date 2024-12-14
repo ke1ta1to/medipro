@@ -3,6 +3,7 @@ package models;
 import models.commands.CommandHandler;
 import models.commands.LeftCommand;
 import models.commands.RightCommand;
+import models.commands.StopCommand;
 import models.entities.Player;
 
 public class GameModel {
@@ -15,6 +16,7 @@ public class GameModel {
     this.player = player;
     commandHandler.register("right", new RightCommand(player));
     commandHandler.register("left", new LeftCommand(player));
+    commandHandler.register("stop", new StopCommand(player));
 
   }
 
