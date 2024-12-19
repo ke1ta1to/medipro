@@ -16,7 +16,7 @@ public class GamePanel extends JPanel {
     public GamePanel() {
         setLayout(new BorderLayout());
 
-        Image image = new ImageIcon(getClass().getResource("/images/character.png")).getImage();
+        Image image = new ImageIcon(GamePanel.class.getResource("/images/character.png")).getImage();
         System.out.println(image);
         StateModel stateModel = new StateModel(200, 200, image);
         StageModel stageModel = new StageModel(stateModel);
@@ -25,7 +25,7 @@ public class GamePanel extends JPanel {
         StagePanel stagePanel = new StagePanel(stageModel, stageController);
         stagePanel.setPreferredSize(new Dimension(800, 600));
 
-        CommandPanel commandPanel = new CommandPanel();
+        CommandPanel commandPanel = new CommandPanel(stageModel, stageController);
         commandPanel.setPreferredSize(new Dimension(250, 0));
 
         DebugPanel debugPanel = new DebugPanel(stateModel, stageModel);

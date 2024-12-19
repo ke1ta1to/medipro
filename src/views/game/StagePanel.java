@@ -25,9 +25,6 @@ public class StagePanel extends JPanel implements ActionListener {
         // 描画開始
         Timer timer = new Timer(1000 / 60, this);
         timer.start();
-
-        // ゲーム開始
-        stageController.start();
     }
 
     // 描画ループ（60fps）

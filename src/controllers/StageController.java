@@ -21,6 +21,11 @@ public class StageController implements ActionListener {
         timer.start();
     }
 
+    public void reset() {
+        timer.stop();
+        model.reset();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         model.tick();

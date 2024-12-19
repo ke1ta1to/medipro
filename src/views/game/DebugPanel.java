@@ -13,8 +13,8 @@ import models.StateModel;
 
 public class DebugPanel extends JPanel implements ActionListener {
 
-    private StateModel stateModel;
-    private StageModel stageModel;
+    private final StateModel stateModel;
+    private final StageModel stageModel;
 
     public DebugPanel(StateModel stateModel, StageModel stageModel) {
         this.stateModel = stateModel;
@@ -34,7 +34,8 @@ public class DebugPanel extends JPanel implements ActionListener {
 
         g.drawString(stateModel.toShortString(), 10, 30);
         g.drawString(stageModel.toString(), 10, 50);
-        g.drawString(currentStateLayer.toString(), 10, 70);
+        if (currentStateLayer != null)
+            g.drawString(currentStateLayer.toString(), 10, 70);
     }
 
     @Override
