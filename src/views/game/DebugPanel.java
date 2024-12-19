@@ -22,7 +22,7 @@ public class DebugPanel extends JPanel implements ActionListener {
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("デバッグ情報"));
 
-        Timer timer = new Timer(1, this);
+        Timer timer = new Timer(10, this);
         timer.start();
     }
 

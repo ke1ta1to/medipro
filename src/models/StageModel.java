@@ -1,6 +1,5 @@
 package models;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +31,7 @@ public class StageModel {
     }
 
     public void draw(Graphics g) {
-        g.setColor(Color.RED);
-        g.fillOval((int) stateModel.getX(), (int) stateModel.getY(), 50, 50);
+        g.drawImage(stateModel.getImage(), (int) stateModel.getX(), (int) stateModel.getY(), 100, 100, null);
     }
 
     public synchronized void tick() {
