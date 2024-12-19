@@ -12,7 +12,7 @@ public class AppFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         GamePanel panel = new GamePanel();
-        add(panel);
+        setContentPane(panel);
 
         pack();
     }
