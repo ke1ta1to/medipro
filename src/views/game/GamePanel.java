@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import controllers.StageController;
+import models.LanguageModel;
 import models.StageModel;
 import models.StateModel;
 
@@ -16,10 +17,10 @@ public class GamePanel extends JPanel {
     public GamePanel() {
         setLayout(new BorderLayout());
 
+        LanguageModel languageModel = new LanguageModel();
         Image image = new ImageIcon(GamePanel.class.getResource("/images/character.png")).getImage();
-        System.out.println(image);
         StateModel stateModel = new StateModel(200, 200, image);
-        StageModel stageModel = new StageModel(stateModel);
+        StageModel stageModel = new StageModel(stateModel, languageModel);
         StageController stageController = new StageController(stageModel);
 
         StagePanel stagePanel = new StagePanel(stageModel, stageController);

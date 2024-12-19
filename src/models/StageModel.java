@@ -7,24 +7,18 @@ import java.util.List;
 public class StageModel {
 
     private final StateModel stateModel;
+    private final LanguageModel languageModel;
     private List<StateLayerModel> stateLayers = new ArrayList<>();
 
     private int index = 0;
 
-    public StageModel(StateModel stateModel) {
+    public StageModel(StateModel stateModel, LanguageModel languageModel) {
         this.stateModel = stateModel;
+        this.languageModel = languageModel;
     }
 
     public void setCommand(String command) {
-        stateLayers.clear();
-        String[] commands = command.split("\n");
-        for (String c : commands) {
-            String[] params = c.split(" ");
-            int waiting = Integer.parseInt(params[0]);
-            boolean moveRight = Boolean.parseBoolean(params[1]);
-            boolean moveLeft = Boolean.parseBoolean(params[2]);
-            stateLayers.add(new StateLayerModel(waiting, moveRight, moveLeft));
-        }
+        languageModel.load(stateLayers, command);
     }
 
     public List<StateLayerModel> getStateLayers() {
