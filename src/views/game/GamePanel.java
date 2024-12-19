@@ -15,7 +15,7 @@ public class GamePanel extends JPanel {
         CommandPanel commandPanel = new CommandPanel();
         commandPanel.setPreferredSize(new Dimension(250, 0));
 
-        CanvasPanel canvasPanel = new CanvasPanel();
+        StagePanel canvasPanel = new StagePanel();
         canvasPanel.setPreferredSize(new Dimension(800, 600));
 
         add(commandPanel, BorderLayout.WEST);

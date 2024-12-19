@@ -4,9 +4,9 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
-public class CanvasPanel extends JPanel {
+public class StagePanel extends JPanel {
 
-    public CanvasPanel() {
+    public StagePanel() {
         setBackground(Color.GREEN);
     }
 
