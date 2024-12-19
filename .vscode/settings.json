@@ -1,9 +1,15 @@
 {
-    "java.project.sourcePaths": ["src"],
+    "editor.formatOnSave": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "java.project.sourcePaths": [
+        "src"
+    ],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
         "lib/**/*.jar"
     ],
+    "java.saveActions.organizeImports": true,
     "[java]": {
         "editor.defaultFormatter": "redhat.java"
     },
