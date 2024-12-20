@@ -14,7 +14,7 @@ public class StageController implements ActionListener {
 
     public StageController(StageModel model) {
         this.model = model;
-        this.timer = new Timer(1, this);
+        this.timer = new Timer(10, this);
     }
 
     public void start() {

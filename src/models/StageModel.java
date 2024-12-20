@@ -43,8 +43,8 @@ public class StageModel {
     public synchronized void tick() {
         EntityStatusModel currentStateLayer = getCurrentStateLayer();
 
-        stateModel.setX(stateModel.getX() + (currentStateLayer.isMoveRight() ? 0.1 : 0)
-                - (currentStateLayer.isMoveLeft() ? 0.1 : 0));
+        stateModel.setX(stateModel.getX() + (currentStateLayer.isMoveRight() ? 1 : 0)
+                - (currentStateLayer.isMoveLeft() ? 1 : 0));
 
         if (currentStateLayer.getWaiting() > 0) {
             currentStateLayer.setWaiting(currentStateLayer.getWaiting() - 1);
