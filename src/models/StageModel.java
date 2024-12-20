@@ -10,6 +10,10 @@ public class StageModel {
     private final LanguageModel languageModel;
     private List<EntityStatusModel> statuses = new ArrayList<>();
 
+    private int tickCount = 0;
+    private int tps = 0;
+    private long lastTime = System.currentTimeMillis();
+
     private int index = 0;
 
     public StageModel(EntityModel stateModel, LanguageModel languageModel) {
@@ -41,6 +45,13 @@ public class StageModel {
     }
 
     public synchronized void tick() {
+        tickCount++;
+        if (System.currentTimeMillis() - lastTime >= 1000) {
+            lastTime = System.currentTimeMillis();
+            tps = tickCount;
+            tickCount = 0;
+        }
+
         EntityStatusModel currentStateLayer = getCurrentStateLayer();
 
         stateModel.setX(stateModel.getX() + (currentStateLayer.isMoveRight() ? 1 : 0)
@@ -64,9 +75,13 @@ public class StageModel {
         return statuses.get(index);
     }
 
+    public int getTps() {
+        return tps;
+    }
+
     @Override
     public String toString() {
-        return "StageModel [index=" + index + "]";
+        return "StageModel [tps=" + tps + ", index=" + index + "]";
     }
 
 }
