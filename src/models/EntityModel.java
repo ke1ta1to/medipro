@@ -2,19 +2,19 @@ package models;
 
 import java.awt.Image;
 
-public class StateModel {
+public class EntityModel {
 
     private double x;
     private double y;
     private Image image;
 
-    public StateModel(double x, double y, Image image) {
+    public EntityModel(double x, double y, Image image) {
         this.x = x;
         this.y = y;
         this.image = image;
     }
 
-    public StateModel() {
+    public EntityModel() {
         this(0, 0, null);
     }
 

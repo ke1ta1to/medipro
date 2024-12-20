@@ -6,27 +6,27 @@ import java.util.List;
 
 public class StageModel {
 
-    private final StateModel stateModel;
+    private final EntityModel stateModel;
     private final LanguageModel languageModel;
-    private List<StateLayerModel> stateLayers = new ArrayList<>();
+    private List<EntityStatusModel> statuses = new ArrayList<>();
 
     private int index = 0;
 
-    public StageModel(StateModel stateModel, LanguageModel languageModel) {
+    public StageModel(EntityModel stateModel, LanguageModel languageModel) {
         this.stateModel = stateModel;
         this.languageModel = languageModel;
     }
 
     public void setCommand(String command) {
-        languageModel.load(stateLayers, command);
+        languageModel.load(statuses, command);
     }
 
-    public List<StateLayerModel> getStateLayers() {
-        return stateLayers;
+    public List<EntityStatusModel> getStatuses() {
+        return statuses;
     }
 
-    public void setStateLayers(List<StateLayerModel> stateLayers) {
-        this.stateLayers = stateLayers;
+    public void setStatuses(List<EntityStatusModel> stateLayers) {
+        this.statuses = stateLayers;
     }
 
     public void draw(Graphics g) {
@@ -37,11 +37,11 @@ public class StageModel {
         index = 0;
         stateModel.setX(200);
         stateModel.setY(200);
-        stateLayers.clear();
+        statuses.clear();
     }
 
     public synchronized void tick() {
-        StateLayerModel currentStateLayer = getCurrentStateLayer();
+        EntityStatusModel currentStateLayer = getCurrentStateLayer();
 
         stateModel.setX(stateModel.getX() + (currentStateLayer.isMoveRight() ? 0.1 : 0)
                 - (currentStateLayer.isMoveLeft() ? 0.1 : 0));
@@ -51,17 +51,17 @@ public class StageModel {
             return;
         }
 
-        if (index < stateLayers.size() - 1) {
+        if (index < statuses.size() - 1) {
             index++;
         }
     }
 
-    public StateLayerModel getCurrentStateLayer() {
-        if (index >= stateLayers.size()) {
+    public EntityStatusModel getCurrentStateLayer() {
+        if (index >= statuses.size()) {
             return null;
         }
 
-        return stateLayers.get(index);
+        return statuses.get(index);
     }
 
     @Override

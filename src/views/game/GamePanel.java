@@ -8,9 +8,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import controllers.StageController;
+import models.EntityModel;
 import models.LanguageModel;
 import models.StageModel;
-import models.StateModel;
 
 public class GamePanel extends JPanel {
 
@@ -19,7 +19,7 @@ public class GamePanel extends JPanel {
 
         LanguageModel languageModel = new LanguageModel();
         Image image = new ImageIcon(GamePanel.class.getResource("/images/character.png")).getImage();
-        StateModel stateModel = new StateModel(200, 200, image);
+        EntityModel stateModel = new EntityModel(200, 200, image);
         StageModel stageModel = new StageModel(stateModel, languageModel);
         StageController stageController = new StageController(stageModel);
 

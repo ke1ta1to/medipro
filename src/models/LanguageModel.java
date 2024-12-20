@@ -4,7 +4,7 @@ import java.util.List;
 
 public class LanguageModel {
 
-    public void load(List<StateLayerModel> stateLayers, String command) {
+    public void load(List<EntityStatusModel> stateLayers, String command) {
         // TODO: 言語の解析（メジェドさん）
 
         stateLayers.clear();
@@ -14,7 +14,7 @@ public class LanguageModel {
             int waiting = Integer.parseInt(params[0]);
             boolean moveRight = Boolean.parseBoolean(params[1]);
             boolean moveLeft = Boolean.parseBoolean(params[2]);
-            stateLayers.add(new StateLayerModel(waiting, moveRight, moveLeft));
+            stateLayers.add(new EntityStatusModel(waiting, moveRight, moveLeft));
         }
     }
 

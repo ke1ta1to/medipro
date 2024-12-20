@@ -7,16 +7,16 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import models.EntityModel;
+import models.EntityStatusModel;
 import models.StageModel;
-import models.StateLayerModel;
-import models.StateModel;
 
 public class DebugPanel extends JPanel implements ActionListener {
 
-    private final StateModel stateModel;
+    private final EntityModel stateModel;
     private final StageModel stageModel;
 
-    public DebugPanel(StateModel stateModel, StageModel stageModel) {
+    public DebugPanel(EntityModel stateModel, StageModel stageModel) {
         this.stateModel = stateModel;
         this.stageModel = stageModel;
 
@@ -30,7 +30,7 @@ public class DebugPanel extends JPanel implements ActionListener {
     public void paint(Graphics g) {
         super.paint(g);
 
-        StateLayerModel currentStateLayer = stageModel.getCurrentStateLayer();
+        EntityStatusModel currentStateLayer = stageModel.getCurrentStateLayer();
 
         g.drawString(stateModel.toShortString(), 10, 30);
         g.drawString(stageModel.toString(), 10, 50);

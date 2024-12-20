@@ -1,18 +1,18 @@
 package models;
 
-public class StateLayerModel {
+public class EntityStatusModel {
 
     private int waiting;
     private boolean moveRight;
     private boolean moveLeft;
 
-    public StateLayerModel(int waiting, boolean moveRight, boolean moveLeft) {
+    public EntityStatusModel(int waiting, boolean moveRight, boolean moveLeft) {
         this.waiting = waiting;
         this.moveRight = moveRight;
         this.moveLeft = moveLeft;
     }
 
-    public StateLayerModel() {
+    public EntityStatusModel() {
         this(0, false, false);
     }
 
