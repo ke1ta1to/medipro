@@ -29,7 +29,7 @@ public class CommandPanel extends JPanel {
         textArea = new JTextArea();
         // TODO: 仮のコマンドを設定
         textArea.setText(
-                "100 true false\n50 false false\n50 false true\n100 false false\n50 false true\n0 false false");
+                "move left\nwait 50\nmove right\nwait 100\nstop\nwait 50");
 
         runButton = new JButton("実行");
         runButton.addActionListener(e -> {
