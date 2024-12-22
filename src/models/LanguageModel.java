@@ -18,13 +18,17 @@ public class LanguageModel {
         boolean isMoveLeft = false;
         boolean isMoveRight = false;
         Pattern waitPattern = Pattern.compile("^wait\\s+(\\d+)\\s*$");
-        Pattern movePattern = Pattern.compile("^move\\s+(\\w+)\\s*$");
 
         stateLayers.clear();
         List<String> commands = new ArrayList<>(Arrays.asList(command.split("\n")));
         commands.add("wait 0");
         for (String c : commands) {
-            if (c.equals("jump")) {
+            c = c.trim();
+            if (c.equals("move left")) {
+                isMoveLeft = true;
+            } else if (c.equals("move right")) {
+                isMoveRight = true;
+            } else if (c.equals("jump")) {
                 // TODO: jump処理
             } else if (c.equals("stop")) {
                 isMoveLeft = false;
@@ -33,21 +37,11 @@ public class LanguageModel {
                 // TODO: hook処理
             } else {
                 Matcher waitMatcher = waitPattern.matcher(c);
-                Matcher moveMatcher = movePattern.matcher(c);
                 if (waitMatcher.matches()) {
                     int waiting = Integer.parseInt(waitMatcher.group(1));
                     stateLayers.add(new EntityStatusModel(waiting, isMoveRight, isMoveLeft));
                     isMoveLeft = false;
                     isMoveRight = false;
-                } else if (moveMatcher.matches()) {
-                    if (moveMatcher.group(1).equals("right")) {
-                        isMoveRight = true;
-                    } else if (moveMatcher.group(1).equals("left")) {
-                        isMoveLeft = true;
-                    } else {
-                        System.out.println("error");
-                        // TODO: 言語のコンパイルに失敗したときの処理
-                    }
                 } else {
                     System.out.println("error");
                     // TODO: 言語のコンパイルに失敗したときの処理
