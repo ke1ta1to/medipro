@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LanguageModel {
+    private Pattern waitPattern = Pattern.compile("^wait\\s+(\\d+)$");
 
     /**
      * waitが来るまでif文で処理を取り、waitが来たらEntityStatusModelをAddする。
@@ -17,7 +18,6 @@ public class LanguageModel {
         // TODO: 言語の解析（メジェドさん）
         boolean isMoveLeft = false;
         boolean isMoveRight = false;
-        Pattern waitPattern = Pattern.compile("^wait\\s+(\\d+)\\s*$");
 
         stateLayers.clear();
         List<String> commands = new ArrayList<>(Arrays.asList(command.split("\n")));
