@@ -22,6 +22,7 @@ public class LanguageModel {
         stateLayers.clear();
         List<String> commands = new ArrayList<>(Arrays.asList(command.split("\n")));
         commands.add("wait 0");
+        Matcher waitMatcher = waitPattern.matcher(c);
         for (String c : commands) {
             c = c.trim();
             if (c.equals("move left")) {
@@ -35,17 +36,14 @@ public class LanguageModel {
                 isMoveRight = false;
             } else if (c.equals("hook")) {
                 // TODO: hook処理
+            } else if (waitMatcher.matches()) {
+                int waiting = Integer.parseInt(waitMatcher.group(1));
+                stateLayers.add(new EntityStatusModel(waiting, isMoveRight, isMoveLeft));
+                isMoveLeft = false;
+                isMoveRight = false;
             } else {
-                Matcher waitMatcher = waitPattern.matcher(c);
-                if (waitMatcher.matches()) {
-                    int waiting = Integer.parseInt(waitMatcher.group(1));
-                    stateLayers.add(new EntityStatusModel(waiting, isMoveRight, isMoveLeft));
-                    isMoveLeft = false;
-                    isMoveRight = false;
-                } else {
-                    System.out.println("error");
-                    // TODO: 言語のコンパイルに失敗したときの処理
-                }
+                System.out.println("error");
+                // TODO: 言語のコンパイルに失敗したときの処理
             }
         }
     }
