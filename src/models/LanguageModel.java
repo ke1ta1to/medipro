@@ -22,9 +22,9 @@ public class LanguageModel {
         stateLayers.clear();
         List<String> commands = new ArrayList<>(Arrays.asList(command.split("\n")));
         commands.add("wait 0");
-        Matcher waitMatcher = waitPattern.matcher(c);
         for (String c : commands) {
             c = c.trim();
+            Matcher waitMatcher = waitPattern.matcher(c);
             if (c.equals("move left")) {
                 isMoveLeft = true;
             } else if (c.equals("move right")) {
