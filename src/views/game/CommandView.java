@@ -11,7 +11,7 @@ import javax.swing.JTextArea;
 import controllers.StageController;
 import models.StageModel;
 
-public class CommandPanel extends JPanel {
+public class CommandView extends JPanel {
 
     private final StageModel stageModel;
     private final StageController stageController;
@@ -19,7 +19,7 @@ public class CommandPanel extends JPanel {
     private final JTextArea textArea;
     private final JButton runButton;
 
-    public CommandPanel(StageModel stageModel, StageController stageController) {
+    public CommandView(StageModel stageModel, StageController stageController) {
         this.stageModel = stageModel;
         this.stageController = stageController;
 

@@ -11,12 +11,12 @@ import javax.swing.Timer;
 import controllers.StageController;
 import models.StageModel;
 
-public class StagePanel extends JPanel implements ActionListener {
+public class StageView extends JPanel implements ActionListener {
 
     private final StageModel stageModel;
     private final StageController stageController;
 
-    public StagePanel(StageModel stageModel, StageController stageController) {
+    public StageView(StageModel stageModel, StageController stageController) {
         setBackground(Color.WHITE);
 
         this.stageModel = stageModel;

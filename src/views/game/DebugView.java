@@ -11,12 +11,12 @@ import models.EntityModel;
 import models.EntityStatusModel;
 import models.StageModel;
 
-public class DebugPanel extends JPanel implements ActionListener {
+public class DebugView extends JPanel implements ActionListener {
 
     private final EntityModel entityModel;
     private final StageModel stageModel;
 
-    public DebugPanel(EntityModel entityModel, StageModel stageModel) {
+    public DebugView(EntityModel entityModel, StageModel stageModel) {
         this.entityModel = entityModel;
         this.stageModel = stageModel;
 

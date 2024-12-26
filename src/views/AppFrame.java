@@ -2,7 +2,7 @@ package views;
 
 import javax.swing.JFrame;
 
-import views.game.GamePanel;
+import views.game.GameView;
 
 public class AppFrame extends JFrame {
 
@@ -11,8 +11,8 @@ public class AppFrame extends JFrame {
         setLocation(100, 100);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        GamePanel panel = new GamePanel();
-        setContentPane(panel);
+        GameView view = new GameView();
+        setContentPane(view);
 
         pack();
     }
