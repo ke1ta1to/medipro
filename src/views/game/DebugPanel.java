@@ -13,11 +13,11 @@ import models.StageModel;
 
 public class DebugPanel extends JPanel implements ActionListener {
 
-    private final EntityModel stateModel;
+    private final EntityModel entityModel;
     private final StageModel stageModel;
 
-    public DebugPanel(EntityModel stateModel, StageModel stageModel) {
-        this.stateModel = stateModel;
+    public DebugPanel(EntityModel entityModel, StageModel stageModel) {
+        this.entityModel = entityModel;
         this.stageModel = stageModel;
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("デバッグ情報"));
@@ -30,12 +30,12 @@ public class DebugPanel extends JPanel implements ActionListener {
     public void paint(Graphics g) {
         super.paint(g);
 
-        EntityStatusModel currentStateLayer = stageModel.getCurrentStateLayer();
+        EntityStatusModel currentEntityStatusModel = stageModel.getCurrentEntityStatusModel();
 
-        g.drawString(stateModel.toShortString(), 10, 30);
+        g.drawString(entityModel.toShortString(), 10, 30);
         g.drawString(stageModel.toString(), 10, 50);
-        if (currentStateLayer != null)
-            g.drawString(currentStateLayer.toString(), 10, 70);
+        if (currentEntityStatusModel != null)
+            g.drawString(currentEntityStatusModel.toString(), 10, 70);
     }
 
     @Override

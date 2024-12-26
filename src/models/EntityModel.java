@@ -44,11 +44,11 @@ public class EntityModel {
 
     @Override
     public String toString() {
-        return "StateModel [x=" + x + ", y=" + y + "]";
+        return "EntityModel [x=" + x + ", y=" + y + "]";
     }
 
     public String toShortString() {
-        return "StateModel [x=" + Math.round(x * 100.0) / 100.0 + ", y=" + Math.round(y * 100.0) / 100.0 + "]";
+        return "EntityModel [x=" + Math.round(x * 100.0) / 100.0 + ", y=" + Math.round(y * 100.0) / 100.0 + "]";
     }
 
 }

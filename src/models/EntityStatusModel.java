@@ -42,7 +42,7 @@ public class EntityStatusModel {
 
     @Override
     public String toString() {
-        return "StateLayerModel [waiting=" + waiting + ", moveRight=" + moveRight + ", moveLeft=" + moveLeft + "]";
+        return "EntityStatusModel [waiting=" + waiting + ", moveRight=" + moveRight + ", moveLeft=" + moveLeft + "]";
     }
 
 }

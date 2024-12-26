@@ -10,16 +10,16 @@ public class LanguageModel {
     private Pattern waitPattern = Pattern.compile("^wait\\s+(\\d+)$");
 
     /**
-     * waitが来るまでif文で処理を取り、waitが来たらEntityStatusModelをAddする。
-     * splitする必要のないものを先に処理し、splitする必要がある場合はsplitして処理する。
+     * waitが来るまでif文で処理を取り、waitが来たらEntityStatusModelをAddする。splitする必要のないものを先に処理し、splitする必要がある場合はsplitして処理する。
+     * 
+     * @param entityStatusLayers EntityStatusModelのリスト
+     * @param command            ユーザーが入力したコマンド
      */
-
-    public void load(List<EntityStatusModel> stateLayers, String command) {
-        // TODO: 言語の解析（メジェドさん）
+    public void load(List<EntityStatusModel> entityStatusLayers, String command) {
         boolean isMoveLeft = false;
         boolean isMoveRight = false;
 
-        stateLayers.clear();
+        entityStatusLayers.clear();
         List<String> commands = new ArrayList<>(Arrays.asList(command.split("\n")));
         commands.add("wait 0");
         for (String c : commands) {
@@ -38,7 +38,7 @@ public class LanguageModel {
                 // TODO: hook処理
             } else if (waitMatcher.matches()) {
                 int waiting = Integer.parseInt(waitMatcher.group(1));
-                stateLayers.add(new EntityStatusModel(waiting, isMoveRight, isMoveLeft));
+                entityStatusLayers.add(new EntityStatusModel(waiting, isMoveRight, isMoveLeft));
                 isMoveLeft = false;
                 isMoveRight = false;
             } else {

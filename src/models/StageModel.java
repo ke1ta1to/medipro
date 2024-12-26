@@ -6,7 +6,7 @@ import java.util.List;
 
 public class StageModel {
 
-    private final EntityModel stateModel;
+    private final EntityModel entityModel;
     private final LanguageModel languageModel;
     private List<EntityStatusModel> statuses = new ArrayList<>();
 
@@ -16,8 +16,8 @@ public class StageModel {
 
     private int index = 0;
 
-    public StageModel(EntityModel stateModel, LanguageModel languageModel) {
-        this.stateModel = stateModel;
+    public StageModel(EntityModel entityModel, LanguageModel languageModel) {
+        this.entityModel = entityModel;
         this.languageModel = languageModel;
     }
 
@@ -29,18 +29,18 @@ public class StageModel {
         return statuses;
     }
 
-    public void setStatuses(List<EntityStatusModel> stateLayers) {
-        this.statuses = stateLayers;
+    public void setStatuses(List<EntityStatusModel> statuses) {
+        this.statuses = statuses;
     }
 
     public void draw(Graphics g) {
-        g.drawImage(stateModel.getImage(), (int) stateModel.getX(), (int) stateModel.getY(), 100, 100, null);
+        g.drawImage(entityModel.getImage(), (int) entityModel.getX(), (int) entityModel.getY(), 100, 100, null);
     }
 
     public void reset() {
         index = 0;
-        stateModel.setX(200);
-        stateModel.setY(200);
+        entityModel.setX(200);
+        entityModel.setY(200);
         statuses.clear();
     }
 
@@ -52,13 +52,13 @@ public class StageModel {
             tickCount = 0;
         }
 
-        EntityStatusModel currentStateLayer = getCurrentStateLayer();
+        EntityStatusModel entityStatuses = getCurrentEntityStatusModel();
 
-        stateModel.setX(stateModel.getX() + (currentStateLayer.isMoveRight() ? 1 : 0)
-                - (currentStateLayer.isMoveLeft() ? 1 : 0));
+        entityModel.setX(entityModel.getX() + (entityStatuses.isMoveRight() ? 1 : 0)
+                - (entityStatuses.isMoveLeft() ? 1 : 0));
 
-        if (currentStateLayer.getWaiting() > 0) {
-            currentStateLayer.setWaiting(currentStateLayer.getWaiting() - 1);
+        if (entityStatuses.getWaiting() > 0) {
+            entityStatuses.setWaiting(entityStatuses.getWaiting() - 1);
             return;
         }
 
@@ -67,7 +67,7 @@ public class StageModel {
         }
     }
 
-    public EntityStatusModel getCurrentStateLayer() {
+    public EntityStatusModel getCurrentEntityStatusModel() {
         if (index >= statuses.size()) {
             return null;
         }
