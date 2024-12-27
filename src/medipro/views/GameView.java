@@ -1,15 +1,25 @@
 package medipro.views;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
+import medipro.controllers.GameController;
+import medipro.models.GameModel;
+
 public class GameView extends JPanel {
 
-    public GameView() {
-        setPreferredSize(new Dimension(640, 480));
+    public GameView(GameModel model, GameController controller) {
         setBackground(Color.RED);
+
+        BorderLayout layout = new BorderLayout();
+        setLayout(layout);
+
+        StageView stageView = new StageView();
+        add(stageView, BorderLayout.CENTER);
+        CommandInputView commandInputView = new CommandInputView();
+        add(commandInputView, BorderLayout.WEST);
     }
 
 }

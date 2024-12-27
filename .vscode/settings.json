@@ -13,4 +13,5 @@
     "[java]": {
         "editor.defaultFormatter": "redhat.java"
     },
+    "editor.foldingImportsByDefault": true,
 }

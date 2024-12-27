@@ -2,6 +2,8 @@ package medipro;
 
 import javax.swing.JFrame;
 
+import medipro.controllers.GameController;
+import medipro.models.GameModel;
 import medipro.views.GameView;
 
 public class AppFrame extends JFrame {
@@ -10,7 +12,9 @@ public class AppFrame extends JFrame {
         super("medipro");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        GameView gameView = new GameView();
+        GameModel gameModel = new GameModel();
+        GameController gameController = new GameController(gameModel);
+        GameView gameView = new GameView(gameModel, gameController);
         getContentPane().add(gameView);
 
         pack();
