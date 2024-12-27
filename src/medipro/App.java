@@ -1,4 +1,4 @@
-import views.AppFrame;
+package medipro;
 
 public class App {
 
