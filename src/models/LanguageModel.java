@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import entities.EntityAction;
+
 public class LanguageModel {
     private Pattern waitPattern = Pattern.compile("^wait\\s+(\\d+)$");
 
@@ -15,9 +17,8 @@ public class LanguageModel {
      * @param entityStatusLayers EntityStatusModelのリスト
      * @param command            ユーザーが入力したコマンド
      */
-    public void load(List<EntityStatusModel> entityStatusLayers, String command) {
-        boolean isMoveLeft = false;
-        boolean isMoveRight = false;
+    public void load(List<EntityAction> entityStatusLayers, String command) {
+        double speed = 0;
 
         entityStatusLayers.clear();
         List<String> commands = new ArrayList<>(Arrays.asList(command.split("\n")));
@@ -26,21 +27,22 @@ public class LanguageModel {
             c = c.trim();
             Matcher waitMatcher = waitPattern.matcher(c);
             if (c.equals("move left")) {
-                isMoveLeft = true;
+                speed = -1;
             } else if (c.equals("move right")) {
-                isMoveRight = true;
+                speed = 1;
             } else if (c.equals("jump")) {
                 // TODO: jump処理
             } else if (c.equals("stop")) {
-                isMoveLeft = false;
-                isMoveRight = false;
+                speed = 0;
             } else if (c.equals("hook")) {
                 // TODO: hook処理
             } else if (waitMatcher.matches()) {
-                int waiting = Integer.parseInt(waitMatcher.group(1));
-                entityStatusLayers.add(new EntityStatusModel(waiting, isMoveRight, isMoveLeft));
-                isMoveLeft = false;
-                isMoveRight = false;
+                int delay = Integer.parseInt(waitMatcher.group(1));
+                EntityAction entityAction = new EntityAction();
+                entityAction.setSpeed(speed);
+                entityAction.setDelay(delay);
+                entityStatusLayers.add(entityAction);
+                speed = 0;
             } else {
                 System.out.println("error");
                 // TODO: 言語のコンパイルに失敗したときの処理

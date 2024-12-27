@@ -4,11 +4,13 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
+import entities.EntityAction;
+
 public class StageModel {
 
     private final EntityModel entityModel;
     private final LanguageModel languageModel;
-    private List<EntityStatusModel> statuses = new ArrayList<>();
+    private List<EntityAction> statuses = new ArrayList<>();
 
     private int tickCount = 0;
     private int tps = 0;
@@ -25,11 +27,11 @@ public class StageModel {
         languageModel.load(statuses, command);
     }
 
-    public List<EntityStatusModel> getStatuses() {
+    public List<EntityAction> getStatuses() {
         return statuses;
     }
 
-    public void setStatuses(List<EntityStatusModel> statuses) {
+    public void setStatuses(List<EntityAction> statuses) {
         this.statuses = statuses;
     }
 
