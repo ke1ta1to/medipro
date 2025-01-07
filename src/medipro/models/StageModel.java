@@ -1,25 +1,41 @@
 package medipro.models;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.swing.ImageIcon;
+
 import medipro.Entity;
+import medipro.World;
 
 public class StageModel {
+
+    private World world = null;
 
     /**
      * 有効キー: a, d, スペース
      */
     private final List<String> availableKeys = List.of("a", "d", " ");
     private Set<String> keys = new HashSet<>();
-    private Entity entity = new Entity();
+    private Entity entity;
 
     // 重力の考慮
-    private double gravity = .2;
+    private double gravity = 0.2;
 
     // ジャンプ力
     private double jumpPower = -5;
+
+    public StageModel() {
+        entity = new Entity(this);
+        ImageIcon icon = new ImageIcon(getClass().getResource("/medipro/risaju.png"));
+        entity.setImage(icon.getImage());
+        entity.setWidth(50);
+        entity.setHeight(50);
+    }
 
     public void addKey(String key) {
         if (availableKeys.contains(key)) {
@@ -43,6 +59,24 @@ public class StageModel {
         return entity;
     }
 
+    public World getWorld() {
+        return world;
+    }
+
+    public void loadWorld(File file) {
+        String text = "";
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                text += line + "\n";
+            }
+        } catch (Exception e) {
+        }
+
+        World world = new World(this, text, 800, 600);
+        this.world = world;
+    }
+
     public void tick() {
         // 横方向の移動
         double speed = 2;
@@ -58,7 +92,7 @@ public class StageModel {
 
         // 重力とジャンプ
         double accY = gravity; // 最終的な加速度
-        if (hasKey(" ") && entity.getPosY() == 100) {
+        if (hasKey(" ")) {
             accY = jumpPower;
         }
         entity.setAccY(accY);
@@ -67,9 +101,9 @@ public class StageModel {
         entity.setVelX(entity.getVelX() + entity.getAccX());
         entity.setVelY(entity.getVelY() + entity.getAccY());
 
-        // 位置を速度に加算、ただし床はy200（キャラクターの高さ100）
+        // 位置を速度に加算
         entity.setPosX(entity.getPosX() + entity.getVelX());
-        entity.setPosY(Math.min(100, entity.getPosY() + entity.getVelY()));
+        entity.setPosY(entity.getPosY() + entity.getVelY());
     }
 
 }

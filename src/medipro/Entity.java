@@ -1,6 +1,12 @@
 package medipro;
 
+import java.awt.Image;
+
+import medipro.models.StageModel;
+
 public class Entity {
+
+    private final StageModel stageModel;
 
     /**
      * 最大速度の大きさ（Y方向）
@@ -14,7 +20,13 @@ public class Entity {
     private double accX = 0;
     private double accY = 0;
 
-    public Entity() {
+    private Image image = null;
+
+    private int width = 0;
+    private int height = 0;
+
+    public Entity(StageModel stageModel) {
+        this.stageModel = stageModel;
     }
 
     public double getPosX() {
@@ -43,6 +55,10 @@ public class Entity {
         } else {
             this.velX = velX;
         }
+
+        if (this.posX + this.velX < 0 || this.posX + this.velX + this.width > stageModel.getWorld().getWidth()) {
+            this.velX = 0;
+        }
     }
 
     public double getVelY() {
@@ -54,6 +70,10 @@ public class Entity {
             this.velY = MAX_VEL_Y * (velY / Math.abs(velY));
         } else {
             this.velY = velY;
+        }
+
+        if (this.posY + this.velY < 0 || this.posY + this.velY + this.height > stageModel.getWorld().getHeight()) {
+            this.velY = 0;
         }
     }
 
@@ -73,10 +93,34 @@ public class Entity {
         this.accY = accY;
     }
 
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
     @Override
     public String toString() {
-        return "Entity [posX=" + posX + ", posY=" + posY + ", velX=" + velX + ", velY=" + velY + ", accX=" + accX
-                + ", accY=" + accY + "]";
+        return "Entity [stageModel=" + stageModel + ", posX=" + posX + ", posY=" + posY + ", velX=" + velX + ", velY="
+                + velY + ", accX=" + accX + ", accY=" + accY + ", width=" + width + ", height=" + height + "]";
     }
 
 }

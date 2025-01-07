@@ -9,6 +9,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import medipro.Entity;
+import medipro.World;
 import medipro.controllers.StageController;
 import medipro.models.StageModel;
 
@@ -21,7 +23,8 @@ public class StageView extends JPanel {
         this.model = model;
         // this.controller = controller;
 
-        setPreferredSize(new Dimension(800, 600));
+        World world = model.getWorld();
+        setPreferredSize(new Dimension(world.getWidth(), world.getHeight()));
         addKeyListener(controller);
         setFocusable(true);
 
@@ -36,6 +39,14 @@ public class StageView extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
 
+        // ステージの描画
+        for (int i = 0; i < model.getWorld().getTiles().length; i++) {
+            for (int j = 0; j < model.getWorld().getTiles()[i].length; j++) {
+                if (model.getWorld().getTiles()[i][j] != null) {
+                    model.getWorld().getTiles()[i][j].draw(g);
+                }
+            }
+        }
         // DEBUG
 
         // draw keys
@@ -45,7 +56,8 @@ public class StageView extends JPanel {
 
         ImageIcon icon = new ImageIcon(getClass().getResource("/medipro/risaju.png"));
         Image image = icon.getImage();
-        g.drawImage(image, (int) model.getEntity().getPosX(), (int) model.getEntity().getPosY(), 100, 100, this);
+        Entity entity = model.getEntity();
+        g.drawImage(image, (int) entity.getPosX(), (int) entity.getPosY(), entity.getWidth(), entity.getHeight(), this);
 
         // stage
         g.setColor(Color.BLACK);

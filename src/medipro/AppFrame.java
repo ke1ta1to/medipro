@@ -1,5 +1,7 @@
 package medipro;
 
+import java.io.File;
+
 import javax.swing.JFrame;
 
 import medipro.controllers.GameController;
@@ -15,7 +17,10 @@ public class AppFrame extends JFrame {
         super("medipro");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        File worldFile = new File(getClass().getResource("world.txt").getFile());
+
         StageModel stageModel = new StageModel();
+        stageModel.loadWorld(worldFile);
         StageController stageController = new StageController(stageModel);
         StageView stageView = new StageView(stageModel, stageController);
 
