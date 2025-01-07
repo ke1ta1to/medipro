@@ -93,7 +93,9 @@ public class StageModel {
         // 重力とジャンプ
         double accY = gravity; // 最終的な加速度
         if (hasKey(" ")) {
+            // タイルに接している場合のみジャンプ
             accY = jumpPower;
+
         }
         entity.setAccY(accY);
 

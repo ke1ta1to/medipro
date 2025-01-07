@@ -53,4 +53,30 @@ public class World {
         return height;
     }
 
+    /**
+     * 指定した座標にあるタイルを取得
+     * 
+     * @param posX
+     * @param posY
+     * @return
+     */
+    public Tile getTileAt(double posX, double posY) {
+        int x = (int) (posX / World.TILE_SIZE);
+        int y = (int) (posY / World.TILE_SIZE);
+        x = Math.min(x, getTiles().length - 1);
+        y = Math.min(y, getTiles()[0].length - 1);
+        return getTiles()[x][y];
+    }
+
+    /**
+     * 指定した座標に壁があるかどうか
+     * 
+     * @param posX
+     * @param posY
+     * @return 壁がある場合はtrue
+     */
+    public boolean isSolidTileAt(double posX, double posY) {
+        return getTileAt(posX, posY).isSolid();
+    }
+
 }

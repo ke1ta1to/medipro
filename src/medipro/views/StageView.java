@@ -58,6 +58,9 @@ public class StageView extends JPanel {
         Image image = icon.getImage();
         Entity entity = model.getEntity();
         g.drawImage(image, (int) entity.getPosX(), (int) entity.getPosY(), entity.getWidth(), entity.getHeight(), this);
+        // entityの周りを線で囲む
+        g.setColor(Color.RED);
+        g.drawRect((int) entity.getPosX(), (int) entity.getPosY(), entity.getWidth(), entity.getHeight());
 
         // stage
         g.setColor(Color.BLACK);
