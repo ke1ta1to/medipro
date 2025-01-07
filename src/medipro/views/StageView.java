@@ -62,10 +62,6 @@ public class StageView extends JPanel {
         g.setColor(Color.RED);
         g.drawRect((int) entity.getPosX(), (int) entity.getPosY(), entity.getWidth(), entity.getHeight());
 
-        // stage
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 200, 800, 1);
-
         // entity data
         g.setColor(Color.RED);
         g.setFont(g.getFont().deriveFont(20.0f));

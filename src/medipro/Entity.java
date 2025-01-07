@@ -12,7 +12,7 @@ public class Entity {
     /**
      * 最大速度の大きさ（Y方向）
      */
-    public static final double MAX_VEL_Y = 5.0;
+    public static final double MAX_VEL_Y = 7.0;
 
     private double posX = 0;
     private double posY = 0;
@@ -25,6 +25,8 @@ public class Entity {
 
     private int width = 0;
     private int height = 0;
+
+    private boolean isOnGround = false;
 
     public Entity(StageModel stageModel) {
         this.stageModel = stageModel;
@@ -104,6 +106,9 @@ public class Entity {
         Tile bottomTile = getCollisionOnBottom(this.posY + this.velY);
         if (bottomTile != null) {
             this.velY = 0;
+            this.isOnGround = true;
+        } else {
+            this.isOnGround = false;
         }
     }
 
@@ -145,6 +150,10 @@ public class Entity {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public boolean isOnGround() {
+        return this.isOnGround;
     }
 
     @Override

@@ -27,7 +27,7 @@ public class StageModel {
     private double gravity = 0.2;
 
     // ジャンプ力
-    private double jumpPower = -5;
+    private double jumpPower = -6.5;
 
     public StageModel() {
         entity = new Entity(this);
@@ -35,6 +35,8 @@ public class StageModel {
         entity.setImage(icon.getImage());
         entity.setWidth(50);
         entity.setHeight(50);
+        entity.setPosX(600);
+        entity.setPosY(500);
     }
 
     public void addKey(String key) {
@@ -93,9 +95,10 @@ public class StageModel {
         // 重力とジャンプ
         double accY = gravity; // 最終的な加速度
         if (hasKey(" ")) {
-            // タイルに接している場合のみジャンプ
-            accY = jumpPower;
-
+            // 下がタイルに接している場合ジャンプ
+            if (entity.isOnGround()) {
+                accY = jumpPower;
+            }
         }
         entity.setAccY(accY);
 
