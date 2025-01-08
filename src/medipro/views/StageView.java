@@ -17,11 +17,11 @@ import medipro.models.StageModel;
 public class StageView extends JPanel {
 
     private final StageModel model;
-    // private final StageController controller;
+    private final StageController controller;
 
     public StageView(StageModel model, StageController controller) {
         this.model = model;
-        // this.controller = controller;
+        this.controller = controller;
 
         World world = model.getWorld();
         setPreferredSize(new Dimension(world.getWidth(), world.getHeight()));
@@ -71,6 +71,14 @@ public class StageView extends JPanel {
         g.drawString("velY: " + model.getEntity().getVelY(), 10, 160);
         g.drawString("accX: " + model.getEntity().getAccX(), 10, 190);
         g.drawString("accY: " + model.getEntity().getAccY(), 10, 220);
+    }
+
+    public StageModel getModel() {
+        return model;
+    }
+
+    public StageController getController() {
+        return controller;
     }
 
 }

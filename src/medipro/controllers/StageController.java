@@ -41,4 +41,9 @@ public class StageController implements KeyListener, ActionListener {
     public void actionPerformed(ActionEvent e) {
         model.tick();
     }
+
+    public StageModel getModel() {
+        return model;
+    }
+
 }

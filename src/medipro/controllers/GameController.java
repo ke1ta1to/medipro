@@ -10,4 +10,8 @@ public class GameController {
         this.model = model;
     }
 
+    public GameModel getModel() {
+        return model;
+    }
+
 }

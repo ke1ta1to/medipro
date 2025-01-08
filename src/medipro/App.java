@@ -2,10 +2,15 @@ package medipro;
 
 public class App {
 
-    public static void main(String[] args) {
+    public void start() {
         System.out.println("Application started");
-        AppFrame frame = new AppFrame();
-        frame.setVisible(true);
+        AppFrame appFrame = new AppFrame();
+        appFrame.setVisible(true);
+
+    }
+
+    public static void main(String[] args) {
+        new App().start();
     }
 
 }

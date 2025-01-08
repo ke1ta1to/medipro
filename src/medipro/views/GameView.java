@@ -20,8 +20,20 @@ public class GameView extends JPanel {
         setLayout(layout);
     }
 
-    public void setView(JPanel view) {
+    public void setStageView(JPanel view) {
         add(view, BorderLayout.CENTER);
+    }
+
+    public void setInputView(JPanel view) {
+        add(view, BorderLayout.WEST);
+    }
+
+    public GameModel getModel() {
+        return model;
+    }
+
+    public GameController getController() {
+        return controller;
     }
 
 }
