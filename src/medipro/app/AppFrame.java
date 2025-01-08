@@ -17,7 +17,7 @@ public class AppFrame extends JFrame {
         super("medipro");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        File worldFile = new File(getClass().getResource("world.txt").getFile());
+        File worldFile = new File("src/medipro/world.txt");
 
         StageModel stageModel = new StageModel();
         stageModel.loadWorld(worldFile);

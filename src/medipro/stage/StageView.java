@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -12,7 +14,7 @@ import javax.swing.Timer;
 import medipro.Entity;
 import medipro.World;
 
-public class StageView extends JPanel {
+public class StageView extends JPanel implements MouseListener {
 
     private final StageModel model;
     private final StageController controller;
@@ -25,6 +27,7 @@ public class StageView extends JPanel {
         setPreferredSize(new Dimension(world.getWidth(), world.getHeight()));
         addKeyListener(controller);
         setFocusable(true);
+        addMouseListener(this);
 
         // 30fps
         Timer timer = new Timer(1000 / 30, (e) -> {
@@ -77,6 +80,27 @@ public class StageView extends JPanel {
 
     public StageController getController() {
         return controller;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        requestFocus();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 
 }

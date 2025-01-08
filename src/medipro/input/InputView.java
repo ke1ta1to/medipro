@@ -5,6 +5,7 @@ import java.awt.Dimension;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 public class InputView extends JPanel {
@@ -24,9 +25,15 @@ public class InputView extends JPanel {
 
         JTextArea textArea = new JTextArea();
         textArea.setFont(textArea.getFont().deriveFont(16f));
-        add(textArea, BorderLayout.CENTER);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+
+        add(scrollPane, BorderLayout.CENTER);
 
         JButton submitButton = new JButton("Submit");
+        submitButton.addActionListener(e -> {
+            controller.submit(textArea.getText());
+            controller.start();
+        });
         add(submitButton, BorderLayout.SOUTH);
     }
 

@@ -12,4 +12,12 @@ public class InputController {
         return inputModel;
     }
 
+    public void submit(String text) {
+        inputModel.setText(text);
+    }
+
+    public void start() {
+        System.out.println(inputModel.getText());
+    }
+
 }
