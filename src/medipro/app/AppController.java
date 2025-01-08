@@ -1,6 +1,4 @@
-package medipro.controllers;
-
-import medipro.models.AppModel;
+package medipro.app;
 
 public class AppController {
 

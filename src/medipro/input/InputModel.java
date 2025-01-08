@@ -1,4 +1,4 @@
-package medipro.models;
+package medipro.input;
 
 public class InputModel {
 

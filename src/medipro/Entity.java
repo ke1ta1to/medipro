@@ -2,7 +2,7 @@ package medipro;
 
 import java.awt.Image;
 
-import medipro.models.StageModel;
+import medipro.stage.StageModel;
 import medipro.tiles.Tile;
 
 public class Entity {

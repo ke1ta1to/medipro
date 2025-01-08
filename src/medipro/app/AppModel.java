@@ -1,4 +1,4 @@
-package medipro.models;
+package medipro.app;
 
 public class AppModel {
 

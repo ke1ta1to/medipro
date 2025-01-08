@@ -1,4 +1,4 @@
-package medipro.models;
+package medipro.stage;
 
 import java.io.BufferedReader;
 import java.io.File;

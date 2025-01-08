@@ -1,6 +1,4 @@
-package medipro.controllers;
-
-import medipro.models.InputModel;
+package medipro.input;
 
 public class InputController {
 

@@ -1,18 +1,15 @@
-package medipro;
+package medipro.app;
 
 import java.io.File;
 
 import javax.swing.JFrame;
 
-import medipro.controllers.AppController;
-import medipro.controllers.InputController;
-import medipro.controllers.StageController;
-import medipro.models.AppModel;
-import medipro.models.InputModel;
-import medipro.models.StageModel;
-import medipro.views.AppView;
-import medipro.views.InputView;
-import medipro.views.StageView;
+import medipro.input.InputController;
+import medipro.input.InputModel;
+import medipro.input.InputView;
+import medipro.stage.StageController;
+import medipro.stage.StageModel;
+import medipro.stage.StageView;
 
 public class AppFrame extends JFrame {
 

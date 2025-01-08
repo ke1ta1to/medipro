@@ -1,6 +1,6 @@
 package medipro;
 
-import medipro.models.StageModel;
+import medipro.stage.StageModel;
 import medipro.tiles.AirTile;
 import medipro.tiles.Tile;
 import medipro.tiles.WallTile;

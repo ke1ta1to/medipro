@@ -1,11 +1,8 @@
-package medipro.views;
+package medipro.app;
 
 import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
-
-import medipro.controllers.AppController;
-import medipro.models.AppModel;
 
 public class AppView extends JPanel {
 

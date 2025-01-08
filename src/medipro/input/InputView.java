@@ -1,4 +1,4 @@
-package medipro.views;
+package medipro.input;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -6,9 +6,6 @@ import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-
-import medipro.controllers.InputController;
-import medipro.models.InputModel;
 
 public class InputView extends JPanel {
 

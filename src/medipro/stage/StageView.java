@@ -1,4 +1,4 @@
-package medipro.views;
+package medipro.stage;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,8 +11,6 @@ import javax.swing.Timer;
 
 import medipro.Entity;
 import medipro.World;
-import medipro.controllers.StageController;
-import medipro.models.StageModel;
 
 public class StageView extends JPanel {
 

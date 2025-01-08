@@ -1,5 +1,7 @@
 package medipro;
 
+import medipro.app.AppFrame;
+
 public class App {
 
     public void start() {
