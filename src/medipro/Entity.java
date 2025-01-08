@@ -22,6 +22,7 @@ public class Entity {
     private int height = 0;
 
     private boolean isOnGround = false;
+    private boolean isAlive = true;
 
     public Entity(StageModel stageModel) {
         this.stageModel = stageModel;
@@ -61,11 +62,13 @@ public class Entity {
         Tile leftTile = getCollisionTileOnLeft(this.posX + this.velX);
         if (leftTile != null) {
             this.velX = 0;
+            leftTile.onCollide(this);
         }
 
         Tile rightTile = getCollisionOnRight(this.posX + this.velX);
         if (rightTile != null) {
             this.velX = 0;
+            rightTile.onCollide(this);
         }
     }
 
@@ -88,11 +91,13 @@ public class Entity {
         Tile topTile = getCollisionOnTop(this.posY + this.velY);
         if (topTile != null) {
             this.velY = 0;
+            topTile.onCollide(this);
         }
 
         Tile bottomTile = getCollisionOnBottom(this.posY + this.velY);
         if (bottomTile != null) {
             this.velY = 0;
+            bottomTile.onCollide(this);
             this.isOnGround = true;
         } else {
             this.isOnGround = false;
@@ -149,6 +154,14 @@ public class Entity {
 
     public boolean isOnGround() {
         return this.isOnGround;
+    }
+
+    public boolean isAlive() {
+        return this.isAlive;
+    }
+
+    public void setAlive(boolean isAlive) {
+        this.isAlive = isAlive;
     }
 
     @Override
