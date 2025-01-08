@@ -1,5 +1,5 @@
 package medipro.models;
 
-public class GameModel {
+public class AppModel {
 
 }

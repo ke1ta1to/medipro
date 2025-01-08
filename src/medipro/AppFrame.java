@@ -4,13 +4,13 @@ import java.io.File;
 
 import javax.swing.JFrame;
 
-import medipro.controllers.GameController;
+import medipro.controllers.AppController;
 import medipro.controllers.InputController;
 import medipro.controllers.StageController;
-import medipro.models.GameModel;
+import medipro.models.AppModel;
 import medipro.models.InputModel;
 import medipro.models.StageModel;
-import medipro.views.GameView;
+import medipro.views.AppView;
 import medipro.views.InputView;
 import medipro.views.StageView;
 
@@ -31,14 +31,14 @@ public class AppFrame extends JFrame {
         InputController inputController = new InputController(inputModel);
         InputView inputView = new InputView(inputModel, inputController);
 
-        GameModel gameModel = new GameModel();
-        GameController gameController = new GameController(gameModel);
-        GameView gameView = new GameView(gameModel, gameController);
+        AppModel appModel = new AppModel();
+        AppController appController = new AppController(appModel);
+        AppView appView = new AppView(appModel, appController);
 
-        gameView.setStageView(stageView);
-        gameView.setInputView(inputView);
+        appView.setStageView(stageView);
+        appView.setInputView(inputView);
 
-        getContentPane().add(gameView);
+        getContentPane().add(appView);
 
         pack();
         setLocationRelativeTo(null);

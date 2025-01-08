@@ -4,15 +4,15 @@ import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 
-import medipro.controllers.GameController;
-import medipro.models.GameModel;
+import medipro.controllers.AppController;
+import medipro.models.AppModel;
 
-public class GameView extends JPanel {
+public class AppView extends JPanel {
 
-    private final GameModel model;
-    private final GameController controller;
+    private final AppModel model;
+    private final AppController controller;
 
-    public GameView(GameModel model, GameController controller) {
+    public AppView(AppModel model, AppController controller) {
         this.model = model;
         this.controller = controller;
 
@@ -28,11 +28,11 @@ public class GameView extends JPanel {
         add(view, BorderLayout.WEST);
     }
 
-    public GameModel getModel() {
+    public AppModel getModel() {
         return model;
     }
 
-    public GameController getController() {
+    public AppController getController() {
         return controller;
     }
 
