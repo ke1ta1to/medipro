@@ -2,6 +2,7 @@ package medipro;
 
 import medipro.stage.StageModel;
 import medipro.tiles.AirTile;
+import medipro.tiles.ThornTile;
 import medipro.tiles.Tile;
 import medipro.tiles.WallTile;
 
@@ -30,8 +31,11 @@ public class World {
                 char c = lines[y].charAt(x);
                 if (c == '*') {
                     tiles[x][y] = new WallTile(x * TILE_SIZE, y * TILE_SIZE);
+                } else if (c == ('T')) {
+                    tiles[x][y] = new ThornTile(x * TILE_SIZE, y * TILE_SIZE);
                 } else {
                     tiles[x][y] = new AirTile(x * TILE_SIZE, y * TILE_SIZE);
+
                 }
             }
         }

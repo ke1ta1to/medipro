@@ -2,6 +2,8 @@ package medipro.tiles;
 
 import java.awt.Graphics;
 
+import medipro.Entity;
+
 public abstract class Tile {
 
     private int x;
@@ -36,4 +38,12 @@ public abstract class Tile {
      * @return 衝突判定がある場合はtrue
      */
     public abstract boolean isSolid();
+
+    /**
+     * このタイルに衝突した際の処理
+     * 
+     * @param target 衝突したエンティティ
+     */
+    public void onCollide(Entity target) {
+    }
 }
