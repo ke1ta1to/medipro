@@ -81,16 +81,15 @@ public class StageModel {
 
     public void tick() {
         // 横方向の移動
-        double speed = 2;
-        double velX = 0;
+        double speed = 0.2;
+        double accX = 0;
         if (hasKey("a")) {
-            velX -= 1;
+            accX -= 1;
         }
         if (hasKey("d")) {
-            velX += 1;
+            accX += 1;
         }
-        entity.setVelX(velX * speed);
-        entity.setAccX(0);
+        entity.setAccX(accX * speed);
 
         // 重力とジャンプ
         double accY = gravity; // 最終的な加速度
