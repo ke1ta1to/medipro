@@ -9,11 +9,6 @@ public class Entity {
 
     private final StageModel stageModel;
 
-    /**
-     * 最大速度の大きさ（Y方向）
-     */
-    public static final double MAX_VEL_Y = 7.0;
-
     private double posX = 0;
     private double posY = 0;
     private double velX = 0;
@@ -53,11 +48,7 @@ public class Entity {
     }
 
     public void setVelX(double velX) {
-        if (Math.abs(velX) > MAX_VEL_Y) {
-            this.velX = MAX_VEL_Y * (velX / Math.abs(velX));
-        } else {
-            this.velX = velX;
-        }
+        this.velX = velX;
 
         if (this.posX + this.velX < 0) {
             this.velX = 0;
@@ -83,11 +74,7 @@ public class Entity {
     }
 
     public void setVelY(double velY) {
-        if (Math.abs(velY) > MAX_VEL_Y) {
-            this.velY = MAX_VEL_Y * (velY / Math.abs(velY));
-        } else {
-            this.velY = velY;
-        }
+        this.velY = velY;
 
         if (this.posY + this.velY < 0) {
             this.velY = 0;
@@ -117,7 +104,15 @@ public class Entity {
     }
 
     public void setAccX(double accX) {
-        this.accX = accX;
+        this.accX = accX + (-0.025 * this.velX);
+
+        if (this.isOnGround && Math.abs(this.velX) > 0.05) {
+            if (this.velX > 0) {
+                this.accX -= 0.1;
+            } else if (this.velX < 0) {
+                this.accX += 0.1;
+            }
+        }
     }
 
     public double getAccY() {

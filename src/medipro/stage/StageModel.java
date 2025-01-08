@@ -83,12 +83,22 @@ public class StageModel {
         // 横方向の移動
         double speed = 0.2;
         double accX = 0;
-        if (hasKey("a")) {
-            accX -= 1;
+        if (entity.isOnGround()) {
+            if (hasKey("a")) {
+                accX -= 1;
+            }
+            if (hasKey("d")) {
+                accX += 1;
+            }
+        } else {
+            if (hasKey("a")) {
+                accX -= 0.5;
+            }
+            if (hasKey("d")) {
+                accX += 0.5;
+            }
         }
-        if (hasKey("d")) {
-            accX += 1;
-        }
+
         entity.setAccX(accX * speed);
 
         // 重力とジャンプ
