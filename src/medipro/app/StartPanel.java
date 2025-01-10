@@ -38,4 +38,3 @@ public class StartPanel extends JPanel {
         add(buttonPanel, BorderLayout.CENTER);
     }
 }
-

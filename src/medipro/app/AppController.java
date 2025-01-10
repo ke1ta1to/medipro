@@ -6,8 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-
-public class AppController implements ActionListener{
+public class AppController implements ActionListener {
 
     private final AppModel model;
     private final CardLayout cardLayout;
@@ -31,10 +30,10 @@ public class AppController implements ActionListener{
                 cardLayout.show(mainPanel, "AppView");
                 break;
             case "Level Select":
-                //TODO::レベル選択
+                // TODO::レベル選択
                 break;
             case "Setting":
-                //TODO::設定選択
+                // TODO::設定選択
                 break;
             default:
                 throw new IllegalArgumentException("Unknown command: " + command);

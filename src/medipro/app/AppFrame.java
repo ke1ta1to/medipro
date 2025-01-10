@@ -32,4 +32,3 @@ public class AppFrame extends JFrame {
         setLocationRelativeTo(null);
     }
 }
-
