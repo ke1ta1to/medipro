@@ -1,12 +1,12 @@
 package medipro.app;
 
 import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-public class AppController implements ActionListener {
+import medipro.cardobserver.CardSubject;
+
+public class AppController {
 
     private final AppModel model;
     private final CardLayout cardLayout;
@@ -20,23 +20,5 @@ public class AppController implements ActionListener {
 
     public AppModel getModel() {
         return model;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String command = e.getActionCommand();
-        switch (command) {
-            case "New Game Start":
-                cardLayout.show(mainPanel, "AppView");
-                break;
-            case "Level Select":
-                // TODO::レベル選択
-                break;
-            case "Setting":
-                // TODO::設定選択
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown command: " + command);
-        }
     }
 }
