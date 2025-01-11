@@ -16,6 +16,9 @@ import medipro.stage.StageView;
 import medipro.top.TopModel;
 import medipro.top.TopController;
 import medipro.top.TopFrame;
+import medipro.level.LevelModel;
+import medipro.level.LevelController;
+import medipro.level.LevelFrame;
 
 import javax.swing.JFrame;
 
@@ -42,10 +45,20 @@ public class AppFrame extends JFrame implements CardObserver {
         TopFrame topFrame = new TopFrame(topModel, topController);
 
         JPanel topPanel = topFrame.getPanel();
-        JPanel gamePanel = getGamePanel();
+        File Level1 = new File("src/medipro/world.txt");
+        JPanel gamePanel1 = getGamePanel(Level1);
+        File Level2 = new File("src/medipro/world2.txt");
+        JPanel gamePanel2 = getGamePanel(Level2);
+
+        LevelModel levelModel = new LevelModel();
+        LevelController levelController = new LevelController(levelModel);
+        LevelFrame levelFrame = new LevelFrame(levelModel, levelController);
+        JPanel levelPanel = levelFrame.getPanel();
 
         mainPanel.add(topPanel, "StartScreen");
-        mainPanel.add(gamePanel, "AppView");
+        mainPanel.add(gamePanel1, "GameViewLevel1");
+        mainPanel.add(gamePanel2, "GameViewLevel2");
+        mainPanel.add(levelPanel, "levelPanel");
 
         getContentPane().add(mainPanel);
 
@@ -58,8 +71,11 @@ public class AppFrame extends JFrame implements CardObserver {
         cardLayout.show(mainPanel, CardSubject.getCardNumber());
     }
 
-    private JPanel getGamePanel() {
-        File worldFile = new File("src/medipro/world.txt");
+    /**
+     * worldFileを読み取って新しく生成するように設計。
+     * TODO: りさじゅうの位置を引数にしないと、レベル別の位置設定ができない。
+     */
+    private JPanel getGamePanel(File worldFile) {
 
         StageModel stageModel = new StageModel();
         stageModel.loadWorld(worldFile);
