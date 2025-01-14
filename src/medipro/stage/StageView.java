@@ -3,11 +3,9 @@ package medipro.stage;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -55,10 +53,9 @@ public class StageView extends JPanel implements MouseListener {
         g.setFont(g.getFont().deriveFont(20.0f));
         g.drawString("Keys: " + model.getKeys(), 10, 40);
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/medipro/risaju.png"));
-        Image image = icon.getImage();
         Entity entity = model.getEntity();
-        g.drawImage(image, (int) entity.getPosX(), (int) entity.getPosY(), entity.getWidth(), entity.getHeight(), this);
+        g.drawImage(entity.getImage(), (int) entity.getPosX(), (int) entity.getPosY(), entity.getWidth(),
+                entity.getHeight(), this);
         // entityの周りを線で囲む
         g.setColor(Color.RED);
         g.drawRect((int) entity.getPosX(), (int) entity.getPosY(), entity.getWidth(), entity.getHeight());
