@@ -17,11 +17,11 @@ public class TopController implements ActionListener {
         String command = e.getActionCommand();
         switch (command) {
             case "New Game Start":
-                CardSubject.setCardNumber("AppView");
+                CardSubject.setCardNumber("GameViewLevel1");
                 break;
 
             case "Level Select":
-                // TODO: レベル選択の処理を追加
+                CardSubject.setCardNumber("levelPanel");
                 break;
 
             case "Setting":
