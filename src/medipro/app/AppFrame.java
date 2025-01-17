@@ -1,8 +1,11 @@
 package medipro.app;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.FlowLayout;
 import java.io.File;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -73,7 +76,7 @@ public class AppFrame extends JFrame implements CardObserver {
      * TODO: りさじゅうの位置を引数にしないと、レベル別の位置設定ができない。
      */
     private JPanel getGamePanel(File worldFile) {
-
+        JPanel mainPanel = new JPanel(new BorderLayout());
         StageModel stageModel = new StageModel();
         stageModel.loadWorld(worldFile);
         StageController stageController = new StageController(stageModel);
@@ -89,6 +92,12 @@ public class AppFrame extends JFrame implements CardObserver {
         appView.setStageView(stageView);
         appView.setInputView(inputView);
 
-        return appView;
+        mainPanel.add(appView, BorderLayout.CENTER);
+        JButton topRightButton = new JButton("三");
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.add(topRightButton);
+        mainPanel.add(buttonPanel, BorderLayout.NORTH);
+
+        return mainPanel;
     }
 }
