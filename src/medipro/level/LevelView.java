@@ -1,18 +1,23 @@
 package medipro.level;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
 
-public class LevelFrame {
-    private final JPanel panel;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-    public LevelFrame(LevelModel model, LevelController controller) {
-        panel = new JPanel(new BorderLayout(20, 20));
-        panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
+public class LevelView extends JPanel {
+
+    public LevelView(LevelModel model, LevelController controller) {
+        setLayout(new BorderLayout(20, 20));
+        setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
         JLabel titleLabel = new JLabel("Select Level", JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 36));
-        panel.add(titleLabel, BorderLayout.NORTH);
+        add(titleLabel, BorderLayout.NORTH);
 
         JPanel buttonPanel = new JPanel(new GridLayout(2, 4, 15, 15));
         String[] levels = { "Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6", "Level 7", "Level 8" };
@@ -25,10 +30,6 @@ public class LevelFrame {
             buttonPanel.add(button);
         }
 
-        panel.add(buttonPanel, BorderLayout.CENTER);
-    }
-
-    public JPanel getPanel() {
-        return panel;
+        add(buttonPanel, BorderLayout.CENTER);
     }
 }

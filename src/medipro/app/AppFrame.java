@@ -3,6 +3,7 @@ package medipro.app;
 import java.awt.CardLayout;
 import java.io.File;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import medipro.cardobserver.CardObserver;
@@ -10,17 +11,15 @@ import medipro.cardobserver.CardSubject;
 import medipro.input.InputController;
 import medipro.input.InputModel;
 import medipro.input.InputView;
+import medipro.level.LevelController;
+import medipro.level.LevelModel;
+import medipro.level.LevelView;
 import medipro.stage.StageController;
 import medipro.stage.StageModel;
 import medipro.stage.StageView;
-import medipro.top.TopModel;
 import medipro.top.TopController;
-import medipro.top.TopFrame;
-import medipro.level.LevelModel;
-import medipro.level.LevelController;
-import medipro.level.LevelFrame;
-
-import javax.swing.JFrame;
+import medipro.top.TopModel;
+import medipro.top.TopView;
 
 public class AppFrame extends JFrame implements CardObserver {
 
@@ -42,9 +41,8 @@ public class AppFrame extends JFrame implements CardObserver {
 
         TopModel topModel = new TopModel();
         TopController topController = new TopController(topModel);
-        TopFrame topFrame = new TopFrame(topModel, topController);
+        TopView topView = new TopView(topModel, topController);
 
-        JPanel topPanel = topFrame.getPanel();
         File Level1 = new File("src/medipro/world.txt");
         JPanel gamePanel1 = getGamePanel(Level1);
         File Level2 = new File("src/medipro/world2.txt");
@@ -52,13 +50,12 @@ public class AppFrame extends JFrame implements CardObserver {
 
         LevelModel levelModel = new LevelModel();
         LevelController levelController = new LevelController(levelModel);
-        LevelFrame levelFrame = new LevelFrame(levelModel, levelController);
-        JPanel levelPanel = levelFrame.getPanel();
+        LevelView levelView = new LevelView(levelModel, levelController);
 
-        mainPanel.add(topPanel, "StartScreen");
+        mainPanel.add(topView, "StartScreen");
         mainPanel.add(gamePanel1, "GameViewLevel1");
         mainPanel.add(gamePanel2, "GameViewLevel2");
-        mainPanel.add(levelPanel, "levelPanel");
+        mainPanel.add(levelView, "levelPanel");
 
         getContentPane().add(mainPanel);
 

@@ -1,19 +1,26 @@
 package medipro.top;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
-public class TopFrame {
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-    private final JPanel panel;
+public class TopView extends JPanel {
 
-    public TopFrame(TopModel model, TopController controller) {
-        panel = new JPanel(new BorderLayout(20, 20));
-        panel.setBorder(BorderFactory.createEmptyBorder(90, 30, 30, 30));
+    public TopView(TopModel model, TopController controller) {
+        setLayout(new BorderLayout(20, 20));
+        setBorder(BorderFactory.createEmptyBorder(90, 30, 30, 30));
 
         JLabel gameNameLabel = new JLabel("GameName", JLabel.CENTER);
         gameNameLabel.setFont(new Font("Arial", Font.BOLD, 36));
-        panel.add(gameNameLabel, BorderLayout.NORTH);
+        add(gameNameLabel, BorderLayout.NORTH);
 
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -33,10 +40,7 @@ public class TopFrame {
             buttonPanel.add(button, gbc);
         }
 
-        panel.add(buttonPanel, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.CENTER);
     }
 
-    public JPanel getPanel() {
-        return panel;
-    }
 }
