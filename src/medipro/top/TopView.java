@@ -18,7 +18,7 @@ public class TopView extends JPanel {
         setLayout(new BorderLayout(20, 20));
         setBorder(BorderFactory.createEmptyBorder(90, 30, 30, 30));
 
-        JLabel gameNameLabel = new JLabel("GameName", JLabel.CENTER);
+        JLabel gameNameLabel = new JLabel("りさプロ！", JLabel.CENTER);
         gameNameLabel.setFont(new Font("Arial", Font.BOLD, 36));
         add(gameNameLabel, BorderLayout.NORTH);
 

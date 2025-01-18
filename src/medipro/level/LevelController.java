@@ -1,9 +1,9 @@
 package medipro.level;
 
-import medipro.cardobserver.CardSubject;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import medipro.cardobserver.CardSubject;
 
 public class LevelController implements ActionListener {
 
@@ -48,7 +48,9 @@ public class LevelController implements ActionListener {
             case "Level 8":
                 CardSubject.setCardNumber("GameViewLevel8");
                 break;
-
+            case "exit":
+                CardSubject.setCardNumber("StartScreen");
+                break;
             default:
                 throw new IllegalArgumentException("Unknown command: " + command);
         }

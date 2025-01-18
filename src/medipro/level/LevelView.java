@@ -31,5 +31,14 @@ public class LevelView extends JPanel {
         }
 
         add(buttonPanel, BorderLayout.CENTER);
+
+        JPanel exitPanel = new JPanel(new GridLayout(1, 1, 15, 30));
+        JButton exitButton = new JButton("Exit");
+        exitButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        exitButton.setActionCommand("exit");
+        exitButton.addActionListener(controller);
+        exitPanel.add(exitButton);
+        add(exitPanel, BorderLayout.SOUTH);
+
     }
 }
