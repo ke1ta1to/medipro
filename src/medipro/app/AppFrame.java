@@ -17,6 +17,9 @@ import medipro.input.InputView;
 import medipro.level.LevelController;
 import medipro.level.LevelModel;
 import medipro.level.LevelView;
+import medipro.setting.SettingController;
+import medipro.setting.SettingModel;
+import medipro.setting.SettingView;
 import medipro.stage.StageController;
 import medipro.stage.StageModel;
 import medipro.stage.StageView;
@@ -55,10 +58,15 @@ public class AppFrame extends JFrame implements CardObserver {
         LevelController levelController = new LevelController(levelModel);
         LevelView levelView = new LevelView(levelModel, levelController);
 
+        SettingModel settingModel = new SettingModel();
+        SettingController settingController = new SettingController(settingModel);
+        SettingView settingView = new SettingView(settingModel, settingController);
+
         mainPanel.add(topView, "StartScreen");
         mainPanel.add(gamePanel1, "GameViewLevel1");
         mainPanel.add(gamePanel2, "GameViewLevel2");
         mainPanel.add(levelView, "levelPanel");
+        mainPanel.add(settingView, "setting");
 
         getContentPane().add(mainPanel);
 

@@ -1,9 +1,9 @@
 package medipro.top;
 
-import medipro.cardobserver.CardSubject;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import medipro.cardobserver.CardSubject;
 
 public class TopController implements ActionListener {
     private TopModel model;
@@ -25,7 +25,7 @@ public class TopController implements ActionListener {
                 break;
 
             case "Setting":
-                // TODO: 設定選択の処理を追加
+                CardSubject.setCardNumber("setting");
                 break;
 
             default:
