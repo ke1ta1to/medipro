@@ -1,4 +1,4 @@
-package medipro.level;
+package medipro.setting;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -9,28 +9,15 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class LevelView extends JPanel {
-
-    public LevelView(LevelModel model, LevelController controller) {
+public class SettingView extends JPanel {
+    public SettingView(SettingModel model, SettingController controller) {
         setLayout(new BorderLayout(20, 20));
         setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
-        JLabel titleLabel = new JLabel("Select Level", JLabel.CENTER);
+        JLabel titleLabel = new JLabel("Setting", JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 36));
         add(titleLabel, BorderLayout.NORTH);
-
-        JPanel buttonPanel = new JPanel(new GridLayout(2, 4, 15, 15));
-        String[] levels = { "Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6", "Level 7", "Level 8" };
-
-        for (String level : levels) {
-            JButton button = new JButton(level);
-            button.setFont(new Font("Arial", Font.PLAIN, 20));
-            button.setActionCommand(level);
-            button.addActionListener(controller);
-            buttonPanel.add(button);
-        }
-
-        add(buttonPanel, BorderLayout.CENTER);
+        // TODO: 設定画面の詳細の作成
 
         JPanel exitPanel = new JPanel(new GridLayout(1, 1, 15, 30));
         JButton exitButton = new JButton("Exit");
@@ -39,6 +26,5 @@ public class LevelView extends JPanel {
         exitButton.addActionListener(controller);
         exitPanel.add(exitButton);
         add(exitPanel, BorderLayout.SOUTH);
-
     }
 }
