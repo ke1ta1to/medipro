@@ -1,5 +1,6 @@
 package medipro.stage;
 
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -30,10 +31,23 @@ public class StageModel {
     // ジャンプ力
     private double jumpPower = -6.5;
 
+    private final Image characterLeftWalk0 = loadImage("L_walk_0.png");
+    private final Image characterLeftWalk1 = loadImage("L_walk_1.png");
+    private final Image characterLeftWalk2 = loadImage("L_walk_2.png");
+    private final Image characterLeftWalkHat0 = loadImage("L_walk_hat_0.png");
+    private final Image characterLeftWalkHat1 = loadImage("L_walk_hat_1.png");
+    private final Image characterLeftWalkHat2 = loadImage("L_walk_hat_2.png");
+    private final Image characterRightWalk0 = loadImage("R_walk_0.png");
+    private final Image characterRightWalk1 = loadImage("R_walk_1.png");
+    private final Image characterRightWalk2 = loadImage("R_walk_2.png");
+    private final Image characterRightWalkHat0 = loadImage("R_walk_hat_0.png");
+    private final Image characterRightWalkHat1 = loadImage("R_walk_hat_1.png");
+    private final Image characterRightWalkHat2 = loadImage("R_walk_hat_2.png");
+
     public StageModel() {
         entity = new Entity(this);
-        ImageIcon icon = new ImageIcon(getClass().getResource("/medipro/risaju.png"));
-        entity.setImage(icon.getImage());
+        Image image = characterRightWalk0;
+        entity.setImage(image);
         entity.setWidth(50);
         entity.setHeight(50);
         entity.setPosX(600);
@@ -127,6 +141,33 @@ public class StageModel {
         // 位置を速度に加算
         entity.setPosX(entity.getPosX() + entity.getVelX());
         entity.setPosY(entity.getPosY() + entity.getVelY());
+
+        // 速度を見て、キャラクターの画像を変更する
+        if (entity.getVelX() > 0) {
+            if (!entity.isOnGround() || (entity.getVelX() < 0.5)) {
+                entity.setImage(characterRightWalkHat0);
+            } else {
+                if (entity.getVelX() % 2 < 1) {
+                    entity.setImage(characterRightWalkHat1);
+                } else {
+                    entity.setImage(characterRightWalkHat2);
+                }
+            }
+        } else {
+            if (!entity.isOnGround() || (entity.getVelX() > -0.5)) {
+                entity.setImage(characterLeftWalkHat0);
+            } else {
+                if (entity.getVelX() % 2 > -1) {
+                    entity.setImage(characterLeftWalkHat1);
+                } else {
+                    entity.setImage(characterLeftWalkHat2);
+                }
+            }
+        }
     }
 
+    private Image loadImage(String name) {
+        return new ImageIcon(getClass().getResource(
+                "/medipro/images/" + name)).getImage();
+    }
 }
