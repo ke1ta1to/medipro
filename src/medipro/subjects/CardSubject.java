@@ -1,10 +1,10 @@
-package medipro.cardobserver;
+package medipro.subjects;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CardSubject {
-    private static List<CardObserver> observers = new ArrayList<>();
+    private static List<Runnable> observers = new ArrayList<>();
     private static String cardNumber;// カードの番号
 
     public static String getCardNumber() {
@@ -16,17 +16,15 @@ public class CardSubject {
         notifyObservers();
     }
 
-    public static void addObserver(CardObserver observer) {
+    public static void addObserver(Runnable observer) {
         observers.add(observer);
     }
 
-    public static void removeObserver(CardObserver observer) {
+    public static void removeObserver(Runnable observer) {
         observers.remove(observer);
     }
 
     public static void notifyObservers() {
-        for (CardObserver observer : observers) {
-            observer.update();
-        }
+        observers.forEach(observer -> observer.run());
     }
 }

@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 
 import medipro.Entity;
 import medipro.World;
+import medipro.subjects.WorldSubject;
 
 public class StageModel {
 
@@ -37,6 +38,10 @@ public class StageModel {
         entity.setHeight(50);
         entity.setPosX(600);
         entity.setPosY(500);
+
+        WorldSubject.addObserver(() -> {
+            world = WorldSubject.getWorld();
+        });
     }
 
     public void addKey(String key) {
@@ -65,7 +70,11 @@ public class StageModel {
         return world;
     }
 
-    public void loadWorld(File file) {
+    public void setWorld(World world) {
+        this.world = world;
+    }
+
+    public World loadWorld(File file) {
         String text = "";
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
@@ -76,7 +85,7 @@ public class StageModel {
         }
 
         World world = new World(this, text, 800, 600);
-        this.world = world;
+        return world;
     }
 
     public void tick() {

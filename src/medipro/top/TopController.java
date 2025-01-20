@@ -3,7 +3,9 @@ package medipro.top;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import medipro.cardobserver.CardSubject;
+import medipro.App;
+import medipro.subjects.CardSubject;
+import medipro.subjects.WorldSubject;
 
 public class TopController implements ActionListener {
     private TopModel model;
@@ -12,12 +14,17 @@ public class TopController implements ActionListener {
         this.model = model;
     }
 
+    public TopModel getModel() {
+        return model;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
         switch (command) {
             case "New Game Start":
-                CardSubject.setCardNumber("GameViewLevel1");
+                WorldSubject.setWorld(App.worldLevel1);
+                CardSubject.setCardNumber(App.GAME_VIEW);
                 break;
 
             case "Level Select":
