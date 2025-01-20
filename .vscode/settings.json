@@ -2,6 +2,7 @@
     "editor.formatOnSave": true,
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
+    "files.autoSave": "off",
     "java.saveActions.organizeImports": true,
     "java.project.outputPath": "bin",
     "java.project.sourcePaths": [

@@ -11,5 +11,4 @@ public class AppController {
     public AppModel getModel() {
         return model;
     }
-
 }

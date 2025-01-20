@@ -25,6 +25,10 @@ public class AppView extends JPanel {
         add(view, BorderLayout.WEST);
     }
 
+    public void setStageMenuBarView(JPanel view) {
+        add(view, BorderLayout.NORTH);
+    }
+
     public AppModel getModel() {
         return model;
     }
