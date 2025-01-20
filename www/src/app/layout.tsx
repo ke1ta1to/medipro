@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import "./globals.css";
 import { PropsWithChildren } from "react";
+import BaseLayout from "@/components/BaseLayout";
 
 export const metadata: Metadata = {
   title: "メディプロ",
@@ -10,7 +11,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="ja">
-      <body>{children}</body>
+      <body>
+        <BaseLayout>{children}</BaseLayout>
+      </body>
     </html>
   );
 }
