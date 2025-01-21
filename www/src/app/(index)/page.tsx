@@ -1,7 +1,8 @@
 import Image from "next/image";
 
 import Hero from "@/components/hero";
-import Overview from "@/components/overview.mdx";
+
+import Overview from "./_components/overview.mdx";
 
 export default function IndexPage() {
   return (
