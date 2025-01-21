@@ -1,5 +1,7 @@
-import { Metadata } from "next";
 import { PropsWithChildren } from "react";
+
+import { Metadata } from "next";
+
 import { BaseLayout } from "@/components/base-layout";
 
 import "./globals.css";
