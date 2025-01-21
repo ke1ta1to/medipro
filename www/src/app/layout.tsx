@@ -1,7 +1,8 @@
 import { Metadata } from "next";
-import "./globals.css";
 import { PropsWithChildren } from "react";
-import BaseLayout from "@/components/BaseLayout";
+import { BaseLayout } from "@/components/base-layout";
+
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "メディプロ",
