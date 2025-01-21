@@ -16,7 +16,7 @@ export default function IndexPage() {
           className="w-[640px] max-w-full"
         />
       </div>
-      <div className="prose mt-8">
+      <div className="prose mt-8 max-w-none">
         <Overview />
       </div>
     </div>
