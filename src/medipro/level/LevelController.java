@@ -34,6 +34,7 @@ public class LevelController implements ActionListener {
                 break;
 
             case "Level 3":
+                WorldSubject.setWorld(App.worldLevel3);
                 CardSubject.setCardNumber(App.GAME_VIEW);
                 break;
 

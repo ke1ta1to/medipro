@@ -29,6 +29,10 @@ public class StageMenuBarView extends JPanel {
         JButton goToStageLevel2Button = new JButton("Go to Stage Level 2");
         goToStageLevel2Button.addActionListener(controller.handleGoToStageLevel2());
         add(goToStageLevel2Button);
+
+        JButton goToStageLevel3Button = new JButton("Go to Stage Level 3");
+        goToStageLevel3Button.addActionListener(controller.handleGoToStageLevel3());
+        add(goToStageLevel3Button);
     }
 
     public StageMenuBarModel getModel() {
