@@ -7,6 +7,7 @@ import medipro.tiles.StartTile;
 import medipro.tiles.ThornTile;
 import medipro.tiles.Tile;
 import medipro.tiles.WallTile;
+import medipro.tiles.WarpTile;
 
 public class World {
 
@@ -34,6 +35,8 @@ public class World {
 
         String[] lines = rawWorld.split("\n");
 
+        WarpTile[] warpTiles = new WarpTile[2];
+
         for (int y = 0; y < height / TILE_SIZE; y++) {
             for (int x = 0; x < width / TILE_SIZE; x++) {
                 char c = lines[y].charAt(x);
@@ -50,9 +53,23 @@ public class World {
                     goalPosX = x * TILE_SIZE;
                     goalPosY = y * TILE_SIZE;
 
+                } else if (c == ('W')) {
+                    tiles[x][y] = new WarpTile(x * TILE_SIZE, y * TILE_SIZE);
+                    if (warpTiles[0] == null) {
+                        warpTiles[0] = (WarpTile) tiles[x][y];
+                    } else {
+                        warpTiles[1] = (WarpTile) tiles[x][y];
+                    }
+
                 } else {
                     tiles[x][y] = new AirTile(x * TILE_SIZE, y * TILE_SIZE);
                 }
+            }
+        }
+        if (warpTiles[0] != null || warpTiles[1] != null) {
+            for (int i = 0; i < warpTiles.length; i++) {
+                WarpTile warpTile = warpTiles[i];
+                warpTile.setWarpPoint(warpTiles[(i + 1) % 2]);
             }
         }
     }
