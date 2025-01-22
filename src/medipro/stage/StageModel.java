@@ -11,6 +11,8 @@ import java.util.Set;
 import javax.swing.ImageIcon;
 
 import medipro.Entity;
+import medipro.HangWire;
+import medipro.Vector2;
 import medipro.World;
 import medipro.subjects.WorldSubject;
 
@@ -21,15 +23,21 @@ public class StageModel {
     /**
      * 有効キー: a, d, スペース
      */
-    private final List<String> availableKeys = List.of("a", "d", " ");
+    private final List<String> availableKeys = List.of("a", "d", " ", "h", "j", "k");
     private Set<String> keys = new HashSet<>();
     private Entity entity;
+
+    private HangWire hangWire;
 
     // 重力の考慮
     private double gravity = 0.2;
 
     // ジャンプ力
     private double jumpPower = -6.5;
+
+    // ハングアクションの速さ
+    private double hangSpeed = 7.0;
+    private double hangTensionCoef = 0.0065;
 
     private final Image characterLeftWalk0 = loadImage("L_walk_0.png");
     private final Image characterLeftWalk1 = loadImage("L_walk_1.png");
@@ -88,6 +96,10 @@ public class StageModel {
         this.world = world;
     }
 
+    public HangWire getHangWire() {
+        return hangWire;
+    }
+
     public World loadWorld(File file) {
         String text = "";
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -100,6 +112,10 @@ public class StageModel {
 
         World world = new World(this, text, 800, 600);
         return world;
+    }
+
+    public boolean hasHangWire() {
+        return hangWire != null;
     }
 
     public void tick() {
@@ -133,6 +149,57 @@ public class StageModel {
             }
         }
         entity.setAccY(accY);
+
+        // ハングアクション
+        Vector2 entitySize = new Vector2(entity.getWidth(), entity.getHeight());
+        Vector2 entityPosition = new Vector2(entity.getPosX(), entity.getPosY()).add(entitySize.mul(0.5));
+
+        if (hangWire == null) {
+            if (hasKey("h")) {
+                hangWire = new HangWire(entityPosition, new Vector2(-1, -1));
+            }
+            if (hasKey("k")) {
+                hangWire = new HangWire(entityPosition, new Vector2(1, -1));
+            }
+        } else if (hasKey("j")) {
+            hangWire = null;
+        }
+
+        if (hangWire != null) {
+            hangWire.setStart(entityPosition);
+            if (hangWire.isHanged()) {
+                Vector2 hangDirection = hangWire.getEnd().sub(entityPosition);
+                Vector2 tension = hangDirection.mul(hangTensionCoef);
+                entity.setAccX(entity.getAccX() + tension.getX());
+                entity.setAccY(entity.getAccY() + tension.getY());
+            } else {
+                double nextLength = hangWire.getProgress() + hangSpeed;
+                Vector2 nextPosition = hangWire.getEnd(nextLength);
+
+                if (nextPosition.getY() > world.getHeight() || nextPosition.getY() < 0
+                        || nextPosition.getX() > world.getWidth() || nextPosition.getX() < 0) {
+                    hangWire = null;
+                    return;
+                }
+
+                if (world.getTileAt(nextPosition.getX(), nextPosition.getY()).isSolid()) {
+                    double left = hangWire.getProgress();
+                    double right = nextLength;
+                    while (right - left > 0.005) {
+                        double middle = (left + right) / 2;
+                        if (world.getTileAt(hangWire.getEnd(middle).getX(), hangWire.getEnd(middle).getY()).isSolid()) {
+                            right = middle;
+                        } else {
+                            left = middle;
+                        }
+                    }
+                    hangWire.setProgress(left);
+                    hangWire.setHanged(true);
+                } else {
+                    hangWire.setProgress(nextLength);
+                }
+            }
+        }
 
         // 速度を加速度に加算
         entity.setVelX(entity.getVelX() + entity.getAccX());
