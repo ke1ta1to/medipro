@@ -1,6 +1,6 @@
 export function DownloadButton() {
   return (
-    <div className="flex flex-col items-center py-4">
+    <div className="not-prose flex flex-col items-center py-4">
       <a
         href="https://github.com/eguchi1611/medipro/releases"
         target="_blank"
