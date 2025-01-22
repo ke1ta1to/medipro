@@ -38,6 +38,7 @@ public class App {
 
     public static World worldLevel1;
     public static World worldLevel2;
+    public static World worldLevel3;
 
     public void start() {
         System.out.println("Application started");
@@ -52,6 +53,8 @@ public class App {
         StageModel stageModel = new StageModel();
         worldLevel1 = stageModel.loadWorld(new File("src/medipro/world.txt"));
         worldLevel2 = stageModel.loadWorld(new File("src/medipro/world2.txt"));
+        worldLevel3 = stageModel.loadWorld(new File("src/medipro/world3.txt"));
+
         stageModel.setWorld(worldLevel1);
         StageController stageController = new StageController(stageModel);
         StageView stageView = new StageView(stageModel, stageController);

@@ -38,4 +38,11 @@ public class StageMenuBarController {
         };
     }
 
+    public ActionListener handleGoToStageLevel3() {
+        return e -> {
+            WorldSubject.setWorld(App.worldLevel3);
+            CardSubject.setCardNumber(App.GAME_VIEW);
+        };
+    }
+
 }
