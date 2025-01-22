@@ -45,4 +45,39 @@ public class StageMenuBarController {
         };
     }
 
+    public ActionListener handleGoToStageLevel4() {
+        return e -> {
+            WorldSubject.setWorld(App.worldLevel4);
+            CardSubject.setCardNumber(App.GAME_VIEW);
+        };
+    }
+
+    public ActionListener handleGoToStageLevel5() {
+        return e -> {
+            WorldSubject.setWorld(App.worldLevel5);
+            CardSubject.setCardNumber(App.GAME_VIEW);
+        };
+    }
+
+    public ActionListener handleGoToStageLevel6() {
+        return e -> {
+            WorldSubject.setWorld(App.worldLevel6);
+            CardSubject.setCardNumber(App.GAME_VIEW);
+        };
+    }
+
+    public ActionListener handleGoToStageLevel7() {
+        return e -> {
+            WorldSubject.setWorld(App.worldLevel7);
+            CardSubject.setCardNumber(App.GAME_VIEW);
+        };
+    }
+
+    public ActionListener handleGoToStageLevel8() {
+        return e -> {
+            WorldSubject.setWorld(App.worldLevel8);
+            CardSubject.setCardNumber(App.GAME_VIEW);
+        };
+    }
+
 }
