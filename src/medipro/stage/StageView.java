@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import medipro.Entity;
+import medipro.Vector2;
 import medipro.World;
 
 public class StageView extends JPanel implements MouseListener {
@@ -65,6 +66,15 @@ public class StageView extends JPanel implements MouseListener {
                     (int) entity.getPosY() + entity.getHeight());
             g.drawLine((int) entity.getPosX() + entity.getWidth(), (int) entity.getPosY(), (int) entity.getPosX(),
                     (int) entity.getPosY() + entity.getHeight());
+        }
+
+        // ハングワイヤーの描画
+        if (model.getHangWire() != null) {
+            g.setColor(Color.PINK);
+            Vector2 hangWireStart = model.getHangWire().getStart();
+            Vector2 hangWireEnd = model.getHangWire().getEnd();
+            g.drawLine((int) hangWireStart.getX(), (int) hangWireStart.getY(), (int) hangWireEnd.getX(),
+                    (int) hangWireEnd.getY());
         }
 
         // entity data
