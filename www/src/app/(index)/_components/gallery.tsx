@@ -20,7 +20,7 @@ const screenshots = [
 
 export function Gallery() {
   return (
-    <div className="flex flex-col justify-center gap-4">
+    <div className="not-prose flex flex-col justify-center gap-4">
       {screenshots.map((screenshot, index) => (
         <Image
           key={index}
