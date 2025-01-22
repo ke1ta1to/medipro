@@ -1,9 +1,9 @@
 import Image from "next/image";
 import NextLink from "next/link";
 
-export default function Hero() {
+export function Hero() {
   return (
-    <NextLink href="/" className="flex flex-col items-center">
+    <NextLink href="/" className="not-prose flex flex-col items-center py-8">
       <Image
         alt="logo"
         src="/logo.svg"
