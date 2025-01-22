@@ -2,6 +2,8 @@ package medipro;
 
 import medipro.stage.StageModel;
 import medipro.tiles.AirTile;
+import medipro.tiles.GoalTile;
+import medipro.tiles.StartTile;
 import medipro.tiles.ThornTile;
 import medipro.tiles.Tile;
 import medipro.tiles.WallTile;
@@ -14,6 +16,12 @@ public class World {
 
     private final int width;
     private final int height;
+
+    private int startPosX;
+    private int startPosY;
+
+    private int goalPosX;
+    private int goalPosY;
 
     private final Tile[][] tiles;
 
@@ -33,9 +41,17 @@ public class World {
                     tiles[x][y] = new WallTile(x * TILE_SIZE, y * TILE_SIZE);
                 } else if (c == ('T')) {
                     tiles[x][y] = new ThornTile(x * TILE_SIZE, y * TILE_SIZE);
+                } else if (c == ('S')) {
+                    tiles[x][y] = new StartTile(x * TILE_SIZE, y * TILE_SIZE);
+                    startPosX = x * TILE_SIZE;
+                    startPosY = y * TILE_SIZE;
+                } else if (c == ('G')) {
+                    tiles[x][y] = new GoalTile(x * TILE_SIZE, y * TILE_SIZE);
+                    goalPosX = x * TILE_SIZE;
+                    goalPosY = y * TILE_SIZE;
+
                 } else {
                     tiles[x][y] = new AirTile(x * TILE_SIZE, y * TILE_SIZE);
-
                 }
             }
         }
@@ -55,6 +71,22 @@ public class World {
 
     public int getHeight() {
         return height;
+    }
+
+    public int getStartPosX() {
+        return startPosX;
+    }
+
+    public int getStartPosY() {
+        return startPosY;
+    }
+
+    public int getGoalPosX() {
+        return goalPosX;
+    }
+
+    public int getGoalPosY() {
+        return goalPosY;
     }
 
     /**

@@ -41,6 +41,7 @@ public class TopView extends JPanel {
         }
 
         add(buttonPanel, BorderLayout.CENTER);
+
     }
 
 }
