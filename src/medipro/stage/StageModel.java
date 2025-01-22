@@ -50,11 +50,11 @@ public class StageModel {
         entity.setImage(image);
         entity.setWidth(50);
         entity.setHeight(50);
-        entity.setPosX(600);
-        entity.setPosY(500);
 
         WorldSubject.addObserver(() -> {
             world = WorldSubject.getWorld();
+            entity.setPosX(world.getStartPosX());
+            entity.setPosY(world.getStartPosY());
         });
     }
 
