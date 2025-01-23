@@ -1,5 +1,10 @@
 package medipro.input;
 
+import medipro.App;
+import medipro.IKeyAction;
+import medipro.commands.Command;
+import medipro.commands.CommandStore;
+
 public class InputController {
 
     private final InputModel inputModel;
@@ -18,6 +23,22 @@ public class InputController {
 
     public void start() {
         System.out.println(inputModel.getText());
+        IKeyAction keyAction = App.getStageModel();
+        CommandStore commandStore = App.getCommandStore();
+        Thread thread = new Thread(() -> {
+            try {
+                String[] lines = inputModel.getText().split("\n");
+                for (String line : lines) {
+                    Command command = commandStore.getCommand(line);
+                    if (command != null) {
+                        command.execute(keyAction, line);
+                    }
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
     }
 
 }

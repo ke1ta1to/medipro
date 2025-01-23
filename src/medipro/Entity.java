@@ -71,8 +71,8 @@ public class Entity {
             rightTile.onCollide(this);
         }
 
-        // 絶対値が0.01以下の場合は0にする
-        if (Math.abs(this.velX) < 0.01) {
+        // 絶対値が0.03以下の場合は0にする
+        if (Math.abs(this.velX) < 0.03) {
             this.velX = 0;
         }
     }
@@ -111,8 +111,8 @@ public class Entity {
             this.isOnGround = false;
         }
 
-        // 絶対値が0.01以下の場合は0にする
-        if (Math.abs(this.velY) < 0.01) {
+        // 絶対値が0.03以下の場合は0にする
+        if (Math.abs(this.velY) < 0.03) {
             this.velY = 0;
         }
     }
@@ -132,8 +132,8 @@ public class Entity {
             }
         }
 
-        // 絶対値が0.01以下の場合は0にする
-        if (Math.abs(this.accX) < 0.01) {
+        // 絶対値が0.03以下の場合は0にする
+        if (Math.abs(this.accX) < 0.03) {
             this.accX = 0;
         }
     }
@@ -145,8 +145,8 @@ public class Entity {
     public void setAccY(double accY) {
         this.accY = accY;
 
-        // 絶対値が0.01以下の場合は0にする
-        if (Math.abs(this.accY) < 0.01) {
+        // 絶対値が0.03以下の場合は0にする
+        if (Math.abs(this.accY) < 0.03) {
             this.accY = 0;
         }
     }

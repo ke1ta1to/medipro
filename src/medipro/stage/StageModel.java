@@ -12,11 +12,12 @@ import javax.swing.ImageIcon;
 
 import medipro.Entity;
 import medipro.HangWire;
+import medipro.IKeyAction;
 import medipro.Vector2;
 import medipro.World;
 import medipro.subjects.WorldSubject;
 
-public class StageModel {
+public class StageModel implements IKeyAction {
 
     private World world = null;
 
@@ -71,26 +72,36 @@ public class StageModel {
         world.resetState();
     }
 
+    @Override
     public void addKey(String key) {
         if (availableKeys.contains(key)) {
             keys.add(key);
         }
     }
 
+    @Override
     public void removeKey(String key) {
         keys.remove(key);
     }
 
+    @Override
     public boolean hasKey(String key) {
         return keys.contains(key);
     }
 
+    @Override
     public void clearKeys() {
         keys.clear();
     }
 
+    @Override
     public Set<String> getKeys() {
         return keys;
+    }
+
+    @Override
+    public List<String> getAvailableKeys() {
+        return availableKeys;
     }
 
     public Entity getEntity() {
@@ -158,6 +169,11 @@ public class StageModel {
             }
         }
         entity.setAccY(accY);
+
+        // 伸びないようにする
+        // if (hasHangWire() && entity.getVelY() > 0) {
+        // entity.setVelY(0);
+        // }
 
         // ハングアクション
         Vector2 entitySize = new Vector2(entity.getWidth(), entity.getHeight());

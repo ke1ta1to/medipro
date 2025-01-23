@@ -10,6 +10,14 @@ import medipro.app.AppController;
 import medipro.app.AppFrame;
 import medipro.app.AppModel;
 import medipro.app.AppView;
+import medipro.commands.CommandStore;
+import medipro.commands.HookCommand;
+import medipro.commands.JumpCommand;
+import medipro.commands.LeftCommand;
+import medipro.commands.RightCommand;
+import medipro.commands.StopCommand;
+import medipro.commands.UnhookCommand;
+import medipro.commands.WaitCommand;
 import medipro.input.InputController;
 import medipro.input.InputModel;
 import medipro.input.InputView;
@@ -35,6 +43,8 @@ import medipro.top.TopView;
 
 public class App {
 
+    private static App app;
+
     public static final String TOP_VIEW = "StartScreen";
     public static final String GAME_VIEW = "GameViewLevel1";
     public static final String LEVEL_VIEW = "levelPanel";
@@ -49,8 +59,28 @@ public class App {
     public static World worldLevel7;
     public static World worldLevel8;
 
+    private CommandStore commandStore;
+
+    private StageMenuModel stageMenuModel;
+    private StageModel stageModel;
+    private InputModel inputModel;
+    private StageMenuBarModel stageMenuBarModel;
+    private AppModel appModel;
+    private TopModel topModel;
+    private LevelModel levelModel;
+    private SettingModel settingModel;
+
     public void start() {
         System.out.println("Application started");
+        commandStore = new CommandStore();
+        commandStore.addCommand(new RightCommand());
+        commandStore.addCommand(new LeftCommand());
+        commandStore.addCommand(new WaitCommand());
+        commandStore.addCommand(new StopCommand());
+        commandStore.addCommand(new HookCommand());
+        commandStore.addCommand(new UnhookCommand());
+        commandStore.addCommand(new JumpCommand());
+
         AppFrame appFrame = new AppFrame();
         appFrame.add(createPanel());
         appFrame.pack();
@@ -59,11 +89,11 @@ public class App {
     }
 
     private JPanel createPanel() {
-        StageMenuModel stageMenuModel = new StageMenuModel();
+        stageMenuModel = new StageMenuModel();
         StageMenuController stageMenuController = new StageMenuController(stageMenuModel);
         StageMenuView stageMenuView = new StageMenuView(stageMenuModel, stageMenuController);
 
-        StageModel stageModel = new StageModel();
+        stageModel = new StageModel();
         worldLevel1 = stageModel.loadWorld(new File("src/medipro/world.txt"));
         worldLevel2 = stageModel.loadWorld(new File("src/medipro/world2.txt"));
         worldLevel3 = stageModel.loadWorld(new File("src/medipro/world3.txt"));
@@ -78,30 +108,30 @@ public class App {
         StageView stageView = new StageView(stageModel, stageController);
         stageView.setStageMenuView(stageMenuView);
 
-        InputModel inputModel = new InputModel();
+        inputModel = new InputModel();
         InputController inputController = new InputController(inputModel);
         InputView inputView = new InputView(inputModel, inputController);
 
-        StageMenuBarModel stageMenuBarModel = new StageMenuBarModel();
+        stageMenuBarModel = new StageMenuBarModel();
         StageMenuBarController stageMenuBarController = new StageMenuBarController(stageMenuBarModel);
         StageMenuBarView stageMenuBarView = new StageMenuBarView(stageMenuBarModel, stageMenuBarController);
 
-        AppModel appModel = new AppModel();
+        appModel = new AppModel();
         AppController appController = new AppController(appModel);
         AppView appView = new AppView(appModel, appController);
         appView.setStageView(stageView);
         appView.setInputView(inputView);
         appView.setStageMenuBarView(stageMenuBarView);
 
-        TopModel topModel = new TopModel();
+        topModel = new TopModel();
         TopController topController = new TopController(topModel);
         TopView topView = new TopView(topModel, topController);
 
-        LevelModel levelModel = new LevelModel();
+        levelModel = new LevelModel();
         LevelController levelController = new LevelController(levelModel);
         LevelView levelView = new LevelView(levelModel, levelController);
 
-        SettingModel settingModel = new SettingModel();
+        settingModel = new SettingModel();
         SettingController settingController = new SettingController(settingModel);
         SettingView settingView = new SettingView(settingModel, settingController);
 
@@ -118,9 +148,88 @@ public class App {
         return panel;
     }
 
+    public static CommandStore getCommandStore() {
+        CommandStore commandStore = app.commandStore;
+        if (commandStore == null) {
+            throw new IllegalStateException("commandStore is null");
+        }
+        return commandStore;
+    }
+
+    public static StageMenuModel getStageMenuModel() {
+        StageMenuModel stageMenuModel = app.stageMenuModel;
+        if (stageMenuModel == null) {
+            throw new IllegalStateException("stageMenuModel is null");
+        }
+        return stageMenuModel;
+    }
+
+    public static StageModel getStageModel() {
+        StageModel stageModel = app.stageModel;
+        if (stageModel == null) {
+            throw new IllegalStateException("stageModel is null");
+        }
+        return stageModel;
+    }
+
+    public static InputModel getInputModel() {
+        InputModel inputModel = app.inputModel;
+        if (inputModel == null) {
+            throw new IllegalStateException("inputModel is null");
+        }
+        return inputModel;
+    }
+
+    public static StageMenuBarModel getStageMenuBarModel() {
+        StageMenuBarModel stageMenuBarModel = app.stageMenuBarModel;
+        if (stageMenuBarModel == null) {
+            throw new IllegalStateException("stageMenuBarModel is null");
+        }
+        return stageMenuBarModel;
+    }
+
+    public static AppModel getAppModel() {
+        AppModel appModel = app.appModel;
+        if (appModel == null) {
+            throw new IllegalStateException("appModel is null");
+        }
+        return appModel;
+    }
+
+    public static TopModel getTopModel() {
+        TopModel topModel = app.topModel;
+        if (topModel == null) {
+            throw new IllegalStateException("topModel is null");
+        }
+        return topModel;
+    }
+
+    public static LevelModel getLevelModel() {
+        LevelModel levelModel = app.levelModel;
+        if (levelModel == null) {
+            throw new IllegalStateException("levelModel is null");
+        }
+        return levelModel;
+    }
+
+    public static SettingModel getSettingModel() {
+        SettingModel settingModel = app.settingModel;
+        if (settingModel == null) {
+            throw new IllegalStateException("settingModel is null");
+        }
+        return settingModel;
+    }
+
+    public static App getApp() {
+        return app;
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            App app = new App();
+            if (app != null) {
+                throw new IllegalStateException("App is already running");
+            }
+            app = new App();
             app.start();
         });
     }
