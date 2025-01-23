@@ -12,4 +12,10 @@ public class StageMenuController {
         return model;
     }
 
+    public void handleClose() {
+        if (model.getOnClose() != null) {
+            model.getOnClose().run();
+        }
+    }
+
 }

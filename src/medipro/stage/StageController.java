@@ -19,6 +19,10 @@ public class StageController implements KeyListener, ActionListener {
         timer.start();
     }
 
+    public void clearKeys() {
+        model.clearKeys();
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
     }

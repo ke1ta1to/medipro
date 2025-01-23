@@ -91,6 +91,10 @@ public class StageModel {
         return keys.contains(key);
     }
 
+    public void clearKeys() {
+        keys.clear();
+    }
+
     public Set<String> getKeys() {
         return keys;
     }

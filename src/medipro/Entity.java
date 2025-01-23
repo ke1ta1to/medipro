@@ -70,6 +70,11 @@ public class Entity {
             this.velX = 0;
             rightTile.onCollide(this);
         }
+
+        // 絶対値が0.01以下の場合は0にする
+        if (Math.abs(this.velX) < 0.01) {
+            this.velX = 0;
+        }
     }
 
     public double getVelY() {
@@ -105,6 +110,11 @@ public class Entity {
         } else {
             this.isOnGround = false;
         }
+
+        // 絶対値が0.01以下の場合は0にする
+        if (Math.abs(this.velY) < 0.01) {
+            this.velY = 0;
+        }
     }
 
     public double getAccX() {
@@ -121,6 +131,11 @@ public class Entity {
                 this.accX += 0.1;
             }
         }
+
+        // 絶対値が0.01以下の場合は0にする
+        if (Math.abs(this.accX) < 0.01) {
+            this.accX = 0;
+        }
     }
 
     public double getAccY() {
@@ -129,6 +144,11 @@ public class Entity {
 
     public void setAccY(double accY) {
         this.accY = accY;
+
+        // 絶対値が0.01以下の場合は0にする
+        if (Math.abs(this.accY) < 0.01) {
+            this.accY = 0;
+        }
     }
 
     public Image getImage() {

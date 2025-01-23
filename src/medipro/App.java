@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import java.io.File;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import medipro.app.AppController;
 import medipro.app.AppFrame;
@@ -75,7 +76,7 @@ public class App {
         stageModel.setWorld(worldLevel1);
         StageController stageController = new StageController(stageModel);
         StageView stageView = new StageView(stageModel, stageController);
-        stageView.setMenuView(stageMenuView);
+        stageView.setStageMenuView(stageMenuView);
 
         InputModel inputModel = new InputModel();
         InputController inputController = new InputController(inputModel);
@@ -118,8 +119,10 @@ public class App {
     }
 
     public static void main(String[] args) {
-        App app = new App();
-        app.start();
+        SwingUtilities.invokeLater(() -> {
+            App app = new App();
+            app.start();
+        });
     }
 
 }
