@@ -3,6 +3,7 @@ package medipro.tiles;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import medipro.Entity;
 import medipro.World;
 
 public class GoalTile extends AirTile {
@@ -18,5 +19,18 @@ public class GoalTile extends AirTile {
 
         g.setColor(Color.BLACK);
         g.drawRect(getX(), getY(), World.TILE_SIZE, World.TILE_SIZE);
+    }
+
+    @Override
+    public boolean isSolid() {
+        return true;
+    }
+
+    @Override
+    public void onCollide(Entity target) {
+        // TODO: ゴールした際の処理
+        System.out.println("Goal!");
+        target.resetStageModel();
+
     }
 }

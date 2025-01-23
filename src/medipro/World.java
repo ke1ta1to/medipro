@@ -107,9 +107,8 @@ public class World {
     }
 
     public void resetState() {
-        if (warpTiles[0] != null || warpTiles[1] != null) {
-            for (int i = 0; i < warpTiles.length; i++) {
-                WarpTile warpTile = warpTiles[i];
+        for (WarpTile warpTile : warpTiles) {
+            if (warpTile != null) {
                 warpTile.setIsCollided(false);
             }
         }
