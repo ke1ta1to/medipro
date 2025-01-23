@@ -15,6 +15,7 @@ import medipro.Entity;
 import medipro.Vector2;
 import medipro.World;
 import medipro.stage_menu.StageMenuView;
+import medipro.utils.Fonts;
 
 public class StageView extends JPanel implements MouseListener {
 
@@ -30,6 +31,7 @@ public class StageView extends JPanel implements MouseListener {
         setLayout(null);
 
         JButton openMenuButton = new JButton("メニュー");
+        openMenuButton.setFont(Fonts.MPLUS1CODE_FONT.deriveFont(20.0f));
         JPanel openMenuButtonPanel = new JPanel();
         openMenuButtonPanel.setOpaque(false);
         openMenuButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
