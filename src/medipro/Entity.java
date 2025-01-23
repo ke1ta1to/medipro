@@ -86,6 +86,9 @@ public class Entity {
 
         if (this.posY + this.velY + this.height > stageModel.getWorld().getHeight()) {
             this.velY = 0;
+            setAlive(false);
+            targetDeathAction();
+            resetStageModel();
         }
 
         Tile topTile = getCollisionOnTop(this.posY + this.velY);
@@ -94,20 +97,13 @@ public class Entity {
             topTile.onCollide(this);
         }
 
-        Tile groundTile = getCollisionOnBottom(this.posY + this.velY);
-        if (groundTile != null) {
+        Tile bottomTile = getCollisionOnBottom(this.posY + this.velY);
+        if (bottomTile != null) {
             this.velY = 0;
-            groundTile.onCollide(this);
+            bottomTile.onCollide(this);
             this.isOnGround = true;
         } else {
             this.isOnGround = false;
-        }
-
-        // FIX: 画面外に落ちた時の処理の最適化
-        if (this.posY + this.height > 599) {
-            setAlive(false);
-            targetDeathAction();
-            resetStageModel();
         }
     }
 
