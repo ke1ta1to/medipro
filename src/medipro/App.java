@@ -1,7 +1,6 @@
 package medipro;
 
 import java.awt.CardLayout;
-import java.io.File;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -24,6 +23,9 @@ import medipro.input.InputView;
 import medipro.level.LevelController;
 import medipro.level.LevelModel;
 import medipro.level.LevelView;
+import medipro.observers.CardSubject;
+import medipro.observers.InputTextSubject;
+import medipro.observers.WorldSubject;
 import medipro.setting.SettingController;
 import medipro.setting.SettingModel;
 import medipro.setting.SettingView;
@@ -36,14 +38,18 @@ import medipro.stage_menu.StageMenuView;
 import medipro.stage_menu_bar.StageMenuBarController;
 import medipro.stage_menu_bar.StageMenuBarModel;
 import medipro.stage_menu_bar.StageMenuBarView;
-import medipro.subjects.CardSubject;
 import medipro.top.TopController;
 import medipro.top.TopModel;
 import medipro.top.TopView;
+import medipro.utils.WorldLoader;
 
 public class App {
 
     private static App app;
+
+    private final CardSubject cardSubject;
+    private final WorldSubject worldSubject;
+    private final InputTextSubject inputTextSubject;
 
     public static final String TOP_VIEW = "StartScreen";
     public static final String GAME_VIEW = "GameViewLevel1";
@@ -70,6 +76,12 @@ public class App {
     private LevelModel levelModel;
     private SettingModel settingModel;
 
+    public App() {
+        cardSubject = new CardSubject();
+        worldSubject = new WorldSubject();
+        inputTextSubject = new InputTextSubject();
+    }
+
     public void start() {
         System.out.println("Application started");
         commandStore = new CommandStore();
@@ -94,22 +106,14 @@ public class App {
         StageMenuView stageMenuView = new StageMenuView(stageMenuModel, stageMenuController);
 
         stageModel = new StageModel();
-        worldLevel1 = stageModel.loadWorld(new File("src/medipro/world.txt"),
-                new File("src/medipro/world_example_command.txt"));
-        worldLevel2 = stageModel.loadWorld(new File("src/medipro/world2.txt"),
-                new File("src/medipro/world2_example_command.txt"));
-        worldLevel3 = stageModel.loadWorld(new File("src/medipro/world3.txt"),
-                new File("src/medipro/world3_example_command.txt"));
-        worldLevel4 = stageModel.loadWorld(new File("src/medipro/world4.txt"),
-                new File("src/medipro/world4_example_command.txt"));
-        worldLevel5 = stageModel.loadWorld(new File("src/medipro/world5.txt"),
-                new File("src/medipro/world5_example_command.txt"));
-        worldLevel6 = stageModel.loadWorld(new File("src/medipro/world6.txt"),
-                new File("src/medipro/world6_example_command.txt"));
-        worldLevel7 = stageModel.loadWorld(new File("src/medipro/world7.txt"),
-                new File("src/medipro/world7_example_command.txt"));
-        worldLevel8 = stageModel.loadWorld(new File("src/medipro/world8.txt"),
-                new File("src/medipro/world8_example_command.txt"));
+        worldLevel1 = WorldLoader.loadWorld(stageModel, "world1");
+        worldLevel2 = WorldLoader.loadWorld(stageModel, "world2");
+        worldLevel3 = WorldLoader.loadWorld(stageModel, "world3");
+        worldLevel4 = WorldLoader.loadWorld(stageModel, "world4");
+        worldLevel5 = WorldLoader.loadWorld(stageModel, "world5");
+        worldLevel6 = WorldLoader.loadWorld(stageModel, "world6");
+        worldLevel7 = WorldLoader.loadWorld(stageModel, "world7");
+        worldLevel8 = WorldLoader.loadWorld(stageModel, "world8");
 
         stageModel.setWorld(worldLevel1);
         StageController stageController = new StageController(stageModel);
@@ -145,8 +149,8 @@ public class App {
 
         CardLayout cardLayout = new CardLayout();
         JPanel panel = new JPanel(cardLayout);
-        CardSubject.addObserver(() -> {
-            cardLayout.show(panel, CardSubject.getCardNumber());
+        getCardSubject().addObserver((cardNumber) -> {
+            cardLayout.show(panel, cardNumber);
         });
         panel.add(topView, App.TOP_VIEW);
         panel.add(appView, App.GAME_VIEW);
@@ -154,6 +158,30 @@ public class App {
         panel.add(settingView, App.SETTING_VIEW);
 
         return panel;
+    }
+
+    public static CardSubject getCardSubject() {
+        CardSubject cardSubject = app.cardSubject;
+        if (cardSubject == null) {
+            throw new IllegalStateException("cardSubject is null");
+        }
+        return cardSubject;
+    }
+
+    public static WorldSubject getWorldSubject() {
+        WorldSubject worldSubject = app.worldSubject;
+        if (worldSubject == null) {
+            throw new IllegalStateException("worldSubject is null");
+        }
+        return worldSubject;
+    }
+
+    public static InputTextSubject getInputTextSubject() {
+        InputTextSubject inputTextSubject = app.inputTextSubject;
+        if (inputTextSubject == null) {
+            throw new IllegalStateException("inputTextSubject is null");
+        }
+        return inputTextSubject;
     }
 
     public static CommandStore getCommandStore() {

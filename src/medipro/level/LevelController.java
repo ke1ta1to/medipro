@@ -4,8 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import medipro.App;
-import medipro.subjects.CardSubject;
-import medipro.subjects.WorldSubject;
 
 public class LevelController implements ActionListener {
 
@@ -24,47 +22,47 @@ public class LevelController implements ActionListener {
         String command = e.getActionCommand();
         switch (command) {
             case "Level 1":
-                WorldSubject.setWorld(App.worldLevel1);
-                CardSubject.setCardNumber(App.GAME_VIEW);
+                App.getWorldSubject().setWorld(App.worldLevel1);
+                App.getCardSubject().setCardNumber(App.GAME_VIEW);
                 break;
 
             case "Level 2":
-                WorldSubject.setWorld(App.worldLevel2);
-                CardSubject.setCardNumber(App.GAME_VIEW);
+                App.getWorldSubject().setWorld(App.worldLevel2);
+                App.getCardSubject().setCardNumber(App.GAME_VIEW);
                 break;
 
             case "Level 3":
-                WorldSubject.setWorld(App.worldLevel3);
-                CardSubject.setCardNumber(App.GAME_VIEW);
+                App.getWorldSubject().setWorld(App.worldLevel3);
+                App.getCardSubject().setCardNumber(App.GAME_VIEW);
                 break;
 
             case "Level 4":
-                WorldSubject.setWorld(App.worldLevel4);
-                CardSubject.setCardNumber(App.GAME_VIEW);
+                App.getWorldSubject().setWorld(App.worldLevel4);
+                App.getCardSubject().setCardNumber(App.GAME_VIEW);
                 break;
 
             case "Level 5":
-                WorldSubject.setWorld(App.worldLevel5);
-                CardSubject.setCardNumber(App.GAME_VIEW);
+                App.getWorldSubject().setWorld(App.worldLevel5);
+                App.getCardSubject().setCardNumber(App.GAME_VIEW);
                 break;
 
             case "Level 6":
-                WorldSubject.setWorld(App.worldLevel6);
-                CardSubject.setCardNumber(App.GAME_VIEW);
+                App.getWorldSubject().setWorld(App.worldLevel6);
+                App.getCardSubject().setCardNumber(App.GAME_VIEW);
                 break;
 
             case "Level 7":
-                WorldSubject.setWorld(App.worldLevel7);
-                CardSubject.setCardNumber(App.GAME_VIEW);
+                App.getWorldSubject().setWorld(App.worldLevel7);
+                App.getCardSubject().setCardNumber(App.GAME_VIEW);
                 break;
 
             case "Level 8":
-                WorldSubject.setWorld(App.worldLevel8);
-                CardSubject.setCardNumber(App.GAME_VIEW);
+                App.getWorldSubject().setWorld(App.worldLevel8);
+                App.getCardSubject().setCardNumber(App.GAME_VIEW);
                 break;
 
             case "exit":
-                CardSubject.setCardNumber(App.TOP_VIEW);
+                App.getCardSubject().setCardNumber(App.TOP_VIEW);
                 break;
 
             default:

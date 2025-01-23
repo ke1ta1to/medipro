@@ -1,21 +1,21 @@
 package medipro.stage;
 
 import java.awt.Image;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.swing.ImageIcon;
 
+import medipro.App;
 import medipro.Entity;
 import medipro.HangWire;
 import medipro.IKeyAction;
 import medipro.Vector2;
 import medipro.World;
-import medipro.subjects.WorldSubject;
 
 public class StageModel implements IKeyAction {
 
@@ -54,9 +54,8 @@ public class StageModel implements IKeyAction {
         entity.setImage(image);
         entity.setWidth(50);
         entity.setHeight(50);
-        // TODO: ここで初期化をちゃんと設定する。
-        WorldSubject.addObserver(() -> {
-            world = WorldSubject.getWorld();
+        App.getWorldSubject().addObserver((world) -> {
+            setWorld(world);
             reset();
         });
     }
@@ -127,22 +126,28 @@ public class StageModel implements IKeyAction {
         return tickCount;
     }
 
-    public World loadWorld(File file, File exampleCommandFIle) {
+    public World loadWorld(InputStream file, InputStream exampleCommandFile) {
+        byte[] buffer = new byte[1024];
         String text = "";
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                text += line + "\n";
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                BufferedInputStream bis = new BufferedInputStream(file)) {
+            int len;
+            while ((len = bis.read(buffer)) != -1) {
+                baos.write(buffer, 0, len);
             }
+            text = new String(baos.toByteArray());
         } catch (Exception e) {
         }
 
         String exampleCommand = "";
-        try (BufferedReader reader = new BufferedReader(new FileReader(exampleCommandFIle))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                exampleCommand += line + "\n";
+        buffer = new byte[1024];
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                BufferedInputStream bis = new BufferedInputStream(exampleCommandFile)) {
+            int len;
+            while ((len = bis.read(buffer)) != -1) {
+                baos.write(buffer, 0, len);
             }
+            exampleCommand = new String(baos.toByteArray());
         } catch (Exception e) {
         }
 

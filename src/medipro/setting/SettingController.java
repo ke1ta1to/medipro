@@ -21,7 +21,7 @@ public class SettingController implements ActionListener {
         String command = e.getActionCommand();
         switch (command) {
             case "exit":
-                medipro.subjects.CardSubject.setCardNumber(App.TOP_VIEW);
+                App.getCardSubject().setCardNumber(App.TOP_VIEW);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown command: " + command);
