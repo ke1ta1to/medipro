@@ -103,6 +103,7 @@ public class Entity {
             this.isOnGround = false;
         }
 
+        // FIX: 画面外に落ちた時の処理の最適化
         if (this.posY + this.height > 599) {
             setAlive(false);
             targetDeathAction();
