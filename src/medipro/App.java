@@ -23,6 +23,9 @@ import medipro.input.InputView;
 import medipro.level.LevelController;
 import medipro.level.LevelModel;
 import medipro.level.LevelView;
+import medipro.menu_bar.MenuBarController;
+import medipro.menu_bar.MenuBarModel;
+import medipro.menu_bar.MenuBarView;
 import medipro.observers.CardSubject;
 import medipro.observers.InputTextSubject;
 import medipro.observers.WorldSubject;
@@ -98,6 +101,11 @@ public class App {
         appFrame.pack();
         appFrame.setLocationRelativeTo(null);
         appFrame.setVisible(true);
+
+        MenuBarModel menuBarModel = new MenuBarModel();
+        MenuBarController menuBarController = new MenuBarController(menuBarModel);
+        MenuBarView menuBarView = new MenuBarView(menuBarModel, menuBarController);
+        appFrame.setJMenuBar(menuBarView);
     }
 
     private JPanel createPanel() {
