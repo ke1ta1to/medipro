@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import medipro.subjects.InputTextSubject;
+import medipro.App;
 
 public class InputView extends JPanel {
 
@@ -38,7 +38,7 @@ public class InputView extends JPanel {
         });
         add(submitButton, BorderLayout.SOUTH);
 
-        InputTextSubject.addObserver(text -> textArea.setText(text));
+        App.getInputTextSubject().addObserver(text -> textArea.setText(text));
     }
 
     public InputModel getModel() {

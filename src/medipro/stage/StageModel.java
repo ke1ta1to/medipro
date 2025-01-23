@@ -10,12 +10,12 @@ import java.util.Set;
 
 import javax.swing.ImageIcon;
 
+import medipro.App;
 import medipro.Entity;
 import medipro.HangWire;
 import medipro.IKeyAction;
 import medipro.Vector2;
 import medipro.World;
-import medipro.subjects.WorldSubject;
 
 public class StageModel implements IKeyAction {
 
@@ -54,9 +54,8 @@ public class StageModel implements IKeyAction {
         entity.setImage(image);
         entity.setWidth(50);
         entity.setHeight(50);
-        // TODO: ここで初期化をちゃんと設定する。
-        WorldSubject.addObserver(() -> {
-            world = WorldSubject.getWorld();
+        App.getWorldSubject().addObserver((world) -> {
+            setWorld(world);
             reset();
         });
     }

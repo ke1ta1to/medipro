@@ -24,6 +24,9 @@ import medipro.input.InputView;
 import medipro.level.LevelController;
 import medipro.level.LevelModel;
 import medipro.level.LevelView;
+import medipro.observers.CardSubject;
+import medipro.observers.InputTextSubject;
+import medipro.observers.WorldSubject;
 import medipro.setting.SettingController;
 import medipro.setting.SettingModel;
 import medipro.setting.SettingView;
@@ -36,7 +39,6 @@ import medipro.stage_menu.StageMenuView;
 import medipro.stage_menu_bar.StageMenuBarController;
 import medipro.stage_menu_bar.StageMenuBarModel;
 import medipro.stage_menu_bar.StageMenuBarView;
-import medipro.subjects.CardSubject;
 import medipro.top.TopController;
 import medipro.top.TopModel;
 import medipro.top.TopView;
@@ -44,6 +46,10 @@ import medipro.top.TopView;
 public class App {
 
     private static App app;
+
+    private final CardSubject cardSubject;
+    private final WorldSubject worldSubject;
+    private final InputTextSubject inputTextSubject;
 
     public static final String TOP_VIEW = "StartScreen";
     public static final String GAME_VIEW = "GameViewLevel1";
@@ -69,6 +75,12 @@ public class App {
     private TopModel topModel;
     private LevelModel levelModel;
     private SettingModel settingModel;
+
+    public App() {
+        cardSubject = new CardSubject();
+        worldSubject = new WorldSubject();
+        inputTextSubject = new InputTextSubject();
+    }
 
     public void start() {
         System.out.println("Application started");
@@ -145,8 +157,8 @@ public class App {
 
         CardLayout cardLayout = new CardLayout();
         JPanel panel = new JPanel(cardLayout);
-        CardSubject.addObserver(() -> {
-            cardLayout.show(panel, CardSubject.getCardNumber());
+        getCardSubject().addObserver((cardNumber) -> {
+            cardLayout.show(panel, cardNumber);
         });
         panel.add(topView, App.TOP_VIEW);
         panel.add(appView, App.GAME_VIEW);
@@ -154,6 +166,30 @@ public class App {
         panel.add(settingView, App.SETTING_VIEW);
 
         return panel;
+    }
+
+    public static CardSubject getCardSubject() {
+        CardSubject cardSubject = app.cardSubject;
+        if (cardSubject == null) {
+            throw new IllegalStateException("cardSubject is null");
+        }
+        return cardSubject;
+    }
+
+    public static WorldSubject getWorldSubject() {
+        WorldSubject worldSubject = app.worldSubject;
+        if (worldSubject == null) {
+            throw new IllegalStateException("worldSubject is null");
+        }
+        return worldSubject;
+    }
+
+    public static InputTextSubject getInputTextSubject() {
+        InputTextSubject inputTextSubject = app.inputTextSubject;
+        if (inputTextSubject == null) {
+            throw new IllegalStateException("inputTextSubject is null");
+        }
+        return inputTextSubject;
     }
 
     public static CommandStore getCommandStore() {
