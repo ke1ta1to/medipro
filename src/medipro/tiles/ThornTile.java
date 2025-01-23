@@ -1,12 +1,17 @@
 package medipro.tiles;
 
-import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 
 import medipro.Entity;
 import medipro.World;
 
 public class ThornTile extends Tile {
+
+    private Image image = new ImageIcon(getClass().getResource(
+            "/medipro/images/Throne.png")).getImage();
 
     public ThornTile(int x, int y) {
         super(x, y);
@@ -14,11 +19,7 @@ public class ThornTile extends Tile {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.RED);
-        g.fillRect(getX(), getY(), World.TILE_SIZE, World.TILE_SIZE);
-
-        g.setColor(Color.BLACK);
-        g.drawRect(getX(), getY(), World.TILE_SIZE, World.TILE_SIZE);
+        g.drawImage(image, getX(), getY(), World.TILE_SIZE, World.TILE_SIZE, null);
     }
 
     @Override
