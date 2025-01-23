@@ -36,8 +36,8 @@ public class StageModel {
     private double jumpPower = -6.5;
 
     // ハングアクションの速さ
-    private double hangSpeed = 7.0;
-    private double hangTensionCoef = 0.0065;
+    private double hangSpeed = 20.0;
+    private double hangTensionCoef = 0.5;
 
     private final Image characterLeftWalk0 = loadImage("L_walk_0.png");
     private final Image characterLeftWalk1 = loadImage("L_walk_1.png");
@@ -58,12 +58,23 @@ public class StageModel {
         entity.setImage(image);
         entity.setWidth(50);
         entity.setHeight(50);
-
+        // TODO: ここで初期化をちゃんと設定する。
         WorldSubject.addObserver(() -> {
             world = WorldSubject.getWorld();
-            entity.setPosX(world.getStartPosX());
-            entity.setPosY(world.getStartPosY());
+            reset();
         });
+    }
+
+    public void reset() {
+        entity.setPosX(world.getStartPosX());
+        entity.setPosY(world.getStartPosY());
+        entity.setVelX(0);
+        entity.setVelY(0);
+        entity.setAccX(0);
+        entity.setAccY(0);
+        entity.setAlive(true);
+        hangWire = null;
+        world.resetState();
     }
 
     public void addKey(String key) {
@@ -168,7 +179,7 @@ public class StageModel {
         if (hangWire != null) {
             hangWire.setStart(entityPosition);
             if (hangWire.isHanged()) {
-                Vector2 hangDirection = hangWire.getEnd().sub(entityPosition);
+                Vector2 hangDirection = hangWire.getEnd().sub(entityPosition).normalize();
                 Vector2 tension = hangDirection.mul(hangTensionCoef);
                 entity.setAccX(entity.getAccX() + tension.getX());
                 entity.setAccY(entity.getAccY() + tension.getY());

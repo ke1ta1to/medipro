@@ -26,6 +26,8 @@ public class World {
 
     private final Tile[][] tiles;
 
+    private final WarpTile[] warpTiles = new WarpTile[2];
+
     public World(StageModel stageModel, String rawWorld, int width, int height) {
         this.stageModel = stageModel;
         this.width = width;
@@ -34,8 +36,6 @@ public class World {
         tiles = new Tile[width / TILE_SIZE][height / TILE_SIZE];
 
         String[] lines = rawWorld.split("\n");
-
-        WarpTile[] warpTiles = new WarpTile[2];
 
         for (int y = 0; y < height / TILE_SIZE; y++) {
             for (int x = 0; x < width / TILE_SIZE; x++) {
@@ -104,6 +104,14 @@ public class World {
 
     public int getGoalPosY() {
         return goalPosY;
+    }
+
+    public void resetState() {
+        for (WarpTile warpTile : warpTiles) {
+            if (warpTile != null) {
+                warpTile.setIsCollided(false);
+            }
+        }
     }
 
     /**
