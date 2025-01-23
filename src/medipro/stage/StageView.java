@@ -3,6 +3,7 @@ package medipro.stage;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GridBagLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -33,6 +34,13 @@ public class StageView extends JPanel implements MouseListener {
             repaint();
         });
         timer.start();
+
+        GridBagLayout layout = new GridBagLayout();
+        setLayout(layout);
+    }
+
+    public void setMenuView(JPanel view) {
+        add(view);
     }
 
     @Override
@@ -86,6 +94,7 @@ public class StageView extends JPanel implements MouseListener {
         g.drawString("velY: " + model.getEntity().getVelY(), 10, 160);
         g.drawString("accX: " + model.getEntity().getAccX(), 10, 190);
         g.drawString("accY: " + model.getEntity().getAccY(), 10, 220);
+
     }
 
     public StageModel getModel() {
