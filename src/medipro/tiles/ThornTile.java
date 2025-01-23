@@ -29,6 +29,7 @@ public class ThornTile extends Tile {
     @Override
     public void onCollide(Entity target) {
         target.setAlive(false);
+        target.resetStageModel();
     }
 
 }
