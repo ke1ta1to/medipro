@@ -29,6 +29,8 @@ public class GoalTile extends AirTile {
     @Override
     public void onCollide(Entity target) {
         // TODO: ゴールした際の処理
+        System.out.println("Goal!");
+        target.resetStageModel();
 
     }
 }
