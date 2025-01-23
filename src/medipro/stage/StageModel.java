@@ -12,11 +12,12 @@ import javax.swing.ImageIcon;
 
 import medipro.Entity;
 import medipro.HangWire;
+import medipro.IKeyAction;
 import medipro.Vector2;
 import medipro.World;
 import medipro.subjects.WorldSubject;
 
-public class StageModel {
+public class StageModel implements IKeyAction {
 
     private World world = null;
 
@@ -26,6 +27,7 @@ public class StageModel {
     private final List<String> availableKeys = List.of("a", "d", " ", "h", "j", "k");
     private Set<String> keys = new HashSet<>();
     private Entity entity;
+    private int tickCount = 0;
 
     private HangWire hangWire;
 
@@ -68,29 +70,41 @@ public class StageModel {
         entity.setAccY(0);
         entity.setAlive(true);
         hangWire = null;
+        clearKeys();
         world.resetState();
+        tickCount = 0;
     }
 
+    @Override
     public void addKey(String key) {
         if (availableKeys.contains(key)) {
             keys.add(key);
         }
     }
 
+    @Override
     public void removeKey(String key) {
         keys.remove(key);
     }
 
+    @Override
     public boolean hasKey(String key) {
         return keys.contains(key);
     }
 
+    @Override
     public void clearKeys() {
         keys.clear();
     }
 
+    @Override
     public Set<String> getKeys() {
         return keys;
+    }
+
+    @Override
+    public List<String> getAvailableKeys() {
+        return availableKeys;
     }
 
     public Entity getEntity() {
@@ -109,7 +123,11 @@ public class StageModel {
         return hangWire;
     }
 
-    public World loadWorld(File file) {
+    public int getTickCount() {
+        return tickCount;
+    }
+
+    public World loadWorld(File file, File exampleCommandFIle) {
         String text = "";
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
@@ -119,7 +137,16 @@ public class StageModel {
         } catch (Exception e) {
         }
 
-        World world = new World(this, text, 800, 600);
+        String exampleCommand = "";
+        try (BufferedReader reader = new BufferedReader(new FileReader(exampleCommandFIle))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                exampleCommand += line + "\n";
+            }
+        } catch (Exception e) {
+        }
+
+        World world = new World(this, text, 800, 600, exampleCommand);
         return world;
     }
 
@@ -128,6 +155,7 @@ public class StageModel {
     }
 
     public void tick() {
+        tickCount++;
         // 横方向の移動
         double speed = 0.2;
         double accX = 0;
@@ -158,6 +186,11 @@ public class StageModel {
             }
         }
         entity.setAccY(accY);
+
+        // 伸びないようにする
+        // if (hasHangWire() && entity.getVelY() > 0) {
+        // entity.setVelY(0);
+        // }
 
         // ハングアクション
         Vector2 entitySize = new Vector2(entity.getWidth(), entity.getHeight());
