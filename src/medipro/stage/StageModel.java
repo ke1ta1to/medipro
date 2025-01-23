@@ -27,6 +27,7 @@ public class StageModel implements IKeyAction {
     private final List<String> availableKeys = List.of("a", "d", " ", "h", "j", "k");
     private Set<String> keys = new HashSet<>();
     private Entity entity;
+    private int tickCount = 0;
 
     private HangWire hangWire;
 
@@ -69,7 +70,9 @@ public class StageModel implements IKeyAction {
         entity.setAccY(0);
         entity.setAlive(true);
         hangWire = null;
+        clearKeys();
         world.resetState();
+        tickCount = 0;
     }
 
     @Override
@@ -120,7 +123,11 @@ public class StageModel implements IKeyAction {
         return hangWire;
     }
 
-    public World loadWorld(File file) {
+    public int getTickCount() {
+        return tickCount;
+    }
+
+    public World loadWorld(File file, File exampleCommandFIle) {
         String text = "";
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
@@ -130,7 +137,16 @@ public class StageModel implements IKeyAction {
         } catch (Exception e) {
         }
 
-        World world = new World(this, text, 800, 600);
+        String exampleCommand = "";
+        try (BufferedReader reader = new BufferedReader(new FileReader(exampleCommandFIle))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                exampleCommand += line + "\n";
+            }
+        } catch (Exception e) {
+        }
+
+        World world = new World(this, text, 800, 600, exampleCommand);
         return world;
     }
 
@@ -139,6 +155,7 @@ public class StageModel implements IKeyAction {
     }
 
     public void tick() {
+        tickCount++;
         // 横方向の移動
         double speed = 0.2;
         double accX = 0;

@@ -13,7 +13,7 @@ public class UnhookCommand extends Command {
     @Override
     public void execute(IKeyAction action, String rawText) throws InterruptedException {
         action.removeKey("j");
-        Thread.sleep(10);
+        sleep(10);
         action.addKey("j");
     }
 

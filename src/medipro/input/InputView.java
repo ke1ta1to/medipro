@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import medipro.subjects.InputTextSubject;
+
 public class InputView extends JPanel {
 
     private final InputModel model;
@@ -35,6 +37,8 @@ public class InputView extends JPanel {
             controller.start();
         });
         add(submitButton, BorderLayout.SOUTH);
+
+        InputTextSubject.addObserver(text -> textArea.setText(text));
     }
 
     public InputModel getModel() {

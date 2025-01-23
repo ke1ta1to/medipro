@@ -94,14 +94,22 @@ public class App {
         StageMenuView stageMenuView = new StageMenuView(stageMenuModel, stageMenuController);
 
         stageModel = new StageModel();
-        worldLevel1 = stageModel.loadWorld(new File("src/medipro/world.txt"));
-        worldLevel2 = stageModel.loadWorld(new File("src/medipro/world2.txt"));
-        worldLevel3 = stageModel.loadWorld(new File("src/medipro/world3.txt"));
-        worldLevel4 = stageModel.loadWorld(new File("src/medipro/world4.txt"));
-        worldLevel5 = stageModel.loadWorld(new File("src/medipro/world5.txt"));
-        worldLevel6 = stageModel.loadWorld(new File("src/medipro/world6.txt"));
-        worldLevel7 = stageModel.loadWorld(new File("src/medipro/world7.txt"));
-        worldLevel8 = stageModel.loadWorld(new File("src/medipro/world8.txt"));
+        worldLevel1 = stageModel.loadWorld(new File("src/medipro/world.txt"),
+                new File("src/medipro/world_example_command.txt"));
+        worldLevel2 = stageModel.loadWorld(new File("src/medipro/world2.txt"),
+                new File("src/medipro/world2_example_command.txt"));
+        worldLevel3 = stageModel.loadWorld(new File("src/medipro/world3.txt"),
+                new File("src/medipro/world3_example_command.txt"));
+        worldLevel4 = stageModel.loadWorld(new File("src/medipro/world4.txt"),
+                new File("src/medipro/world4_example_command.txt"));
+        worldLevel5 = stageModel.loadWorld(new File("src/medipro/world5.txt"),
+                new File("src/medipro/world5_example_command.txt"));
+        worldLevel6 = stageModel.loadWorld(new File("src/medipro/world6.txt"),
+                new File("src/medipro/world6_example_command.txt"));
+        worldLevel7 = stageModel.loadWorld(new File("src/medipro/world7.txt"),
+                new File("src/medipro/world7_example_command.txt"));
+        worldLevel8 = stageModel.loadWorld(new File("src/medipro/world8.txt"),
+                new File("src/medipro/world8_example_command.txt"));
 
         stageModel.setWorld(worldLevel1);
         StageController stageController = new StageController(stageModel);

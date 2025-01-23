@@ -1,0 +1,7 @@
+right
+wait 1s
+jump
+wait 1440ms
+hook right
+wait 500ms
+unhook

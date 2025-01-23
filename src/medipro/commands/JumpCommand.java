@@ -11,7 +11,7 @@ public class JumpCommand extends Command {
     @Override
     public void execute(IKeyAction action, String rawText) throws InterruptedException {
         action.addKey(" ");
-        Thread.sleep(10);
+        sleep(10);
         action.removeKey(" ");
     }
 

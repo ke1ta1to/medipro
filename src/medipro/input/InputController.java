@@ -2,8 +2,11 @@ package medipro.input;
 
 import medipro.App;
 import medipro.IKeyAction;
+import medipro.World;
 import medipro.commands.Command;
 import medipro.commands.CommandStore;
+import medipro.subjects.InputTextSubject;
+import medipro.subjects.WorldSubject;
 
 public class InputController {
 
@@ -11,6 +14,11 @@ public class InputController {
 
     public InputController(InputModel inputModel) {
         this.inputModel = inputModel;
+
+        WorldSubject.addObserver(() -> {
+            World world = WorldSubject.getWorld();
+            InputTextSubject.setText(world.getExampleCommand());
+        });
     }
 
     public InputModel getModel() {
@@ -18,6 +26,7 @@ public class InputController {
     }
 
     public void submit(String text) {
+        App.getStageModel().getEntity().reset();
         inputModel.setText(text);
     }
 

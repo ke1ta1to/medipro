@@ -191,6 +191,17 @@ public class Entity {
         stageModel.reset();
     }
 
+    public void reset() {
+        this.posX = stageModel.getWorld().getStartPosX();
+        this.posY = stageModel.getWorld().getStartPosY();
+        this.velX = 0;
+        this.velY = 0;
+        this.accX = 0;
+        this.accY = 0;
+        this.isOnGround = false;
+        this.isAlive = true;
+    }
+
     public void targetDeathAction() {
         // TODO: ターゲットが死んだときのアクションを追加する。
     }

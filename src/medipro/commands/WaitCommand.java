@@ -21,12 +21,12 @@ public class WaitCommand extends Command {
             // 単位がsの時
             String[] split = rawText.split(" ");
             int time = Integer.parseInt(split[1].replace("s", ""));
-            Thread.sleep(time * 1000);
+            sleep(time * 1000);
         } else if (rawText.matches(WAIT_MS_REGEX)) {
             // 単位がmsの時
             String[] split = rawText.split(" ");
             int time = Integer.parseInt(split[1].replace("ms", ""));
-            Thread.sleep(time);
+            sleep(time);
         }
     }
 
