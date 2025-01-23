@@ -39,22 +39,16 @@ public class StageModel {
     private double hangSpeed = 20.0;
     private double hangTensionCoef = 0.5;
 
-    private final Image characterLeftWalk0 = loadImage("L_walk_0.png");
-    private final Image characterLeftWalk1 = loadImage("L_walk_1.png");
-    private final Image characterLeftWalk2 = loadImage("L_walk_2.png");
     private final Image characterLeftWalkHat0 = loadImage("L_walk_hat_0.png");
     private final Image characterLeftWalkHat1 = loadImage("L_walk_hat_1.png");
     private final Image characterLeftWalkHat2 = loadImage("L_walk_hat_2.png");
-    private final Image characterRightWalk0 = loadImage("R_walk_0.png");
-    private final Image characterRightWalk1 = loadImage("R_walk_1.png");
-    private final Image characterRightWalk2 = loadImage("R_walk_2.png");
     private final Image characterRightWalkHat0 = loadImage("R_walk_hat_0.png");
     private final Image characterRightWalkHat1 = loadImage("R_walk_hat_1.png");
     private final Image characterRightWalkHat2 = loadImage("R_walk_hat_2.png");
 
     public StageModel() {
         entity = new Entity(this);
-        Image image = characterRightWalk0;
+        Image image = characterRightWalkHat0;
         entity.setImage(image);
         entity.setWidth(50);
         entity.setHeight(50);
