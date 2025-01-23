@@ -164,6 +164,10 @@ public class Entity {
         this.isAlive = isAlive;
     }
 
+    public void resetStageModel() {
+        stageModel.reset();
+    }
+
     @Override
     public String toString() {
         return "Entity [stageModel=" + stageModel + ", posX=" + posX + ", posY=" + posY + ", velX=" + velX + ", velY="

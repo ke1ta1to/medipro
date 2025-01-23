@@ -58,12 +58,23 @@ public class StageModel {
         entity.setImage(image);
         entity.setWidth(50);
         entity.setHeight(50);
-
+        // TODO: ここで初期化をちゃんと設定する。
         WorldSubject.addObserver(() -> {
             world = WorldSubject.getWorld();
-            entity.setPosX(world.getStartPosX());
-            entity.setPosY(world.getStartPosY());
+            reset();
         });
+    }
+
+    public void reset() {
+        entity.setPosX(world.getStartPosX());
+        entity.setPosY(world.getStartPosY());
+        entity.setVelX(0);
+        entity.setVelY(0);
+        entity.setAccX(0);
+        entity.setAccY(0);
+        entity.setAlive(true);
+        hangWire = null;
+        world.resetState();
     }
 
     public void addKey(String key) {
