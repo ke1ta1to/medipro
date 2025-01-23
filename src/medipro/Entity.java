@@ -94,13 +94,19 @@ public class Entity {
             topTile.onCollide(this);
         }
 
-        Tile bottomTile = getCollisionOnBottom(this.posY + this.velY);
-        if (bottomTile != null) {
+        Tile groundTile = getCollisionOnBottom(this.posY + this.velY);
+        if (groundTile != null) {
             this.velY = 0;
-            bottomTile.onCollide(this);
+            groundTile.onCollide(this);
             this.isOnGround = true;
         } else {
             this.isOnGround = false;
+        }
+
+        if (this.posY + this.height > 599) {
+            setAlive(false);
+            targetDeathAction();
+            resetStageModel();
         }
     }
 
@@ -166,6 +172,10 @@ public class Entity {
 
     public void resetStageModel() {
         stageModel.reset();
+    }
+
+    public void targetDeathAction() {
+        // TODO: ターゲットが死んだときのアクションを追加する。
     }
 
     @Override
