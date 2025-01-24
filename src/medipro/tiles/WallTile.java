@@ -4,9 +4,10 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
+import medipro.World;
 
 public class WallTile extends Tile {
-    private final Image wallImage = loadImage("WallTest.png");
+    private final Image wallImage = loadImage("Temp_Wall.png");
 
     public WallTile(int x, int y) {
         super(x, y);
@@ -19,7 +20,7 @@ public class WallTile extends Tile {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(wallImage, getX(), getY(), null);
+        g.drawImage(wallImage, getX(), getY(), World.TILE_SIZE, World.TILE_SIZE, null);
     }
 
     @Override
