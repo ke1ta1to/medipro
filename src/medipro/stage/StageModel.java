@@ -18,6 +18,11 @@ import medipro.IKeyAction;
 import medipro.Vector2;
 import medipro.World;
 
+interface EntityHistory {
+    Vector2 getPosition();
+    Image getImage();
+}
+
 public class StageModel implements IKeyAction {
 
     private World world = null;
@@ -51,6 +56,27 @@ public class StageModel implements IKeyAction {
     private final Image characterRightWalkHat1 = loadImage("R_walk_hat_1.png");
     private final Image characterRightWalkHat2 = loadImage("R_walk_hat_2.png");
 
+    private static class EntityHistoryImpl implements EntityHistory {
+        private final Vector2 position;
+        private final Image image;
+
+        public EntityHistoryImpl(Vector2 position, Image image) {
+            this.position = position;
+            this.image = image;
+        }
+        @Override
+        public Vector2 getPosition() {
+            return position;
+        }
+        @Override
+        public Image getImage() {
+            return image;
+        }
+    }
+
+    // 0.5sごとに、キャラの居た位置と、テクスチャを保持する配列
+    private List<EntityHistory> entityHistories = new java.util.ArrayList<>();
+
     public StageModel() {
         entity = new Entity(this);
         Image image = characterRightWalkHat0;
@@ -61,6 +87,21 @@ public class StageModel implements IKeyAction {
             setWorld(world);
             reset();
         });
+
+        new javax.swing.Timer(500, e -> {
+            if (entity.isAlive()) {
+                Vector2 position = new Vector2(entity.getPosX(), entity.getPosY());
+                Image currentImage = entity.getImage();
+                System.out.println("position: " + position + ", image: " + currentImage);
+                entityHistories.add(new EntityHistoryImpl(position, currentImage));
+            }
+        }).start();
+
+        App.getWorldSubject().addObserver((world) -> {
+            setWorld(world);
+            reset();
+        });
+
     }
 
     public void reset() {
@@ -75,6 +116,7 @@ public class StageModel implements IKeyAction {
         clearKeys();
         world.resetState();
         tickCount = 0;
+        entityHistories.clear();
     }
 
     @Override
