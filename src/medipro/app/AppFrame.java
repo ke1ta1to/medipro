@@ -22,7 +22,6 @@ public class AppFrame extends JFrame {
                 | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-
     }
 
 }

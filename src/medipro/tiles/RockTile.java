@@ -5,15 +5,14 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-import medipro.Entity;
 import medipro.World;
 
-public class GoalTile extends AirTile {
+public class RockTile extends Tile {
 
     private Image image = new ImageIcon(getClass().getResource(
-            "/medipro/images/GoalFlag.png")).getImage();
+            "/medipro/images/Rock.png")).getImage();
 
-    public GoalTile(int x, int y) {
+    public RockTile(int x, int y) {
         super(x, y);
     }
 
@@ -27,11 +26,4 @@ public class GoalTile extends AirTile {
         return true;
     }
 
-    @Override
-    public void onCollide(Entity target) {
-        // TODO: ゴールした際の処理
-        System.out.println("Goal!");
-        target.resetStageModel();
-
-    }
 }

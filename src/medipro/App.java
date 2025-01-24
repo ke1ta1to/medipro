@@ -38,9 +38,7 @@ import medipro.stage.StageView;
 import medipro.stage_menu.StageMenuController;
 import medipro.stage_menu.StageMenuModel;
 import medipro.stage_menu.StageMenuView;
-import medipro.stage_menu_bar.StageMenuBarController;
 import medipro.stage_menu_bar.StageMenuBarModel;
-import medipro.stage_menu_bar.StageMenuBarView;
 import medipro.top.TopController;
 import medipro.top.TopModel;
 import medipro.top.TopView;
@@ -97,15 +95,18 @@ public class App {
         commandStore.addCommand(new JumpCommand());
 
         AppFrame appFrame = new AppFrame();
+
         appFrame.add(createPanel());
-        appFrame.pack();
-        appFrame.setLocationRelativeTo(null);
-        appFrame.setVisible(true);
 
         MenuBarModel menuBarModel = new MenuBarModel();
         MenuBarController menuBarController = new MenuBarController(menuBarModel);
         MenuBarView menuBarView = new MenuBarView(menuBarModel, menuBarController);
         appFrame.setJMenuBar(menuBarView);
+
+        appFrame.pack();
+        appFrame.setLocationRelativeTo(null);
+        appFrame.setVisible(true);
+
     }
 
     private JPanel createPanel() {
@@ -132,16 +133,18 @@ public class App {
         InputController inputController = new InputController(inputModel);
         InputView inputView = new InputView(inputModel, inputController);
 
-        stageMenuBarModel = new StageMenuBarModel();
-        StageMenuBarController stageMenuBarController = new StageMenuBarController(stageMenuBarModel);
-        StageMenuBarView stageMenuBarView = new StageMenuBarView(stageMenuBarModel, stageMenuBarController);
+        // stageMenuBarModel = new StageMenuBarModel();
+        // StageMenuBarController stageMenuBarController = new
+        // StageMenuBarController(stageMenuBarModel);
+        // StageMenuBarView stageMenuBarView = new StageMenuBarView(stageMenuBarModel,
+        // stageMenuBarController);
 
         appModel = new AppModel();
         AppController appController = new AppController(appModel);
         AppView appView = new AppView(appModel, appController);
         appView.setStageView(stageView);
         appView.setInputView(inputView);
-        appView.setStageMenuBarView(stageMenuBarView);
+        // appView.setStageMenuBarView(stageMenuBarView);
 
         topModel = new TopModel();
         TopController topController = new TopController(topModel);

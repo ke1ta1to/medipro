@@ -44,10 +44,12 @@ public class StageModel implements IKeyAction {
     private final Image characterLeftWalkHat0 = loadImage("L_walk_hat_0.png");
     private final Image characterLeftWalkHat1 = loadImage("L_walk_hat_1.png");
     private final Image characterLeftWalkHat2 = loadImage("L_walk_hat_2.png");
+    private final Image characterLeftJump = loadImage("L_jump_hat.png");
     private final Image characterRightWalkHat0 = loadImage("R_walk_hat_0.png");
     private final Image characterRightWalkHat1 = loadImage("R_walk_hat_1.png");
     private final Image characterRightWalkHat2 = loadImage("R_walk_hat_2.png");
     private final Image characterStop = loadImage("risaju.png");
+    private final Image characterRightJump = loadImage("R_jump_hat.png");
 
     public StageModel() {
         entity = new Entity(this);
@@ -262,6 +264,15 @@ public class StageModel implements IKeyAction {
         // 速度を見て、キャラクターの画像を変更する
         if (entity.getVelX() > 0) {
             entity.setElapsedSinceStop(0);
+        }
+        // 速度や中空かを見て、キャラクターの画像を変更する
+        if (!entity.isOnGround()) {
+            if (entity.getVelX() > 0) {
+                entity.setImage(characterRightJump);
+            } else {
+                entity.setImage(characterLeftJump);
+            }
+        } else if (entity.getVelX() > 0) {
             if (!entity.isOnGround() || (entity.getVelX() < 0.5)) {
                 entity.setImage(characterRightWalkHat0);
             } else {

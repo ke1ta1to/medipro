@@ -3,6 +3,7 @@ package medipro;
 import medipro.stage.StageModel;
 import medipro.tiles.AirTile;
 import medipro.tiles.GoalTile;
+import medipro.tiles.RockTile;
 import medipro.tiles.StartTile;
 import medipro.tiles.ThornTile;
 import medipro.tiles.Tile;
@@ -45,6 +46,8 @@ public class World {
                 char c = lines[y].charAt(x);
                 if (c == '*') {
                     tiles[x][y] = new WallTile(x * TILE_SIZE, y * TILE_SIZE);
+                } else if (c == ('R')) {
+                    tiles[x][y] = new RockTile(x * TILE_SIZE, y * TILE_SIZE);
                 } else if (c == ('T')) {
                     tiles[x][y] = new ThornTile(x * TILE_SIZE, y * TILE_SIZE);
                 } else if (c == ('S')) {
