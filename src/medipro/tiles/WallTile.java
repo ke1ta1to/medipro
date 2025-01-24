@@ -6,6 +6,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public class WallTile extends Tile {
+    private final Image wallImage = loadImage("WallTest.png");
 
     public WallTile(int x, int y) {
         super(x, y);
@@ -18,7 +19,6 @@ public class WallTile extends Tile {
 
     @Override
     public void draw(Graphics g) {
-        private final Image wallImage = loadImage("WallTest.png");
         g.drawImage(wallImage, getX(), getY(), null);
     }
 
