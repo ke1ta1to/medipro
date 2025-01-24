@@ -10,9 +10,6 @@ import medipro.World;
 public class WallTile extends Tile {
     private final Image wallImage = loadImage("Temp_Wall.png");
 
-    private Image image = new ImageIcon(getClass().getResource(
-            "/medipro/images/NormalWall.png")).getImage();
-
     public WallTile(int x, int y) {
         super(x, y);
     }

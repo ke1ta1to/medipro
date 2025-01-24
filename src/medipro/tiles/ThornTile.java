@@ -11,9 +11,6 @@ import medipro.World;
 public class ThornTile extends Tile {
     private final Image thornImage = loadImage("Temp_Thorn.png");
 
-    private Image image = new ImageIcon(getClass().getResource(
-            "/medipro/images/Throne.png")).getImage();
-
     public ThornTile(int x, int y) {
         super(x, y);
     }
