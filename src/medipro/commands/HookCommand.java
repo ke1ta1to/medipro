@@ -15,13 +15,13 @@ public class HookCommand extends Command {
     @Override
     public void execute(IKeyAction action, String rawText) throws InterruptedException {
         if (rawText.matches(HOOK_RIGHT_REGEX)) {
-            action.addKey(75);
+            action.addKey("k");
             sleep(10);
-            action.removeKey(75);
+            action.removeKey("k");
         } else if (rawText.matches(HOOK_LEFT_REGEX)) {
-            action.addKey(72);
+            action.addKey("h");
             sleep(10);
-            action.removeKey(72);
+            action.removeKey("h");
         }
     }
 

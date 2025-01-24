@@ -29,13 +29,13 @@ public class StageController implements KeyListener, ActionListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        int key = e.getKeyCode();
+        String key = String.valueOf(e.getKeyChar()).toLowerCase();
         model.addKey(key);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        int key = e.getKeyCode();
+        String key = String.valueOf(e.getKeyChar()).toLowerCase();
         model.removeKey(key);
     }
 

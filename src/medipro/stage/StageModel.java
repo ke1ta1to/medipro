@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 
@@ -25,12 +24,10 @@ public class StageModel implements IKeyAction {
     /**
      * 有効キー: a, d, スペース
      */
-    private final List<Integer> availableKeys = List.of(65, 68, 32, 72, 74, 75);
-    private Set<Integer> keys = new HashSet<>();
+    private final List<String> availableKeys = List.of("a", "d", " ", "h", "j", "k");
+    private Set<String> keys = new HashSet<>();
     private Entity entity;
     private int tickCount = 0;
-
-    private boolean isDebug = true;
 
     private HangWire hangWire;
 
@@ -81,21 +78,19 @@ public class StageModel implements IKeyAction {
     }
 
     @Override
-    public void addKey(int key) {
+    public void addKey(String key) {
         if (availableKeys.contains(key)) {
             keys.add(key);
-        } else if (key == KeyEvent.VK_F3) {
-            isDebug = !isDebug;
         }
     }
 
     @Override
-    public void removeKey(int key) {
+    public void removeKey(String key) {
         keys.remove(key);
     }
 
     @Override
-    public boolean hasKey(int key) {
+    public boolean hasKey(String key) {
         return keys.contains(key);
     }
 
@@ -105,12 +100,12 @@ public class StageModel implements IKeyAction {
     }
 
     @Override
-    public Set<Integer> getKeys() {
+    public Set<String> getKeys() {
         return keys;
     }
 
     @Override
-    public List<Integer> getAvailableKeys() {
+    public List<String> getAvailableKeys() {
         return availableKeys;
     }
 
@@ -167,33 +162,25 @@ public class StageModel implements IKeyAction {
         return hangWire != null;
     }
 
-    public boolean getIsDebug() {
-        return isDebug;
-    }
-
-    public void setIsDebug(boolean isDebug) {
-        this.isDebug = isDebug;
-    }
-
     public void tick() {
         tickCount++;
         // 横方向の移動
         double speed = 0.2;
         double accX = 0;
         if (entity.isOnGround()) {
-            if (hasKey(65)) {
+            if (hasKey("a")) {
                 accX -= 1;
                 entity.setDirection(-1);
             }
-            if (hasKey(68)) {
+            if (hasKey("d")) {
                 accX += 1;
                 entity.setDirection(1);
             }
         } else {
-            if (hasKey(65)) {
+            if (hasKey("a")) {
                 accX -= 0.5;
             }
-            if (hasKey(68)) {
+            if (hasKey("d")) {
                 accX += 0.5;
             }
         }
@@ -202,7 +189,7 @@ public class StageModel implements IKeyAction {
 
         // 重力とジャンプ
         double accY = gravity; // 最終的な加速度
-        if (hasKey(32)) {
+        if (hasKey(" ")) {
             // 下がタイルに接している場合ジャンプ
             if (entity.isOnGround()) {
                 accY = jumpPower;
@@ -220,13 +207,13 @@ public class StageModel implements IKeyAction {
         Vector2 entityPosition = new Vector2(entity.getPosX(), entity.getPosY()).add(entitySize.mul(0.5));
 
         if (hangWire == null) {
-            if (hasKey(72)) {
+            if (hasKey("h")) {
                 hangWire = new HangWire(entityPosition, new Vector2(-1, -1));
             }
-            if (hasKey(75)) {
+            if (hasKey("k")) {
                 hangWire = new HangWire(entityPosition, new Vector2(1, -1));
             }
-        } else if (hasKey(74)) {
+        } else if (hasKey("j")) {
             hangWire = null;
         }
 

@@ -12,9 +12,9 @@ public class UnhookCommand extends Command {
 
     @Override
     public void execute(IKeyAction action, String rawText) throws InterruptedException {
-        action.removeKey(74);
+        action.addKey("j");
         sleep(10);
-        action.addKey(74);
+        action.removeKey("j");
     }
 
 }

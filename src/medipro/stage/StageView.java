@@ -89,6 +89,10 @@ public class StageView extends JPanel implements MouseListener {
         }
 
         // draw keys
+        g.setColor(Color.CYAN);
+        g.setFont(g.getFont().deriveFont(20.0f));
+        g.drawString("Keys: " + model.getKeys(), 10, 40);
+
         Entity entity = model.getEntity();
         g.drawImage(entity.getImage(), (int) entity.getPosX(), (int) entity.getPosY(), entity.getWidth(),
                 entity.getHeight(), this);
@@ -113,18 +117,15 @@ public class StageView extends JPanel implements MouseListener {
         }
 
         // entity data
-        if (model.getIsDebug()) {
-            g.setColor(Color.CYAN);
-            g.setFont(g.getFont().deriveFont(20.0f));
-            g.drawString("Keys: " + model.getKeys(), 10, 40);
-            g.setColor(Color.RED);
-            g.drawString("posX: " + model.getEntity().getPosX(), 10, 70);
-            g.drawString("posY: " + model.getEntity().getPosY(), 10, 100);
-            g.drawString("velX: " + model.getEntity().getVelX(), 10, 130);
-            g.drawString("velY: " + model.getEntity().getVelY(), 10, 160);
-            g.drawString("accX: " + model.getEntity().getAccX(), 10, 190);
-            g.drawString("accY: " + model.getEntity().getAccY(), 10, 220);
-        }
+        g.setColor(Color.RED);
+        g.setFont(g.getFont().deriveFont(20.0f));
+        g.drawString("posX: " + model.getEntity().getPosX(), 10, 70);
+        g.drawString("posY: " + model.getEntity().getPosY(), 10, 100);
+        g.drawString("velX: " + model.getEntity().getVelX(), 10, 130);
+        g.drawString("velY: " + model.getEntity().getVelY(), 10, 160);
+        g.drawString("accX: " + model.getEntity().getAccX(), 10, 190);
+        g.drawString("accY: " + model.getEntity().getAccY(), 10, 220);
+
     }
 
     public StageModel getModel() {
