@@ -1,24 +1,27 @@
 package medipro.tiles;
 
-import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 
 import medipro.Entity;
 import medipro.World;
 
 public class ThornTile extends Tile {
+    private final Image thornImage = loadImage("Temp_Thorn.png");
 
     public ThornTile(int x, int y) {
         super(x, y);
     }
 
+    private Image loadImage(String name) {
+        return new ImageIcon(getClass().getResource("/medipro/images/" + name)).getImage();
+    }
+
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.RED);
-        g.fillRect(getX(), getY(), World.TILE_SIZE, World.TILE_SIZE);
-
-        g.setColor(Color.BLACK);
-        g.drawRect(getX(), getY(), World.TILE_SIZE, World.TILE_SIZE);
+        g.drawImage(thornImage, getX(), getY(), World.TILE_SIZE, World.TILE_SIZE, null);
     }
 
     @Override
