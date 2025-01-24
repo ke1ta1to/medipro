@@ -47,6 +47,7 @@ public class StageModel implements IKeyAction {
     private final Image characterRightWalkHat0 = loadImage("R_walk_hat_0.png");
     private final Image characterRightWalkHat1 = loadImage("R_walk_hat_1.png");
     private final Image characterRightWalkHat2 = loadImage("R_walk_hat_2.png");
+    private final Image characterStop = loadImage("risaju.png");
 
     public StageModel() {
         entity = new Entity(this);
@@ -167,9 +168,11 @@ public class StageModel implements IKeyAction {
         if (entity.isOnGround()) {
             if (hasKey("a")) {
                 accX -= 1;
+                entity.setDirection(-1);
             }
             if (hasKey("d")) {
                 accX += 1;
+                entity.setDirection(1);
             }
         } else {
             if (hasKey("a")) {
@@ -258,6 +261,7 @@ public class StageModel implements IKeyAction {
 
         // 速度を見て、キャラクターの画像を変更する
         if (entity.getVelX() > 0) {
+            entity.setElapsedSinceStop(0);
             if (!entity.isOnGround() || (entity.getVelX() < 0.5)) {
                 entity.setImage(characterRightWalkHat0);
             } else {
@@ -267,7 +271,8 @@ public class StageModel implements IKeyAction {
                     entity.setImage(characterRightWalkHat2);
                 }
             }
-        } else {
+        } else if (entity.getVelX() < 0) {
+            entity.setElapsedSinceStop(0);
             if (!entity.isOnGround() || (entity.getVelX() > -0.5)) {
                 entity.setImage(characterLeftWalkHat0);
             } else {
@@ -276,6 +281,19 @@ public class StageModel implements IKeyAction {
                 } else {
                     entity.setImage(characterLeftWalkHat2);
                 }
+            }
+        } else {
+            entity.setElapsedSinceStop(entity.getElapsedSinceStop() + 1);
+            if (entity.getDirection() == 1) {
+                entity.setImage(characterRightWalkHat0);
+            } else if (entity.getDirection() == -1) {
+                entity.setImage(characterLeftWalkHat0);
+            } else {
+                entity.setImage(characterStop);
+            }
+
+            if (entity.getElapsedSinceStop() > 100) {
+                entity.setImage(characterStop);
             }
         }
     }
