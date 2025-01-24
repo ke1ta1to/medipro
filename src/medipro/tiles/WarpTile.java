@@ -1,12 +1,17 @@
 package medipro.tiles;
 
-import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 
 import medipro.Entity;
 import medipro.World;
 
 public class WarpTile extends Tile {
+
+    private Image image = new ImageIcon(getClass().getResource(
+            "/medipro/images/WarpGate.png")).getImage();
 
     private WarpTile otherPoint;
     private boolean isCollided = false;
@@ -17,11 +22,7 @@ public class WarpTile extends Tile {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.MAGENTA);
-        g.fillRect(getX(), getY(), World.TILE_SIZE, World.TILE_SIZE);
-
-        g.setColor(Color.BLACK);
-        g.drawRect(getX(), getY(), World.TILE_SIZE, World.TILE_SIZE);
+        g.drawImage(image, getX(), getY(), 2 * World.TILE_SIZE, 2 * World.TILE_SIZE, null);
     }
 
     @Override
@@ -34,8 +35,8 @@ public class WarpTile extends Tile {
 
     @Override
     public void onCollide(Entity target) {
-        target.setPosX(otherPoint.getX());
-        target.setPosY(otherPoint.getY());
+        target.setPosX(otherPoint.getX() - (target.getWidth() / 2));
+        target.setPosY(otherPoint.getY() - (target.getHeight() / 2));
         this.isCollided = true;
         otherPoint.setIsCollided(true);
 
