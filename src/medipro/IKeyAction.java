@@ -5,17 +5,17 @@ import java.util.Set;
 
 public interface IKeyAction {
 
-    void addKey(String key);
+    void addKey(int key);
 
-    void removeKey(String key);
+    void removeKey(int key);
 
     void clearKeys();
 
-    boolean hasKey(String key);
+    boolean hasKey(int key);
 
-    Set<String> getKeys();
+    Set<Integer> getKeys();
 
     // availableKeys
-    List<String> getAvailableKeys();
+    List<Integer> getAvailableKeys();
 
 }
