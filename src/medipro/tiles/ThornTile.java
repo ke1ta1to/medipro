@@ -9,17 +9,19 @@ import medipro.Entity;
 import medipro.World;
 
 public class ThornTile extends Tile {
-
-    private Image image = new ImageIcon(getClass().getResource(
-            "/medipro/images/Throne.png")).getImage();
+    private final Image thornImage = loadImage("Temp_Thorn.png");
 
     public ThornTile(int x, int y) {
         super(x, y);
     }
 
+    private Image loadImage(String name) {
+        return new ImageIcon(getClass().getResource("/medipro/images/" + name)).getImage();
+    }
+
     @Override
     public void draw(Graphics g) {
-        g.drawImage(image, getX(), getY(), World.TILE_SIZE, World.TILE_SIZE, null);
+        g.drawImage(thornImage, getX(), getY(), World.TILE_SIZE, World.TILE_SIZE, null);
     }
 
     @Override
