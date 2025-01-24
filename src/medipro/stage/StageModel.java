@@ -29,6 +29,8 @@ public class StageModel implements IKeyAction {
     private Entity entity;
     private int tickCount = 0;
 
+    private boolean isDebug = true;
+
     private HangWire hangWire;
 
     // 重力の考慮
@@ -76,8 +78,11 @@ public class StageModel implements IKeyAction {
 
     @Override
     public void addKey(String key) {
+        System.out.println(key);
         if (availableKeys.contains(key)) {
             keys.add(key);
+        } else if (key.equals("F3")) {
+            isDebug = !isDebug;
         }
     }
 
@@ -157,6 +162,14 @@ public class StageModel implements IKeyAction {
 
     public boolean hasHangWire() {
         return hangWire != null;
+    }
+
+    public boolean getIsDebug() {
+        return isDebug;
+    }
+
+    public void setIsDebug(boolean isDebug) {
+        this.isDebug = isDebug;
     }
 
     public void tick() {
