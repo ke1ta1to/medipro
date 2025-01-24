@@ -97,15 +97,18 @@ public class App {
         commandStore.addCommand(new JumpCommand());
 
         AppFrame appFrame = new AppFrame();
+
         appFrame.add(createPanel());
-        appFrame.pack();
-        appFrame.setLocationRelativeTo(null);
-        appFrame.setVisible(true);
 
         MenuBarModel menuBarModel = new MenuBarModel();
         MenuBarController menuBarController = new MenuBarController(menuBarModel);
         MenuBarView menuBarView = new MenuBarView(menuBarModel, menuBarController);
         appFrame.setJMenuBar(menuBarView);
+
+        appFrame.pack();
+        appFrame.setLocationRelativeTo(null);
+        appFrame.setVisible(true);
+
     }
 
     private JPanel createPanel() {
