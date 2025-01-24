@@ -1,11 +1,16 @@
 package medipro.tiles;
 
-import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 
 import medipro.World;
 
 public class WallTile extends Tile {
+
+    private Image image = new ImageIcon(getClass().getResource(
+            "/medipro/images/NormalWall.png")).getImage();
 
     public WallTile(int x, int y) {
         super(x, y);
@@ -13,11 +18,7 @@ public class WallTile extends Tile {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.GRAY);
-        g.fillRect(getX(), getY(), World.TILE_SIZE, World.TILE_SIZE);
-
-        g.setColor(Color.BLACK);
-        g.drawRect(getX(), getY(), World.TILE_SIZE, World.TILE_SIZE);
+        g.drawImage(image, getX(), getY(), World.TILE_SIZE, World.TILE_SIZE, null);
     }
 
     @Override
