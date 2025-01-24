@@ -53,9 +53,6 @@ public class StageModel implements IKeyAction {
     private final Image characterStop = loadImage("risaju.png");
     private final Image characterRightJump = loadImage("R_jump_hat.png");
 
-    private final int shortLength = 2;
-    private final int intLength = 4;
-
     public StageModel() {
         entity = new Entity(this);
         Image image = characterRightWalkHat0;
