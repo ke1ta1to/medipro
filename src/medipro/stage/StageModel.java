@@ -214,6 +214,10 @@ public class StageModel implements IKeyAction {
         this.isDebug = isDebug;
     }
 
+    public List<EntityHistory> getEntityHistories() {
+        return entityHistories;
+    }
+
     public void tick() {
         tickCount++;
         // 横方向の移動

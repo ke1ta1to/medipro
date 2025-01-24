@@ -92,6 +92,12 @@ public class StageView extends JPanel implements MouseListener {
         Entity entity = model.getEntity();
         g.drawImage(entity.getImage(), (int) entity.getPosX(), (int) entity.getPosY(), entity.getWidth(),
                 entity.getHeight(), this);
+
+        // 軌跡を描画
+        model.getEntityHistories().forEach((history) -> {
+            g.drawImage(history.getImage(), (int) history.getPosition().getX(), (int) history.getPosition().getY(), entity.getWidth(),
+                    entity.getHeight(), this);
+        });
         // entityの周りを線で囲む
         g.setColor(Color.RED);
         g.drawRect((int) entity.getPosX(), (int) entity.getPosY(), entity.getWidth(), entity.getHeight());
