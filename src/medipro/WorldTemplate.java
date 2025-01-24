@@ -6,6 +6,7 @@ import java.util.Map;
 public class WorldTemplate implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    public static final int TILE_SIZE = 20;
     private static final Map<Character, Short> tileMap = Map.of(
             '*', (short) 1,
             'R', (short) 2,
@@ -30,10 +31,14 @@ public class WorldTemplate implements Serializable {
         this.tileIDs = new short[width][height];
 
         String[] lines = rawWorld.split("\n");
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+        for (int y = 0; y < height / TILE_SIZE; y++) {
+            for (int x = 0; x < width / TILE_SIZE; x++) {
                 char c = lines[y].charAt(x);
-                tileIDs[x][y] = tileMap.get(c);
+                if (tileMap.containsKey(c)) {
+                    tileIDs[x][y] = tileMap.get(c);
+                } else {
+                    tileIDs[x][y] = 0;
+                }
             }
         }
     }

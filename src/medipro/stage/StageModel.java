@@ -3,9 +3,8 @@ package medipro.stage;
 import java.awt.Image;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,6 +17,7 @@ import medipro.HangWire;
 import medipro.IKeyAction;
 import medipro.Vector2;
 import medipro.World;
+import medipro.WorldTemplate;
 
 public class StageModel implements IKeyAction {
 
@@ -159,51 +159,19 @@ public class StageModel implements IKeyAction {
         } catch (Exception e) {
         }
 
-        World world = new World(this, text, 800, 600, exampleCommand);
+        WorldTemplate worldTemplate = new WorldTemplate(text, 800, 600, exampleCommand);
+
+        World world = new World(this, worldTemplate);
         return world;
     }
 
     public World loadBinaryWorld(InputStream file) {
-        try (DataInputStream dis = new DataInputStream(file)) {
-            // 3文字読んで、"rps"でなければ例外を投げる
-            if (dis.readByte() != 'r' || dis.readByte() != 'p' || dis.readByte() != 's') {
-                throw new IllegalArgumentException("invalid file format: header");
-            }
-            int version = dis.readUnsignedByte();
-            if (version != 1) {
-                throw new IllegalArgumentException("invalid file format: version");
-            }
-            int headerSize = dis.readInt();
-            String stageName = dis.readUTF();
-            String author = dis.readUTF();
-            int width = dis.readInt();
-            int height = dis.readInt();
-            if (width != 40 || height != 30) {
-                throw new IllegalArgumentException("invalid file format: stage size");
-            }
-            String initialCommand = dis.readUTF();
-
-            int skip = headerSize - shortLength - stageName.length() - shortLength - author.length() - intLength
-                    - intLength - shortLength - initialCommand.length();
-            if (skip < 0) {
-                throw new IllegalArgumentException("invalid file format: header size");
-            } else if (skip > 0) {
-                dis.skipBytes(skip);
-            }
-
-            long tileCount = dis.readLong();
-            if (tileCount != width * height) {
-                throw new IllegalArgumentException("invalid file format: tile count");
-            }
-            short[][] tiles = new short[width][height];
-            for (int y = 0; y < height; y++) {
-                for (int x = 0; x < width; x++) {
-                    tiles[x][y] = dis.readShort();
-                }
-            }
-            return new World(this, tiles, initialCommand);
-        } catch (IOException e) {
-            throw new IllegalArgumentException("invalid file format: stream error");
+        try (ObjectInputStream ois = new ObjectInputStream(file)) {
+            WorldTemplate worldTemplate = (WorldTemplate) ois.readObject();
+            World world = new World(this, worldTemplate);
+            return world;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Failed to load world");
         }
     }
 
