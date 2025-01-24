@@ -5,15 +5,14 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-import medipro.Entity;
 import medipro.World;
 
-public class ThornTile extends Tile {
+public class RockTile extends Tile {
 
     private Image image = new ImageIcon(getClass().getResource(
-            "/medipro/images/Throne.png")).getImage();
+            "/medipro/images/Rock.png")).getImage();
 
-    public ThornTile(int x, int y) {
+    public RockTile(int x, int y) {
         super(x, y);
     }
 
@@ -25,13 +24,6 @@ public class ThornTile extends Tile {
     @Override
     public boolean isSolid() {
         return true;
-    }
-
-    @Override
-    public void onCollide(Entity target) {
-        target.setAlive(false);
-        target.targetDeathAction();
-        target.resetStageModel();
     }
 
 }
