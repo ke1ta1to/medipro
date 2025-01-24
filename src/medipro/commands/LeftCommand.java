@@ -10,8 +10,8 @@ public class LeftCommand extends Command {
 
     @Override
     public void execute(IKeyAction action, String rawText) {
-        action.removeKey("d");
-        action.addKey("a");
+        action.removeKey(68);
+        action.addKey(65);
     }
 
 }
