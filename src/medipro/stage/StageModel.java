@@ -96,7 +96,6 @@ public class StageModel implements IKeyAction {
             if (entity.isAlive()) {
                 Vector2 position = new Vector2(entity.getPosX(), entity.getPosY());
                 Image currentImage = entity.getImage();
-                System.out.println("position: " + position + ", image: " + currentImage);
                 entityHistories.add(new EntityHistoryImpl(position, currentImage));
             }
         }).start();
