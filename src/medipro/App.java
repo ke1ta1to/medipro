@@ -17,6 +17,9 @@ import medipro.commands.RightCommand;
 import medipro.commands.StopCommand;
 import medipro.commands.UnhookCommand;
 import medipro.commands.WaitCommand;
+import medipro.how_to_play.HowToPlayController;
+import medipro.how_to_play.HowToPlayModel;
+import medipro.how_to_play.HowToPlayView;
 import medipro.input.InputController;
 import medipro.input.InputModel;
 import medipro.input.InputView;
@@ -56,6 +59,7 @@ public class App {
     public static final String GAME_VIEW = "GameViewLevel1";
     public static final String LEVEL_VIEW = "levelPanel";
     public static final String SETTING_VIEW = "setting";
+    public static final String HOW_TO_PLAY = "howToPlay";
 
     public static World worldLevel1;
     public static World worldLevel2;
@@ -76,6 +80,7 @@ public class App {
     private TopModel topModel;
     private LevelModel levelModel;
     private SettingModel settingModel;
+    private HowToPlayModel howToPlayModel;
 
     public App() {
         cardSubject = new CardSubject();
@@ -158,6 +163,10 @@ public class App {
         SettingController settingController = new SettingController(settingModel);
         SettingView settingView = new SettingView(settingModel, settingController);
 
+        howToPlayModel = new HowToPlayModel();
+        HowToPlayController howToPlayController = new HowToPlayController(howToPlayModel);
+        HowToPlayView howToPlayView = new HowToPlayView(howToPlayModel, howToPlayController);
+
         CardLayout cardLayout = new CardLayout();
         JPanel panel = new JPanel(cardLayout);
         getCardSubject().addObserver((cardNumber) -> {
@@ -167,6 +176,7 @@ public class App {
         panel.add(appView, App.GAME_VIEW);
         panel.add(levelView, App.LEVEL_VIEW);
         panel.add(settingView, App.SETTING_VIEW);
+        panel.add(howToPlayView, App.HOW_TO_PLAY);
 
         return panel;
     }

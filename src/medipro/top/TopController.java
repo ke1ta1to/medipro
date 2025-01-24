@@ -33,6 +33,10 @@ public class TopController implements ActionListener {
                 App.getCardSubject().setCardNumber(App.SETTING_VIEW);
                 break;
 
+            case "How to Play":
+                App.getCardSubject().setCardNumber(App.HOW_TO_PLAY);
+                break;
+
             default:
                 throw new IllegalArgumentException("Unknown command: " + command);
         }
