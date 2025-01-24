@@ -80,6 +80,59 @@ public class World {
         }
     }
 
+    public World(StageModel stageModel, short[][] tileIDs, String exampleCommand) {
+        this.stageModel = stageModel;
+        this.width = tileIDs.length * TILE_SIZE;
+        this.height = tileIDs[0].length * TILE_SIZE;
+        this.exampleCommand = exampleCommand;
+
+        tiles = new Tile[tileIDs.length][tileIDs[0].length];
+        for (int y = 0; y < tileIDs[0].length; y++) {
+            for (int x = 0; x < tileIDs.length; x++) {
+                switch (tileIDs[x][y]) {
+                    case 0:
+                        tiles[x][y] = new AirTile(x * TILE_SIZE, y * TILE_SIZE);
+                        break;
+                    case 1:
+                        tiles[x][y] = new WallTile(x * TILE_SIZE, y * TILE_SIZE);
+                        break;
+                    case 2:
+                        tiles[x][y] = new RockTile(x * TILE_SIZE, y * TILE_SIZE);
+                        break;
+                    case 3:
+                        tiles[x][y] = new ThornTile(x * TILE_SIZE, y * TILE_SIZE);
+                        break;
+                    case 4:
+                        tiles[x][y] = new StartTile(x * TILE_SIZE, y * TILE_SIZE);
+                        startPosX = x * TILE_SIZE;
+                        startPosY = y * TILE_SIZE;
+                        break;
+                    case 5:
+                        tiles[x][y] = new GoalTile(x * TILE_SIZE, y * TILE_SIZE);
+                        goalPosX = x * TILE_SIZE;
+                        goalPosY = y * TILE_SIZE;
+                        break;
+                    case 6:
+                        tiles[x][y] = new WarpTile(x * TILE_SIZE, y * TILE_SIZE);
+                        if (warpTiles[0] == null) {
+                            warpTiles[0] = (WarpTile) tiles[x][y];
+                        } else {
+                            warpTiles[1] = (WarpTile) tiles[x][y];
+                        }
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Invalid tile ID: " + tileIDs[x][y]);
+                }
+            }
+        }
+        if (warpTiles[0] != null || warpTiles[1] != null) {
+            for (int i = 0; i < warpTiles.length; i++) {
+                WarpTile warpTile = warpTiles[i];
+                warpTile.setWarpPoint(warpTiles[(i + 1) % 2]);
+            }
+        }
+    }
+
     public StageModel getStageModel() {
         return stageModel;
     }
