@@ -213,7 +213,7 @@ public class App {
     if (stageModel == null) {
       throw new IllegalStateException("stageModel is null");
     }
-    if (kind == "init") {
+    if ("init".equals(kind)) {
       stageModel.clearEntityHistories();
     }
     return stageModel;

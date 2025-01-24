@@ -36,6 +36,7 @@ public class StageModel implements IKeyAction {
     private int tickCount = 0;
 
     private boolean isDebug = true;
+    private boolean isHistoryShown = true;
 
     private HangWire hangWire;
 
@@ -125,6 +126,8 @@ public class StageModel implements IKeyAction {
             keys.add(key);
         } else if (key == KeyEvent.VK_F3) {
             isDebug = !isDebug;
+        } else if (key == KeyEvent.VK_R) {
+            isHistoryShown = !isHistoryShown;
         }
     }
 
@@ -208,6 +211,10 @@ public class StageModel implements IKeyAction {
 
     public boolean getIsDebug() {
         return isDebug;
+    }
+
+    public boolean getIsHistoryShown() {
+        return isHistoryShown;
     }
 
     public void setIsDebug(boolean isDebug) {
