@@ -1,9 +1,6 @@
 package medipro.stage;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -74,6 +71,7 @@ public class StageView extends JPanel implements MouseListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
 
         // 背景の描画
         g.setColor(Color.WHITE);
@@ -94,10 +92,12 @@ public class StageView extends JPanel implements MouseListener {
                 entity.getHeight(), this);
 
         // 軌跡を描画
+        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f));
         model.getEntityHistories().forEach((history) -> {
-            g.drawImage(history.getImage(), (int) history.getPosition().getX(), (int) history.getPosition().getY(), entity.getWidth(),
+            g2d.drawImage(history.getImage(), (int) history.getPosition().getX(), (int) history.getPosition().getY(), entity.getWidth(),
                     entity.getHeight(), this);
         });
+        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
         // entityの周りを線で囲む
         g.setColor(Color.RED);
         g.drawRect((int) entity.getPosX(), (int) entity.getPosY(), entity.getWidth(), entity.getHeight());
