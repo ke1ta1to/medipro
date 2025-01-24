@@ -2,6 +2,7 @@ package medipro.tiles;
 
 import java.awt.Graphics;
 import java.awt.Image;
+
 import javax.swing.ImageIcon;
 
 import medipro.Entity;
@@ -9,6 +10,9 @@ import medipro.World;
 
 public class ThornTile extends Tile {
     private final Image thornImage = loadImage("Temp_Thorn.png");
+
+    private Image image = new ImageIcon(getClass().getResource(
+            "/medipro/images/Throne.png")).getImage();
 
     public ThornTile(int x, int y) {
         super(x, y);
