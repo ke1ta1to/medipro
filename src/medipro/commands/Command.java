@@ -21,7 +21,7 @@ public abstract class Command {
     }
 
     protected void sleep(int time) {
-        StageModel stageModel = App.getStageModel();
+        StageModel stageModel = App.getStageModel("sleep");
         // 100tpsのとき、何tick待つか
         int tick = time / 10;
         // スタート時
