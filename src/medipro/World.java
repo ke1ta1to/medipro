@@ -16,6 +16,8 @@ public class World {
 
     private final StageModel stageModel;
 
+    private final String exampleCommand;
+
     private final int width;
     private final int height;
 
@@ -29,10 +31,11 @@ public class World {
 
     private final WarpTile[] warpTiles = new WarpTile[2];
 
-    public World(StageModel stageModel, String rawWorld, int width, int height) {
+    public World(StageModel stageModel, String rawWorld, int width, int height, String exampleCommand) {
         this.stageModel = stageModel;
         this.width = width;
         this.height = height;
+        this.exampleCommand = exampleCommand;
 
         tiles = new Tile[width / TILE_SIZE][height / TILE_SIZE];
 
@@ -107,6 +110,14 @@ public class World {
 
     public int getGoalPosY() {
         return goalPosY;
+    }
+
+    public WarpTile[] getWarpTiles() {
+        return warpTiles;
+    }
+
+    public String getExampleCommand() {
+        return exampleCommand;
     }
 
     public void resetState() {

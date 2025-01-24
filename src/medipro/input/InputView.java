@@ -2,11 +2,15 @@ package medipro.input;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import medipro.App;
+import medipro.utils.Fonts;
 
 public class InputView extends JPanel {
 
@@ -24,17 +28,20 @@ public class InputView extends JPanel {
         setLayout(layout);
 
         JTextArea textArea = new JTextArea();
-        textArea.setFont(textArea.getFont().deriveFont(16f));
+        textArea.setFont(Fonts.MPLUS1CODE_FONT.deriveFont(Font.PLAIN, 16));
         JScrollPane scrollPane = new JScrollPane(textArea);
 
         add(scrollPane, BorderLayout.CENTER);
 
-        JButton submitButton = new JButton("Submit");
+        JButton submitButton = new JButton("実行");
+        submitButton.setFont(Fonts.STICK_FONT.deriveFont(Font.PLAIN, 24));
         submitButton.addActionListener(e -> {
             controller.submit(textArea.getText());
             controller.start();
         });
         add(submitButton, BorderLayout.SOUTH);
+
+        App.getInputTextSubject().addObserver(text -> textArea.setText(text));
     }
 
     public InputModel getModel() {

@@ -2,25 +2,54 @@ package medipro.stage;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import medipro.Entity;
 import medipro.Vector2;
 import medipro.World;
+import medipro.stage_menu.StageMenuView;
+import medipro.utils.Fonts;
 
 public class StageView extends JPanel implements MouseListener {
 
     private final StageModel model;
     private final StageController controller;
 
+    private StageMenuView stageMenuView;
+
     public StageView(StageModel model, StageController controller) {
         this.model = model;
         this.controller = controller;
+
+        setLayout(null);
+
+        JButton openMenuButton = new JButton("メニュー");
+        openMenuButton.setFont(Fonts.MPLUS1CODE_FONT.deriveFont(20.0f));
+        JPanel openMenuButtonPanel = new JPanel();
+        openMenuButtonPanel.setOpaque(false);
+        openMenuButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        openMenuButtonPanel.add(openMenuButton);
+        openMenuButtonPanel.setSize(openMenuButtonPanel.getPreferredSize());
+        openMenuButton.addActionListener((e) -> {
+            stageMenuView.setVisible(true);
+            stageMenuView.requestFocus();
+            openMenuButtonPanel.setVisible(false);
+            controller.clearKeys();
+            stageMenuView.getController().getModel().setOnClose(() -> {
+                stageMenuView.setVisible(false);
+                openMenuButtonPanel.setVisible(true);
+                requestFocus();
+            });
+        });
+        openMenuButtonPanel.setLocation(800 - openMenuButtonPanel.getWidth(), 0);
+        add(openMenuButtonPanel);
 
         World world = model.getWorld();
         setPreferredSize(new Dimension(world.getWidth(), world.getHeight()));
@@ -35,9 +64,20 @@ public class StageView extends JPanel implements MouseListener {
         timer.start();
     }
 
+    public void setStageMenuView(StageMenuView view) {
+        this.stageMenuView = view;
+        view.setBounds(200, 150, 400, 300);
+        view.setVisible(false);
+        add(view);
+    }
+
     @Override
-    public void paint(Graphics g) {
-        super.paint(g);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        // 背景の描画
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, getWidth(), getHeight());
 
         // ステージの描画
         for (int i = 0; i < model.getWorld().getTiles().length; i++) {
@@ -47,7 +87,6 @@ public class StageView extends JPanel implements MouseListener {
                 }
             }
         }
-        // DEBUG
 
         // draw keys
         g.setColor(Color.CYAN);
@@ -86,6 +125,7 @@ public class StageView extends JPanel implements MouseListener {
         g.drawString("velY: " + model.getEntity().getVelY(), 10, 160);
         g.drawString("accX: " + model.getEntity().getAccX(), 10, 190);
         g.drawString("accY: " + model.getEntity().getAccY(), 10, 220);
+
     }
 
     public StageModel getModel() {

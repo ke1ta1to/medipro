@@ -1,0 +1,18 @@
+right
+wait 250ms
+jump
+wait 500ms
+jump
+wait 1500ms
+stop
+left
+wait 250ms
+jump
+wait 500ms
+jump
+wait 300ms
+jump
+wait 1s
+right
+wait 400ms
+jump

@@ -1,0 +1,3 @@
+right
+wait 1s
+jump

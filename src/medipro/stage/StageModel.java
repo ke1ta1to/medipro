@@ -1,22 +1,23 @@
 package medipro.stage;
 
 import java.awt.Image;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.swing.ImageIcon;
 
+import medipro.App;
 import medipro.Entity;
 import medipro.HangWire;
+import medipro.IKeyAction;
 import medipro.Vector2;
 import medipro.World;
-import medipro.subjects.WorldSubject;
 
-public class StageModel {
+public class StageModel implements IKeyAction {
 
     private World world = null;
 
@@ -26,6 +27,7 @@ public class StageModel {
     private final List<String> availableKeys = List.of("a", "d", " ", "h", "j", "k");
     private Set<String> keys = new HashSet<>();
     private Entity entity;
+    private int tickCount = 0;
 
     private HangWire hangWire;
 
@@ -39,28 +41,21 @@ public class StageModel {
     private double hangSpeed = 20.0;
     private double hangTensionCoef = 0.5;
 
-    private final Image characterLeftWalk0 = loadImage("L_walk_0.png");
-    private final Image characterLeftWalk1 = loadImage("L_walk_1.png");
-    private final Image characterLeftWalk2 = loadImage("L_walk_2.png");
     private final Image characterLeftWalkHat0 = loadImage("L_walk_hat_0.png");
     private final Image characterLeftWalkHat1 = loadImage("L_walk_hat_1.png");
     private final Image characterLeftWalkHat2 = loadImage("L_walk_hat_2.png");
-    private final Image characterRightWalk0 = loadImage("R_walk_0.png");
-    private final Image characterRightWalk1 = loadImage("R_walk_1.png");
-    private final Image characterRightWalk2 = loadImage("R_walk_2.png");
     private final Image characterRightWalkHat0 = loadImage("R_walk_hat_0.png");
     private final Image characterRightWalkHat1 = loadImage("R_walk_hat_1.png");
     private final Image characterRightWalkHat2 = loadImage("R_walk_hat_2.png");
 
     public StageModel() {
         entity = new Entity(this);
-        Image image = characterRightWalk0;
+        Image image = characterRightWalkHat0;
         entity.setImage(image);
         entity.setWidth(50);
         entity.setHeight(50);
-        // TODO: ここで初期化をちゃんと設定する。
-        WorldSubject.addObserver(() -> {
-            world = WorldSubject.getWorld();
+        App.getWorldSubject().addObserver((world) -> {
+            setWorld(world);
             reset();
         });
     }
@@ -74,25 +69,41 @@ public class StageModel {
         entity.setAccY(0);
         entity.setAlive(true);
         hangWire = null;
+        clearKeys();
         world.resetState();
+        tickCount = 0;
     }
 
+    @Override
     public void addKey(String key) {
         if (availableKeys.contains(key)) {
             keys.add(key);
         }
     }
 
+    @Override
     public void removeKey(String key) {
         keys.remove(key);
     }
 
+    @Override
     public boolean hasKey(String key) {
         return keys.contains(key);
     }
 
+    @Override
+    public void clearKeys() {
+        keys.clear();
+    }
+
+    @Override
     public Set<String> getKeys() {
         return keys;
+    }
+
+    @Override
+    public List<String> getAvailableKeys() {
+        return availableKeys;
     }
 
     public Entity getEntity() {
@@ -111,17 +122,36 @@ public class StageModel {
         return hangWire;
     }
 
-    public World loadWorld(File file) {
+    public int getTickCount() {
+        return tickCount;
+    }
+
+    public World loadWorld(InputStream file, InputStream exampleCommandFile) {
+        byte[] buffer = new byte[1024];
         String text = "";
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                text += line + "\n";
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                BufferedInputStream bis = new BufferedInputStream(file)) {
+            int len;
+            while ((len = bis.read(buffer)) != -1) {
+                baos.write(buffer, 0, len);
             }
+            text = new String(baos.toByteArray());
         } catch (Exception e) {
         }
 
-        World world = new World(this, text, 800, 600);
+        String exampleCommand = "";
+        buffer = new byte[1024];
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                BufferedInputStream bis = new BufferedInputStream(exampleCommandFile)) {
+            int len;
+            while ((len = bis.read(buffer)) != -1) {
+                baos.write(buffer, 0, len);
+            }
+            exampleCommand = new String(baos.toByteArray());
+        } catch (Exception e) {
+        }
+
+        World world = new World(this, text, 800, 600, exampleCommand);
         return world;
     }
 
@@ -130,6 +160,7 @@ public class StageModel {
     }
 
     public void tick() {
+        tickCount++;
         // 横方向の移動
         double speed = 0.2;
         double accX = 0;
@@ -160,6 +191,11 @@ public class StageModel {
             }
         }
         entity.setAccY(accY);
+
+        // 伸びないようにする
+        // if (hasHangWire() && entity.getVelY() > 0) {
+        // entity.setVelY(0);
+        // }
 
         // ハングアクション
         Vector2 entitySize = new Vector2(entity.getWidth(), entity.getHeight());

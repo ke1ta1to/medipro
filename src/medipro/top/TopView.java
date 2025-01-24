@@ -12,6 +12,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import medipro.components.TitleButton;
+import medipro.utils.Fonts;
+
 public class TopView extends JPanel {
 
     public TopView(TopModel model, TopController controller) {
@@ -19,7 +22,7 @@ public class TopView extends JPanel {
         setBorder(BorderFactory.createEmptyBorder(90, 30, 30, 30));
 
         JLabel gameNameLabel = new JLabel("りさプロ！", JLabel.CENTER);
-        gameNameLabel.setFont(new Font("Arial", Font.BOLD, 36));
+        gameNameLabel.setFont(Fonts.STICK_FONT.deriveFont(Font.PLAIN, 60));
         add(gameNameLabel, BorderLayout.NORTH);
 
         JPanel buttonPanel = new JPanel(new GridBagLayout());
@@ -29,8 +32,7 @@ public class TopView extends JPanel {
 
         String[] buttonLabels = { "New Game Start", "Level Select", "Setting" };
         for (int i = 0; i < buttonLabels.length; i++) {
-            JButton button = new JButton(buttonLabels[i]);
-            button.setFont(new Font("Arial", Font.PLAIN, 20));
+            JButton button = new TitleButton(buttonLabels[i]);
             button.setPreferredSize(new Dimension(200, 60));
             button.setActionCommand(buttonLabels[i]);
             button.addActionListener(controller);
