@@ -22,13 +22,13 @@ public class InputController {
     }
 
     public void submit(String text) {
-        App.getStageModel().getEntity().reset();
+        App.getStageModel("submit").getEntity().reset();
         inputModel.setText(text);
     }
 
     public void start() {
         System.out.println(inputModel.getText());
-        IKeyAction keyAction = App.getStageModel();
+        IKeyAction keyAction = App.getStageModel("init");
         CommandStore commandStore = App.getCommandStore();
         Thread thread = new Thread(() -> {
             try {

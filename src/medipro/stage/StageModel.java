@@ -218,6 +218,10 @@ public class StageModel implements IKeyAction {
         return entityHistories;
     }
 
+    public void clearEntityHistories() {
+        this.entityHistories.clear();
+    }
+
     public void tick() {
         tickCount++;
         // 横方向の移動
