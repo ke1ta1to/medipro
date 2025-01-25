@@ -29,10 +29,12 @@ public class HowToPlayController implements ActionListener {
                 App.getCardSubject().setCardNumber(App.TOP_VIEW);
                 break;
             case "BACK":
-                HowToPlayView.getSubject().setHowToPlayNumber(HowToPlayView.NO1);
+                view.setCurrent(view.getCurrent() - 1);
+                HowToPlayView.getSubject().setHowToPlayNumber(view.getPages(view.getPAGES(), view.getCurrent()));
                 break;
             case "NEXT":
-                HowToPlayView.getSubject().setHowToPlayNumber(HowToPlayView.NO2);
+                view.setCurrent(view.getCurrent() + 1);
+                HowToPlayView.getSubject().setHowToPlayNumber(view.getPages(view.getPAGES(), view.getCurrent()));
                 break;
             default:
                 throw new IllegalArgumentException("Unknown command: " + command);

@@ -19,10 +19,13 @@ public class HowToPlayView extends JPanel {
 
     public static final String NO1 = "page1";
     public static final String NO2 = "page2";
+    public static final String[] PAGES = { NO1, NO2 };
+    private int current;
 
     public HowToPlayView(HowToPlayModel model, HowToPlayController controller) {
 
         howToPlayView = this;
+        current = 0;
 
         setLayout(new BorderLayout(20, 20));
         setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
@@ -70,5 +73,23 @@ public class HowToPlayView extends JPanel {
             throw new IllegalStateException("cardSubject is null");
         }
         return howToPlaySubject;
+    }
+
+    public void setCurrent(int current) {
+        if (current >= 0 && current < PAGES.length) {
+            this.current = current;
+        }
+    }
+
+    public int getCurrent() {
+        return current;
+    }
+
+    public String[] getPAGES() {
+        return PAGES;
+    }
+
+    public static String getPages(String[] PAGES, int n) {
+        return PAGES[n];
     }
 }
