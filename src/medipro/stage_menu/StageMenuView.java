@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import medipro.App;
+
 public class StageMenuView extends JPanel {
 
     public static final int WIDTH = 400;
@@ -54,7 +56,11 @@ public class StageMenuView extends JPanel {
         backButton.addActionListener((e) -> {
             controller.handleClose();
         });
-        JButton exitButton = new JButton("終了");
+        JButton exitButton = new JButton("タイトルへ");
+        exitButton.addActionListener((e) -> {
+            App.getCardSubject().setCardNumber(App.TOP_VIEW);
+            controller.handleClose();
+        });
         bottomPanel.add(backButton);
         bottomPanel.add(exitButton);
         JPanel bottomWrapperPanel = new JPanel();
