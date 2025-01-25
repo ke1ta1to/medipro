@@ -10,9 +10,9 @@ public class JumpCommand extends Command {
 
     @Override
     public void execute(IKeyAction action, String rawText) throws InterruptedException {
-        action.addKey(" ");
+        action.addKey(32);
         sleep(10);
-        action.removeKey(" ");
+        action.removeKey(32);
     }
 
 }
