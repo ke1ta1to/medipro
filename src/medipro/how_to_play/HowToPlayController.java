@@ -7,6 +7,7 @@ import medipro.App;
 
 public class HowToPlayController implements ActionListener {
     private final HowToPlayModel model;
+    private HowToPlayView view;
 
     public HowToPlayController(HowToPlayModel model) {
         this.model = model;
@@ -16,12 +17,22 @@ public class HowToPlayController implements ActionListener {
         return model;
     }
 
+    public void setHowToPlayView(HowToPlayView view) {
+        this.view = view;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
         switch (command) {
             case "exit":
                 App.getCardSubject().setCardNumber(App.TOP_VIEW);
+                break;
+            case "BACK":
+                HowToPlayView.getSubject().setHowToPlayNumber(HowToPlayView.NO1);
+                break;
+            case "NEXT":
+                HowToPlayView.getSubject().setHowToPlayNumber(HowToPlayView.NO2);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown command: " + command);
