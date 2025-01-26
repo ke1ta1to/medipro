@@ -237,6 +237,7 @@ public class Entity {
     public void targetDeathAction() {
         // TODO: ターゲットが死んだときのアクションを追加する。
         App.getStageModel().reset();
+        App.getStageModel().getWorld().resetState();
     }
 
     @Override

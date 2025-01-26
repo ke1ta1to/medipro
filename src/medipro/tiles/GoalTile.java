@@ -33,5 +33,6 @@ public class GoalTile extends AirTile {
         // TODO: ゴールした際の処理
         System.out.println("Goal!");
         App.getStageModel().reset();
+        App.getStageModel().getWorld().resetState();
     }
 }
