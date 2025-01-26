@@ -17,6 +17,15 @@ import medipro.commands.RightCommand;
 import medipro.commands.StopCommand;
 import medipro.commands.UnhookCommand;
 import medipro.commands.WaitCommand;
+import medipro.how_to_play.HowToPlayController;
+import medipro.how_to_play.HowToPlayModel;
+import medipro.how_to_play.HowToPlayPage1Controller;
+import medipro.how_to_play.HowToPlayPage1Model;
+import medipro.how_to_play.HowToPlayPage1View;
+import medipro.how_to_play.HowToPlayPage2Controller;
+import medipro.how_to_play.HowToPlayPage2Model;
+import medipro.how_to_play.HowToPlayPage2View;
+import medipro.how_to_play.HowToPlayView;
 import medipro.input.InputController;
 import medipro.input.InputModel;
 import medipro.input.InputView;
@@ -56,6 +65,7 @@ public class App {
     public static final String GAME_VIEW = "GameViewLevel1";
     public static final String LEVEL_VIEW = "levelPanel";
     public static final String SETTING_VIEW = "setting";
+    public static final String HOW_TO_PLAY = "howToPlay";
 
     public static World worldLevel1;
     public static World worldLevel2;
@@ -76,6 +86,7 @@ public class App {
     private TopModel topModel;
     private LevelModel levelModel;
     private SettingModel settingModel;
+    private HowToPlayModel howToPlayModel;
 
     public App() {
         cardSubject = new CardSubject();
@@ -158,6 +169,20 @@ public class App {
         SettingController settingController = new SettingController(settingModel);
         SettingView settingView = new SettingView(settingModel, settingController);
 
+        HowToPlayPage1Model howToPlayPage1Model = new HowToPlayPage1Model();
+        HowToPlayPage1Controller howToPlayPage1Controller = new HowToPlayPage1Controller(howToPlayPage1Model);
+        HowToPlayPage1View howToPlayPage1View = new HowToPlayPage1View(howToPlayPage1Model, howToPlayPage1Controller);
+
+        HowToPlayPage2Model howToPlayPage2Model = new HowToPlayPage2Model();
+        HowToPlayPage2Controller howToPlayPage2Controller = new HowToPlayPage2Controller(howToPlayPage2Model);
+        HowToPlayPage2View howToPlayPage2View = new HowToPlayPage2View(howToPlayPage2Model, howToPlayPage2Controller);
+
+        howToPlayModel = new HowToPlayModel();
+        HowToPlayController howToPlayController = new HowToPlayController(howToPlayModel);
+        HowToPlayView howToPlayView = new HowToPlayView(howToPlayModel, howToPlayController);
+        howToPlayView.addPage(howToPlayPage1View, HowToPlayModel.PAGE_NO1);
+        howToPlayView.addPage(howToPlayPage2View, HowToPlayModel.PAGE_NO2);
+
         CardLayout cardLayout = new CardLayout();
         JPanel panel = new JPanel(cardLayout);
         getCardSubject().addObserver((cardNumber) -> {
@@ -167,6 +192,7 @@ public class App {
         panel.add(appView, App.GAME_VIEW);
         panel.add(levelView, App.LEVEL_VIEW);
         panel.add(settingView, App.SETTING_VIEW);
+        panel.add(howToPlayView, App.HOW_TO_PLAY);
 
         return panel;
     }
@@ -265,6 +291,14 @@ public class App {
             throw new IllegalStateException("settingModel is null");
         }
         return settingModel;
+    }
+
+    public static HowToPlayModel getHowToPlayModel() {
+        HowToPlayModel howToPlayModel = app.howToPlayModel;
+        if (howToPlayModel == null) {
+            throw new IllegalStateException("howToPlayModel is null");
+        }
+        return howToPlayModel;
     }
 
     public static App getApp() {

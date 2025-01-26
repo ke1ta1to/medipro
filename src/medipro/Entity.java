@@ -97,7 +97,6 @@ public class Entity {
             this.velY = 0;
             setAlive(false);
             targetDeathAction();
-            resetStageModel();
         }
 
         Tile topTile = getCollisionOnTop(this.posY + this.velY);
@@ -213,10 +212,6 @@ public class Entity {
         this.isAlive = isAlive;
     }
 
-    public void resetStageModel() {
-        stageModel.reset();
-    }
-
     public void reset() {
         this.posX = stageModel.getWorld().getStartPosX();
         this.posY = stageModel.getWorld().getStartPosY();
@@ -230,6 +225,7 @@ public class Entity {
 
     public void targetDeathAction() {
         // TODO: ターゲットが死んだときのアクションを追加する。
+        App.getStageModel().reset();
     }
 
     @Override

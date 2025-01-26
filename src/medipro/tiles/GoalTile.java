@@ -5,6 +5,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
+import medipro.App;
 import medipro.Entity;
 import medipro.World;
 
@@ -31,7 +32,6 @@ public class GoalTile extends AirTile {
     public void onCollide(Entity target) {
         // TODO: ゴールした際の処理
         System.out.println("Goal!");
-        target.resetStageModel();
-
+        App.getStageModel().reset();
     }
 }
