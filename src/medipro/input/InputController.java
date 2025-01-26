@@ -3,6 +3,8 @@ package medipro.input;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 
+import javax.swing.JTextArea;
+
 import medipro.App;
 import medipro.IKeyAction;
 import medipro.commands.Command;
@@ -28,9 +30,12 @@ public class InputController {
         return model;
     }
 
-    public void submit(ActionEvent event) {
+    public TextChangeListener getTextChangeListener(JTextArea textArea) {
+        return new TextChangeListener(model, this, textArea);
+    }
+
+    public void handleSubmit(ActionEvent event) {
         App.getStageModel().getEntity().reset();
-        model.setText(model.getText());
         start();
     }
 
