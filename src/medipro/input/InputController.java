@@ -29,9 +29,8 @@ public class InputController {
     }
 
     public void submit(ActionEvent event) {
-        String text = event.getActionCommand();
         App.getStageModel().getEntity().reset();
-        model.setText(text);
+        model.setText(model.getText());
         start();
     }
 
