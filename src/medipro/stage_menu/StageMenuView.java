@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -39,7 +40,57 @@ public class StageMenuView extends JPanel {
         JPanel actionsPanel = new JPanel();
         BoxLayout actionsPanelLayout = new BoxLayout(actionsPanel, BoxLayout.Y_AXIS);
         actionsPanel.setLayout(actionsPanelLayout);
-        actionsPanel.add(createButtonPanel("ステージ選択", "ステージ選択", (e) -> {
+        String[] stages = { "stage1", "stage2", "stage3", "stage4", "stage5", "stage6", "stage7", "stage8" };
+        actionsPanel.add(creatComboBoxPanel("ステージを選択", stages, (e) -> {
+            String selectedStage = (String) ((JComboBox<?>) e.getSource()).getSelectedItem();
+            switch (selectedStage) {
+                case "stage1":
+                    App.getWorldSubject().setWorld(App.worldLevel1);
+                    App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                    controller.handleClose();
+                    break;
+                case "stage2":
+                    App.getWorldSubject().setWorld(App.worldLevel2);
+                    App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                    controller.handleClose();
+                    break;
+                case "stage3":
+                    App.getWorldSubject().setWorld(App.worldLevel3);
+                    App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                    controller.handleClose();
+                    break;
+                case "stage4":
+                    App.getWorldSubject().setWorld(App.worldLevel4);
+                    App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                    controller.handleClose();
+                    break;
+                case "stage5":
+                    App.getWorldSubject().setWorld(App.worldLevel5);
+                    App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                    controller.handleClose();
+                    break;
+                case "stage6":
+                    App.getWorldSubject().setWorld(App.worldLevel6);
+                    App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                    controller.handleClose();
+                    break;
+                case "stage7":
+                    App.getWorldSubject().setWorld(App.worldLevel7);
+                    App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                    controller.handleClose();
+                    break;
+                case "stage8":
+                    App.getWorldSubject().setWorld(App.worldLevel8);
+                    App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                    controller.handleClose();
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unexpected value: " + selectedStage);
+            }
+        }));
+        actionsPanel.add(createButtonPanel("レベル設定画面へ", "GO", (e) -> {
+            App.getCardSubject().setCardNumber(App.LEVEL_VIEW);
+            controller.handleClose();
         }));
         actionsPanel.add(createButtonPanel("設定", "設定", (e) -> {
         }));
@@ -87,6 +138,19 @@ public class StageMenuView extends JPanel {
         button.setPreferredSize(new Dimension(150, 50));
         button.addActionListener(actionListener);
         panel.add(button, BorderLayout.EAST);
+        return panel;
+    }
+
+    private JPanel creatComboBoxPanel(String labelText, String[] items, ActionListener actionListener) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.setPreferredSize(new Dimension(350, 50));
+        JLabel label = new JLabel(labelText);
+        panel.add(label, BorderLayout.WEST);
+        JComboBox<String> comboBox = new JComboBox<>(items);
+        comboBox.setPreferredSize(new Dimension(150, 50));
+        comboBox.addActionListener(actionListener);
+        panel.add(comboBox, BorderLayout.EAST);
         return panel;
     }
 
