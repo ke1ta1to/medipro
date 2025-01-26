@@ -19,6 +19,12 @@ import medipro.commands.UnhookCommand;
 import medipro.commands.WaitCommand;
 import medipro.how_to_play.HowToPlayController;
 import medipro.how_to_play.HowToPlayModel;
+import medipro.how_to_play.HowToPlayPage1Controller;
+import medipro.how_to_play.HowToPlayPage1Model;
+import medipro.how_to_play.HowToPlayPage1View;
+import medipro.how_to_play.HowToPlayPage2Controller;
+import medipro.how_to_play.HowToPlayPage2Model;
+import medipro.how_to_play.HowToPlayPage2View;
 import medipro.how_to_play.HowToPlayView;
 import medipro.input.InputController;
 import medipro.input.InputModel;
@@ -163,9 +169,19 @@ public class App {
         SettingController settingController = new SettingController(settingModel);
         SettingView settingView = new SettingView(settingModel, settingController);
 
+        HowToPlayPage1Model howToPlayPage1Model = new HowToPlayPage1Model();
+        HowToPlayPage1Controller howToPlayPage1Controller = new HowToPlayPage1Controller(howToPlayPage1Model);
+        HowToPlayPage1View howToPlayPage1View = new HowToPlayPage1View(howToPlayPage1Model, howToPlayPage1Controller);
+
+        HowToPlayPage2Model howToPlayPage2Model = new HowToPlayPage2Model();
+        HowToPlayPage2Controller howToPlayPage2Controller = new HowToPlayPage2Controller(howToPlayPage2Model);
+        HowToPlayPage2View howToPlayPage2View = new HowToPlayPage2View(howToPlayPage2Model, howToPlayPage2Controller);
+
         howToPlayModel = new HowToPlayModel();
         HowToPlayController howToPlayController = new HowToPlayController(howToPlayModel);
         HowToPlayView howToPlayView = new HowToPlayView(howToPlayModel, howToPlayController);
+        howToPlayView.addPage(howToPlayPage1View, HowToPlayModel.PAGE_NO1);
+        howToPlayView.addPage(howToPlayPage2View, HowToPlayModel.PAGE_NO2);
 
         CardLayout cardLayout = new CardLayout();
         JPanel panel = new JPanel(cardLayout);
@@ -275,6 +291,14 @@ public class App {
             throw new IllegalStateException("settingModel is null");
         }
         return settingModel;
+    }
+
+    public static HowToPlayModel getHowToPlayModel() {
+        HowToPlayModel howToPlayModel = app.howToPlayModel;
+        if (howToPlayModel == null) {
+            throw new IllegalStateException("howToPlayModel is null");
+        }
+        return howToPlayModel;
     }
 
     public static App getApp() {

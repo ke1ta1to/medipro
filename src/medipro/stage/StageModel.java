@@ -1,6 +1,7 @@
 package medipro.stage;
 
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -24,10 +25,13 @@ public class StageModel implements IKeyAction {
     /**
      * 有効キー: a, d, スペース
      */
-    private final List<String> availableKeys = List.of("a", "d", " ", "h", "j", "k");
-    private Set<String> keys = new HashSet<>();
+    private final List<Integer> availableKeys = List.of(KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_SPACE, KeyEvent.VK_H,
+            KeyEvent.VK_J, KeyEvent.VK_K);
+    private Set<Integer> keys = new HashSet<>();
     private Entity entity;
     private int tickCount = 0;
+
+    private boolean isDebug = true;
 
     private HangWire hangWire;
 
@@ -48,6 +52,7 @@ public class StageModel implements IKeyAction {
     private final Image characterRightWalkHat0 = loadImage("R_walk_hat_0.png");
     private final Image characterRightWalkHat1 = loadImage("R_walk_hat_1.png");
     private final Image characterRightWalkHat2 = loadImage("R_walk_hat_2.png");
+    private final Image characterStop = loadImage("risaju.png");
     private final Image characterRightJump = loadImage("R_jump_hat.png");
 
     public StageModel() {
@@ -77,19 +82,21 @@ public class StageModel implements IKeyAction {
     }
 
     @Override
-    public void addKey(String key) {
+    public void addKey(int key) {
         if (availableKeys.contains(key)) {
             keys.add(key);
+        } else if (key == KeyEvent.VK_F3) {
+            isDebug = !isDebug;
         }
     }
 
     @Override
-    public void removeKey(String key) {
+    public void removeKey(int key) {
         keys.remove(key);
     }
 
     @Override
-    public boolean hasKey(String key) {
+    public boolean hasKey(int key) {
         return keys.contains(key);
     }
 
@@ -99,12 +106,12 @@ public class StageModel implements IKeyAction {
     }
 
     @Override
-    public Set<String> getKeys() {
+    public Set<Integer> getKeys() {
         return keys;
     }
 
     @Override
-    public List<String> getAvailableKeys() {
+    public List<Integer> getAvailableKeys() {
         return availableKeys;
     }
 
@@ -161,23 +168,33 @@ public class StageModel implements IKeyAction {
         return hangWire != null;
     }
 
+    public boolean getIsDebug() {
+        return isDebug;
+    }
+
+    public void setIsDebug(boolean isDebug) {
+        this.isDebug = isDebug;
+    }
+
     public void tick() {
         tickCount++;
         // 横方向の移動
         double speed = 0.2;
         double accX = 0;
         if (entity.isOnGround()) {
-            if (hasKey("a")) {
+            if (hasKey(KeyEvent.VK_A)) {
                 accX -= 1;
+                entity.setDirection(-1);
             }
-            if (hasKey("d")) {
+            if (hasKey(KeyEvent.VK_D)) {
                 accX += 1;
+                entity.setDirection(1);
             }
         } else {
-            if (hasKey("a")) {
+            if (hasKey(KeyEvent.VK_A)) {
                 accX -= 0.5;
             }
-            if (hasKey("d")) {
+            if (hasKey(KeyEvent.VK_D)) {
                 accX += 0.5;
             }
         }
@@ -186,7 +203,7 @@ public class StageModel implements IKeyAction {
 
         // 重力とジャンプ
         double accY = gravity; // 最終的な加速度
-        if (hasKey(" ")) {
+        if (hasKey(KeyEvent.VK_SPACE)) {
             // 下がタイルに接している場合ジャンプ
             if (entity.isOnGround()) {
                 accY = jumpPower;
@@ -204,13 +221,13 @@ public class StageModel implements IKeyAction {
         Vector2 entityPosition = new Vector2(entity.getPosX(), entity.getPosY()).add(entitySize.mul(0.5));
 
         if (hangWire == null) {
-            if (hasKey("h")) {
+            if (hasKey(KeyEvent.VK_H)) {
                 hangWire = new HangWire(entityPosition, new Vector2(-1, -1));
             }
-            if (hasKey("k")) {
+            if (hasKey(KeyEvent.VK_K)) {
                 hangWire = new HangWire(entityPosition, new Vector2(1, -1));
             }
-        } else if (hasKey("j")) {
+        } else if (hasKey(KeyEvent.VK_J)) {
             hangWire = null;
         }
 
@@ -258,6 +275,10 @@ public class StageModel implements IKeyAction {
         entity.setPosX(entity.getPosX() + entity.getVelX());
         entity.setPosY(entity.getPosY() + entity.getVelY());
 
+        // 速度を見て、キャラクターの画像を変更する
+        if (entity.getVelX() > 0) {
+            entity.setElapsedSinceStop(0);
+        }
         // 速度や中空かを見て、キャラクターの画像を変更する
         if (!entity.isOnGround()) {
             if (entity.getVelX() > 0) {
@@ -275,7 +296,8 @@ public class StageModel implements IKeyAction {
                     entity.setImage(characterRightWalkHat2);
                 }
             }
-        } else {
+        } else if (entity.getVelX() < 0) {
+            entity.setElapsedSinceStop(0);
             if (!entity.isOnGround() || (entity.getVelX() > -0.5)) {
                 entity.setImage(characterLeftWalkHat0);
             } else {
@@ -284,6 +306,19 @@ public class StageModel implements IKeyAction {
                 } else {
                     entity.setImage(characterLeftWalkHat2);
                 }
+            }
+        } else {
+            entity.setElapsedSinceStop(entity.getElapsedSinceStop() + 1);
+            if (entity.getDirection() == 1) {
+                entity.setImage(characterRightWalkHat0);
+            } else if (entity.getDirection() == -1) {
+                entity.setImage(characterLeftWalkHat0);
+            } else {
+                entity.setImage(characterStop);
+            }
+
+            if (entity.getElapsedSinceStop() > 100) {
+                entity.setImage(characterStop);
             }
         }
     }

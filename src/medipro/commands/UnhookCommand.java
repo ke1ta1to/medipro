@@ -1,5 +1,7 @@
 package medipro.commands;
 
+import java.awt.event.KeyEvent;
+
 import medipro.IKeyAction;
 
 public class UnhookCommand extends Command {
@@ -12,9 +14,9 @@ public class UnhookCommand extends Command {
 
     @Override
     public void execute(IKeyAction action, String rawText) throws InterruptedException {
-        action.addKey("j");
+        action.addKey(KeyEvent.VK_J);
         sleep(10);
-        action.removeKey("j");
+        action.removeKey(KeyEvent.VK_J);
     }
 
 }

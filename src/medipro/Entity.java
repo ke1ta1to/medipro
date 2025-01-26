@@ -24,6 +24,10 @@ public class Entity {
     private boolean isOnGround = false;
     private boolean isAlive = true;
 
+    private int direction = 1;
+
+    private int elapsedSinceStop = 0;
+
     public Entity(StageModel stageModel) {
         this.stageModel = stageModel;
     }
@@ -71,8 +75,8 @@ public class Entity {
             rightTile.onCollide(this);
         }
 
-        // 絶対値が0.03以下の場合は0にする
-        if (Math.abs(this.velX) < 0.03) {
+        // 絶対値が0.05以下の場合は0にする
+        if (Math.abs(this.velX) < 0.05) {
             this.velX = 0;
         }
     }
@@ -148,6 +152,28 @@ public class Entity {
         if (Math.abs(this.accY) < 0.03) {
             this.accY = 0;
         }
+    }
+
+    public int getDirection() {
+        return direction;
+    }
+
+    public void setDirection(int direction) {
+        if (direction <= -1) {
+            this.direction = -1;
+        } else if (direction >= 1) {
+            this.direction = 1;
+        } else {
+            this.direction = 0;
+        }
+    }
+
+    public int getElapsedSinceStop() {
+        return elapsedSinceStop;
+    }
+
+    public void setElapsedSinceStop(int elapsedSinceStop) {
+        this.elapsedSinceStop = elapsedSinceStop;
     }
 
     public Image getImage() {

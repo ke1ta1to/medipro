@@ -1,5 +1,7 @@
 package medipro.commands;
 
+import java.awt.event.KeyEvent;
+
 import medipro.IKeyAction;
 
 public class JumpCommand extends Command {
@@ -10,9 +12,9 @@ public class JumpCommand extends Command {
 
     @Override
     public void execute(IKeyAction action, String rawText) throws InterruptedException {
-        action.addKey(" ");
+        action.addKey(KeyEvent.VK_SPACE);
         sleep(10);
-        action.removeKey(" ");
+        action.removeKey(KeyEvent.VK_SPACE);
     }
 
 }
