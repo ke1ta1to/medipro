@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import medipro.App;
+import medipro.app.AppModel;
 
 public class StageMenuView extends JPanel {
 
@@ -46,42 +47,43 @@ public class StageMenuView extends JPanel {
             switch (selectedStage) {
                 case "stage1":
                     App.getStageModel().setWorld(App.worldLevel1);
-                    App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                    App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
+
                     controller.handleClose();
                     break;
                 case "stage2":
                     App.getStageModel().setWorld(App.worldLevel2);
-                    App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                    App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                     controller.handleClose();
                     break;
                 case "stage3":
                     App.getStageModel().setWorld(App.worldLevel3);
-                    App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                    App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                     controller.handleClose();
                     break;
                 case "stage4":
                     App.getStageModel().setWorld(App.worldLevel4);
-                    App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                    App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                     controller.handleClose();
                     break;
                 case "stage5":
                     App.getStageModel().setWorld(App.worldLevel5);
-                    App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                    App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                     controller.handleClose();
                     break;
                 case "stage6":
                     App.getStageModel().setWorld(App.worldLevel6);
-                    App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                    App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                     controller.handleClose();
                     break;
                 case "stage7":
                     App.getStageModel().setWorld(App.worldLevel7);
-                    App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                    App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                     controller.handleClose();
                     break;
                 case "stage8":
                     App.getStageModel().setWorld(App.worldLevel8);
-                    App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                    App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                     controller.handleClose();
                     break;
                 default:
@@ -89,7 +91,7 @@ public class StageMenuView extends JPanel {
             }
         }));
         actionsPanel.add(createButtonPanel("レベル設定画面へ", "GO", (e) -> {
-            App.getCardSubject().setCardNumber(App.LEVEL_VIEW);
+            App.getAppModel().setPageName(AppModel.PAGE_LEVEL_SELECT);
             controller.handleClose();
         }));
         actionsPanel.add(createButtonPanel("設定", "設定", (e) -> {
@@ -109,7 +111,7 @@ public class StageMenuView extends JPanel {
         });
         JButton exitButton = new JButton("タイトルへ");
         exitButton.addActionListener((e) -> {
-            App.getCardSubject().setCardNumber(App.TOP_VIEW);
+            App.getAppModel().setPageName(AppModel.PAGE_TITLE);
             controller.handleClose();
         });
         bottomPanel.add(backButton);

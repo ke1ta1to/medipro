@@ -1,6 +1,7 @@
 package medipro.menu_bar;
 
 import medipro.App;
+import medipro.app.AppModel;
 
 public class MenuBarController {
 
@@ -19,11 +20,12 @@ public class MenuBarController {
     }
 
     public void handleGoTitle() {
-        App.getCardSubject().setCardNumber(App.TOP_VIEW);
+        App.getAppModel().setPageName(AppModel.PAGE_TITLE);
     }
 
     public void handleChangeStage(int stageNumber) {
-        App.getCardSubject().setCardNumber(App.GAME_VIEW);
+        App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
+
         switch (stageNumber) {
             case 1:
                 App.getStageModel().setWorld(App.worldLevel1);

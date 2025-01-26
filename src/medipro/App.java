@@ -2,7 +2,6 @@ package medipro;
 
 import java.awt.CardLayout;
 
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import medipro.app.AppController;
@@ -35,7 +34,6 @@ import medipro.level.LevelView;
 import medipro.menu_bar.MenuBarController;
 import medipro.menu_bar.MenuBarModel;
 import medipro.menu_bar.MenuBarView;
-import medipro.observers.CardSubject;
 import medipro.setting.SettingController;
 import medipro.setting.SettingModel;
 import medipro.setting.SettingView;
@@ -50,18 +48,13 @@ import medipro.top.TopController;
 import medipro.top.TopModel;
 import medipro.top.TopView;
 import medipro.utils.WorldLoader;
+import medipro.workspace.WorkspaceController;
+import medipro.workspace.WorkspaceModel;
+import medipro.workspace.WorkspaceView;
 
 public class App {
 
     private static App app;
-
-    private final CardSubject cardSubject;
-
-    public static final String TOP_VIEW = "StartScreen";
-    public static final String GAME_VIEW = "GameViewLevel1";
-    public static final String LEVEL_VIEW = "levelPanel";
-    public static final String SETTING_VIEW = "setting";
-    public static final String HOW_TO_PLAY = "howToPlay";
 
     public static World voidWorld;
     public static World worldLevel1;
@@ -79,15 +72,12 @@ public class App {
     private StageModel stageModel;
     private InputModel inputModel;
     private StageMenuBarModel stageMenuBarModel;
+    private WorkspaceModel workspaceModel;
     private AppModel appModel;
     private TopModel topModel;
     private LevelModel levelModel;
     private SettingModel settingModel;
     private HowToPlayModel howToPlayModel;
-
-    public App() {
-        cardSubject = new CardSubject();
-    }
 
     public void start() {
         System.out.println("Application started");
@@ -102,20 +92,6 @@ public class App {
 
         AppFrame appFrame = new AppFrame();
 
-        appFrame.add(createPanel());
-
-        MenuBarModel menuBarModel = new MenuBarModel();
-        MenuBarController menuBarController = new MenuBarController(menuBarModel);
-        MenuBarView menuBarView = new MenuBarView(menuBarModel, menuBarController);
-        appFrame.setJMenuBar(menuBarView);
-
-        appFrame.pack();
-        appFrame.setLocationRelativeTo(null);
-        appFrame.setVisible(true);
-
-    }
-
-    private JPanel createPanel() {
         stageMenuModel = new StageMenuModel();
         StageMenuController stageMenuController = new StageMenuController(stageMenuModel);
         StageMenuView stageMenuView = new StageMenuView(stageMenuModel, stageMenuController);
@@ -130,8 +106,8 @@ public class App {
         worldLevel6 = WorldLoader.loadWorld(stageModel, "world6");
         worldLevel7 = WorldLoader.loadWorld(stageModel, "world7");
         worldLevel8 = WorldLoader.loadWorld(stageModel, "world8");
-
         stageModel.setWorld(voidWorld);
+
         StageController stageController = new StageController(stageModel);
         StageView stageView = new StageView(stageModel, stageController);
         stageView.setStageMenuView(stageMenuView);
@@ -140,18 +116,11 @@ public class App {
         InputController inputController = new InputController(inputModel);
         InputView inputView = new InputView(inputModel, inputController);
 
-        // stageMenuBarModel = new StageMenuBarModel();
-        // StageMenuBarController stageMenuBarController = new
-        // StageMenuBarController(stageMenuBarModel);
-        // StageMenuBarView stageMenuBarView = new StageMenuBarView(stageMenuBarModel,
-        // stageMenuBarController);
-
-        appModel = new AppModel();
-        AppController appController = new AppController(appModel);
-        AppView appView = new AppView(appModel, appController);
-        appView.setStageView(stageView);
-        appView.setInputView(inputView);
-        // appView.setStageMenuBarView(stageMenuBarView);
+        workspaceModel = new WorkspaceModel();
+        WorkspaceController workspaceController = new WorkspaceController(workspaceModel);
+        WorkspaceView workspaceView = new WorkspaceView(workspaceModel, workspaceController);
+        workspaceView.setInputView(inputView);
+        workspaceView.setStageView(stageView);
 
         topModel = new TopModel();
         TopController topController = new TopController(topModel);
@@ -160,10 +129,6 @@ public class App {
         levelModel = new LevelModel();
         LevelController levelController = new LevelController(levelModel);
         LevelView levelView = new LevelView(levelModel, levelController);
-
-        settingModel = new SettingModel();
-        SettingController settingController = new SettingController(settingModel);
-        SettingView settingView = new SettingView(settingModel, settingController);
 
         HowToPlayPage1Model howToPlayPage1Model = new HowToPlayPage1Model();
         HowToPlayPage1Controller howToPlayPage1Controller = new HowToPlayPage1Controller(howToPlayPage1Model);
@@ -179,26 +144,30 @@ public class App {
         howToPlayView.addPage(howToPlayPage1View, HowToPlayModel.PAGE_NO1);
         howToPlayView.addPage(howToPlayPage2View, HowToPlayModel.PAGE_NO2);
 
-        CardLayout cardLayout = new CardLayout();
-        JPanel panel = new JPanel(cardLayout);
-        getCardSubject().addObserver((cardNumber) -> {
-            cardLayout.show(panel, cardNumber);
-        });
-        panel.add(topView, App.TOP_VIEW);
-        panel.add(appView, App.GAME_VIEW);
-        panel.add(levelView, App.LEVEL_VIEW);
-        panel.add(settingView, App.SETTING_VIEW);
-        panel.add(howToPlayView, App.HOW_TO_PLAY);
+        settingModel = new SettingModel();
+        SettingController settingController = new SettingController(settingModel);
+        SettingView settingView = new SettingView(settingModel, settingController);
 
-        return panel;
-    }
+        appModel = new AppModel();
+        AppController appController = new AppController(appModel);
+        AppView appView = new AppView(appModel, appController);
+        appFrame.add(appView);
+        appView.addView(workspaceView, AppModel.PAGE_WORKSPACE);
+        appView.addView(topView, AppModel.PAGE_TITLE);
+        appView.addView(levelView, AppModel.PAGE_LEVEL_SELECT);
+        appView.addView(howToPlayView, AppModel.PAGE_HOW_TO_PLAY);
+        appView.addView(settingView, AppModel.PAGE_SETTING);
+        ((CardLayout) appView.getLayout()).show(appView, AppModel.PAGE_TITLE);
 
-    public static CardSubject getCardSubject() {
-        CardSubject cardSubject = app.cardSubject;
-        if (cardSubject == null) {
-            throw new IllegalStateException("cardSubject is null");
-        }
-        return cardSubject;
+        MenuBarModel menuBarModel = new MenuBarModel();
+        MenuBarController menuBarController = new MenuBarController(menuBarModel);
+        MenuBarView menuBarView = new MenuBarView(menuBarModel, menuBarController);
+        appFrame.setJMenuBar(menuBarView);
+
+        appFrame.pack();
+        appFrame.setLocationRelativeTo(null);
+        appFrame.setVisible(true);
+
     }
 
     public static CommandStore getCommandStore() {

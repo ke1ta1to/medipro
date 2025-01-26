@@ -21,7 +21,6 @@ public class InputController {
     private void handleChangeWorld(PropertyChangeEvent evt) {
         World world = (World) evt.getNewValue();
         model.setText(world.getExampleCommand());
-        System.out.println("InputController.handleChangeWorld()");
     }
 
     public InputModel getModel() {

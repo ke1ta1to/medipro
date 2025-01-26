@@ -4,11 +4,11 @@ import java.beans.PropertyChangeSupport;
 
 public class AppModel {
 
-    public static final String TOP_VIEW = "StartScreen";
-    public static final String GAME_VIEW = "GameViewLevel1";
-    public static final String LEVEL_VIEW = "levelPanel";
-    public static final String SETTING_VIEW = "setting";
-    public static final String HOW_TO_PLAY = "howToPlay";
+    public static final String PAGE_TITLE = "title";
+    public static final String PAGE_WORKSPACE = "workspace";
+    public static final String PAGE_LEVEL_SELECT = "level-select";
+    public static final String PAGE_SETTING = "setting";
+    public static final String PAGE_HOW_TO_PLAY = "how-to-play";
 
     private String pageName;
 
