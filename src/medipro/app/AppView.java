@@ -1,6 +1,7 @@
 package medipro.app;
 
-import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.beans.PropertyChangeEvent;
 
 import javax.swing.JPanel;
 
@@ -13,20 +14,14 @@ public class AppView extends JPanel {
         this.model = model;
         this.controller = controller;
 
-        BorderLayout layout = new BorderLayout();
+        model.addPropertyChangeListener("pageName", this::handleChangePageName);
+
+        CardLayout layout = new CardLayout();
         setLayout(layout);
     }
 
-    public void setStageView(JPanel view) {
-        add(view, BorderLayout.CENTER);
-    }
-
-    public void setInputView(JPanel view) {
-        add(view, BorderLayout.WEST);
-    }
-
-    public void setStageMenuBarView(JPanel view) {
-        add(view, BorderLayout.NORTH);
+    public void addView(JPanel view, String name) {
+        add(view, name);
     }
 
     public AppModel getModel() {
@@ -35,6 +30,11 @@ public class AppView extends JPanel {
 
     public AppController getController() {
         return controller;
+    }
+
+    private void handleChangePageName(PropertyChangeEvent evt) {
+        CardLayout layout = (CardLayout) getLayout();
+        layout.show(this, (String) evt.getNewValue());
     }
 
 }

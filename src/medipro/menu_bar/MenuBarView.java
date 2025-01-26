@@ -15,14 +15,10 @@ public class MenuBarView extends JMenuBar {
 
         JMenu gameMenu = new JMenu("りさプロ");
         JMenuItem goTitleMenu = new JMenuItem("タイトルへ戻る");
-        goTitleMenu.addActionListener((e) -> {
-            controller.handleGoTitle();
-        });
+        goTitleMenu.addActionListener(controller::handleClickGoTitle);
         gameMenu.add(goTitleMenu);
         JMenuItem exitMenuItem = new JMenuItem("終了");
-        exitMenuItem.addActionListener((e) -> {
-            controller.handleExit();
-        });
+        exitMenuItem.addActionListener(controller::handleClickExit);
         gameMenu.add(exitMenuItem);
         add(gameMenu);
 
@@ -30,10 +26,8 @@ public class MenuBarView extends JMenuBar {
         JMenu changeStageMenu = new JMenu("ステージ変更");
         for (int i = 1; i <= 8; i++) {
             JMenuItem changeStageMenuItem = new JMenuItem("ステージ" + i);
-            int stageNumber = i;
-            changeStageMenuItem.addActionListener((e) -> {
-                controller.handleChangeStage(stageNumber);
-            });
+            changeStageMenuItem.setActionCommand(String.valueOf(i));
+            changeStageMenuItem.addActionListener(controller::handleChangeStage);
             changeStageMenu.add(changeStageMenuItem);
         }
         debugMenu.add(changeStageMenu);

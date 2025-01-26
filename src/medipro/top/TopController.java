@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import medipro.App;
+import medipro.app.AppModel;
 
 public class TopController implements ActionListener {
     private TopModel model;
@@ -21,20 +22,20 @@ public class TopController implements ActionListener {
         String command = e.getActionCommand();
         switch (command) {
             case "New Game Start":
-                App.getWorldSubject().setWorld(App.worldLevel1);
-                App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
+                App.getStageModel().setWorld(App.worldLevel1);
                 break;
 
             case "Level Select":
-                App.getCardSubject().setCardNumber(App.LEVEL_VIEW);
+                App.getAppModel().setPageName(AppModel.PAGE_LEVEL_SELECT);
                 break;
 
             case "Setting":
-                App.getCardSubject().setCardNumber(App.SETTING_VIEW);
+                App.getAppModel().setPageName(AppModel.PAGE_SETTING);
                 break;
 
             case "How to Play":
-                App.getCardSubject().setCardNumber(App.HOW_TO_PLAY);
+                App.getAppModel().setPageName(AppModel.PAGE_HOW_TO_PLAY);
                 break;
 
             default:

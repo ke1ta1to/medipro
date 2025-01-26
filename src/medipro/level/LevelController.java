@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import medipro.App;
+import medipro.app.AppModel;
 
 public class LevelController implements ActionListener {
 
@@ -22,47 +23,47 @@ public class LevelController implements ActionListener {
         String command = e.getActionCommand();
         switch (command) {
             case "Level 1":
-                App.getWorldSubject().setWorld(App.worldLevel1);
-                App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                App.getStageModel().setWorld(App.worldLevel1);
+                App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                 break;
 
             case "Level 2":
-                App.getWorldSubject().setWorld(App.worldLevel2);
-                App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                App.getStageModel().setWorld(App.worldLevel2);
+                App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                 break;
 
             case "Level 3":
-                App.getWorldSubject().setWorld(App.worldLevel3);
-                App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                App.getStageModel().setWorld(App.worldLevel3);
+                App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                 break;
 
             case "Level 4":
-                App.getWorldSubject().setWorld(App.worldLevel4);
-                App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                App.getStageModel().setWorld(App.worldLevel4);
+                App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                 break;
 
             case "Level 5":
-                App.getWorldSubject().setWorld(App.worldLevel5);
-                App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                App.getStageModel().setWorld(App.worldLevel5);
+                App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                 break;
 
             case "Level 6":
-                App.getWorldSubject().setWorld(App.worldLevel6);
-                App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                App.getStageModel().setWorld(App.worldLevel6);
+                App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                 break;
 
             case "Level 7":
-                App.getWorldSubject().setWorld(App.worldLevel7);
-                App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                App.getStageModel().setWorld(App.worldLevel7);
+                App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                 break;
 
             case "Level 8":
-                App.getWorldSubject().setWorld(App.worldLevel8);
-                App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                App.getStageModel().setWorld(App.worldLevel8);
+                App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                 break;
 
             case "exit":
-                App.getCardSubject().setCardNumber(App.TOP_VIEW);
+                App.getAppModel().setPageName(AppModel.PAGE_TITLE);
                 break;
 
             default:

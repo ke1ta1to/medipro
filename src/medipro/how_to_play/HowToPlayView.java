@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.beans.PropertyChangeEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -42,18 +43,16 @@ public class HowToPlayView extends JPanel {
         exitPanel.add(exitButton);
         add(exitPanel, BorderLayout.SOUTH);
 
-        model.getPcs().addPropertyChangeListener((evt) -> {
-            if (evt.getSource() instanceof HowToPlayModel) {
-                if (evt.getPropertyName().equals("currentPage")) {
-                    String newPage = (String) evt.getNewValue();
-                    cardLayout.show(parent, newPage);
-                }
-            }
-        });
+        model.addPropertyChangeListener("currentPage", this::updatePage);
     }
 
     public void addPage(JPanel page, String name) {
         parent.add(page, name);
+    }
+
+    private void updatePage(PropertyChangeEvent evt) {
+        CardLayout cardLayout = (CardLayout) parent.getLayout();
+        cardLayout.show(parent, (String) evt.getNewValue());
     }
 
 }

@@ -1,6 +1,7 @@
 package medipro;
 
 import medipro.stage.StageModel;
+import medipro.stage.StageView;
 import medipro.tiles.AirTile;
 import medipro.tiles.GoalTile;
 import medipro.tiles.RockTile;
@@ -18,9 +19,6 @@ public class World {
 
     private final String exampleCommand;
 
-    private final int width;
-    private final int height;
-
     private int startPosX;
     private int startPosY;
 
@@ -31,18 +29,16 @@ public class World {
 
     private final WarpTile[] warpTiles = new WarpTile[2];
 
-    public World(StageModel stageModel, String rawWorld, int width, int height, String exampleCommand) {
+    public World(StageModel stageModel, String rawWorld, String exampleCommand) {
         this.stageModel = stageModel;
-        this.width = width;
-        this.height = height;
         this.exampleCommand = exampleCommand;
 
-        tiles = new Tile[width / TILE_SIZE][height / TILE_SIZE];
+        tiles = new Tile[StageView.WIDTH / TILE_SIZE][StageView.HEIGHT / TILE_SIZE];
 
         String[] lines = rawWorld.split("\n");
 
-        for (int y = 0; y < height / TILE_SIZE; y++) {
-            for (int x = 0; x < width / TILE_SIZE; x++) {
+        for (int y = 0; y < StageView.HEIGHT / TILE_SIZE; y++) {
+            for (int x = 0; x < StageView.WIDTH / TILE_SIZE; x++) {
                 char c = lines[y].charAt(x);
                 if (c == '*') {
                     tiles[x][y] = new WallTile(x * TILE_SIZE, y * TILE_SIZE);
@@ -86,14 +82,6 @@ public class World {
 
     public Tile[][] getTiles() {
         return tiles;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
     }
 
     public int getStartPosX() {

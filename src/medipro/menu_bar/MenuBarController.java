@@ -1,6 +1,9 @@
 package medipro.menu_bar;
 
+import java.awt.event.ActionEvent;
+
 import medipro.App;
+import medipro.app.AppModel;
 
 public class MenuBarController {
 
@@ -14,51 +17,54 @@ public class MenuBarController {
         return model;
     }
 
-    public void handleExit() {
+    public void handleClickExit(ActionEvent event) {
         System.exit(0);
     }
 
-    public void handleGoTitle() {
-        App.getCardSubject().setCardNumber(App.TOP_VIEW);
+    public void handleClickGoTitle(ActionEvent event) {
+        App.getAppModel().setPageName(AppModel.PAGE_TITLE);
     }
 
-    public void handleChangeStage(int stageNumber) {
-        App.getCardSubject().setCardNumber(App.GAME_VIEW);
+    public void handleChangeStage(ActionEvent event) {
+        App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
+
+        String stageNumber = event.getActionCommand();
         switch (stageNumber) {
-            case 1:
-                App.getWorldSubject().setWorld(App.worldLevel1);
+            case "1":
+                App.getStageModel().setWorld(App.worldLevel1);
                 break;
 
-            case 2:
-                App.getWorldSubject().setWorld(App.worldLevel2);
+            case "2":
+                App.getStageModel().setWorld(App.worldLevel2);
                 break;
 
-            case 3:
-                App.getWorldSubject().setWorld(App.worldLevel3);
+            case "3":
+                App.getStageModel().setWorld(App.worldLevel3);
                 break;
 
-            case 4:
-                App.getWorldSubject().setWorld(App.worldLevel4);
+            case "4":
+                App.getStageModel().setWorld(App.worldLevel4);
                 break;
 
-            case 5:
-                App.getWorldSubject().setWorld(App.worldLevel5);
+            case "5":
+                App.getStageModel().setWorld(App.worldLevel5);
                 break;
 
-            case 6:
-                App.getWorldSubject().setWorld(App.worldLevel6);
+            case "6":
+                App.getStageModel().setWorld(App.worldLevel6);
                 break;
 
-            case 7:
-                App.getWorldSubject().setWorld(App.worldLevel7);
+            case "7":
+                App.getStageModel().setWorld(App.worldLevel7);
                 break;
 
-            case 8:
-                App.getWorldSubject().setWorld(App.worldLevel8);
+            case "8":
+                App.getStageModel().setWorld(App.worldLevel8);
                 break;
 
             default:
                 break;
         }
     }
+
 }

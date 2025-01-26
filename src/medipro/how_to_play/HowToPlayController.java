@@ -3,6 +3,7 @@ package medipro.how_to_play;
 import java.awt.event.ActionEvent;
 
 import medipro.App;
+import medipro.app.AppModel;
 
 public class HowToPlayController {
     private final HowToPlayModel model;
@@ -24,7 +25,7 @@ public class HowToPlayController {
     }
 
     public void handleClickExitButton(ActionEvent e) {
-        App.getCardSubject().setCardNumber(App.TOP_VIEW);
+        App.getAppModel().setPageName(AppModel.PAGE_TITLE);
     }
 
 }

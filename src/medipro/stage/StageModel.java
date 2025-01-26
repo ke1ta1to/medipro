@@ -2,6 +2,7 @@ package medipro.stage;
 
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeSupport;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -11,7 +12,6 @@ import java.util.Set;
 
 import javax.swing.ImageIcon;
 
-import medipro.App;
 import medipro.Entity;
 import medipro.HangWire;
 import medipro.IKeyAction;
@@ -19,6 +19,8 @@ import medipro.Vector2;
 import medipro.World;
 
 public class StageModel implements IKeyAction {
+
+    private boolean openedMenu = false;
 
     private World world = null;
 
@@ -55,16 +57,14 @@ public class StageModel implements IKeyAction {
     private final Image characterStop = loadImage("risaju.png");
     private final Image characterRightJump = loadImage("R_jump_hat.png");
 
+    private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+
     public StageModel() {
         entity = new Entity(this);
         Image image = characterRightWalkHat0;
         entity.setImage(image);
         entity.setWidth(50);
         entity.setHeight(50);
-        App.getWorldSubject().addObserver((world) -> {
-            setWorld(world);
-            reset();
-        });
     }
 
     public void reset() {
@@ -77,7 +77,6 @@ public class StageModel implements IKeyAction {
         entity.setAlive(true);
         hangWire = null;
         clearKeys();
-        world.resetState();
         tickCount = 0;
     }
 
@@ -124,7 +123,21 @@ public class StageModel implements IKeyAction {
     }
 
     public void setWorld(World world) {
+        World oldWorld = this.world;
         this.world = world;
+        world.resetState();
+        reset();
+        pcs.firePropertyChange("world", oldWorld, world);
+    }
+
+    public boolean isOpenedMenu() {
+        return openedMenu;
+    }
+
+    public void setOpenedMenu(boolean isOpenMenu) {
+        boolean oldIsOpenMenu = this.openedMenu;
+        this.openedMenu = isOpenMenu;
+        pcs.firePropertyChange("openedMenu", oldIsOpenMenu, isOpenMenu);
     }
 
     public HangWire getHangWire() {
@@ -160,7 +173,7 @@ public class StageModel implements IKeyAction {
         } catch (Exception e) {
         }
 
-        World world = new World(this, text, 800, 600, exampleCommand);
+        World world = new World(this, text, exampleCommand);
         return world;
     }
 
@@ -242,8 +255,8 @@ public class StageModel implements IKeyAction {
                 double nextLength = hangWire.getProgress() + hangSpeed;
                 Vector2 nextPosition = hangWire.getEnd(nextLength);
 
-                if (nextPosition.getY() > world.getHeight() || nextPosition.getY() < 0
-                        || nextPosition.getX() > world.getWidth() || nextPosition.getX() < 0) {
+                if (nextPosition.getY() > StageView.HEIGHT || nextPosition.getY() < 0
+                        || nextPosition.getX() > StageView.WIDTH || nextPosition.getX() < 0) {
                     hangWire = null;
                     return;
                 }
@@ -327,4 +340,13 @@ public class StageModel implements IKeyAction {
         return new ImageIcon(getClass().getResource(
                 "/medipro/images/" + name)).getImage();
     }
+
+    public void addPropertyChangeListener(String propertyName, java.beans.PropertyChangeListener listener) {
+        pcs.addPropertyChangeListener(propertyName, listener);
+    }
+
+    public void removePropertyChangeListener(String propertyName, java.beans.PropertyChangeListener listener) {
+        pcs.removePropertyChangeListener(propertyName, listener);
+    }
+
 }
