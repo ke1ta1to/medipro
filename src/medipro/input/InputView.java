@@ -31,6 +31,7 @@ public class InputView extends JPanel {
 
         textArea = new JTextArea();
         textArea.setFont(Fonts.MPLUS1CODE_FONT.deriveFont(Font.PLAIN, 16));
+        textArea.getDocument().addDocumentListener(controller.getTextChangeListener(textArea));
         JScrollPane scrollPane = new JScrollPane(textArea);
 
         add(scrollPane, BorderLayout.CENTER);

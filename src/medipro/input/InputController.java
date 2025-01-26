@@ -30,10 +30,12 @@ public class InputController {
         return model;
     }
 
+    public TextChangeListener getTextChangeListener(JTextArea textArea) {
+        return new TextChangeListener(model, this, textArea);
+    }
+
     public void handleSubmit(ActionEvent event) {
         App.getStageModel().getEntity().reset();
-        JTextArea textArea = (JTextArea) event.getSource();
-        model.setText(textArea.getText());
         start();
     }
 
