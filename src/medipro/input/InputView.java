@@ -37,7 +37,7 @@ public class InputView extends JPanel {
 
         JButton submitButton = new JButton("実行");
         submitButton.setFont(Fonts.STICK_FONT.deriveFont(Font.PLAIN, 24));
-        submitButton.addActionListener(e -> controller.submit(e, textArea.getText()));
+        submitButton.addActionListener(controller::handleSubmit);
         add(submitButton, BorderLayout.SOUTH);
 
         model.addPropertyChangeListener("text", this::updateText);
@@ -53,7 +53,6 @@ public class InputView extends JPanel {
 
     private void updateText(PropertyChangeEvent evt) {
         textArea.setText((String) evt.getNewValue());
-        System.out.println("updateText: " + evt.getNewValue());
     }
 
 }
