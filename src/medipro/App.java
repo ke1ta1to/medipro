@@ -98,15 +98,15 @@ public class App {
         StageMenuView stageMenuView = new StageMenuView(stageMenuModel, stageMenuController);
 
         stageModel = new StageModel();
-        voidWorld = WorldLoader.loadWorld(stageModel, "void");
-        worldLevel1 = WorldLoader.loadWorld(stageModel, "world1");
-        worldLevel2 = WorldLoader.loadWorld(stageModel, "world2");
-        worldLevel3 = WorldLoader.loadWorld(stageModel, "world3");
-        worldLevel4 = WorldLoader.loadWorld(stageModel, "world4");
-        worldLevel5 = WorldLoader.loadWorld(stageModel, "world5");
-        worldLevel6 = WorldLoader.loadWorld(stageModel, "world6");
-        worldLevel7 = WorldLoader.loadWorld(stageModel, "world7");
-        worldLevel8 = WorldLoader.loadWorld(stageModel, "world8");
+        voidWorld = WorldLoader.loadWorld(stageModel, "0_void");
+        worldLevel1 = WorldLoader.loadWorld(stageModel, "1_tutorial");
+        worldLevel2 = WorldLoader.loadWorld(stageModel, "2_walking");
+        worldLevel3 = WorldLoader.loadWorld(stageModel, "3_spike");
+        worldLevel4 = WorldLoader.loadWorld(stageModel, "4_hook");
+        worldLevel5 = WorldLoader.loadWorld(stageModel, "5_portal");
+        worldLevel6 = WorldLoader.loadWorld(stageModel, "6_null");
+        worldLevel7 = WorldLoader.loadWorld(stageModel, "7_null");
+        worldLevel8 = WorldLoader.loadWorld(stageModel, "8_null");
         stageModel.setWorld(voidWorld);
 
         StageController stageController = new StageController(stageModel);
