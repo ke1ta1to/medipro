@@ -1,6 +1,8 @@
 package medipro;
 
 import java.awt.Image;
+import java.util.ArrayList;
+import java.util.List;
 
 import medipro.stage.StageModel;
 import medipro.tiles.Tile;
@@ -63,16 +65,20 @@ public class Entity {
             this.velX = 0;
         }
 
-        Tile leftTile = getCollisionTileOnLeft(this.posX + this.velX);
-        if (leftTile != null) {
+        Tile leftTiles[] = getCollisionTileOnLeft(this.posX + this.velX);
+        if (leftTiles != null) {
             this.velX = 0;
-            leftTile.onCollide(this);
+            for (Tile leftTile : leftTiles) {
+                leftTile.onCollide(this);
+            }
         }
 
-        Tile rightTile = getCollisionOnRight(this.posX + this.velX);
-        if (rightTile != null) {
+        Tile rightTiles[] = getCollisionOnRight(this.posX + this.velX);
+        if (rightTiles != null) {
             this.velX = 0;
-            rightTile.onCollide(this);
+            for (Tile right : rightTiles) {
+                right.onCollide(this);
+            }
         }
 
         // 絶対値が0.05以下の場合は0にする
@@ -99,16 +105,20 @@ public class Entity {
             targetDeathAction();
         }
 
-        Tile topTile = getCollisionOnTop(this.posY + this.velY);
-        if (topTile != null) {
+        Tile topTiles[] = getCollisionOnTop(this.posY + this.velY);
+        if (topTiles != null) {
             this.velY = 0;
-            topTile.onCollide(this);
+            for (Tile topTile : topTiles) {
+                topTile.onCollide(this);
+            }
         }
 
-        Tile bottomTile = getCollisionOnBottom(this.posY + this.velY);
-        if (bottomTile != null) {
+        Tile bottomTiles[] = getCollisionOnBottom(this.posY + this.velY);
+        if (bottomTiles != null) {
             this.velY = 0;
-            bottomTile.onCollide(this);
+            for (Tile bottomTile : bottomTiles) {
+                bottomTile.onCollide(this);
+            }
             this.isOnGround = true;
         } else {
             this.isOnGround = false;
@@ -234,7 +244,8 @@ public class Entity {
                 + velY + ", accX=" + accX + ", accY=" + accY + ", width=" + width + ", height=" + height + "]";
     }
 
-    public Tile getCollisionTileOnLeft(double newPosX) {
+    public Tile[] getCollisionTileOnLeft(double newPosX) {
+        List<Tile> collisionTiles = new ArrayList<>();
         double[] checkPointsY = {
                 this.posY, // 上端
                 this.posY + this.height / 3, // 高さの1/3位置
@@ -244,13 +255,17 @@ public class Entity {
         for (double checkPointY : checkPointsY) {
             Tile tile = stageModel.getWorld().getTileAt(newPosX, checkPointY);
             if (tile != null && tile.isSolid()) {
-                return tile;
+                collisionTiles.add(tile);
             }
+        }
+        if (collisionTiles.size() > 0) {
+            return collisionTiles.toArray(new Tile[0]);
         }
         return null;
     }
 
-    public Tile getCollisionOnRight(double newPosX) {
+    public Tile[] getCollisionOnRight(double newPosX) {
+        List<Tile> collisionTiles = new ArrayList<>();
         double[] checkPointsY = {
                 this.posY, // 上端
                 this.posY + this.height / 3, // 高さの1/3位置
@@ -260,13 +275,17 @@ public class Entity {
         for (double checkPointY : checkPointsY) {
             Tile tile = stageModel.getWorld().getTileAt(newPosX + this.width, checkPointY);
             if (tile != null && tile.isSolid()) {
-                return tile;
+                collisionTiles.add(tile);
             }
+        }
+        if (collisionTiles.size() > 0) {
+            return collisionTiles.toArray(new Tile[0]);
         }
         return null;
     }
 
-    public Tile getCollisionOnTop(double newPosY) {
+    public Tile[] getCollisionOnTop(double newPosY) {
+        List<Tile> collisionTiles = new ArrayList<>();
         double[] checkPointsX = {
                 this.posX, // 左端
                 this.posX + this.width / 3, // 幅の1/3位置
@@ -276,13 +295,17 @@ public class Entity {
         for (double checkPointX : checkPointsX) {
             Tile tile = stageModel.getWorld().getTileAt(checkPointX, newPosY);
             if (tile != null && tile.isSolid()) {
-                return tile;
+                collisionTiles.add(tile);
             }
+        }
+        if (collisionTiles.size() > 0) {
+            return collisionTiles.toArray(new Tile[0]);
         }
         return null;
     }
 
-    public Tile getCollisionOnBottom(double newPosY) {
+    public Tile[] getCollisionOnBottom(double newPosY) {
+        List<Tile> collisionTiles = new ArrayList<>();
         double[] checkPointsX = {
                 this.posX, // 左端
                 this.posX + this.width / 3, // 幅の1/3位置
@@ -292,8 +315,11 @@ public class Entity {
         for (double checkPointX : checkPointsX) {
             Tile tile = stageModel.getWorld().getTileAt(checkPointX, newPosY + this.height);
             if (tile != null && tile.isSolid()) {
-                return tile;
+                collisionTiles.add(tile);
             }
+        }
+        if (collisionTiles.size() > 0) {
+            return collisionTiles.toArray(new Tile[0]);
         }
         return null;
     }
