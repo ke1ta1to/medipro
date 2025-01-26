@@ -33,7 +33,7 @@ public class StageModel implements IKeyAction {
     private Entity entity;
     private int tickCount = 0;
 
-    private boolean isDebug = true;
+    private boolean debug = false;
 
     private HangWire hangWire;
 
@@ -85,7 +85,7 @@ public class StageModel implements IKeyAction {
         if (availableKeys.contains(key)) {
             keys.add(key);
         } else if (key == KeyEvent.VK_F3) {
-            isDebug = !isDebug;
+            debug = !debug;
         }
     }
 
@@ -181,12 +181,12 @@ public class StageModel implements IKeyAction {
         return hangWire != null;
     }
 
-    public boolean getIsDebug() {
-        return isDebug;
+    public boolean isDebug() {
+        return debug;
     }
 
-    public void setIsDebug(boolean isDebug) {
-        this.isDebug = isDebug;
+    public void setDebug(boolean isDebug) {
+        this.debug = isDebug;
     }
 
     public void tick() {

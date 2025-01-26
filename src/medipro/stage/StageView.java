@@ -99,14 +99,14 @@ public class StageView extends JPanel implements MouseListener {
         g.drawImage(entity.getImage(), (int) entity.getPosX(), (int) entity.getPosY(), entity.getWidth(),
                 entity.getHeight(), this);
         // entityの周りを線で囲む
-        g.setColor(Color.RED);
-        g.drawRect((int) entity.getPosX(), (int) entity.getPosY(), entity.getWidth(), entity.getHeight());
-        if (entity.isAlive() == false) {
+        if (model.isDebug()) {
             g.setColor(Color.RED);
-            g.drawLine((int) entity.getPosX(), (int) entity.getPosY(), (int) entity.getPosX() + entity.getWidth(),
-                    (int) entity.getPosY() + entity.getHeight());
-            g.drawLine((int) entity.getPosX() + entity.getWidth(), (int) entity.getPosY(), (int) entity.getPosX(),
-                    (int) entity.getPosY() + entity.getHeight());
+            g.drawRect((int) entity.getPosX(), (int) entity.getPosY(), entity.getWidth(), entity.getHeight());
+        }
+
+        // 死んだ時の描画
+        if (!entity.isAlive()) {
+            // TODO: 死んだ時の描画
         }
 
         // ハングワイヤーの描画
@@ -119,7 +119,7 @@ public class StageView extends JPanel implements MouseListener {
         }
 
         // entity data
-        if (model.getIsDebug()) {
+        if (model.isDebug()) {
             g.setColor(Color.CYAN);
             g.setFont(g.getFont().deriveFont(20.0f));
             g.drawString("Keys: " + model.getKeys(), 10, 40);
