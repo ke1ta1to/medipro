@@ -45,42 +45,42 @@ public class StageMenuView extends JPanel {
             String selectedStage = (String) ((JComboBox<?>) e.getSource()).getSelectedItem();
             switch (selectedStage) {
                 case "stage1":
-                    App.getWorldSubject().setWorld(App.worldLevel1);
+                    App.getStageModel().setWorld(App.worldLevel1);
                     App.getCardSubject().setCardNumber(App.GAME_VIEW);
                     controller.handleClose();
                     break;
                 case "stage2":
-                    App.getWorldSubject().setWorld(App.worldLevel2);
+                    App.getStageModel().setWorld(App.worldLevel2);
                     App.getCardSubject().setCardNumber(App.GAME_VIEW);
                     controller.handleClose();
                     break;
                 case "stage3":
-                    App.getWorldSubject().setWorld(App.worldLevel3);
+                    App.getStageModel().setWorld(App.worldLevel3);
                     App.getCardSubject().setCardNumber(App.GAME_VIEW);
                     controller.handleClose();
                     break;
                 case "stage4":
-                    App.getWorldSubject().setWorld(App.worldLevel4);
+                    App.getStageModel().setWorld(App.worldLevel4);
                     App.getCardSubject().setCardNumber(App.GAME_VIEW);
                     controller.handleClose();
                     break;
                 case "stage5":
-                    App.getWorldSubject().setWorld(App.worldLevel5);
+                    App.getStageModel().setWorld(App.worldLevel5);
                     App.getCardSubject().setCardNumber(App.GAME_VIEW);
                     controller.handleClose();
                     break;
                 case "stage6":
-                    App.getWorldSubject().setWorld(App.worldLevel6);
+                    App.getStageModel().setWorld(App.worldLevel6);
                     App.getCardSubject().setCardNumber(App.GAME_VIEW);
                     controller.handleClose();
                     break;
                 case "stage7":
-                    App.getWorldSubject().setWorld(App.worldLevel7);
+                    App.getStageModel().setWorld(App.worldLevel7);
                     App.getCardSubject().setCardNumber(App.GAME_VIEW);
                     controller.handleClose();
                     break;
                 case "stage8":
-                    App.getWorldSubject().setWorld(App.worldLevel8);
+                    App.getStageModel().setWorld(App.worldLevel8);
                     App.getCardSubject().setCardNumber(App.GAME_VIEW);
                     controller.handleClose();
                     break;

@@ -13,11 +13,13 @@ import javax.swing.Timer;
 
 import medipro.Entity;
 import medipro.Vector2;
-import medipro.World;
 import medipro.stage_menu.StageMenuView;
 import medipro.utils.Fonts;
 
 public class StageView extends JPanel implements MouseListener {
+
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 600;
 
     private final StageModel model;
     private final StageController controller;
@@ -48,11 +50,10 @@ public class StageView extends JPanel implements MouseListener {
                 requestFocus();
             });
         });
-        openMenuButtonPanel.setLocation(800 - openMenuButtonPanel.getWidth(), 0);
+        openMenuButtonPanel.setLocation(StageView.WIDTH - openMenuButtonPanel.getWidth(), 0);
         add(openMenuButtonPanel);
 
-        World world = model.getWorld();
-        setPreferredSize(new Dimension(world.getWidth(), world.getHeight()));
+        setPreferredSize(new Dimension(StageView.WIDTH, StageView.HEIGHT));
         addKeyListener(controller);
         setFocusable(true);
         addMouseListener(this);

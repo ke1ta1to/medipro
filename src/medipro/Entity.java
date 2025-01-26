@@ -3,6 +3,7 @@ package medipro;
 import java.awt.Image;
 
 import medipro.stage.StageModel;
+import medipro.stage.StageView;
 import medipro.tiles.Tile;
 
 public class Entity {
@@ -59,7 +60,7 @@ public class Entity {
             this.velX = 0;
         }
 
-        if (this.posX + this.velX + this.width > stageModel.getWorld().getWidth()) {
+        if (this.posX + this.velX + this.width > StageView.WIDTH) {
             this.velX = 0;
         }
 
@@ -93,7 +94,7 @@ public class Entity {
             this.posY = 0;
         }
 
-        if (this.posY + this.velY + this.height > stageModel.getWorld().getHeight()) {
+        if (this.posY + this.velY + this.height > StageView.HEIGHT) {
             this.velY = 0;
             setAlive(false);
             targetDeathAction();

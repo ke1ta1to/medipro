@@ -21,8 +21,8 @@ public class TopController implements ActionListener {
         String command = e.getActionCommand();
         switch (command) {
             case "New Game Start":
-                App.getWorldSubject().setWorld(App.worldLevel1);
                 App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                App.getStageModel().setWorld(App.worldLevel1);
                 break;
 
             case "Level Select":

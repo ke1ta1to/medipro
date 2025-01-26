@@ -26,35 +26,35 @@ public class MenuBarController {
         App.getCardSubject().setCardNumber(App.GAME_VIEW);
         switch (stageNumber) {
             case 1:
-                App.getWorldSubject().setWorld(App.worldLevel1);
+                App.getStageModel().setWorld(App.worldLevel1);
                 break;
 
             case 2:
-                App.getWorldSubject().setWorld(App.worldLevel2);
+                App.getStageModel().setWorld(App.worldLevel2);
                 break;
 
             case 3:
-                App.getWorldSubject().setWorld(App.worldLevel3);
+                App.getStageModel().setWorld(App.worldLevel3);
                 break;
 
             case 4:
-                App.getWorldSubject().setWorld(App.worldLevel4);
+                App.getStageModel().setWorld(App.worldLevel4);
                 break;
 
             case 5:
-                App.getWorldSubject().setWorld(App.worldLevel5);
+                App.getStageModel().setWorld(App.worldLevel5);
                 break;
 
             case 6:
-                App.getWorldSubject().setWorld(App.worldLevel6);
+                App.getStageModel().setWorld(App.worldLevel6);
                 break;
 
             case 7:
-                App.getWorldSubject().setWorld(App.worldLevel7);
+                App.getStageModel().setWorld(App.worldLevel7);
                 break;
 
             case 8:
-                App.getWorldSubject().setWorld(App.worldLevel8);
+                App.getStageModel().setWorld(App.worldLevel8);
                 break;
 
             default:

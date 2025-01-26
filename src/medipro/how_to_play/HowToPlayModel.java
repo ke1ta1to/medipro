@@ -10,11 +10,10 @@ public class HowToPlayModel {
     public static final String[] PAGES = { PAGE_NO1, PAGE_NO2 };
 
     private String currentPage;
-    private final PropertyChangeSupport pcs;
+    private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     public HowToPlayModel() {
         currentPage = PAGE_NO1;
-        pcs = new PropertyChangeSupport(this);
     }
 
     public String getCurrentPage() {
@@ -53,8 +52,12 @@ public class HowToPlayModel {
         }
     }
 
-    public PropertyChangeSupport getPcs() {
-        return pcs;
+    public void addPropertyChangeListener(String propertyName, java.beans.PropertyChangeListener listener) {
+        pcs.addPropertyChangeListener(propertyName, listener);
+    }
+
+    public void removePropertyChangeListener(String propertyName, java.beans.PropertyChangeListener listener) {
+        pcs.removePropertyChangeListener(propertyName, listener);
     }
 
 }

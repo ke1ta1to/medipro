@@ -36,8 +36,6 @@ import medipro.menu_bar.MenuBarController;
 import medipro.menu_bar.MenuBarModel;
 import medipro.menu_bar.MenuBarView;
 import medipro.observers.CardSubject;
-import medipro.observers.InputTextSubject;
-import medipro.observers.WorldSubject;
 import medipro.setting.SettingController;
 import medipro.setting.SettingModel;
 import medipro.setting.SettingView;
@@ -58,8 +56,6 @@ public class App {
     private static App app;
 
     private final CardSubject cardSubject;
-    private final WorldSubject worldSubject;
-    private final InputTextSubject inputTextSubject;
 
     public static final String TOP_VIEW = "StartScreen";
     public static final String GAME_VIEW = "GameViewLevel1";
@@ -67,6 +63,7 @@ public class App {
     public static final String SETTING_VIEW = "setting";
     public static final String HOW_TO_PLAY = "howToPlay";
 
+    public static World voidWorld;
     public static World worldLevel1;
     public static World worldLevel2;
     public static World worldLevel3;
@@ -90,8 +87,6 @@ public class App {
 
     public App() {
         cardSubject = new CardSubject();
-        worldSubject = new WorldSubject();
-        inputTextSubject = new InputTextSubject();
     }
 
     public void start() {
@@ -126,6 +121,7 @@ public class App {
         StageMenuView stageMenuView = new StageMenuView(stageMenuModel, stageMenuController);
 
         stageModel = new StageModel();
+        voidWorld = WorldLoader.loadWorld(stageModel, "void");
         worldLevel1 = WorldLoader.loadWorld(stageModel, "world1");
         worldLevel2 = WorldLoader.loadWorld(stageModel, "world2");
         worldLevel3 = WorldLoader.loadWorld(stageModel, "world3");
@@ -135,7 +131,7 @@ public class App {
         worldLevel7 = WorldLoader.loadWorld(stageModel, "world7");
         worldLevel8 = WorldLoader.loadWorld(stageModel, "world8");
 
-        stageModel.setWorld(worldLevel1);
+        stageModel.setWorld(voidWorld);
         StageController stageController = new StageController(stageModel);
         StageView stageView = new StageView(stageModel, stageController);
         stageView.setStageMenuView(stageMenuView);
@@ -203,22 +199,6 @@ public class App {
             throw new IllegalStateException("cardSubject is null");
         }
         return cardSubject;
-    }
-
-    public static WorldSubject getWorldSubject() {
-        WorldSubject worldSubject = app.worldSubject;
-        if (worldSubject == null) {
-            throw new IllegalStateException("worldSubject is null");
-        }
-        return worldSubject;
-    }
-
-    public static InputTextSubject getInputTextSubject() {
-        InputTextSubject inputTextSubject = app.inputTextSubject;
-        if (inputTextSubject == null) {
-            throw new IllegalStateException("inputTextSubject is null");
-        }
-        return inputTextSubject;
     }
 
     public static CommandStore getCommandStore() {

@@ -9,12 +9,17 @@ public class AppView extends JPanel {
     private final AppModel model;
     private final AppController controller;
 
+    private JPanel parentView;
+
     public AppView(AppModel model, AppController controller) {
         this.model = model;
         this.controller = controller;
 
         BorderLayout layout = new BorderLayout();
         setLayout(layout);
+
+        // parentView = new JPanel(new CardLayout());
+        // add(parentView, BorderLayout.CENTER);
     }
 
     public void setStageView(JPanel view) {
