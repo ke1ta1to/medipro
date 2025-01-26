@@ -10,9 +10,10 @@ public class Fonts {
     static {
         try {
             STICK_FONT = Font.createFont(Font.TRUETYPE_FONT,
-                    Fonts.class.getClassLoader().getResourceAsStream("medipro/fonts/Stick-Regular.ttf"));
+                    Fonts.class.getClassLoader().getResourceAsStream("net/keitaito/medipro/fonts/Stick-Regular.ttf"));
             MPLUS1CODE_FONT = Font.createFont(Font.TRUETYPE_FONT,
-                    Fonts.class.getClassLoader().getResourceAsStream("medipro/fonts/MPLUS1Code-Medium.ttf"));
+                    Fonts.class.getClassLoader()
+                            .getResourceAsStream("net/keitaito/medipro/fonts/MPLUS1Code-Medium.ttf"));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

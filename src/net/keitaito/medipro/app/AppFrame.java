@@ -13,7 +13,8 @@ public class AppFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // フレームのアイコンを設定
-        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("medipro/images/risaju.png"));
+        ImageIcon icon = new ImageIcon(
+                getClass().getClassLoader().getResource("net/keitaito/medipro/images/risaju.png"));
         setIconImage(icon.getImage());
 
         try {

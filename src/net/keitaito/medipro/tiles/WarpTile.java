@@ -10,8 +10,8 @@ import net.keitaito.medipro.worlds.World;
 
 public class WarpTile extends Tile {
 
-    private Image image = new ImageIcon(getClass().getResource(
-            "/medipro/images/WarpGate.png")).getImage();
+    private Image image = new ImageIcon(getClass().getClassLoader().getResource(
+            "net/keitaito/medipro/images/WarpGate.png")).getImage();
 
     private WarpTile otherPoint;
     private boolean isCollided = false;

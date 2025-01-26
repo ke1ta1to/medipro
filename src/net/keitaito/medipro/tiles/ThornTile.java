@@ -16,7 +16,8 @@ public class ThornTile extends Tile {
     }
 
     private Image loadImage(String name) {
-        return new ImageIcon(getClass().getResource("/medipro/images/" + name)).getImage();
+        return new ImageIcon(getClass().getClassLoader().getResource("net/keitaito/medipro/images/" + name))
+                .getImage();
     }
 
     @Override

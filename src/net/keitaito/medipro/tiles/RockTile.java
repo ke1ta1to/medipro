@@ -9,8 +9,8 @@ import net.keitaito.medipro.worlds.World;
 
 public class RockTile extends Tile {
 
-    private Image image = new ImageIcon(getClass().getResource(
-            "/medipro/images/Rock.png")).getImage();
+    private Image image = new ImageIcon(getClass().getClassLoader().getResource(
+            "net/keitaito/medipro/images/Rock.png")).getImage();
 
     public RockTile(int x, int y) {
         super(x, y);

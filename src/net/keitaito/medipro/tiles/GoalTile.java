@@ -11,8 +11,8 @@ import net.keitaito.medipro.worlds.World;
 
 public class GoalTile extends AirTile {
 
-    private Image image = new ImageIcon(getClass().getResource(
-            "/medipro/images/GoalFlag.png")).getImage();
+    private Image image = new ImageIcon(getClass().getClassLoader().getResource(
+            "net/keitaito/medipro/images/GoalFlag.png")).getImage();
 
     public GoalTile(int x, int y) {
         super(x, y);

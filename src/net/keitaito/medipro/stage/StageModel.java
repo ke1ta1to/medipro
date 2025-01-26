@@ -337,8 +337,8 @@ public class StageModel implements IKeyAction {
     }
 
     private Image loadImage(String name) {
-        return new ImageIcon(getClass().getResource(
-                "/medipro/images/" + name)).getImage();
+        return new ImageIcon(getClass().getClassLoader().getResource(
+                "net/keitaito/medipro/images/" + name)).getImage();
     }
 
     public void addPropertyChangeListener(String propertyName, java.beans.PropertyChangeListener listener) {
