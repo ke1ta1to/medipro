@@ -53,7 +53,10 @@ public class InputView extends JPanel {
     }
 
     private void updateText(PropertyChangeEvent evt) {
-        textArea.setText((String) evt.getNewValue());
+        String newText = (String) evt.getNewValue();
+        if (!textArea.getText().equals(newText)) {
+            textArea.setText((String) evt.getNewValue());
+        }
     }
 
 }
