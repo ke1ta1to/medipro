@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.beans.PropertyChangeEvent;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -39,17 +40,8 @@ public class StageView extends JPanel implements MouseListener {
         openMenuButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         openMenuButtonPanel.add(openMenuButton);
         openMenuButtonPanel.setSize(openMenuButtonPanel.getPreferredSize());
-        openMenuButton.addActionListener((e) -> {
-            stageMenuView.setVisible(true);
-            stageMenuView.requestFocus();
-            openMenuButtonPanel.setVisible(false);
-            controller.clearKeys();
-            stageMenuView.getController().getModel().setOnClose(() -> {
-                stageMenuView.setVisible(false);
-                openMenuButtonPanel.setVisible(true);
-                requestFocus();
-            });
-        });
+        openMenuButton.addActionListener(controller::handleClickOpenMenuButton);
+
         openMenuButtonPanel.setLocation(StageView.WIDTH - openMenuButtonPanel.getWidth(), 0);
         add(openMenuButtonPanel);
 
@@ -57,6 +49,8 @@ public class StageView extends JPanel implements MouseListener {
         addKeyListener(controller);
         setFocusable(true);
         addMouseListener(this);
+
+        model.addPropertyChangeListener("openedMenu", this::handleChangeMenuOpened);
 
         // 30fps
         Timer timer = new Timer(1000 / 30, (e) -> {
@@ -70,6 +64,17 @@ public class StageView extends JPanel implements MouseListener {
         view.setBounds(200, 150, 400, 300);
         view.setVisible(false);
         add(view);
+    }
+
+    private void handleChangeMenuOpened(PropertyChangeEvent event) {
+        if ((boolean) event.getNewValue()) {
+            stageMenuView.setVisible(true);
+            stageMenuView.requestFocus();
+            controller.clearKeys();
+        } else {
+            stageMenuView.setVisible(false);
+            requestFocus();
+        }
     }
 
     @Override

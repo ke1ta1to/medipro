@@ -20,6 +20,8 @@ import medipro.World;
 
 public class StageModel implements IKeyAction {
 
+    private boolean openedMenu = false;
+
     private World world = null;
 
     /**
@@ -126,6 +128,16 @@ public class StageModel implements IKeyAction {
         world.resetState();
         reset();
         pcs.firePropertyChange("world", oldWorld, world);
+    }
+
+    public boolean isOpenedMenu() {
+        return openedMenu;
+    }
+
+    public void setOpenedMenu(boolean isOpenMenu) {
+        boolean oldIsOpenMenu = this.openedMenu;
+        this.openedMenu = isOpenMenu;
+        pcs.firePropertyChange("openedMenu", oldIsOpenMenu, isOpenMenu);
     }
 
     public HangWire getHangWire() {

@@ -37,10 +37,8 @@ public class InputView extends JPanel {
 
         JButton submitButton = new JButton("実行");
         submitButton.setFont(Fonts.STICK_FONT.deriveFont(Font.PLAIN, 24));
-        submitButton.addActionListener(e -> {
-            controller.submit(textArea.getText());
-            controller.start();
-        });
+        submitButton.setActionCommand(textArea.getText());
+        submitButton.addActionListener(controller::submit);
         add(submitButton, BorderLayout.SOUTH);
 
         model.addPropertyChangeListener("text", this::updateText);

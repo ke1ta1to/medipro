@@ -1,12 +1,11 @@
 package medipro.setting;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import medipro.App;
 import medipro.app.AppModel;
 
-public class SettingController implements ActionListener {
+public class SettingController {
     private final SettingModel model;
 
     public SettingController(SettingModel model) {
@@ -17,8 +16,7 @@ public class SettingController implements ActionListener {
         return model;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    public void handleClickExit(ActionEvent e) {
         String command = e.getActionCommand();
         switch (command) {
             case "exit":

@@ -1,5 +1,6 @@
 package medipro.input;
 
+import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 
 import medipro.App;
@@ -27,9 +28,11 @@ public class InputController {
         return model;
     }
 
-    public void submit(String text) {
+    public void submit(ActionEvent event) {
+        String text = event.getActionCommand();
         App.getStageModel().getEntity().reset();
         model.setText(text);
+        start();
     }
 
     public void start() {

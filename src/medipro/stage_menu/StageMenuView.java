@@ -48,54 +48,41 @@ public class StageMenuView extends JPanel {
                 case "stage1":
                     App.getStageModel().setWorld(App.worldLevel1);
                     App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
-
-                    controller.handleClose();
                     break;
                 case "stage2":
                     App.getStageModel().setWorld(App.worldLevel2);
                     App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
-                    controller.handleClose();
                     break;
                 case "stage3":
                     App.getStageModel().setWorld(App.worldLevel3);
                     App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
-                    controller.handleClose();
                     break;
                 case "stage4":
                     App.getStageModel().setWorld(App.worldLevel4);
                     App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
-                    controller.handleClose();
                     break;
                 case "stage5":
                     App.getStageModel().setWorld(App.worldLevel5);
                     App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
-                    controller.handleClose();
                     break;
                 case "stage6":
                     App.getStageModel().setWorld(App.worldLevel6);
                     App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
-                    controller.handleClose();
                     break;
                 case "stage7":
                     App.getStageModel().setWorld(App.worldLevel7);
                     App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
-                    controller.handleClose();
                     break;
                 case "stage8":
                     App.getStageModel().setWorld(App.worldLevel8);
                     App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
-                    controller.handleClose();
                     break;
                 default:
                     throw new IllegalArgumentException("Unexpected value: " + selectedStage);
             }
         }));
-        actionsPanel.add(createButtonPanel("レベル設定画面へ", "GO", (e) -> {
-            App.getAppModel().setPageName(AppModel.PAGE_LEVEL_SELECT);
-            controller.handleClose();
-        }));
-        actionsPanel.add(createButtonPanel("設定", "設定", (e) -> {
-        }));
+        actionsPanel.add(createButtonPanel("レベル設定画面へ", "GO", controller::handleClickGoLevelSelect));
+        actionsPanel.add(createButtonPanel("設定", "設定", controller::handleClickGoSetting));
         JPanel actionsWrapperPanel = new JPanel();
         actionsWrapperPanel.setLayout(new FlowLayout());
         actionsWrapperPanel.add(actionsPanel);
@@ -106,14 +93,10 @@ public class StageMenuView extends JPanel {
         bottomPanel.setLayout(bottomPanelLayout);
         bottomPanel.setPreferredSize(new Dimension(350, 50));
         JButton backButton = new JButton("戻る");
-        backButton.addActionListener((e) -> {
-            controller.handleClose();
-        });
+        backButton.addActionListener(controller::handleClose);
         JButton exitButton = new JButton("タイトルへ");
-        exitButton.addActionListener((e) -> {
-            App.getAppModel().setPageName(AppModel.PAGE_TITLE);
-            controller.handleClose();
-        });
+        exitButton.addActionListener(controller::handleClickExit);
+
         bottomPanel.add(backButton);
         bottomPanel.add(exitButton);
         JPanel bottomWrapperPanel = new JPanel();

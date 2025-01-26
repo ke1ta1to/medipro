@@ -48,4 +48,8 @@ public class StageController implements KeyListener, ActionListener {
         return model;
     }
 
+    public void handleClickOpenMenuButton(ActionEvent event) {
+        model.setOpenedMenu(true);
+    }
+
 }

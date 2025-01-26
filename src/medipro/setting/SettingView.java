@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class SettingView extends JPanel {
+
     public SettingView(SettingModel model, SettingController controller) {
         setLayout(new BorderLayout(20, 20));
         setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
@@ -23,7 +24,7 @@ public class SettingView extends JPanel {
         JButton exitButton = new JButton("Exit");
         exitButton.setFont(new Font("Arial", Font.PLAIN, 20));
         exitButton.setActionCommand("exit");
-        exitButton.addActionListener(controller);
+        exitButton.addActionListener(controller::handleClickExit);
         exitPanel.add(exitButton);
         add(exitPanel, BorderLayout.SOUTH);
     }
