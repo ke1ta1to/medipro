@@ -6,7 +6,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 import medipro.Entity;
-import medipro.World;
+import medipro.worlds.World;
 
 public class WarpTile extends Tile {
 

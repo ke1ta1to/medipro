@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 
 import medipro.App;
 import medipro.Entity;
-import medipro.World;
+import medipro.worlds.World;
 
 public class GoalTile extends AirTile {
 

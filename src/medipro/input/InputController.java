@@ -5,9 +5,9 @@ import java.beans.PropertyChangeEvent;
 
 import medipro.App;
 import medipro.IKeyAction;
-import medipro.World;
 import medipro.commands.Command;
 import medipro.commands.CommandStore;
+import medipro.worlds.World;
 
 public class InputController {
 

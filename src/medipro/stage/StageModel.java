@@ -16,7 +16,7 @@ import medipro.Entity;
 import medipro.HangWire;
 import medipro.IKeyAction;
 import medipro.Vector2;
-import medipro.World;
+import medipro.worlds.World;
 
 public class StageModel implements IKeyAction {
 
