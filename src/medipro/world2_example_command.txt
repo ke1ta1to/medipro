@@ -1,9 +1,0 @@
-right
-wait 1500ms
-left
-wait 1500ms
-right
-wait 2000ms
-left
-wait 2000ms
-right

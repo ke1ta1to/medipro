@@ -1,5 +1,0 @@
-right
-wait 1s
-hook right
-wait 350ms
-unhook
