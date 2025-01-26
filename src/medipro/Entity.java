@@ -65,7 +65,7 @@ public class Entity {
             this.velX = 0;
         }
 
-        Tile leftTiles[] = getCollisionTileOnLeft(this.posX + this.velX);
+        Tile[] leftTiles = getCollisionTileOnLeft(this.posX + this.velX);
         if (leftTiles != null) {
             this.velX = 0;
             for (Tile leftTile : leftTiles) {
@@ -73,7 +73,7 @@ public class Entity {
             }
         }
 
-        Tile rightTiles[] = getCollisionOnRight(this.posX + this.velX);
+        Tile[] rightTiles = getCollisionOnRight(this.posX + this.velX);
         if (rightTiles != null) {
             this.velX = 0;
             for (Tile right : rightTiles) {
@@ -105,7 +105,7 @@ public class Entity {
             targetDeathAction();
         }
 
-        Tile topTiles[] = getCollisionOnTop(this.posY + this.velY);
+        Tile[] topTiles = getCollisionOnTop(this.posY + this.velY);
         if (topTiles != null) {
             this.velY = 0;
             for (Tile topTile : topTiles) {
@@ -113,7 +113,7 @@ public class Entity {
             }
         }
 
-        Tile bottomTiles[] = getCollisionOnBottom(this.posY + this.velY);
+        Tile[] bottomTiles = getCollisionOnBottom(this.posY + this.velY);
         if (bottomTiles != null) {
             this.velY = 0;
             for (Tile bottomTile : bottomTiles) {
