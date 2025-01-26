@@ -1,4 +1,4 @@
-package medipro;
+package medipro.worlds;
 
 import medipro.stage.StageModel;
 import medipro.stage.StageView;

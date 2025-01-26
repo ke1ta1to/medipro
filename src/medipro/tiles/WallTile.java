@@ -5,7 +5,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-import medipro.World;
+import medipro.worlds.World;
 
 public class WallTile extends Tile {
     private final Image wallImage = loadImage("Temp_Wall.png");

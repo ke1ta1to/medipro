@@ -47,10 +47,11 @@ import medipro.stage_menu_bar.StageMenuBarModel;
 import medipro.top.TopController;
 import medipro.top.TopModel;
 import medipro.top.TopView;
-import medipro.utils.WorldLoader;
 import medipro.workspace.WorkspaceController;
 import medipro.workspace.WorkspaceModel;
 import medipro.workspace.WorkspaceView;
+import medipro.worlds.World;
+import medipro.worlds.WorldLoader;
 
 public class App {
 

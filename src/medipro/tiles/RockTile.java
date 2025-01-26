@@ -5,7 +5,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-import medipro.World;
+import medipro.worlds.World;
 
 public class RockTile extends Tile {
 
