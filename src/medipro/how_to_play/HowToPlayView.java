@@ -44,8 +44,10 @@ public class HowToPlayView extends JPanel {
 
         model.getPcs().addPropertyChangeListener((evt) -> {
             if (evt.getSource() instanceof HowToPlayModel) {
-                String newPage = (String) evt.getNewValue();
-                cardLayout.show(parent, newPage);
+                if (evt.getPropertyName().equals("currentPage")) {
+                    String newPage = (String) evt.getNewValue();
+                    cardLayout.show(parent, newPage);
+                }
             }
         });
     }
