@@ -7,10 +7,10 @@ import javax.swing.ImageIcon;
 
 import medipro.World;
 
-public class WallTile extends Tile {
-    private final Image wallImage = loadImage("maptile_jimen_hyojo_center.png");
+public class WallInTile extends Tile {
+    private final Image wallImage = loadImage("IceInBlock.png");
 
-    public WallTile(int x, int y) {
+    public WallInTile(int x, int y) {
         super(x, y);
     }
 

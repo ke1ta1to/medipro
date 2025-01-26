@@ -1,30 +1,30 @@
 *                                      *
-*                                      *
-*                                      *
-*                                      *
-*                                      *
-*                                      *
-*                                      *
-*                                      *
-*                                      *
-*                                      *
-*                                      *
-*                                      *
-*                                      *
-*                                      *
-*                                      *
-*                                      *
-*                                      *
-*                                      *
-*                                      *
-*                                      *
-*                                      *
-*                                      *
-*                                      *
-*                                      *
-*  S                                   *
-*                 RR                   *
-*                 RR                  G*
-****************************************
-****************************************
-****************************************
+I                                      I
+I                                      I
+I                                      I
+I                                      I
+I                                      I
+I                                      I
+I                                      I
+I                                      I
+I                                      I
+I                                      I
+I                                      I
+I                                      I
+I                                      I
+I                                      I
+I                                      I
+I                                      I
+I                                      I
+I                                      I
+I                                      I
+I                                      I
+I                                      I
+I                                      I
+I                                      I
+I  S                                   I
+I                 RR                   I
+I                 RR                  GI
+I**************************************I
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII

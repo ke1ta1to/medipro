@@ -9,6 +9,7 @@ import medipro.tiles.ThornTile;
 import medipro.tiles.Tile;
 import medipro.tiles.WallTile;
 import medipro.tiles.WarpTile;
+import medipro.tiles.WallInTile;
 
 public class World {
 
@@ -46,6 +47,8 @@ public class World {
                 char c = lines[y].charAt(x);
                 if (c == '*') {
                     tiles[x][y] = new WallTile(x * TILE_SIZE, y * TILE_SIZE);
+                } else if (c == ('I')) {
+                    tiles[x][y] = new WallInTile(x * TILE_SIZE, y * TILE_SIZE);
                 } else if (c == ('R')) {
                     tiles[x][y] = new RockTile(x * TILE_SIZE, y * TILE_SIZE);
                 } else if (c == ('T')) {
