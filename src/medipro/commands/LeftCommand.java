@@ -1,5 +1,7 @@
 package medipro.commands;
 
+import java.awt.event.KeyEvent;
+
 import medipro.IKeyAction;
 
 public class LeftCommand extends Command {
@@ -10,8 +12,8 @@ public class LeftCommand extends Command {
 
     @Override
     public void execute(IKeyAction action, String rawText) {
-        action.removeKey(68);
-        action.addKey(65);
+        action.removeKey(KeyEvent.VK_D);
+        action.addKey(KeyEvent.VK_A);
     }
 
 }
