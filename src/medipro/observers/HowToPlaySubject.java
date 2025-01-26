@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HowToPlaySubject {
+
     private List<IHowToPlayObserver> observers = new ArrayList<>();
     private String howToPlayNumber;// カードの番号
 
