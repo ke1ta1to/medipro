@@ -14,6 +14,7 @@ public class App {
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/api/v1", new IndexHandler());
         server.start();
+        System.out.println("Server started on port " + port);
     }
 
     public static void main(String[] args) throws IOException {
