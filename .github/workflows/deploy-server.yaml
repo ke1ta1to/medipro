@@ -22,4 +22,5 @@ jobs:
           context: .
           file: ./docker/server/Dockerfile
           push: true
+          provenance: false
           tags: ghcr.io/${{ github.repository }}/server:latest
