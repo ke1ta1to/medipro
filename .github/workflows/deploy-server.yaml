@@ -21,6 +21,8 @@ jobs:
         id: metadata
         with:
           images: ${{ steps.login-ecr.outputs.registry }}/medipro-server
+          flavor: |
+            latest=true
           tags: |
             type=semver,pattern={{major}}.{{minor}}.{{patch}}
             type=semver,pattern={{major}}.{{minor}}
@@ -32,4 +34,5 @@ jobs:
           file: ./docker/server/Dockerfile
           push: true
           provenance: false
-          tags: ghcr.io/${{ github.repository }}/server:latest
+          tags: ${{ steps.metadata.outputs.tags }}
+          labels: ${{ steps.metadata.outputs.labels }}
