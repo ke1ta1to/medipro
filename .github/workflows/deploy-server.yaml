@@ -10,12 +10,26 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ap-northeast-1
+          role-to-assume: medipro-server-ecr-role
+      - uses: aws-actions/amazon-ecr-login@v2
+        id: login-ecr
       # ghcrにログイン
       - uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/metadata-action@v5
+        id: metadata
+        with:
+          images: ${{ steps.login-ecr.outputs.registry }}/medipro-server
+          tags: |
+            type=semver,pattern={{major}}.{{minor}}.{{patch}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
       # イメージをビルド
       - uses: docker/build-push-action@v6
         with:
