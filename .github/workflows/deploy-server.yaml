@@ -7,6 +7,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
+      id-token: write
       packages: write
     steps:
       - uses: actions/checkout@v4
@@ -16,12 +17,6 @@ jobs:
           role-to-assume: medipro-server-ecr-role
       - uses: aws-actions/amazon-ecr-login@v2
         id: login-ecr
-      # ghcrにログイン
-      - uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
       - uses: docker/metadata-action@v5
         id: metadata
         with:
