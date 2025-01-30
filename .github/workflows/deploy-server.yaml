@@ -1,0 +1,37 @@
+name: Deploy Server
+
+on:
+  push:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ap-northeast-1
+          role-to-assume: arn:aws:iam::183295441800:role/medipro-server-ecr-role
+      - uses: aws-actions/amazon-ecr-login@v2
+        id: login-ecr
+      - uses: docker/metadata-action@v5
+        id: metadata
+        with:
+          images: ${{ steps.login-ecr.outputs.registry }}/medipro-server
+          tags: |
+            type=semver,pattern={{major}}.{{minor}}.{{patch}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=raw,latest
+      # イメージをビルド
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./docker/server/Dockerfile
+          push: true
+          provenance: false
+          tags: ${{ steps.metadata.outputs.tags }}
+          labels: ${{ steps.metadata.outputs.labels }}

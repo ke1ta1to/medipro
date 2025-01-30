@@ -12,8 +12,9 @@ public class App {
     public void start() throws IOException {
         int port = 8000;
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-        server.createContext("/api/v1", new IndexHandler());
+        server.createContext("/v1", new IndexHandler());
         server.start();
+        System.out.println("Server started on port " + port);
     }
 
     public static void main(String[] args) throws IOException {
