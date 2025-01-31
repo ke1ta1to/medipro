@@ -6,6 +6,8 @@ public class InputModel {
 
     private String text;
 
+    private boolean openedMenu = false;
+
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     public void addPropertyChangeListener(String propertyName, java.beans.PropertyChangeListener listener) {
@@ -14,6 +16,12 @@ public class InputModel {
 
     public void removePropertyChangeListener(String propertyName, java.beans.PropertyChangeListener listener) {
         pcs.removePropertyChangeListener(propertyName, listener);
+    }
+
+    public void setOpenedMenu(boolean isOpenMenu) {
+        boolean oldIsOpenMenu = this.openedMenu;
+        this.openedMenu = isOpenMenu;
+        pcs.firePropertyChange("openedMenu", oldIsOpenMenu, isOpenMenu);
     }
 
     public String getText() {

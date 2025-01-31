@@ -70,7 +70,6 @@ public class StageView extends JPanel implements MouseListener {
         if ((boolean) event.getNewValue()) {
             stageMenuView.setVisible(true);
             stageMenuView.requestFocus();
-            controller.clearKeys();
         } else {
             stageMenuView.setVisible(false);
             requestFocus();

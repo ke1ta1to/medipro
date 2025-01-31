@@ -28,6 +28,9 @@ import net.keitaito.medipro.how_to_play.HowToPlayView;
 import net.keitaito.medipro.input.InputController;
 import net.keitaito.medipro.input.InputModel;
 import net.keitaito.medipro.input.InputView;
+import net.keitaito.medipro.input_command_menu.InputCommandMenuController;
+import net.keitaito.medipro.input_command_menu.InputCommandMenuModel;
+import net.keitaito.medipro.input_command_menu.InputCommandMenuView;
 import net.keitaito.medipro.level.LevelController;
 import net.keitaito.medipro.level.LevelModel;
 import net.keitaito.medipro.level.LevelView;
@@ -79,6 +82,7 @@ public class App {
     private LevelModel levelModel;
     private SettingModel settingModel;
     private HowToPlayModel howToPlayModel;
+    private InputCommandMenuModel inputCommandMenuModel;
 
     public void start() {
         System.out.println("Application started");
@@ -116,6 +120,12 @@ public class App {
         inputModel = new InputModel();
         InputController inputController = new InputController(inputModel);
         InputView inputView = new InputView(inputModel, inputController);
+
+        inputCommandMenuModel = new InputCommandMenuModel();
+        InputCommandMenuController inputCommandMenuController = new InputCommandMenuController(inputCommandMenuModel);
+        InputCommandMenuView inputCommandMenuView = new InputCommandMenuView(inputCommandMenuModel,
+                inputCommandMenuController);
+        inputView.setInputCommandMenuView(inputCommandMenuView);
 
         workspaceModel = new WorkspaceModel();
         WorkspaceController workspaceController = new WorkspaceController(workspaceModel);
@@ -193,6 +203,14 @@ public class App {
             throw new IllegalStateException("stageModel is null");
         }
         return stageModel;
+    }
+
+    public static InputCommandMenuModel getInputCommandMenuModel() {
+        InputCommandMenuModel inputCommandMenuModel = app.inputCommandMenuModel;
+        if (inputCommandMenuModel == null) {
+            throw new IllegalStateException("inputCommandMenuModel is null");
+        }
+        return inputCommandMenuModel;
     }
 
     public static InputModel getInputModel() {

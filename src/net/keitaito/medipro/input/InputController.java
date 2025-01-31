@@ -58,4 +58,8 @@ public class InputController {
         thread.start();
     }
 
+    public void handleClickOpenMenuButton(ActionEvent event) {
+        model.setOpenedMenu(true);
+    }
+
 }
