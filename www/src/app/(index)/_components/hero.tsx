@@ -27,10 +27,10 @@ export function Hero() {
         ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文
       </div>
       <div className="mt-16 flex gap-4">
-        <HeroButton className="bg-primary-500 text-white" href="#ダウンロード">
+        <HeroButton className="bg-primary-500 text-white" href="#">
           ダウンロード
         </HeroButton>
-        <HeroButton className="border border-primary-500" href="#実行方法">
+        <HeroButton className="border border-primary-500" href="#">
           あそびかた
         </HeroButton>
       </div>
