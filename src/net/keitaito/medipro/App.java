@@ -1,6 +1,8 @@
 package net.keitaito.medipro;
 
 import java.awt.CardLayout;
+import java.io.IOException;
+import java.nio.file.Paths;
 
 import javax.swing.SwingUtilities;
 
@@ -34,6 +36,9 @@ import net.keitaito.medipro.level.LevelView;
 import net.keitaito.medipro.menu_bar.MenuBarController;
 import net.keitaito.medipro.menu_bar.MenuBarModel;
 import net.keitaito.medipro.menu_bar.MenuBarView;
+import net.keitaito.medipro.save.SaveData;
+import net.keitaito.medipro.save.SaveManager;
+import net.keitaito.medipro.save.WorldSaveData;
 import net.keitaito.medipro.setting.SettingController;
 import net.keitaito.medipro.setting.SettingModel;
 import net.keitaito.medipro.setting.SettingView;
@@ -79,6 +84,7 @@ public class App {
     private LevelModel levelModel;
     private SettingModel settingModel;
     private HowToPlayModel howToPlayModel;
+    private SaveManager save;
 
     public void start() {
         System.out.println("Application started");
@@ -96,6 +102,8 @@ public class App {
         stageMenuModel = new StageMenuModel();
         StageMenuController stageMenuController = new StageMenuController(stageMenuModel);
         StageMenuView stageMenuView = new StageMenuView(stageMenuModel, stageMenuController);
+
+        save = new SaveManager();
 
         stageModel = new StageModel();
         voidWorld = WorldLoader.loadWorld(stageModel, "0_void");
@@ -255,7 +263,27 @@ public class App {
         return app;
     }
 
-    public static void main(String[] args) {
+    public static SaveManager getSave() {
+        SaveManager save = app.save;
+        if (save == null) {
+            throw new IllegalStateException("save is null");
+        }
+        return save;
+    }
+
+    public static void main(String[] args) throws IOException {
+        // セーブの確認
+        WorldSaveData worldSaveData1 = new WorldSaveData();
+        worldSaveData1.setCleared(true);
+        worldSaveData1.setAnsCommand("right");
+        SaveData saveData = new SaveData();
+        saveData.setWorldSaveData1(worldSaveData1);
+        SaveManager.save(saveData);
+
+        // セーブの読み込み
+        SaveData saveData2 = SaveManager.load(Paths.get("").toAbsolutePath().toString() + "/save/saves.txt");
+        System.out.println(saveData2.getWorldSaveData1().getAnsCommand());
+
         SwingUtilities.invokeLater(() -> {
             if (app != null) {
                 throw new IllegalStateException("App is already running");
