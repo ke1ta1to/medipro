@@ -2,6 +2,7 @@ package medipro;
 
 import medipro.stage.StageModel;
 import medipro.tiles.AirTile;
+import medipro.tiles.GoalDummyTile;
 import medipro.tiles.GoalTile;
 import medipro.tiles.RockTile;
 import medipro.tiles.StartTile;
@@ -61,7 +62,8 @@ public class World {
                     tiles[x][y] = new GoalTile(x * TILE_SIZE, y * TILE_SIZE);
                     goalPosX = x * TILE_SIZE;
                     goalPosY = y * TILE_SIZE;
-
+                } else if (c == ('D')) {
+                    tiles[x][y] = new GoalDummyTile(x * TILE_SIZE, y * TILE_SIZE);
                 } else if (c == ('W')) {
                     tiles[x][y] = new WarpTile(x * TILE_SIZE, y * TILE_SIZE);
                     if (warpTiles[0] == null) {
