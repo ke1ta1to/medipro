@@ -24,41 +24,49 @@ public class LevelController implements ActionListener {
             case "Level 1":
                 App.getWorldSubject().setWorld(App.worldLevel1);
                 App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                model.setSelectedLevel(1);
                 break;
 
             case "Level 2":
                 App.getWorldSubject().setWorld(App.worldLevel2);
                 App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                model.setSelectedLevel(2);
                 break;
 
             case "Level 3":
                 App.getWorldSubject().setWorld(App.worldLevel3);
                 App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                model.setSelectedLevel(3);
                 break;
 
             case "Level 4":
                 App.getWorldSubject().setWorld(App.worldLevel4);
                 App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                model.setSelectedLevel(4);
                 break;
 
             case "Level 5":
                 App.getWorldSubject().setWorld(App.worldLevel5);
                 App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                model.setSelectedLevel(5);
                 break;
 
             case "Level 6":
                 App.getWorldSubject().setWorld(App.worldLevel6);
                 App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                model.setSelectedLevel(6);
                 break;
 
             case "Level 7":
                 App.getWorldSubject().setWorld(App.worldLevel7);
                 App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                model.setSelectedLevel(7);
                 break;
 
             case "Level 8":
                 App.getWorldSubject().setWorld(App.worldLevel8);
                 App.getCardSubject().setCardNumber(App.GAME_VIEW);
+                model.setSelectedLevel(8);
                 break;
 
             case "exit":

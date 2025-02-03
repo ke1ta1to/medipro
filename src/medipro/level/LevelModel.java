@@ -1,13 +1,16 @@
 package medipro.level;
 
 public class LevelModel {
-    private String selectedLevel;
+    private int selectedLevel;
 
-    public String getSelectedLevel() {
+    public int getSelectedLevel() {
+        if (selectedLevel == 0) {
+            return 0;
+        }
         return selectedLevel;
     }
 
-    public void setSelectedLevel(String selectedLevel) {
+    public void setSelectedLevel(int selectedLevel) {
         this.selectedLevel = selectedLevel;
     }
 }
