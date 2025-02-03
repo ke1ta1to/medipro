@@ -1,7 +1,6 @@
 package net.keitaito.medipro.helpdialog;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -11,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import net.keitaito.medipro.utils.Fonts;
+import net.keitaito.medipro.utils.Views;
 
 public class HelpDialogView extends JPanel {
 
@@ -64,14 +64,8 @@ public class HelpDialogView extends JPanel {
 
         // TODO: デザインは好きに変えてくれ
 
-        // draw border
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, WIDTH, HEIGHT);
-
-        // draw background
-        int thickness = 2; // 枠線の太さ
-        g.setColor(Color.WHITE);
-        g.fillRect(thickness, thickness, WIDTH - thickness * 2, HEIGHT - thickness * 2);
+        // 背景を描画
+        Views.paintBackground(g, WIDTH, HEIGHT);
     }
 
 }

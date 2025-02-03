@@ -3,6 +3,7 @@ package net.keitaito.medipro.stagemenu;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
@@ -14,6 +15,8 @@ import javax.swing.JPanel;
 
 import net.keitaito.medipro.App;
 import net.keitaito.medipro.app.AppModel;
+import net.keitaito.medipro.utils.Fonts;
+import net.keitaito.medipro.utils.Views;
 
 public class StageMenuView extends JPanel {
 
@@ -33,11 +36,14 @@ public class StageMenuView extends JPanel {
 
         JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new FlowLayout());
+        titlePanel.setOpaque(false);
         JLabel label = new JLabel("メニュー");
+        label.setFont(Fonts.STICK_FONT.deriveFont(20.0f));
         titlePanel.add(label);
         add(titlePanel, BorderLayout.NORTH);
 
         JPanel actionsPanel = new JPanel();
+        actionsPanel.setOpaque(false);
         BoxLayout actionsPanelLayout = new BoxLayout(actionsPanel, BoxLayout.Y_AXIS);
         actionsPanel.setLayout(actionsPanelLayout);
         String[] stages = { "stage1", "stage2", "stage3", "stage4", "stage5", "stage6", "stage7", "stage8" };
@@ -84,12 +90,14 @@ public class StageMenuView extends JPanel {
         actionsPanel.add(createButtonPanel("設定", "設定", controller::handleClickGoSetting));
         JPanel actionsWrapperPanel = new JPanel();
         actionsWrapperPanel.setLayout(new FlowLayout());
+        actionsWrapperPanel.setOpaque(false);
         actionsWrapperPanel.add(actionsPanel);
         add(actionsWrapperPanel, BorderLayout.CENTER);
 
         JPanel bottomPanel = new JPanel();
         GridLayout bottomPanelLayout = new GridLayout(1, 2);
         bottomPanel.setLayout(bottomPanelLayout);
+        bottomPanel.setOpaque(false);
         bottomPanel.setPreferredSize(new Dimension(350, 50));
         JButton backButton = new JButton("戻る");
         backButton.addActionListener(controller::handleClose);
@@ -99,6 +107,7 @@ public class StageMenuView extends JPanel {
         bottomPanel.add(backButton);
         bottomPanel.add(exitButton);
         JPanel bottomWrapperPanel = new JPanel();
+        bottomWrapperPanel.setOpaque(false);
         bottomWrapperPanel.setLayout(new FlowLayout());
         bottomWrapperPanel.add(bottomPanel);
         add(bottomWrapperPanel, BorderLayout.SOUTH);
@@ -115,6 +124,7 @@ public class StageMenuView extends JPanel {
     private JPanel createButtonPanel(String labelText, String buttonText, ActionListener actionListener) {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
+        panel.setOpaque(false);
         panel.setPreferredSize(new Dimension(350, 50));
         JLabel label = new JLabel(labelText);
         panel.add(label, BorderLayout.WEST);
@@ -127,6 +137,7 @@ public class StageMenuView extends JPanel {
 
     private JPanel creatComboBoxPanel(String labelText, String[] items, ActionListener actionListener) {
         JPanel panel = new JPanel();
+        panel.setOpaque(false);
         panel.setLayout(new BorderLayout());
         panel.setPreferredSize(new Dimension(350, 50));
         JLabel label = new JLabel(labelText);
@@ -136,6 +147,13 @@ public class StageMenuView extends JPanel {
         comboBox.addActionListener(actionListener);
         panel.add(comboBox, BorderLayout.EAST);
         return panel;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        Views.paintBackground(g, WIDTH, HEIGHT);
     }
 
 }
