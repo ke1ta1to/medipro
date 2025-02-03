@@ -1,4 +1,4 @@
-package net.keitaito.medipro.menu_bar;
+package net.keitaito.medipro.menubar;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;

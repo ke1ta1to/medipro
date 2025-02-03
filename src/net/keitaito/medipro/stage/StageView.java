@@ -14,7 +14,7 @@ import javax.swing.Timer;
 
 import net.keitaito.medipro.Entity;
 import net.keitaito.medipro.Vector2;
-import net.keitaito.medipro.stage_menu.StageMenuView;
+import net.keitaito.medipro.stagemenu.StageMenuView;
 import net.keitaito.medipro.utils.Fonts;
 
 public class StageView extends JPanel implements MouseListener {
