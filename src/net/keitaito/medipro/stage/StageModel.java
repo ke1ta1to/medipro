@@ -6,6 +6,7 @@ import java.beans.PropertyChangeSupport;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -136,7 +137,7 @@ public class StageModel implements IKeyAction {
         return tickCount;
     }
 
-    public World loadWorld(InputStream file, InputStream exampleCommandFile) {
+    public World loadWorld(InputStream file, InputStream exampleCommandFile, URL thumbnailUrl) {
         byte[] buffer = new byte[1024];
         String text = "";
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -161,7 +162,10 @@ public class StageModel implements IKeyAction {
         } catch (Exception e) {
         }
 
-        World world = new World(this, text, exampleCommand);
+        ImageIcon icon = new ImageIcon(thumbnailUrl);
+        Image thumbnail = icon.getImage();
+
+        World world = new World(this, text, exampleCommand, thumbnail);
         return world;
     }
 

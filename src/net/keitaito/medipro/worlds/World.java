@@ -1,5 +1,7 @@
 package net.keitaito.medipro.worlds;
 
+import java.awt.Image;
+
 import net.keitaito.medipro.stage.StageModel;
 import net.keitaito.medipro.stage.StageView;
 import net.keitaito.medipro.tiles.AirTile;
@@ -19,6 +21,8 @@ public class World {
 
     private final String exampleCommand;
 
+    private final Image thumbnail;
+
     private int startPosX;
     private int startPosY;
 
@@ -29,9 +33,10 @@ public class World {
 
     private final WarpTile[] warpTiles = new WarpTile[2];
 
-    public World(StageModel stageModel, String rawWorld, String exampleCommand) {
+    public World(StageModel stageModel, String rawWorld, String exampleCommand, Image thumbnail) {
         this.stageModel = stageModel;
         this.exampleCommand = exampleCommand;
+        this.thumbnail = thumbnail;
 
         tiles = new Tile[StageView.WIDTH / TILE_SIZE][StageView.HEIGHT / TILE_SIZE];
 
@@ -106,6 +111,10 @@ public class World {
 
     public String getExampleCommand() {
         return exampleCommand;
+    }
+
+    public Image getThumbnail() {
+        return thumbnail;
     }
 
     public void resetState() {
