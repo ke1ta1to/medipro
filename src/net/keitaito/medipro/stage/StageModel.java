@@ -6,17 +6,21 @@ import java.beans.PropertyChangeSupport;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.swing.ImageIcon;
 
+import com.google.gson.Gson;
+
 import net.keitaito.medipro.Entity;
 import net.keitaito.medipro.HangWire;
 import net.keitaito.medipro.IKeyAction;
 import net.keitaito.medipro.Vector2;
 import net.keitaito.medipro.worlds.World;
+import net.keitaito.medipro.worlds.WorldMetadata;
 
 public class StageModel implements IKeyAction {
 
@@ -136,7 +140,8 @@ public class StageModel implements IKeyAction {
         return tickCount;
     }
 
-    public World loadWorld(InputStream file, InputStream exampleCommandFile) {
+    public World loadWorld(InputStream file, InputStream exampleCommandFile, URL thumbnailUrl,
+            InputStream metadataText) {
         byte[] buffer = new byte[1024];
         String text = "";
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -161,7 +166,25 @@ public class StageModel implements IKeyAction {
         } catch (Exception e) {
         }
 
-        World world = new World(this, text, exampleCommand);
+        String metadataTextString = "";
+        buffer = new byte[1024];
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                BufferedInputStream bis = new BufferedInputStream(metadataText)) {
+            int len;
+            while ((len = bis.read(buffer)) != -1) {
+                baos.write(buffer, 0, len);
+            }
+            metadataTextString = new String(baos.toByteArray());
+        } catch (Exception e) {
+        }
+
+        ImageIcon icon = new ImageIcon(thumbnailUrl);
+        Image thumbnail = icon.getImage();
+
+        Gson gson = new Gson();
+        WorldMetadata metadata = gson.fromJson(metadataTextString, WorldMetadata.class);
+
+        World world = new World(this, text, exampleCommand, thumbnail, metadata);
         return world;
     }
 

@@ -22,42 +22,42 @@ public class LevelController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
         switch (command) {
-            case "Level 1":
+            case "1":
                 App.getStageModel().setWorld(App.worldLevel1);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                 break;
 
-            case "Level 2":
+            case "2":
                 App.getStageModel().setWorld(App.worldLevel2);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                 break;
 
-            case "Level 3":
+            case "3":
                 App.getStageModel().setWorld(App.worldLevel3);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                 break;
 
-            case "Level 4":
+            case "4":
                 App.getStageModel().setWorld(App.worldLevel4);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                 break;
 
-            case "Level 5":
+            case "5":
                 App.getStageModel().setWorld(App.worldLevel5);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                 break;
 
-            case "Level 6":
+            case "6":
                 App.getStageModel().setWorld(App.worldLevel6);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                 break;
 
-            case "Level 7":
+            case "7":
                 App.getStageModel().setWorld(App.worldLevel7);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                 break;
 
-            case "Level 8":
+            case "8":
                 App.getStageModel().setWorld(App.worldLevel8);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                 break;
