@@ -2,9 +2,11 @@ package net.keitaito.medipro.save;
 
 import java.io.Serializable;
 
-//こっちだけシリアライズする
+// こっちだけシリアライズする
 public class SaveData implements Serializable {
-    private static final long serialVersionUID = 3485623L;
+
+    private static final long serialVersionUID = 2935853174223788090L;
+
     private WorldSaveData worldSaveData1;
     private WorldSaveData worldSaveData2;
     private WorldSaveData worldSaveData3;

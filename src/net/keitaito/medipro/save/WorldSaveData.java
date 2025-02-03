@@ -4,24 +4,25 @@ import java.io.Serializable;
 
 public class WorldSaveData implements Serializable {
 
-    private static final long serialVersionUID = 3485623L;
-    private boolean cleared;
-    private String ansCommand;
+    private static final long serialVersionUID = 3811643340731509827L;
 
-    public boolean isCleared() {
-        return cleared;
+    private boolean checked;
+    private String input;
+
+    public boolean isChecked() {
+        return checked;
     }
 
-    public void setCleared(boolean cleared) {
-        this.cleared = cleared;
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 
-    public String getAnsCommand() {
-        return ansCommand;
+    public String getInput() {
+        return input;
     }
 
-    public void setAnsCommand(String ansCommand) {
-        this.ansCommand = ansCommand;
+    public void setInput(String ansCommand) {
+        this.input = ansCommand;
     }
 
 }

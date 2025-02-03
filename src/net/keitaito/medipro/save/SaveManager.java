@@ -7,8 +7,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Paths;
 
-public class SaveManager {
-    private static final String fileName = Paths.get("").toAbsolutePath().toString() + "/save/saves.txt";
+public final class SaveManager {
+
+    private static final String fileName = Paths.get("").toAbsolutePath().normalize().toString() + "/saves/risapro.dat";
 
     public static void save(SaveData data) throws IOException {
         try (FileOutputStream fos = new FileOutputStream(fileName);
@@ -20,8 +21,8 @@ public class SaveManager {
         }
     }
 
-    public static SaveData load(String filePath) {
-        try (FileInputStream fis = new FileInputStream(filePath);
+    public static SaveData load() {
+        try (FileInputStream fis = new FileInputStream(fileName);
                 ObjectInputStream ois = new ObjectInputStream(fis);) {
             SaveData data = (SaveData) ois.readObject();
             return data;
