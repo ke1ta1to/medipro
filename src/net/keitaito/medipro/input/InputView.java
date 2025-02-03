@@ -1,6 +1,7 @@
 package net.keitaito.medipro.input;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.beans.PropertyChangeEvent;
@@ -28,7 +29,6 @@ public class InputView extends JPanel {
         setPreferredSize(new Dimension(250, 0));
 
         BorderLayout layout = new BorderLayout();
-        layout.setVgap(10);
         setLayout(layout);
 
         textArea = new JTextArea();
@@ -48,6 +48,7 @@ public class InputView extends JPanel {
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BorderLayout());
+        buttonPanel.setBackground(Color.WHITE);
         buttonPanel.add(helpButton, BorderLayout.WEST);
         buttonPanel.add(submitButton, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);

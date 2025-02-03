@@ -38,7 +38,7 @@ public class StageView extends JPanel implements MouseListener {
         setLayout(null);
 
         JButton openMenuButton = new JButton("メニュー");
-        openMenuButton.setFont(Fonts.MPLUS1CODE_FONT.deriveFont(20.0f));
+        openMenuButton.setFont(Fonts.STICK_FONT.deriveFont(20.0f));
         JPanel openMenuButtonPanel = new JPanel();
         openMenuButtonPanel.setOpaque(false);
         openMenuButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
