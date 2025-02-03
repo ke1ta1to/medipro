@@ -30,7 +30,7 @@ public abstract class Tile {
         this.y = y;
     }
 
-    public abstract void draw(Graphics g);
+    public abstract void draw(Graphics g, int stageNo);
 
     /**
      * このタイルに衝突判定があるかどうか
