@@ -135,9 +135,13 @@ public class App {
         worldLevel7 = WorldLoader.loadWorld(stageModel, "world7");
         worldLevel8 = WorldLoader.loadWorld(stageModel, "world8");
 
+        levelModel = new LevelModel();
+        LevelController levelController = new LevelController(levelModel);
+        LevelView levelView = new LevelView(levelModel, levelController);
+
         stageModel.setWorld(worldLevel1);
         StageController stageController = new StageController(stageModel);
-        StageView stageView = new StageView(stageModel, stageController);
+        StageView stageView = new StageView(stageModel, stageController, levelModel);
         stageView.setStageMenuView(stageMenuView);
 
         inputModel = new InputModel();
@@ -160,10 +164,6 @@ public class App {
         topModel = new TopModel();
         TopController topController = new TopController(topModel);
         TopView topView = new TopView(topModel, topController);
-
-        levelModel = new LevelModel();
-        LevelController levelController = new LevelController(levelModel);
-        LevelView levelView = new LevelView(levelModel, levelController);
 
         settingModel = new SettingModel();
         SettingController settingController = new SettingController(settingModel);

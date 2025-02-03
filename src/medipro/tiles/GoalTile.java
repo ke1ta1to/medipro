@@ -19,7 +19,7 @@ public class GoalTile extends AirTile {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics g, int stageLevel) {
         g.drawImage(image, getX(), getY(), World.TILE_SIZE, World.TILE_SIZE, null);
     }
 

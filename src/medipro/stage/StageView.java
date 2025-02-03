@@ -16,17 +16,20 @@ import medipro.Vector2;
 import medipro.World;
 import medipro.stage_menu.StageMenuView;
 import medipro.utils.Fonts;
+import medipro.level.LevelModel;
 
 public class StageView extends JPanel implements MouseListener {
 
     private final StageModel model;
     private final StageController controller;
+    private final LevelModel levelModel;
 
     private StageMenuView stageMenuView;
 
-    public StageView(StageModel model, StageController controller) {
+    public StageView(StageModel model, StageController controller, LevelModel levelModel) {
         this.model = model;
         this.controller = controller;
+        this.levelModel = levelModel;
 
         setLayout(null);
 
@@ -83,7 +86,7 @@ public class StageView extends JPanel implements MouseListener {
         for (int i = 0; i < model.getWorld().getTiles().length; i++) {
             for (int j = 0; j < model.getWorld().getTiles()[i].length; j++) {
                 if (model.getWorld().getTiles()[i][j] != null) {
-                    model.getWorld().getTiles()[i][j].draw(g);
+                    model.getWorld().getTiles()[i][j].draw(g, levelModel.getSelectedLevel());
                 }
             }
         }

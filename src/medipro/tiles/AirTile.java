@@ -9,7 +9,7 @@ public class AirTile extends Tile {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics g, int stageLevel) {
     }
 
     @Override

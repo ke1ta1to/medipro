@@ -9,6 +9,6 @@ public class StartTile extends AirTile {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics g, int stageLevel) {
     }
 }

@@ -21,7 +21,7 @@ public class WarpTile extends Tile {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics g, int stageLevel) {
         g.drawImage(image, getX(), getY(), 2 * World.TILE_SIZE, 2 * World.TILE_SIZE, null);
     }
 
