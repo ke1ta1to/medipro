@@ -49,7 +49,7 @@ public class InputView extends JPanel {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BorderLayout());
         buttonPanel.setBackground(Color.WHITE);
-        buttonPanel.add(helpButton, BorderLayout.WEST);
+        buttonPanel.add(helpButton, BorderLayout.EAST);
         buttonPanel.add(submitButton, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
