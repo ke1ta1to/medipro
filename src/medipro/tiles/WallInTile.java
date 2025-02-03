@@ -6,7 +6,7 @@ import java.awt.Image;
 import medipro.World;
 
 public class WallInTile extends Tile {
-    private final Image wallImage = loadImage("IceInBlock.png");
+    private Image wallImage;
 
     public WallInTile(int x, int y) {
         super(x, y);
@@ -14,6 +14,7 @@ public class WallInTile extends Tile {
 
     @Override
     public void draw(Graphics g, int stageLevel) {
+        wallImage = loadImage("WallInTile.png", stageLevel);
         g.drawImage(wallImage, getX(), getY(), World.TILE_SIZE, World.TILE_SIZE, null);
     }
 

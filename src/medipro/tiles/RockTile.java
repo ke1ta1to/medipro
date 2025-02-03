@@ -9,8 +9,7 @@ import medipro.World;
 
 public class RockTile extends Tile {
 
-    private Image image = new ImageIcon(getClass().getResource(
-            "/medipro/images/Rock.png")).getImage();
+    private Image image;
 
     public RockTile(int x, int y) {
         super(x, y);
@@ -18,6 +17,7 @@ public class RockTile extends Tile {
 
     @Override
     public void draw(Graphics g, int stageLevel) {
+        image = loadImage("RockTile.png");
         g.drawImage(image, getX(), getY(), World.TILE_SIZE, World.TILE_SIZE, null);
     }
 

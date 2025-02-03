@@ -136,6 +136,7 @@ public class App {
         worldLevel8 = WorldLoader.loadWorld(stageModel, "world8");
 
         levelModel = new LevelModel();
+        levelModel.setSelectedLevel(1);
         LevelController levelController = new LevelController(levelModel);
         LevelView levelView = new LevelView(levelModel, levelController);
 

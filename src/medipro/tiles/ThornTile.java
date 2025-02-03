@@ -7,7 +7,7 @@ import medipro.Entity;
 import medipro.World;
 
 public class ThornTile extends Tile {
-    private Image thornImage = loadImage("Temp_Thorn.png");
+    private Image thornImage;
 
     public ThornTile(int x, int y) {
         super(x, y);
@@ -15,6 +15,7 @@ public class ThornTile extends Tile {
 
     @Override
     public void draw(Graphics g, int stageLevel) {
+        thornImage = loadImage("ThornTile.png", stageLevel);
         g.drawImage(thornImage, getX(), getY(), World.TILE_SIZE, World.TILE_SIZE, null);
     }
 

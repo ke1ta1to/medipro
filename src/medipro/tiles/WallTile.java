@@ -6,7 +6,7 @@ import java.awt.Image;
 import medipro.World;
 
 public class WallTile extends Tile {
-    private final Image wallImage = loadImage("maptile_jimen_hyojo_center.png");
+    private Image wallImage;
 
     public WallTile(int x, int y) {
         super(x, y);
@@ -14,6 +14,7 @@ public class WallTile extends Tile {
 
     @Override
     public void draw(Graphics g, int stageLevel) {
+        wallImage = loadImage("WallTile.png", stageLevel);
         g.drawImage(wallImage, getX(), getY(), World.TILE_SIZE, World.TILE_SIZE, null);
     }
 
