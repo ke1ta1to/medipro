@@ -28,7 +28,6 @@ public class StageMenuView extends JPanel {
         this.controller = controller;
 
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
-
         BorderLayout layout = new BorderLayout();
         setLayout(layout);
 

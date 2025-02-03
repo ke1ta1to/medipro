@@ -9,6 +9,7 @@ import net.keitaito.medipro.App;
 import net.keitaito.medipro.IKeyAction;
 import net.keitaito.medipro.commands.Command;
 import net.keitaito.medipro.commands.CommandStore;
+import net.keitaito.medipro.helpdialog.HelpDialogModel;
 import net.keitaito.medipro.worlds.World;
 
 public class InputController {
@@ -37,6 +38,11 @@ public class InputController {
     public void handleSubmit(ActionEvent event) {
         App.getStageModel().getEntity().reset();
         start();
+    }
+
+    public void handleHelp(ActionEvent event) {
+        HelpDialogModel helpDialogModel = App.getHelpDialogModel();
+        helpDialogModel.setOpen(!helpDialogModel.isOpen());
     }
 
     public void start() {

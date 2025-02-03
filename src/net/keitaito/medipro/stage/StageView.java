@@ -12,8 +12,10 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import net.keitaito.medipro.App;
 import net.keitaito.medipro.Entity;
 import net.keitaito.medipro.Vector2;
+import net.keitaito.medipro.helpdialog.HelpDialogView;
 import net.keitaito.medipro.stagemenu.StageMenuView;
 import net.keitaito.medipro.utils.Fonts;
 
@@ -26,6 +28,8 @@ public class StageView extends JPanel implements MouseListener {
     private final StageController controller;
 
     private StageMenuView stageMenuView;
+
+    private HelpDialogView helpDialogView;
 
     public StageView(StageModel model, StageController controller) {
         this.model = model;
@@ -41,6 +45,8 @@ public class StageView extends JPanel implements MouseListener {
         openMenuButtonPanel.add(openMenuButton);
         openMenuButtonPanel.setSize(openMenuButtonPanel.getPreferredSize());
         openMenuButton.addActionListener(controller::handleClickOpenMenuButton);
+
+        App.getHelpDialogModel().addPropertyChangeListener("open", this::handleChangeHelpOpened);
 
         openMenuButtonPanel.setLocation(StageView.WIDTH - openMenuButtonPanel.getWidth(), 0);
         add(openMenuButtonPanel);
@@ -61,8 +67,15 @@ public class StageView extends JPanel implements MouseListener {
 
     public void setStageMenuView(StageMenuView view) {
         this.stageMenuView = view;
-        view.setBounds(200, 150, 400, 300);
-        view.setVisible(false);
+        view.setBounds(200, 150, StageMenuView.WIDTH, StageMenuView.HEIGHT);
+        view.setVisible(model.isOpenedMenu());
+        add(view);
+    }
+
+    public void setHelpDialogView(HelpDialogView view) {
+        this.helpDialogView = view;
+        view.setBounds(10, 10, HelpDialogView.WIDTH, HelpDialogView.HEIGHT);
+        view.setVisible(view.getModel().isOpen());
         add(view);
     }
 
@@ -70,9 +83,18 @@ public class StageView extends JPanel implements MouseListener {
         if ((boolean) event.getNewValue()) {
             stageMenuView.setVisible(true);
             stageMenuView.requestFocus();
-            controller.clearKeys();
         } else {
             stageMenuView.setVisible(false);
+            requestFocus();
+        }
+    }
+
+    private void handleChangeHelpOpened(PropertyChangeEvent event) {
+        if ((boolean) event.getNewValue()) {
+            helpDialogView.setVisible(true);
+            helpDialogView.requestFocus();
+        } else {
+            helpDialogView.setVisible(false);
             requestFocus();
         }
     }

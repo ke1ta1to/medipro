@@ -19,6 +19,8 @@ public class InputView extends JPanel {
 
     private final JTextArea textArea;
 
+    private final JButton helpButton;
+
     public InputView(InputModel model, InputController controller) {
         this.model = model;
         this.controller = controller;
@@ -36,10 +38,19 @@ public class InputView extends JPanel {
 
         add(scrollPane, BorderLayout.CENTER);
 
+        helpButton = new JButton("？");
+        helpButton.setFont(Fonts.STICK_FONT.deriveFont(Font.PLAIN, 24));
+        helpButton.addActionListener(controller::handleHelp);
+
         JButton submitButton = new JButton("実行");
         submitButton.setFont(Fonts.STICK_FONT.deriveFont(Font.PLAIN, 24));
         submitButton.addActionListener(controller::handleSubmit);
-        add(submitButton, BorderLayout.SOUTH);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BorderLayout());
+        buttonPanel.add(helpButton, BorderLayout.WEST);
+        buttonPanel.add(submitButton, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
 
         model.addPropertyChangeListener("text", this::updateText);
     }
