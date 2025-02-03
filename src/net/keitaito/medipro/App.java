@@ -1,6 +1,7 @@
 package net.keitaito.medipro;
 
 import java.awt.CardLayout;
+import java.io.IOException;
 
 import javax.swing.SwingUtilities;
 
@@ -34,6 +35,7 @@ import net.keitaito.medipro.level.LevelView;
 import net.keitaito.medipro.menu_bar.MenuBarController;
 import net.keitaito.medipro.menu_bar.MenuBarModel;
 import net.keitaito.medipro.menu_bar.MenuBarView;
+import net.keitaito.medipro.save.SaveManager;
 import net.keitaito.medipro.setting.SettingController;
 import net.keitaito.medipro.setting.SettingModel;
 import net.keitaito.medipro.setting.SettingView;
@@ -79,9 +81,13 @@ public class App {
     private LevelModel levelModel;
     private SettingModel settingModel;
     private HowToPlayModel howToPlayModel;
+    private SaveManager saveManager;
 
     public void start() {
         System.out.println("Application started");
+
+        saveManager = new SaveManager();
+
         commandStore = new CommandStore();
         commandStore.addCommand(new RightCommand());
         commandStore.addCommand(new LeftCommand());
@@ -255,7 +261,15 @@ public class App {
         return app;
     }
 
-    public static void main(String[] args) {
+    public static SaveManager getSaveManager() {
+        SaveManager save = app.saveManager;
+        if (save == null) {
+            throw new IllegalStateException("save is null");
+        }
+        return save;
+    }
+
+    public static void main(String[] args) throws IOException {
         SwingUtilities.invokeLater(() -> {
             if (app != null) {
                 throw new IllegalStateException("App is already running");
