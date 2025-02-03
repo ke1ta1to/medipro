@@ -62,7 +62,9 @@ public class LevelView extends JPanel {
             panel.setOpaque(false);
             panel.setLayout(new BorderLayout());
 
-            JLabel textLabel = new JLabel("Level " + (i + 1), JLabel.CENTER);
+            JLabel textLabel = new JLabel();
+            textLabel.setText(world.getMetadata().getTitle());
+            textLabel.setVerticalAlignment(JLabel.TOP);
             textLabel.setFont(Fonts.STICK_FONT.deriveFont(30f));
             textLabel.setForeground(Fonts.FOREGROUND_COLOR);
             panel.add(textLabel, BorderLayout.CENTER);

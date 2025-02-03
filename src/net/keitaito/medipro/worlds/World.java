@@ -23,6 +23,8 @@ public class World {
 
     private final Image thumbnail;
 
+    private final WorldMetadata metadata;
+
     private int startPosX;
     private int startPosY;
 
@@ -33,10 +35,12 @@ public class World {
 
     private final WarpTile[] warpTiles = new WarpTile[2];
 
-    public World(StageModel stageModel, String rawWorld, String exampleCommand, Image thumbnail) {
+    public World(StageModel stageModel, String rawWorld, String exampleCommand, Image thumbnail,
+            WorldMetadata metadata) {
         this.stageModel = stageModel;
         this.exampleCommand = exampleCommand;
         this.thumbnail = thumbnail;
+        this.metadata = metadata;
 
         tiles = new Tile[StageView.WIDTH / TILE_SIZE][StageView.HEIGHT / TILE_SIZE];
 
@@ -115,6 +119,10 @@ public class World {
 
     public Image getThumbnail() {
         return thumbnail;
+    }
+
+    public WorldMetadata getMetadata() {
+        return metadata;
     }
 
     public void resetState() {
