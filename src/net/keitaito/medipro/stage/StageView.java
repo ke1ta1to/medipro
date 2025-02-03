@@ -56,7 +56,7 @@ public class StageView extends JPanel implements MouseListener {
         setFocusable(true);
         addMouseListener(this);
 
-        model.addPropertyChangeListener("openedMenu", this::handleChangeMenuOpened);
+        App.getStageMenuModel().addPropertyChangeListener("open", this::handleChangeMenuOpened);
 
         // 30fps
         Timer timer = new Timer(1000 / 30, (e) -> {
@@ -68,7 +68,7 @@ public class StageView extends JPanel implements MouseListener {
     public void setStageMenuView(StageMenuView view) {
         this.stageMenuView = view;
         view.setBounds(200, 150, StageMenuView.WIDTH, StageMenuView.HEIGHT);
-        view.setVisible(model.isOpenedMenu());
+        view.setVisible(view.getModel().isOpen());
         add(view);
     }
 

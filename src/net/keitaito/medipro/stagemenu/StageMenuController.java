@@ -18,22 +18,25 @@ public class StageMenuController {
     }
 
     public void handleClose(ActionEvent event) {
-        App.getStageModel().setOpenedMenu(false);
+        model.setOpen(false);
     }
 
     public void handleClickGoLevelSelect(ActionEvent e) {
         App.getAppModel().setPageName(AppModel.PAGE_LEVEL_SELECT);
-        App.getStageModel().setOpenedMenu(false);
+        model.setOpen(false);
+
     }
 
     public void handleClickGoSetting(ActionEvent e) {
         App.getAppModel().setPageName(AppModel.PAGE_SETTING);
-        App.getStageModel().setOpenedMenu(false);
+        model.setOpen(false);
+
     }
 
     public void handleClickExit(ActionEvent e) {
         App.getAppModel().setPageName(AppModel.PAGE_TITLE);
-        App.getStageModel().setOpenedMenu(false);
+        model.setOpen(false);
+
     }
 
 }
