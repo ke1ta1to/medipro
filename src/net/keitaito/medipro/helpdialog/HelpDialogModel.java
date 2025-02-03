@@ -1,8 +1,8 @@
-package net.keitaito.medipro.stagemenu;
+package net.keitaito.medipro.helpdialog;
 
 import java.beans.PropertyChangeSupport;
 
-public class StageMenuModel {
+public class HelpDialogModel {
 
     private boolean open = false;
 
@@ -21,9 +21,9 @@ public class StageMenuModel {
     }
 
     public void setOpen(boolean open) {
-        boolean oldOpen = this.open;
+        boolean old = this.open;
         this.open = open;
-        pcs.firePropertyChange("open", oldOpen, open);
+        pcs.firePropertyChange("open", old, open);
     }
 
 }

@@ -17,6 +17,9 @@ import net.keitaito.medipro.commands.RightCommand;
 import net.keitaito.medipro.commands.StopCommand;
 import net.keitaito.medipro.commands.UnhookCommand;
 import net.keitaito.medipro.commands.WaitCommand;
+import net.keitaito.medipro.helpdialog.HelpDialogController;
+import net.keitaito.medipro.helpdialog.HelpDialogModel;
+import net.keitaito.medipro.helpdialog.HelpDialogView;
 import net.keitaito.medipro.howtoplay.HowToPlayController;
 import net.keitaito.medipro.howtoplay.HowToPlayModel;
 import net.keitaito.medipro.howtoplay.HowToPlayPage1Controller;
@@ -72,6 +75,7 @@ public class App {
     private CommandStore commandStore;
 
     private StageMenuModel stageMenuModel;
+    private HelpDialogModel helpDialogModel;
     private StageModel stageModel;
     private InputModel inputModel;
     private StageMenuBarModel stageMenuBarModel;
@@ -103,6 +107,10 @@ public class App {
         StageMenuController stageMenuController = new StageMenuController(stageMenuModel);
         StageMenuView stageMenuView = new StageMenuView(stageMenuModel, stageMenuController);
 
+        helpDialogModel = new HelpDialogModel();
+        HelpDialogController helpDialogController = new HelpDialogController(helpDialogModel);
+        HelpDialogView helpDialogView = new HelpDialogView(helpDialogModel, helpDialogController);
+
         stageModel = new StageModel();
         voidWorld = WorldLoader.loadWorld(stageModel, "0_void");
         worldLevel1 = WorldLoader.loadWorld(stageModel, "1_tutorial");
@@ -118,6 +126,7 @@ public class App {
         StageController stageController = new StageController(stageModel);
         StageView stageView = new StageView(stageModel, stageController);
         stageView.setStageMenuView(stageMenuView);
+        stageView.setHelpDialogView(helpDialogView);
 
         inputModel = new InputModel();
         InputController inputController = new InputController(inputModel);
@@ -191,6 +200,14 @@ public class App {
             throw new IllegalStateException("stageMenuModel is null");
         }
         return stageMenuModel;
+    }
+
+    public static HelpDialogModel getHelpDialogModel() {
+        HelpDialogModel helpDialogModel = app.helpDialogModel;
+        if (helpDialogModel == null) {
+            throw new IllegalStateException("helpDialogModel is null");
+        }
+        return helpDialogModel;
     }
 
     public static StageModel getStageModel() {
