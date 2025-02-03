@@ -1,4 +1,4 @@
-package net.keitaito.medipro.how_to_play;
+package net.keitaito.medipro.howtoplay;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;

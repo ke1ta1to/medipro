@@ -1,4 +1,4 @@
-package net.keitaito.medipro.stage_menu_bar;
+package net.keitaito.medipro.stagemenubar;
 
 import java.awt.event.ActionEvent;
 
