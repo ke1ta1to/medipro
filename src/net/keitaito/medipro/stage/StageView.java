@@ -86,7 +86,7 @@ public class StageView extends JPanel implements MouseListener {
 
     public void setGameOverView(GameOverView view) {
         this.gameOverView = view;
-        view.setBounds(250, 70, GameOverView.WIDTH, GameOverView.HEIGHT);
+        view.setBounds(250, 300, GameOverView.WIDTH, GameOverView.HEIGHT);
         view.setVisible(view.getModel().isOpen());
         add(view);
     }

@@ -11,8 +11,8 @@ import net.keitaito.medipro.utils.Fonts;
 import net.keitaito.medipro.utils.Views;
 
 public class GameOverView extends JPanel {
-    public static final int WIDTH = 400;
-    public static final int HEIGHT = 400;
+    public static final int WIDTH = 250;
+    public static final int HEIGHT = 80;
 
     private final GameOverModel model;
     private final GameOverController controller;
