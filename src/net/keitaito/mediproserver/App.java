@@ -41,6 +41,15 @@ public class App {
         int port = 8000;
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/v1/inputs", new IndexHandler(this));
+        server.createContext("/",
+                e -> {
+                    // hello world
+                    String response = "Hello World!";
+                    e.sendResponseHeaders(200, response.length());
+                    e.getResponseBody().write(response.getBytes());
+
+                    e.close();
+                });
         server.start();
         System.out.println("Server started on port " + port);
     }
