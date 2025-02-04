@@ -7,6 +7,9 @@ import * as cfn_origins from "aws-cdk-lib/aws-cloudfront-origins";
 import * as route53 from "aws-cdk-lib/aws-route53";
 import * as route53_targets from "aws-cdk-lib/aws-route53-targets";
 import * as certificatemanager from "aws-cdk-lib/aws-certificatemanager";
+import * as ec2 from "aws-cdk-lib/aws-ec2";
+import * as iam from "aws-cdk-lib/aws-iam";
+import * as efs from "aws-cdk-lib/aws-efs";
 
 interface MediproServerAppStackProps extends cdk.StackProps {
   certificateArn: string;
@@ -16,6 +19,25 @@ interface MediproServerAppStackProps extends cdk.StackProps {
 export class MediproServerAppStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: MediproServerAppStackProps) {
     super(scope, id, props);
+
+    const vpc = new ec2.Vpc(this, "MediproServerVpc", {
+      subnetConfiguration: [
+        {
+          name: "Public",
+          subnetType: ec2.SubnetType.PUBLIC,
+          cidrMask: 24,
+        },
+      ],
+    });
+
+    const fileSystem = new efs.FileSystem(this, "MediproServerFileSystem", {
+      vpc: vpc,
+      vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC },
+    });
+
+    const accessPoint = new efs.AccessPoint(this, "MediproServerAccessPoint", {
+      fileSystem: fileSystem,
+    });
 
     const repository = ecr.Repository.fromRepositoryName(
       this,
@@ -27,6 +49,19 @@ export class MediproServerAppStack extends cdk.Stack {
       code: lambda.DockerImageCode.fromEcr(repository, {
         tagOrDigest: "latest",
       }),
+      vpc: vpc,
+      vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC },
+      allowPublicSubnet: true,
+      role: new iam.Role(this, "MediproServerFunctionRole", {
+        assumedBy: new iam.ServicePrincipal("lambda.amazonaws.com"),
+      }),
+      filesystem: lambda.FileSystem.fromEfsAccessPoint(
+        accessPoint,
+        "/mnt/data",
+      ),
+      environment: {
+        DATABASE_URL: "jdbc:sqlite:/mnt/data/medipro.db",
+      },
     });
 
     const funcUrl = func.addFunctionUrl({
