@@ -28,6 +28,8 @@ public class IndexHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
 
         if (exchange.getRequestMethod().equals("GET")) {
+            // リクエストをprint
+            System.out.println(exchange.getRequestMethod() + " " + exchange.getRequestURI());
             String sql = "SELECT * FROM inputs";
             Connection connection = app.getConnection();
             try {
