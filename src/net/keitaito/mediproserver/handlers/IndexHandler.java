@@ -26,7 +26,6 @@ public class IndexHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-
         if (exchange.getRequestMethod().equals("GET")) {
             // リクエストをprint
             System.out.println(exchange.getRequestMethod() + " " + exchange.getRequestURI());

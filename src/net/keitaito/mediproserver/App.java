@@ -36,7 +36,7 @@ public class App {
             e.printStackTrace();
         }
 
-        seed();
+        // seed();
 
         int port = 8000;
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
@@ -58,6 +58,7 @@ public class App {
         return connection;
     }
 
+    @SuppressWarnings("unused")
     private void seed() {
         String[] sqls = {
                 "INSERT INTO inputs (name, world_name, input_text) VALUES ('input1','world1', 'text1')",

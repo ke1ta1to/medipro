@@ -1,3 +1,4 @@
+import { Construct } from "constructs";
 import * as cdk from "aws-cdk-lib";
 import * as certificatemanager from "aws-cdk-lib/aws-certificatemanager";
 import * as cfn from "aws-cdk-lib/aws-cloudfront";
@@ -5,10 +6,10 @@ import * as cfn_origins from "aws-cdk-lib/aws-cloudfront-origins";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as ecr from "aws-cdk-lib/aws-ecr";
 import * as efs from "aws-cdk-lib/aws-efs";
+import * as iam from "aws-cdk-lib/aws-iam";
 import * as lambda from "aws-cdk-lib/aws-lambda";
 import * as route53 from "aws-cdk-lib/aws-route53";
 import * as route53_targets from "aws-cdk-lib/aws-route53-targets";
-import { Construct } from "constructs";
 
 interface MediproServerAppStackProps extends cdk.StackProps {
   certificateArn: string;
@@ -32,6 +33,14 @@ export class MediproServerAppStack extends cdk.Stack {
     const fileSystem = new efs.FileSystem(this, "MediproServerFileSystem", {
       vpc: vpc,
       vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC },
+      fileSystemPolicy: new iam.PolicyDocument({
+        statements: [
+          new iam.PolicyStatement({
+            actions: ["elasticfilesystem:ClientMount"],
+            principals: [new iam.AnyPrincipal()],
+          }),
+        ],
+      }),
     });
 
     const accessPoint = new efs.AccessPoint(this, "MediproServerAccessPoint", {
@@ -71,6 +80,20 @@ export class MediproServerAppStack extends cdk.Stack {
     new cdk.CfnOutput(this, "MediproServerFunctionUrl", {
       value: funcUrl.url,
     });
+
+    const instance = new ec2.Instance(this, "MediproServerInstance", {
+      vpc: vpc,
+      vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC },
+      instanceType: new ec2.InstanceType("t2.micro"),
+      machineImage: ec2.MachineImage.latestAmazonLinux2023(),
+      keyPair: ec2.KeyPair.fromKeyPairName(
+        this,
+        "MediproServerKeyPair",
+        "m1mac",
+      ),
+    });
+    instance.connections.allowFromAnyIpv4(ec2.Port.tcp(22));
+    fileSystem.connections.allowDefaultPortFrom(instance);
 
     const certificate = certificatemanager.Certificate.fromCertificateArn(
       this,
