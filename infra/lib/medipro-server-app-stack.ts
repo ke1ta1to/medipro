@@ -41,6 +41,7 @@ export class MediproServerAppStack extends cdk.Stack {
           }),
         ],
       }),
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
 
     const accessPoint = new efs.AccessPoint(this, "MediproServerAccessPoint", {

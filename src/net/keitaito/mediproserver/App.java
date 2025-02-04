@@ -17,7 +17,7 @@ public class App {
     private final String dbUrl = System.getenv("DATABASE_URL") != null ? System.getenv("DATABASE_URL")
             : "jdbc:sqlite:medipro.db";
 
-    public void start() throws IOException, ClassNotFoundException {
+    public void init() throws ClassNotFoundException {
         Class.forName("org.sqlite.JDBC");
 
         try {
@@ -28,16 +28,14 @@ public class App {
 
         try {
             Statement statement = connection.createStatement();
-            // inputs (id, name, world_name, input_text) を、テーブルが存在しない場合に作成する, idはint primary
-            // key autoincrement
             String sql = "CREATE TABLE IF NOT EXISTS inputs (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, world_name TEXT, input_text TEXT)";
             statement.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
-        // seed();
-
+    public void start() throws IOException, ClassNotFoundException {
         int port = 8000;
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/v1/inputs", new IndexHandler(this));
@@ -58,25 +56,10 @@ public class App {
         return connection;
     }
 
-    @SuppressWarnings("unused")
-    private void seed() {
-        String[] sqls = {
-                "INSERT INTO inputs (name, world_name, input_text) VALUES ('input1','world1', 'text1')",
-                "INSERT INTO inputs (name, world_name, input_text) VALUES ('input2','world2', 'text2')"
-        };
-        try {
-            Statement statement = connection.createStatement();
-            for (String sql : sqls) {
-                statement.executeUpdate(sql);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void main(String[] args) {
         App app = new App();
         try {
+            app.init();
             app.start();
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
