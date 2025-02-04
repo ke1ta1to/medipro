@@ -30,7 +30,7 @@ public class GoalTile extends AirTile {
 
     @Override
     public void onCollide(Entity target) {
-        // TODO: ゴールした際の処理
+        App.getGameClearModel().setOpen(true);
         System.out.println("Goal!");
         App.getStageModel().reset();
         App.getStageModel().getWorld().resetState();

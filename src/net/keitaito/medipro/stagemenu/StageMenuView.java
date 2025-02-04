@@ -50,6 +50,7 @@ public class StageMenuView extends JPanel {
         actionsPanel.add(creatComboBoxPanel("ステージを選択", stages, (e) -> {
             String selectedStage = (String) ((JComboBox<?>) e.getSource()).getSelectedItem();
             App.getGameOverModel().setOpen(false);
+            App.getGameClearModel().setOpen(false);
             switch (selectedStage) {
                 case "stage1":
                     App.getStageModel().setWorld(App.worldLevel1);

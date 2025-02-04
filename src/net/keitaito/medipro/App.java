@@ -17,6 +17,9 @@ import net.keitaito.medipro.commands.RightCommand;
 import net.keitaito.medipro.commands.StopCommand;
 import net.keitaito.medipro.commands.UnhookCommand;
 import net.keitaito.medipro.commands.WaitCommand;
+import net.keitaito.medipro.gameclear.GameClearController;
+import net.keitaito.medipro.gameclear.GameClearModel;
+import net.keitaito.medipro.gameclear.GameClearView;
 import net.keitaito.medipro.gameover.GameOverController;
 import net.keitaito.medipro.gameover.GameOverModel;
 import net.keitaito.medipro.gameover.GameOverView;
@@ -90,6 +93,7 @@ public class App {
     private HowToPlayModel howToPlayModel;
     private SaveManager saveManager;
     private GameOverModel gameOverModel;
+    private GameClearModel gameClearModel;
 
     public void start() {
         System.out.println("Application started");
@@ -119,6 +123,10 @@ public class App {
         GameOverController gameOverController = new GameOverController(gameOverModel);
         GameOverView gameOverView = new GameOverView(gameOverModel, gameOverController);
 
+        gameClearModel = new GameClearModel();
+        GameClearController gameClearController = new GameClearController(gameClearModel);
+        GameClearView gameClearView = new GameClearView(gameClearModel, gameClearController);
+
         stageModel = new StageModel();
         voidWorld = WorldLoader.loadWorld(stageModel, "0_void");
         worldLevel1 = WorldLoader.loadWorld(stageModel, "1_tutorial");
@@ -136,6 +144,7 @@ public class App {
         stageView.setStageMenuView(stageMenuView);
         stageView.setHelpDialogView(helpDialogView);
         stageView.setGameOverView(gameOverView);
+        stageView.setGameClearView(gameClearView);
 
         inputModel = new InputModel();
         InputController inputController = new InputController(inputModel);
@@ -225,6 +234,14 @@ public class App {
             throw new IllegalStateException("gameOverModel is null");
         }
         return gameOverModel;
+    }
+
+    public static GameClearModel getGameClearModel() {
+        GameClearModel gameClearModel = app.gameClearModel;
+        if (gameClearModel == null) {
+            throw new IllegalStateException("gameClearModel is null");
+        }
+        return gameClearModel;
     }
 
     public static StageModel getStageModel() {
