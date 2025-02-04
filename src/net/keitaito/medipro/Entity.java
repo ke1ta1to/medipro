@@ -245,7 +245,9 @@ public class Entity {
         this.accY = 0;
         GameOverModel gameOverModel = App.getGameOverModel();
         gameOverModel.setOpen(true);
-        System.out.println(gameOverModel.isOpen());
+        App.getStageModel().clearKeys();
+        this.isOnGround = false;
+        this.isAlive = false;
 
     }
 
