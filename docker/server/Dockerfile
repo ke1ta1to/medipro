@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM bitnami/java:21 AS builder
+FROM public.ecr.aws/amazoncorretto/amazoncorretto:21
 
 WORKDIR /app
 
