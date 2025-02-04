@@ -17,6 +17,9 @@ import net.keitaito.medipro.commands.RightCommand;
 import net.keitaito.medipro.commands.StopCommand;
 import net.keitaito.medipro.commands.UnhookCommand;
 import net.keitaito.medipro.commands.WaitCommand;
+import net.keitaito.medipro.gameover.GameOverController;
+import net.keitaito.medipro.gameover.GameOverModel;
+import net.keitaito.medipro.gameover.GameOverView;
 import net.keitaito.medipro.helpdialog.HelpDialogController;
 import net.keitaito.medipro.helpdialog.HelpDialogModel;
 import net.keitaito.medipro.helpdialog.HelpDialogView;
@@ -86,6 +89,7 @@ public class App {
     private SettingModel settingModel;
     private HowToPlayModel howToPlayModel;
     private SaveManager saveManager;
+    private GameOverModel gameOverModel;
 
     public void start() {
         System.out.println("Application started");
@@ -111,6 +115,10 @@ public class App {
         HelpDialogController helpDialogController = new HelpDialogController(helpDialogModel);
         HelpDialogView helpDialogView = new HelpDialogView(helpDialogModel, helpDialogController);
 
+        gameOverModel = new GameOverModel();
+        GameOverController gameOverController = new GameOverController(gameOverModel);
+        GameOverView gameOverView = new GameOverView(gameOverModel, gameOverController);
+
         stageModel = new StageModel();
         voidWorld = WorldLoader.loadWorld(stageModel, "0_void");
         worldLevel1 = WorldLoader.loadWorld(stageModel, "1_tutorial");
@@ -127,6 +135,7 @@ public class App {
         StageView stageView = new StageView(stageModel, stageController);
         stageView.setStageMenuView(stageMenuView);
         stageView.setHelpDialogView(helpDialogView);
+        stageView.setGameOverView(gameOverView);
 
         inputModel = new InputModel();
         InputController inputController = new InputController(inputModel);
@@ -208,6 +217,14 @@ public class App {
             throw new IllegalStateException("helpDialogModel is null");
         }
         return helpDialogModel;
+    }
+
+    public static GameOverModel getGameOverModel() {
+        GameOverModel gameOverModel = app.gameOverModel;
+        if (gameOverModel == null) {
+            throw new IllegalStateException("gameOverModel is null");
+        }
+        return gameOverModel;
     }
 
     public static StageModel getStageModel() {

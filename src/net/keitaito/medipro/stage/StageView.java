@@ -15,6 +15,7 @@ import javax.swing.Timer;
 import net.keitaito.medipro.App;
 import net.keitaito.medipro.Entity;
 import net.keitaito.medipro.Vector2;
+import net.keitaito.medipro.gameover.GameOverView;
 import net.keitaito.medipro.helpdialog.HelpDialogView;
 import net.keitaito.medipro.stagemenu.StageMenuView;
 import net.keitaito.medipro.utils.Fonts;
@@ -30,6 +31,8 @@ public class StageView extends JPanel implements MouseListener {
     private StageMenuView stageMenuView;
 
     private HelpDialogView helpDialogView;
+
+    private GameOverView gameOverView;
 
     public StageView(StageModel model, StageController controller) {
         this.model = model;
@@ -58,6 +61,8 @@ public class StageView extends JPanel implements MouseListener {
 
         App.getStageMenuModel().addPropertyChangeListener("open", this::handleChangeMenuOpened);
 
+        App.getGameOverModel().addPropertyChangeListener("open", this::handleChangeGameOverOpened);
+
         // 30fps
         Timer timer = new Timer(1000 / 30, (e) -> {
             repaint();
@@ -79,6 +84,13 @@ public class StageView extends JPanel implements MouseListener {
         add(view);
     }
 
+    public void setGameOverView(GameOverView view) {
+        this.gameOverView = view;
+        view.setBounds(250, 70, GameOverView.WIDTH, GameOverView.HEIGHT);
+        view.setVisible(view.getModel().isOpen());
+        add(view);
+    }
+
     private void handleChangeMenuOpened(PropertyChangeEvent event) {
         if ((boolean) event.getNewValue()) {
             stageMenuView.setVisible(true);
@@ -95,6 +107,16 @@ public class StageView extends JPanel implements MouseListener {
             helpDialogView.requestFocus();
         } else {
             helpDialogView.setVisible(false);
+            requestFocus();
+        }
+    }
+
+    private void handleChangeGameOverOpened(PropertyChangeEvent event) {
+        if ((boolean) event.getNewValue()) {
+            gameOverView.setVisible(true);
+            gameOverView.requestFocus();
+        } else {
+            gameOverView.setVisible(false);
             requestFocus();
         }
     }

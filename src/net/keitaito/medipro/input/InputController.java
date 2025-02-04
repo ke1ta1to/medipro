@@ -36,6 +36,7 @@ public class InputController {
     }
 
     public void handleSubmit(ActionEvent event) {
+        App.getGameOverModel().setOpen(false);
         App.getStageModel().getEntity().reset();
         start();
     }

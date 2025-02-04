@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.keitaito.medipro.gameover.GameOverModel;
 import net.keitaito.medipro.stage.StageModel;
 import net.keitaito.medipro.stage.StageView;
 import net.keitaito.medipro.tiles.Tile;
@@ -232,12 +233,20 @@ public class Entity {
         this.accY = 0;
         this.isOnGround = false;
         this.isAlive = true;
+        App.getStageModel().reset();
+        App.getStageModel().getWorld().resetState();
     }
 
     public void targetDeathAction() {
         // TODO: ターゲットが死んだときのアクションを追加する。
-        App.getStageModel().reset();
-        App.getStageModel().getWorld().resetState();
+        this.velX = 0;
+        this.velY = 0;
+        this.accX = 0;
+        this.accY = 0;
+        GameOverModel gameOverModel = App.getGameOverModel();
+        gameOverModel.setOpen(true);
+        System.out.println(gameOverModel.isOpen());
+
     }
 
     @Override
