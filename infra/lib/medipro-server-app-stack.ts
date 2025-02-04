@@ -37,8 +37,8 @@ export class MediproServerAppStack extends cdk.Stack {
     const accessPoint = new efs.AccessPoint(this, "MediproServerAccessPoint", {
       fileSystem: fileSystem,
       posixUser: {
-        uid: "1001",
-        gid: "1001",
+        uid: "0",
+        gid: "0",
       },
     });
 

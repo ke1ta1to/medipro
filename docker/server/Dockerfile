@@ -16,9 +16,4 @@ ENV CLASSPATH=/app/bin:/app/lib/*
 # Javaのコンパイル
 RUN javac -sourcepath ./src -d ./bin $(find . -name "*.java")
 
-RUN addgroup --system --gid 1001 appgroup
-RUN adduser --system --uid 1001 appuser
-
-USER appuser
-
 CMD [ "java", "-cp", "bin:lib/*", "net.keitaito.mediproserver.App" ]
