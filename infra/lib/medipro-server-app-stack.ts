@@ -1,15 +1,14 @@
 import * as cdk from "aws-cdk-lib";
-import { Construct } from "constructs";
-import * as ecr from "aws-cdk-lib/aws-ecr";
-import * as lambda from "aws-cdk-lib/aws-lambda";
+import * as certificatemanager from "aws-cdk-lib/aws-certificatemanager";
 import * as cfn from "aws-cdk-lib/aws-cloudfront";
 import * as cfn_origins from "aws-cdk-lib/aws-cloudfront-origins";
+import * as ec2 from "aws-cdk-lib/aws-ec2";
+import * as ecr from "aws-cdk-lib/aws-ecr";
+import * as efs from "aws-cdk-lib/aws-efs";
+import * as lambda from "aws-cdk-lib/aws-lambda";
 import * as route53 from "aws-cdk-lib/aws-route53";
 import * as route53_targets from "aws-cdk-lib/aws-route53-targets";
-import * as certificatemanager from "aws-cdk-lib/aws-certificatemanager";
-import * as ec2 from "aws-cdk-lib/aws-ec2";
-import * as iam from "aws-cdk-lib/aws-iam";
-import * as efs from "aws-cdk-lib/aws-efs";
+import { Construct } from "constructs";
 
 interface MediproServerAppStackProps extends cdk.StackProps {
   certificateArn: string;
@@ -52,9 +51,6 @@ export class MediproServerAppStack extends cdk.Stack {
       vpc: vpc,
       vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC },
       allowPublicSubnet: true,
-      role: new iam.Role(this, "MediproServerFunctionRole", {
-        assumedBy: new iam.ServicePrincipal("lambda.amazonaws.com"),
-      }),
       filesystem: lambda.FileSystem.fromEfsAccessPoint(
         accessPoint,
         "/mnt/data",
