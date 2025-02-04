@@ -1,9 +1,13 @@
 package net.keitaito.medipro.helpdialog;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -19,14 +23,16 @@ public class HelpDialogView extends JPanel {
 
     private final HelpDialogModel model;
     private final HelpDialogController controller;
+    private final CardLayout cardLayout;
+    private final JPanel cardPanel;
 
     public HelpDialogView(HelpDialogModel model, HelpDialogController controller) {
         this.model = model;
         this.controller = controller;
+        this.cardLayout = new CardLayout();
+        this.cardPanel = new JPanel(cardLayout);
 
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
-
-        // setOpaque(false); // 不透明にする。必要なら。
 
         BorderLayout layout = new BorderLayout();
         setLayout(layout);
@@ -38,6 +44,12 @@ public class HelpDialogView extends JPanel {
         titlePanel.setOpaque(false); // 背景を透明にする
         titlePanel.add(titleLabel);
         add(titlePanel, BorderLayout.NORTH);
+
+        // カードパネル
+        JPanel contentPanel = CreateContentsPanel();
+        contentPanel.setOpaque(false); // 背景を透明にする
+        cardPanel.add(contentPanel, "main");
+        add(cardPanel, BorderLayout.CENTER);
 
         // ボタンパネル
         JButton closeButton = new JButton("閉じる");
@@ -66,6 +78,124 @@ public class HelpDialogView extends JPanel {
 
         // 背景を描画
         Views.paintBackground(g, WIDTH, HEIGHT);
+    }
+
+    private JPanel CreateContentsPanel() {
+        JPanel panel = new JPanel();
+        java.util.List<String> commands = java.util.Arrays.asList(
+                "left : 右に動き続ける",
+                "right : 左に動き続ける",
+                "jump : ジャンプする",
+                "wait",
+                "stop : 左右の動きを止める",
+                "hook",
+                "unhook : hookを離す");
+        panel.setLayout(new GridLayout(commands.size(), 1));
+        panel.setPreferredSize(new Dimension(WIDTH, HEIGHT - 100));
+
+        for (String command : commands) {
+            if (command.equals("wait")) {
+                JButton commandButton = new JButton(command);
+                commandButton.setFont(Fonts.STICK_FONT.deriveFont(20.0f));
+                commandButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        JPanel newPanel = new JPanel();
+                        newPanel.setLayout(new BorderLayout());
+                        JLabel commandNameLabel = new JLabel(command);
+                        commandNameLabel.setHorizontalAlignment(JLabel.CENTER);
+                        commandNameLabel.setFont(Fonts.STICK_FONT.deriveFont(20.0f));
+                        newPanel.add(commandNameLabel, BorderLayout.NORTH);
+
+                        JLabel descriptionLabel = new JLabel();
+                        descriptionLabel
+                                .setText("<html><div style='text-align: left; line-height: 1.5; font-size: 14px;'>"
+                                        + "<b>wait</b>は指定した時間だけ<br>"
+                                        + "処理を停止するコマンドです<br>"
+                                        + "<hr>"
+                                        + "<b>wait n s:</b> n秒だけ処理を停止します<br>"
+                                        + "例: <i>wait 1s</i> - 1秒間処理を停止<br>"
+                                        + "<hr>"
+                                        + "<b>wait n ms:</b> nミリ秒だけ処理を停止します<br>"
+                                        + "例: <i>wait 500ms</i> - 500ミリ秒間処理を停止"
+                                        + "</div></html>");
+                        descriptionLabel.setFont(Fonts.STICK_FONT.deriveFont(16.0f));
+                        descriptionLabel.setHorizontalAlignment(JLabel.CENTER);
+                        newPanel.add(descriptionLabel, BorderLayout.CENTER);
+
+                        JButton backButton = new JButton("戻る");
+                        backButton.setFont(Fonts.STICK_FONT.deriveFont(20.0f));
+                        backButton.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                cardLayout.show(cardPanel, "main");
+                            }
+                        });
+                        newPanel.add(backButton, BorderLayout.SOUTH);
+
+                        cardPanel.add(newPanel, command);
+                        cardLayout.show(cardPanel, command);
+                    }
+                });
+                panel.add(commandButton);
+            } else if (command.equals("hook")) {
+                JButton commandButton = new JButton(command);
+                commandButton.setFont(Fonts.STICK_FONT.deriveFont(20.0f));
+                commandButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        JPanel newPanel = new JPanel();
+                        newPanel.setLayout(new BorderLayout());
+                        JLabel commandNameLabel = new JLabel(command);
+                        commandNameLabel.setHorizontalAlignment(JLabel.CENTER);
+                        commandNameLabel.setFont(Fonts.STICK_FONT.deriveFont(20.0f));
+                        newPanel.add(commandNameLabel, BorderLayout.NORTH);
+
+                        JLabel descriptionLabel = new JLabel();
+                        descriptionLabel
+                                .setText("<html><div style='text-align: left; line-height: 1.5; font-size: 14px;'>"
+                                        + "<b>hook</b>は指定した方向に<br>"
+                                        + "フックを飛ばすコマンドです。<br>"
+                                        + "フックは壁に当たるまで飛び続けます。<br>"
+                                        + "フックは壁に当たると、その位置に<br>"
+                                        + "プレイヤーが移動します。<br>"
+                                        + "<hr>"
+                                        + "<b>hook left:</b> フックを左に飛ばす<br>"
+                                        + "<hr>"
+                                        + "<b>hook right:</b> フックを左に飛ばす<br>"
+                                        + "</div></html>");
+                        descriptionLabel.setFont(Fonts.STICK_FONT.deriveFont(16.0f));
+                        descriptionLabel.setHorizontalAlignment(JLabel.CENTER);
+                        newPanel.add(descriptionLabel, BorderLayout.CENTER);
+
+                        JButton backButton = new JButton("戻る");
+                        backButton.setFont(Fonts.STICK_FONT.deriveFont(20.0f));
+                        backButton.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                cardLayout.show(cardPanel, "main");
+                            }
+                        });
+                        newPanel.add(backButton, BorderLayout.SOUTH);
+
+                        cardPanel.add(newPanel, command);
+                        cardLayout.show(cardPanel, command);
+                    }
+                });
+                panel.add(commandButton);
+            } else {
+                JLabel commandLabel = new JLabel(command);
+                commandLabel.setFont(Fonts.STICK_FONT.deriveFont(20.0f));
+                commandLabel.setHorizontalAlignment(JLabel.CENTER);
+                panel.add(commandLabel);
+            }
+        }
+
+        return panel;
+    }
+
+    public CardLayout getCardLayout() {
+        return cardLayout;
     }
 
 }
