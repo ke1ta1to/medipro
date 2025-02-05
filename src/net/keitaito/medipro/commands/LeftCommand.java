@@ -2,6 +2,7 @@ package net.keitaito.medipro.commands;
 
 import java.awt.event.KeyEvent;
 
+import net.keitaito.medipro.App;
 import net.keitaito.medipro.IKeyAction;
 
 public class LeftCommand extends Command {
@@ -12,8 +13,10 @@ public class LeftCommand extends Command {
 
     @Override
     public void execute(IKeyAction action, String rawText) {
-        action.removeKey(KeyEvent.VK_D);
-        action.addKey(KeyEvent.VK_A);
+        if (App.getStageModel().getEntity().isAlive() && !App.getStageModel().getEntity().isGoal()) {
+            action.removeKey(KeyEvent.VK_D);
+            action.addKey(KeyEvent.VK_A);
+        }
     }
 
 }

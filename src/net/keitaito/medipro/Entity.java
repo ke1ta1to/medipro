@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.keitaito.medipro.gameover.GameOverModel;
 import net.keitaito.medipro.stage.StageModel;
 import net.keitaito.medipro.stage.StageView;
 import net.keitaito.medipro.tiles.Tile;
@@ -26,6 +27,7 @@ public class Entity {
 
     private boolean isOnGround = false;
     private boolean isAlive = true;
+    private boolean isGoal = false;
 
     private int direction = 1;
 
@@ -219,8 +221,16 @@ public class Entity {
         return this.isAlive;
     }
 
+    public boolean isGoal() {
+        return this.isGoal;
+    }
+
     public void setAlive(boolean isAlive) {
         this.isAlive = isAlive;
+    }
+
+    public void setGoal(boolean isGoal) {
+        this.isGoal = isGoal;
     }
 
     public void reset() {
@@ -232,12 +242,27 @@ public class Entity {
         this.accY = 0;
         this.isOnGround = false;
         this.isAlive = true;
+        App.getStageModel().reset();
+        App.getStageModel().getWorld().resetState();
     }
 
     public void targetDeathAction() {
         // TODO: ターゲットが死んだときのアクションを追加する。
-        App.getStageModel().reset();
-        App.getStageModel().getWorld().resetState();
+        this.velX = 0;
+        this.velY = 0;
+        this.accX = 0;
+        this.accY = 0;
+        GameOverModel gameOverModel = App.getGameOverModel();
+        gameOverModel.setOpen(true);
+
+    }
+
+    public void targetGoalAction() {
+        this.velX = 0;
+        this.velY = 0;
+        this.accX = 0;
+        this.accY = 0;
+        App.getGameClearModel().setOpen(true);
     }
 
     @Override

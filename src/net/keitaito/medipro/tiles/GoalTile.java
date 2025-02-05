@@ -3,7 +3,6 @@ package net.keitaito.medipro.tiles;
 import java.awt.Graphics;
 import java.awt.Image;
 
-import net.keitaito.medipro.App;
 import net.keitaito.medipro.Entity;
 import net.keitaito.medipro.worlds.World;
 
@@ -28,9 +27,7 @@ public class GoalTile extends AirTile {
 
     @Override
     public void onCollide(Entity target) {
-        // TODO: ゴールした際の処理
-        System.out.println("Goal!");
-        App.getStageModel().reset();
-        App.getStageModel().getWorld().resetState();
+        target.setGoal(true);
+        target.targetGoalAction();
     }
 }

@@ -1,6 +1,7 @@
 package net.keitaito.medipro;
 
 import java.awt.CardLayout;
+import java.io.IOException;
 
 import javax.swing.SwingUtilities;
 
@@ -16,34 +17,44 @@ import net.keitaito.medipro.commands.RightCommand;
 import net.keitaito.medipro.commands.StopCommand;
 import net.keitaito.medipro.commands.UnhookCommand;
 import net.keitaito.medipro.commands.WaitCommand;
-import net.keitaito.medipro.how_to_play.HowToPlayController;
-import net.keitaito.medipro.how_to_play.HowToPlayModel;
-import net.keitaito.medipro.how_to_play.HowToPlayPage1Controller;
-import net.keitaito.medipro.how_to_play.HowToPlayPage1Model;
-import net.keitaito.medipro.how_to_play.HowToPlayPage1View;
-import net.keitaito.medipro.how_to_play.HowToPlayPage2Controller;
-import net.keitaito.medipro.how_to_play.HowToPlayPage2Model;
-import net.keitaito.medipro.how_to_play.HowToPlayPage2View;
-import net.keitaito.medipro.how_to_play.HowToPlayView;
+import net.keitaito.medipro.gameclear.GameClearController;
+import net.keitaito.medipro.gameclear.GameClearModel;
+import net.keitaito.medipro.gameclear.GameClearView;
+import net.keitaito.medipro.gameover.GameOverController;
+import net.keitaito.medipro.gameover.GameOverModel;
+import net.keitaito.medipro.gameover.GameOverView;
+import net.keitaito.medipro.helpdialog.HelpDialogController;
+import net.keitaito.medipro.helpdialog.HelpDialogModel;
+import net.keitaito.medipro.helpdialog.HelpDialogView;
+import net.keitaito.medipro.howtoplay.HowToPlayController;
+import net.keitaito.medipro.howtoplay.HowToPlayModel;
+import net.keitaito.medipro.howtoplay.HowToPlayPage1Controller;
+import net.keitaito.medipro.howtoplay.HowToPlayPage1Model;
+import net.keitaito.medipro.howtoplay.HowToPlayPage1View;
+import net.keitaito.medipro.howtoplay.HowToPlayPage2Controller;
+import net.keitaito.medipro.howtoplay.HowToPlayPage2Model;
+import net.keitaito.medipro.howtoplay.HowToPlayPage2View;
+import net.keitaito.medipro.howtoplay.HowToPlayView;
 import net.keitaito.medipro.input.InputController;
 import net.keitaito.medipro.input.InputModel;
 import net.keitaito.medipro.input.InputView;
 import net.keitaito.medipro.level.LevelController;
 import net.keitaito.medipro.level.LevelModel;
 import net.keitaito.medipro.level.LevelView;
-import net.keitaito.medipro.menu_bar.MenuBarController;
-import net.keitaito.medipro.menu_bar.MenuBarModel;
-import net.keitaito.medipro.menu_bar.MenuBarView;
+import net.keitaito.medipro.menubar.MenuBarController;
+import net.keitaito.medipro.menubar.MenuBarModel;
+import net.keitaito.medipro.menubar.MenuBarView;
+import net.keitaito.medipro.save.SaveManager;
 import net.keitaito.medipro.setting.SettingController;
 import net.keitaito.medipro.setting.SettingModel;
 import net.keitaito.medipro.setting.SettingView;
 import net.keitaito.medipro.stage.StageController;
 import net.keitaito.medipro.stage.StageModel;
 import net.keitaito.medipro.stage.StageView;
-import net.keitaito.medipro.stage_menu.StageMenuController;
-import net.keitaito.medipro.stage_menu.StageMenuModel;
-import net.keitaito.medipro.stage_menu.StageMenuView;
-import net.keitaito.medipro.stage_menu_bar.StageMenuBarModel;
+import net.keitaito.medipro.stagemenu.StageMenuController;
+import net.keitaito.medipro.stagemenu.StageMenuModel;
+import net.keitaito.medipro.stagemenu.StageMenuView;
+import net.keitaito.medipro.stagemenubar.StageMenuBarModel;
 import net.keitaito.medipro.top.TopController;
 import net.keitaito.medipro.top.TopModel;
 import net.keitaito.medipro.top.TopView;
@@ -70,6 +81,7 @@ public class App {
     private CommandStore commandStore;
 
     private StageMenuModel stageMenuModel;
+    private HelpDialogModel helpDialogModel;
     private StageModel stageModel;
     private InputModel inputModel;
     private StageMenuBarModel stageMenuBarModel;
@@ -79,9 +91,15 @@ public class App {
     private LevelModel levelModel;
     private SettingModel settingModel;
     private HowToPlayModel howToPlayModel;
+    private SaveManager saveManager;
+    private GameOverModel gameOverModel;
+    private GameClearModel gameClearModel;
 
     public void start() {
         System.out.println("Application started");
+
+        saveManager = new SaveManager();
+
         commandStore = new CommandStore();
         commandStore.addCommand(new RightCommand());
         commandStore.addCommand(new LeftCommand());
@@ -96,6 +114,18 @@ public class App {
         stageMenuModel = new StageMenuModel();
         StageMenuController stageMenuController = new StageMenuController(stageMenuModel);
         StageMenuView stageMenuView = new StageMenuView(stageMenuModel, stageMenuController);
+
+        helpDialogModel = new HelpDialogModel();
+        HelpDialogController helpDialogController = new HelpDialogController(helpDialogModel);
+        HelpDialogView helpDialogView = new HelpDialogView(helpDialogModel, helpDialogController);
+
+        gameOverModel = new GameOverModel();
+        GameOverController gameOverController = new GameOverController(gameOverModel);
+        GameOverView gameOverView = new GameOverView(gameOverModel, gameOverController);
+
+        gameClearModel = new GameClearModel();
+        GameClearController gameClearController = new GameClearController(gameClearModel);
+        GameClearView gameClearView = new GameClearView(gameClearModel, gameClearController);
 
         stageModel = new StageModel();
         voidWorld = WorldLoader.loadWorld(stageModel, "0_void");
@@ -118,6 +148,9 @@ public class App {
         StageController stageController = new StageController(stageModel);
         StageView stageView = new StageView(stageModel, stageController, levelModel);
         stageView.setStageMenuView(stageMenuView);
+        stageView.setHelpDialogView(helpDialogView);
+        stageView.setGameOverView(gameOverView);
+        stageView.setGameClearView(gameClearView);
 
         inputModel = new InputModel();
         InputController inputController = new InputController(inputModel);
@@ -189,6 +222,30 @@ public class App {
         return stageMenuModel;
     }
 
+    public static HelpDialogModel getHelpDialogModel() {
+        HelpDialogModel helpDialogModel = app.helpDialogModel;
+        if (helpDialogModel == null) {
+            throw new IllegalStateException("helpDialogModel is null");
+        }
+        return helpDialogModel;
+    }
+
+    public static GameOverModel getGameOverModel() {
+        GameOverModel gameOverModel = app.gameOverModel;
+        if (gameOverModel == null) {
+            throw new IllegalStateException("gameOverModel is null");
+        }
+        return gameOverModel;
+    }
+
+    public static GameClearModel getGameClearModel() {
+        GameClearModel gameClearModel = app.gameClearModel;
+        if (gameClearModel == null) {
+            throw new IllegalStateException("gameClearModel is null");
+        }
+        return gameClearModel;
+    }
+
     public static StageModel getStageModel() {
         StageModel stageModel = app.stageModel;
         if (stageModel == null) {
@@ -257,7 +314,15 @@ public class App {
         return app;
     }
 
-    public static void main(String[] args) {
+    public static SaveManager getSaveManager() {
+        SaveManager save = app.saveManager;
+        if (save == null) {
+            throw new IllegalStateException("save is null");
+        }
+        return save;
+    }
+
+    public static void main(String[] args) throws IOException {
         SwingUtilities.invokeLater(() -> {
             if (app != null) {
                 throw new IllegalStateException("App is already running");

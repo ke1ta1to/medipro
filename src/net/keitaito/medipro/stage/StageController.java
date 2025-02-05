@@ -7,6 +7,8 @@ import java.awt.event.KeyListener;
 
 import javax.swing.Timer;
 
+import net.keitaito.medipro.App;
+
 public class StageController implements KeyListener, ActionListener {
 
     private final StageModel model;
@@ -49,7 +51,7 @@ public class StageController implements KeyListener, ActionListener {
     }
 
     public void handleClickOpenMenuButton(ActionEvent event) {
-        model.setOpenedMenu(true);
+        App.getStageMenuModel().setOpen(true);
     }
 
 }

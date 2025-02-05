@@ -12,11 +12,15 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import net.keitaito.medipro.App;
 import net.keitaito.medipro.Entity;
 import net.keitaito.medipro.Vector2;
-import net.keitaito.medipro.stage_menu.StageMenuView;
-import net.keitaito.medipro.utils.Fonts;
+import net.keitaito.medipro.gameclear.GameClearView;
+import net.keitaito.medipro.gameover.GameOverView;
+import net.keitaito.medipro.helpdialog.HelpDialogView;
 import net.keitaito.medipro.level.LevelModel;
+import net.keitaito.medipro.stagemenu.StageMenuView;
+import net.keitaito.medipro.utils.Fonts;
 
 public class StageView extends JPanel implements MouseListener {
 
@@ -29,6 +33,12 @@ public class StageView extends JPanel implements MouseListener {
 
     private StageMenuView stageMenuView;
 
+    private HelpDialogView helpDialogView;
+
+    private GameOverView gameOverView;
+
+    private GameClearView gameClearView;
+
     public StageView(StageModel model, StageController controller, LevelModel levelModel) {
         this.model = model;
         this.controller = controller;
@@ -37,13 +47,15 @@ public class StageView extends JPanel implements MouseListener {
         setLayout(null);
 
         JButton openMenuButton = new JButton("メニュー");
-        openMenuButton.setFont(Fonts.MPLUS1CODE_FONT.deriveFont(20.0f));
+        openMenuButton.setFont(Fonts.STICK_FONT.deriveFont(20.0f));
         JPanel openMenuButtonPanel = new JPanel();
         openMenuButtonPanel.setOpaque(false);
         openMenuButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         openMenuButtonPanel.add(openMenuButton);
         openMenuButtonPanel.setSize(openMenuButtonPanel.getPreferredSize());
         openMenuButton.addActionListener(controller::handleClickOpenMenuButton);
+
+        App.getHelpDialogModel().addPropertyChangeListener("open", this::handleChangeHelpOpened);
 
         openMenuButtonPanel.setLocation(StageView.WIDTH - openMenuButtonPanel.getWidth(), 0);
         add(openMenuButtonPanel);
@@ -53,7 +65,11 @@ public class StageView extends JPanel implements MouseListener {
         setFocusable(true);
         addMouseListener(this);
 
-        model.addPropertyChangeListener("openedMenu", this::handleChangeMenuOpened);
+        App.getStageMenuModel().addPropertyChangeListener("open", this::handleChangeMenuOpened);
+
+        App.getGameOverModel().addPropertyChangeListener("open", this::handleChangeGameOverOpened);
+
+        App.getGameClearModel().addPropertyChangeListener("open", this::handleChangeGameClearOpened);
 
         // 30fps
         Timer timer = new Timer(1000 / 30, (e) -> {
@@ -64,8 +80,29 @@ public class StageView extends JPanel implements MouseListener {
 
     public void setStageMenuView(StageMenuView view) {
         this.stageMenuView = view;
-        view.setBounds(200, 150, 400, 300);
-        view.setVisible(false);
+        view.setBounds(200, 150, StageMenuView.WIDTH, StageMenuView.HEIGHT);
+        view.setVisible(view.getModel().isOpen());
+        add(view);
+    }
+
+    public void setHelpDialogView(HelpDialogView view) {
+        this.helpDialogView = view;
+        view.setBounds(10, 10, HelpDialogView.WIDTH, HelpDialogView.HEIGHT);
+        view.setVisible(view.getModel().isOpen());
+        add(view);
+    }
+
+    public void setGameOverView(GameOverView view) {
+        this.gameOverView = view;
+        view.setBounds(250, 300, GameOverView.WIDTH, GameOverView.HEIGHT);
+        view.setVisible(view.getModel().isOpen());
+        add(view);
+    }
+
+    public void setGameClearView(GameClearView view) {
+        this.gameClearView = view;
+        view.setBounds(250, 300, GameClearView.WIDTH, GameClearView.HEIGHT);
+        view.setVisible(view.getModel().isOpen());
         add(view);
     }
 
@@ -73,9 +110,38 @@ public class StageView extends JPanel implements MouseListener {
         if ((boolean) event.getNewValue()) {
             stageMenuView.setVisible(true);
             stageMenuView.requestFocus();
-            controller.clearKeys();
         } else {
             stageMenuView.setVisible(false);
+            requestFocus();
+        }
+    }
+
+    private void handleChangeHelpOpened(PropertyChangeEvent event) {
+        if ((boolean) event.getNewValue()) {
+            helpDialogView.setVisible(true);
+            helpDialogView.requestFocus();
+        } else {
+            helpDialogView.setVisible(false);
+            requestFocus();
+        }
+    }
+
+    private void handleChangeGameOverOpened(PropertyChangeEvent event) {
+        if ((boolean) event.getNewValue()) {
+            gameOverView.setVisible(true);
+            gameOverView.requestFocus();
+        } else {
+            gameOverView.setVisible(false);
+            requestFocus();
+        }
+    }
+
+    private void handleChangeGameClearOpened(PropertyChangeEvent event) {
+        if ((boolean) event.getNewValue()) {
+            gameClearView.setVisible(true);
+            gameClearView.requestFocus();
+        } else {
+            gameClearView.setVisible(false);
             requestFocus();
         }
     }
