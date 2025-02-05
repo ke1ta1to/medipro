@@ -76,6 +76,6 @@ public class LevelController implements ActionListener {
             default:
                 throw new IllegalArgumentException("Unknown command: " + command);
         }
-        // ystem.out.println("Selected Level " + model.getSelectedLevel());
+        System.out.println("Selected Level " + model.getSelectedLevel());
     }
 }
