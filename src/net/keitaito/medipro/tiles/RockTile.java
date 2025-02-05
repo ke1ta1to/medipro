@@ -11,11 +11,12 @@ public class RockTile extends Tile {
 
     public RockTile(int x, int y) {
         super(x, y);
+
+        image = loadImage("RockTile.png");
     }
 
     @Override
     public void draw(Graphics g, int stageLevel) {
-        image = loadImage("RockTile.png");
         g.drawImage(image, getX(), getY(), World.TILE_SIZE, World.TILE_SIZE, null);
     }
 

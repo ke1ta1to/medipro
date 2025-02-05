@@ -146,7 +146,7 @@ public class App {
 
         stageModel.setWorld(worldLevel1);
         StageController stageController = new StageController(stageModel);
-        StageView stageView = new StageView(stageModel, stageController, levelModel);
+        StageView stageView = new StageView(stageModel, stageController);
         stageView.setStageMenuView(stageMenuView);
         stageView.setHelpDialogView(helpDialogView);
         stageView.setGameOverView(gameOverView);
@@ -163,7 +163,7 @@ public class App {
         workspaceView.setStageView(stageView);
 
         topModel = new TopModel();
-        TopController topController = new TopController(topModel, levelModel);
+        TopController topController = new TopController(topModel);
         TopView topView = new TopView(topModel, topController);
 
         settingModel = new SettingModel();
@@ -196,7 +196,7 @@ public class App {
         ((CardLayout) appView.getLayout()).show(appView, AppModel.PAGE_TITLE);
 
         MenuBarModel menuBarModel = new MenuBarModel();
-        MenuBarController menuBarController = new MenuBarController(menuBarModel, levelModel);
+        MenuBarController menuBarController = new MenuBarController(menuBarModel);
         MenuBarView menuBarView = new MenuBarView(menuBarModel, menuBarController);
         appFrame.setJMenuBar(menuBarView);
 

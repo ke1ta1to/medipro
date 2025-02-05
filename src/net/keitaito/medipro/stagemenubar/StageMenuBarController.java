@@ -9,11 +9,10 @@ import net.keitaito.medipro.level.LevelModel;
 public class StageMenuBarController {
 
     private final StageMenuBarModel model;
-    private final LevelModel levelModel;
+    private final LevelModel levelModel = App.getLevelModel();
 
     public StageMenuBarController(StageMenuBarModel model) {
         this.model = model;
-        this.levelModel = App.getLevelModel();
     }
 
     public StageMenuBarModel getModel() {

@@ -18,7 +18,6 @@ import net.keitaito.medipro.Vector2;
 import net.keitaito.medipro.gameclear.GameClearView;
 import net.keitaito.medipro.gameover.GameOverView;
 import net.keitaito.medipro.helpdialog.HelpDialogView;
-import net.keitaito.medipro.level.LevelModel;
 import net.keitaito.medipro.stagemenu.StageMenuView;
 import net.keitaito.medipro.utils.Fonts;
 
@@ -29,7 +28,6 @@ public class StageView extends JPanel implements MouseListener {
 
     private final StageModel model;
     private final StageController controller;
-    private final LevelModel levelModel;
 
     private StageMenuView stageMenuView;
 
@@ -39,10 +37,9 @@ public class StageView extends JPanel implements MouseListener {
 
     private GameClearView gameClearView;
 
-    public StageView(StageModel model, StageController controller, LevelModel levelModel) {
+    public StageView(StageModel model, StageController controller) {
         this.model = model;
         this.controller = controller;
-        this.levelModel = levelModel;
 
         setLayout(null);
 
@@ -158,7 +155,7 @@ public class StageView extends JPanel implements MouseListener {
         for (int i = 0; i < model.getWorld().getTiles().length; i++) {
             for (int j = 0; j < model.getWorld().getTiles()[i].length; j++) {
                 if (model.getWorld().getTiles()[i][j] != null) {
-                    model.getWorld().getTiles()[i][j].draw(g, levelModel.getSelectedLevel());
+                    model.getWorld().getTiles()[i][j].draw(g, App.getLevelModel().getSelectedLevel());
                 }
             }
         }
