@@ -29,6 +29,7 @@ public class GoalTile extends AirTile {
 
     @Override
     public void onCollide(Entity target) {
+        target.setAlive(false);
         target.targetGoalAction();
     }
 }

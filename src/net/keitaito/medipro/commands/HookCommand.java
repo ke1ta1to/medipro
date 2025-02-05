@@ -2,6 +2,7 @@ package net.keitaito.medipro.commands;
 
 import java.awt.event.KeyEvent;
 
+import net.keitaito.medipro.App;
 import net.keitaito.medipro.IKeyAction;
 
 public class HookCommand extends Command {
@@ -16,14 +17,16 @@ public class HookCommand extends Command {
 
     @Override
     public void execute(IKeyAction action, String rawText) throws InterruptedException {
-        if (rawText.matches(HOOK_RIGHT_REGEX)) {
-            action.addKey(KeyEvent.VK_K);
-            sleep(10);
-            action.removeKey(KeyEvent.VK_K);
-        } else if (rawText.matches(HOOK_LEFT_REGEX)) {
-            action.addKey(KeyEvent.VK_H);
-            sleep(10);
-            action.removeKey(KeyEvent.VK_H);
+        if (App.getStageModel().getEntity().isAlive()) {
+            if (rawText.matches(HOOK_RIGHT_REGEX)) {
+                action.addKey(KeyEvent.VK_K);
+                sleep(10);
+                action.removeKey(KeyEvent.VK_K);
+            } else if (rawText.matches(HOOK_LEFT_REGEX)) {
+                action.addKey(KeyEvent.VK_H);
+                sleep(10);
+                action.removeKey(KeyEvent.VK_H);
+            }
         }
     }
 
