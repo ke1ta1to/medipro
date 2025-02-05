@@ -25,41 +25,49 @@ public class LevelController implements ActionListener {
             case "Level 1":
                 App.getStageModel().setWorld(App.worldLevel1);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
+                model.setSelectedLevel(1);
                 break;
 
             case "Level 2":
                 App.getStageModel().setWorld(App.worldLevel2);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
+                model.setSelectedLevel(2);
                 break;
 
             case "Level 3":
                 App.getStageModel().setWorld(App.worldLevel3);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
+                model.setSelectedLevel(3);
                 break;
 
             case "Level 4":
                 App.getStageModel().setWorld(App.worldLevel4);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
+                model.setSelectedLevel(4);
                 break;
 
             case "Level 5":
                 App.getStageModel().setWorld(App.worldLevel5);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
+                model.setSelectedLevel(5);
                 break;
 
             case "Level 6":
                 App.getStageModel().setWorld(App.worldLevel6);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
+                model.setSelectedLevel(6);
                 break;
 
             case "Level 7":
                 App.getStageModel().setWorld(App.worldLevel7);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
+                model.setSelectedLevel(7);
                 break;
 
             case "Level 8":
                 App.getStageModel().setWorld(App.worldLevel8);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
+                model.setSelectedLevel(8);
                 break;
 
             case "exit":

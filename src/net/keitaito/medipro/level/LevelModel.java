@@ -12,6 +12,7 @@ public class LevelModel {
     }
 
     public void setSelectedLevel(int selectedLevel) {
+        System.out.println("selectedLevel: " + selectedLevel);
         this.selectedLevel = selectedLevel;
     }
 }

@@ -5,12 +5,15 @@ import java.awt.event.ActionListener;
 
 import net.keitaito.medipro.App;
 import net.keitaito.medipro.app.AppModel;
+import net.keitaito.medipro.level.LevelModel;
 
 public class TopController implements ActionListener {
     private TopModel model;
+    private final LevelModel levelModel;
 
-    public TopController(TopModel model) {
+    public TopController(TopModel model, LevelModel levelModel) {
         this.model = model;
+        this.levelModel = levelModel;
     }
 
     public TopModel getModel() {
@@ -24,6 +27,7 @@ public class TopController implements ActionListener {
             case "New Game Start":
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                 App.getStageModel().setWorld(App.worldLevel1);
+                levelModel.setSelectedLevel(1);
                 break;
 
             case "Level Select":

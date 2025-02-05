@@ -130,7 +130,7 @@ public class App {
         workspaceView.setStageView(stageView);
 
         topModel = new TopModel();
-        TopController topController = new TopController(topModel);
+        TopController topController = new TopController(topModel, levelModel);
         TopView topView = new TopView(topModel, topController);
 
         settingModel = new SettingModel();
@@ -163,7 +163,7 @@ public class App {
         ((CardLayout) appView.getLayout()).show(appView, AppModel.PAGE_TITLE);
 
         MenuBarModel menuBarModel = new MenuBarModel();
-        MenuBarController menuBarController = new MenuBarController(menuBarModel);
+        MenuBarController menuBarController = new MenuBarController(menuBarModel, levelModel);
         MenuBarView menuBarView = new MenuBarView(menuBarModel, menuBarController);
         appFrame.setJMenuBar(menuBarView);
 
