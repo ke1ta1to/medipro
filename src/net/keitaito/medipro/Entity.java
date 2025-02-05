@@ -248,6 +248,14 @@ public class Entity {
 
     }
 
+    public void targetGoalAction() {
+        this.velX = 0;
+        this.velY = 0;
+        this.accX = 0;
+        this.accY = 0;
+        App.getGameClearModel().setOpen(true);
+    }
+
     @Override
     public String toString() {
         return "Entity [stageModel=" + stageModel + ", posX=" + posX + ", posY=" + posY + ", velX=" + velX + ", velY="
