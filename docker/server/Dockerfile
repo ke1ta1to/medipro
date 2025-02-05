@@ -7,7 +7,7 @@ WORKDIR /app
 # Lambda Web Adapter
 COPY --from=public.ecr.aws/awsguru/aws-lambda-adapter:0.5.0 /lambda-adapter /opt/extensions/lambda-adapter
 ENV PORT=8000
-ENV READINESS_CHECK_PATH=/v1
+ENV READINESS_CHECK_PATH=/
 
 COPY ./src/net/keitaito/mediproserver ./src/net/keitaito/mediproserver
 COPY ./lib ./lib
