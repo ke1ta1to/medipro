@@ -94,7 +94,7 @@ public class App {
         AppFrame appFrame = new AppFrame();
 
         stageMenuModel = new StageMenuModel();
-        StageMenuController stageMenuController = new StageMenuController(stageMenuModel, levelModel);
+        StageMenuController stageMenuController = new StageMenuController(stageMenuModel);
         StageMenuView stageMenuView = new StageMenuView(stageMenuModel, stageMenuController);
 
         stageModel = new StageModel();
@@ -150,10 +150,6 @@ public class App {
         HowToPlayView howToPlayView = new HowToPlayView(howToPlayModel, howToPlayController);
         howToPlayView.addPage(howToPlayPage1View, HowToPlayModel.PAGE_NO1);
         howToPlayView.addPage(howToPlayPage2View, HowToPlayModel.PAGE_NO2);
-
-        settingModel = new SettingModel();
-        SettingController settingController = new SettingController(settingModel);
-        SettingView settingView = new SettingView(settingModel, settingController);
 
         appModel = new AppModel();
         AppController appController = new AppController(appModel);

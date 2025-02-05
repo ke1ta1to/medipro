@@ -16,7 +16,7 @@ import net.keitaito.medipro.Entity;
 import net.keitaito.medipro.Vector2;
 import net.keitaito.medipro.stage_menu.StageMenuView;
 import net.keitaito.medipro.utils.Fonts;
-import medipro.level.LevelModel;
+import net.keitaito.medipro.level.LevelModel;
 
 public class StageView extends JPanel implements MouseListener {
 

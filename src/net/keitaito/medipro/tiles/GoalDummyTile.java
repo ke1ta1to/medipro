@@ -1,9 +1,9 @@
-package medipro.tiles;
+package net.keitaito.medipro.tiles;
 
 import java.awt.Graphics;
 
-import medipro.App;
-import medipro.Entity;
+import net.keitaito.medipro.App;
+import net.keitaito.medipro.Entity;
 
 public class GoalDummyTile extends AirTile {
 

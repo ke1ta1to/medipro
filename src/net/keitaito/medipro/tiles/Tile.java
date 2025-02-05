@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 
-import medipro.Entity;
 import net.keitaito.medipro.Entity;
 
 public abstract class Tile {

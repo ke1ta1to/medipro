@@ -3,10 +3,6 @@ package net.keitaito.medipro.tiles;
 import java.awt.Graphics;
 import java.awt.Image;
 
-import medipro.Entity;
-import medipro.World;
-import javax.swing.ImageIcon;
-
 import net.keitaito.medipro.Entity;
 import net.keitaito.medipro.worlds.World;
 

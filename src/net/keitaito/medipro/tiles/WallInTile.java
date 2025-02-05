@@ -1,9 +1,9 @@
-package medipro.tiles;
+package net.keitaito.medipro.tiles;
 
 import java.awt.Graphics;
 import java.awt.Image;
 
-import medipro.World;
+import net.keitaito.medipro.worlds.World;
 
 public class WallInTile extends Tile {
     private Image wallImage;
