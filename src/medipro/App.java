@@ -110,7 +110,7 @@ public class App {
         appFrame.add(createPanel());
 
         MenuBarModel menuBarModel = new MenuBarModel();
-        MenuBarController menuBarController = new MenuBarController(menuBarModel);
+        MenuBarController menuBarController = new MenuBarController(menuBarModel, levelModel);
         MenuBarView menuBarView = new MenuBarView(menuBarModel, menuBarController);
         appFrame.setJMenuBar(menuBarView);
 
