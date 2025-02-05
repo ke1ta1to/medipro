@@ -50,11 +50,6 @@ export class MediproServerAppStack extends cdk.Stack {
         uid: "0",
         gid: "0",
       },
-      createAcl: {
-        ownerGid: "0",
-        ownerUid: "0",
-        permissions: "755",
-      },
     });
 
     const repository = ecr.Repository.fromRepositoryName(
