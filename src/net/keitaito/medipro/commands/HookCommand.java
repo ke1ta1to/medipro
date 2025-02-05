@@ -17,7 +17,7 @@ public class HookCommand extends Command {
 
     @Override
     public void execute(IKeyAction action, String rawText) throws InterruptedException {
-        if (App.getStageModel().getEntity().isAlive()) {
+        if (App.getStageModel().getEntity().isAlive() && !App.getStageModel().getEntity().isGoal()) {
             if (rawText.matches(HOOK_RIGHT_REGEX)) {
                 action.addKey(KeyEvent.VK_K);
                 sleep(10);

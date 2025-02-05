@@ -27,6 +27,7 @@ public class Entity {
 
     private boolean isOnGround = false;
     private boolean isAlive = true;
+    private boolean isGoal = false;
 
     private int direction = 1;
 
@@ -220,8 +221,16 @@ public class Entity {
         return this.isAlive;
     }
 
+    public boolean isGoal() {
+        return this.isGoal;
+    }
+
     public void setAlive(boolean isAlive) {
         this.isAlive = isAlive;
+    }
+
+    public void setGoal(boolean isGoal) {
+        this.isGoal = isGoal;
     }
 
     public void reset() {

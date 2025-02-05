@@ -13,7 +13,7 @@ public class JumpCommand extends Command {
 
     @Override
     public void execute(IKeyAction action, String rawText) throws InterruptedException {
-        if (App.getStageModel().getEntity().isAlive()) {
+        if (App.getStageModel().getEntity().isAlive() && !App.getStageModel().getEntity().isGoal()) {
             action.addKey(KeyEvent.VK_SPACE);
             sleep(10);
             action.removeKey(KeyEvent.VK_SPACE);
