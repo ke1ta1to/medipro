@@ -2,6 +2,9 @@ package net.keitaito.medipro.tiles;
 
 import java.awt.Graphics;
 
+import javax.swing.ImageIcon;
+import java.awt.Image;
+
 import net.keitaito.medipro.Entity;
 
 public abstract class Tile {
@@ -30,7 +33,17 @@ public abstract class Tile {
         this.y = y;
     }
 
-    public abstract void draw(Graphics g);
+    public abstract void draw(Graphics g, int stageLevel);
+
+    public Image loadImage(String name) {
+        return new ImageIcon(getClass().getResource(
+                "/net/keitaito/medipro/images/" + name)).getImage();
+    }
+
+    public Image loadImage(String name, int stageLevel) {
+        return new ImageIcon(getClass().getResource(
+                "/net/keitaito/medipro/images/" + stageLevel + "/" + name)).getImage();
+    }
 
     /**
      * このタイルに衝突判定があるかどうか

@@ -139,6 +139,12 @@ public class App {
         worldLevel8 = WorldLoader.loadWorld(stageModel, "8_null");
         stageModel.setWorld(voidWorld);
 
+        levelModel = new LevelModel();
+        levelModel.setSelectedLevel(1);
+        LevelController levelController = new LevelController(levelModel);
+        LevelView levelView = new LevelView(levelModel, levelController);
+
+        stageModel.setWorld(worldLevel1);
         StageController stageController = new StageController(stageModel);
         StageView stageView = new StageView(stageModel, stageController);
         stageView.setStageMenuView(stageMenuView);
@@ -160,9 +166,9 @@ public class App {
         TopController topController = new TopController(topModel);
         TopView topView = new TopView(topModel, topController);
 
-        levelModel = new LevelModel();
-        LevelController levelController = new LevelController(levelModel);
-        LevelView levelView = new LevelView(levelModel, levelController);
+        settingModel = new SettingModel();
+        SettingController settingController = new SettingController(settingModel);
+        SettingView settingView = new SettingView(settingModel, settingController);
 
         HowToPlayPage1Model howToPlayPage1Model = new HowToPlayPage1Model();
         HowToPlayPage1Controller howToPlayPage1Controller = new HowToPlayPage1Controller(howToPlayPage1Model);
@@ -177,10 +183,6 @@ public class App {
         HowToPlayView howToPlayView = new HowToPlayView(howToPlayModel, howToPlayController);
         howToPlayView.addPage(howToPlayPage1View, HowToPlayModel.PAGE_NO1);
         howToPlayView.addPage(howToPlayPage2View, HowToPlayModel.PAGE_NO2);
-
-        settingModel = new SettingModel();
-        SettingController settingController = new SettingController(settingModel);
-        SettingView settingView = new SettingView(settingModel, settingController);
 
         appModel = new AppModel();
         AppController appController = new AppController(appModel);

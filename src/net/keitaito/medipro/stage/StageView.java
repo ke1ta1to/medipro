@@ -155,7 +155,7 @@ public class StageView extends JPanel implements MouseListener {
         for (int i = 0; i < model.getWorld().getTiles().length; i++) {
             for (int j = 0; j < model.getWorld().getTiles()[i].length; j++) {
                 if (model.getWorld().getTiles()[i][j] != null) {
-                    model.getWorld().getTiles()[i][j].draw(g);
+                    model.getWorld().getTiles()[i][j].draw(g, App.getLevelModel().getSelectedLevel());
                 }
             }
         }

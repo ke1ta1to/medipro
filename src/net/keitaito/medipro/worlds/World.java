@@ -12,6 +12,8 @@ import net.keitaito.medipro.tiles.ThornTile;
 import net.keitaito.medipro.tiles.Tile;
 import net.keitaito.medipro.tiles.WallTile;
 import net.keitaito.medipro.tiles.WarpTile;
+import net.keitaito.medipro.tiles.GoalDummyTile;
+import net.keitaito.medipro.tiles.WallInTile;
 
 public class World {
 
@@ -51,6 +53,8 @@ public class World {
                 char c = lines[y].charAt(x);
                 if (c == '*') {
                     tiles[x][y] = new WallTile(x * TILE_SIZE, y * TILE_SIZE);
+                } else if (c == ('I')) {
+                    tiles[x][y] = new WallInTile(x * TILE_SIZE, y * TILE_SIZE);
                 } else if (c == ('R')) {
                     tiles[x][y] = new RockTile(x * TILE_SIZE, y * TILE_SIZE);
                 } else if (c == ('T')) {
@@ -63,7 +67,8 @@ public class World {
                     tiles[x][y] = new GoalTile(x * TILE_SIZE, y * TILE_SIZE);
                     goalPosX = x * TILE_SIZE;
                     goalPosY = y * TILE_SIZE;
-
+                } else if (c == ('D')) {
+                    tiles[x][y] = new GoalDummyTile(x * TILE_SIZE, y * TILE_SIZE);
                 } else if (c == ('W')) {
                     tiles[x][y] = new WarpTile(x * TILE_SIZE, y * TILE_SIZE);
                     if (warpTiles[0] == null) {
