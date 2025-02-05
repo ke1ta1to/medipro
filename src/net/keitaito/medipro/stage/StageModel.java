@@ -77,6 +77,7 @@ public class StageModel implements IKeyAction {
         entity.setAccX(0);
         entity.setAccY(0);
         entity.setAlive(true);
+        entity.setGoal(false);
         hangWire = null;
         clearKeys();
         tickCount = 0;

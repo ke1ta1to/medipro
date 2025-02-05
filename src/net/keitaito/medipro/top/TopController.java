@@ -24,6 +24,8 @@ public class TopController implements ActionListener {
             case "New Game Start":
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                 App.getStageModel().setWorld(App.worldLevel1);
+                App.getGameOverModel().setOpen(false);
+                App.getGameClearModel().setOpen(false);
                 break;
 
             case "Level Select":

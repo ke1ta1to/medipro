@@ -20,6 +20,8 @@ public class LevelController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        App.getGameOverModel().setOpen(false);
+        App.getGameClearModel().setOpen(false);
         String command = e.getActionCommand();
         switch (command) {
             case "1":
