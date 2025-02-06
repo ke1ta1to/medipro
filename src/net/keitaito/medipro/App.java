@@ -48,6 +48,7 @@ import net.keitaito.medipro.save.SaveManager;
 import net.keitaito.medipro.setting.SettingController;
 import net.keitaito.medipro.setting.SettingModel;
 import net.keitaito.medipro.setting.SettingView;
+import net.keitaito.medipro.sound.SoundModel;
 import net.keitaito.medipro.stage.StageController;
 import net.keitaito.medipro.stage.StageModel;
 import net.keitaito.medipro.stage.StageView;
@@ -63,6 +64,7 @@ import net.keitaito.medipro.workspace.WorkspaceModel;
 import net.keitaito.medipro.workspace.WorkspaceView;
 import net.keitaito.medipro.worlds.World;
 import net.keitaito.medipro.worlds.WorldLoader;
+import net.keitaito.medipro.sound.SoundModel;
 
 public class App {
 
@@ -94,6 +96,7 @@ public class App {
     private SaveManager saveManager;
     private GameOverModel gameOverModel;
     private GameClearModel gameClearModel;
+    private SoundModel soundModel;
 
     public void start() {
         System.out.println("Application started");
@@ -204,6 +207,16 @@ public class App {
         appFrame.setLocationRelativeTo(null);
         appFrame.setVisible(true);
 
+        soundModel = new SoundModel("nc400405_BGM.wav");
+        soundModel.loop();
+    }
+
+    public static SoundModel getSoundModel() {
+        SoundModel soundModel = app.soundModel;
+        if (soundModel == null) {
+            throw new IllegalStateException("soundModel is null");
+        }
+        return soundModel;
     }
 
     public static CommandStore getCommandStore() {
