@@ -54,4 +54,8 @@ public class StageController implements KeyListener, ActionListener {
         App.getStageMenuModel().setOpen(true);
     }
 
+    public void handleClickOpenShareButton(ActionEvent event) {
+        App.getShareModel().setOpen(!App.getShareModel().isOpen());
+    }
+
 }

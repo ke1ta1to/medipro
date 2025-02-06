@@ -51,6 +51,10 @@ import net.keitaito.medipro.save.SaveManager;
 import net.keitaito.medipro.setting.SettingController;
 import net.keitaito.medipro.setting.SettingModel;
 import net.keitaito.medipro.setting.SettingView;
+import net.keitaito.medipro.share.ShareController;
+import net.keitaito.medipro.share.ShareModel;
+import net.keitaito.medipro.share.ShareView;
+import net.keitaito.medipro.sound.SoundModel;
 import net.keitaito.medipro.stage.StageController;
 import net.keitaito.medipro.stage.StageModel;
 import net.keitaito.medipro.stage.StageView;
@@ -98,6 +102,9 @@ public class App {
     private SaveManager saveManager;
     private GameOverModel gameOverModel;
     private GameClearModel gameClearModel;
+    private SoundModel bgmModel;
+    private SoundModel seModel;
+    private ShareModel shareModel;
 
     public void start() {
         System.out.println("Application started");
@@ -152,6 +159,10 @@ public class App {
         AchievementController achievementController = new AchievementController(achievementModel);
         AchievementView achievementView = new AchievementView(achievementModel, achievementController);
 
+        shareModel = new ShareModel();
+        ShareController shareController = new ShareController(shareModel);
+        ShareView shareView = new ShareView(shareModel, shareController);
+
         stageModel.setWorld(worldLevel1);
         StageController stageController = new StageController(stageModel);
         StageView stageView = new StageView(stageModel, stageController);
@@ -159,6 +170,7 @@ public class App {
         stageView.setHelpDialogView(helpDialogView);
         stageView.setGameOverView(gameOverView);
         stageView.setGameClearView(gameClearView);
+        stageView.setShareView(shareView);
 
         inputModel = new InputModel();
         InputController inputController = new InputController(inputModel);
@@ -213,6 +225,25 @@ public class App {
         appFrame.setLocationRelativeTo(null);
         appFrame.setVisible(true);
 
+        bgmModel = new SoundModel("nc400405_BGM.wav");
+        bgmModel.loop();
+        seModel = new SoundModel("nc254757_決定_クリック.wav");
+    }
+
+    public static SoundModel getBgmModel() {
+        SoundModel soundModel = app.bgmModel;
+        if (soundModel == null) {
+            throw new IllegalStateException("soundModel is null");
+        }
+        return soundModel;
+    }
+
+    public static SoundModel getSeModel() {
+        SoundModel soundModel = app.seModel;
+        if (soundModel == null) {
+            throw new IllegalStateException("soundModel is null");
+        }
+        return soundModel;
     }
 
     public static CommandStore getCommandStore() {
@@ -277,6 +308,22 @@ public class App {
             throw new IllegalStateException("stageMenuBarModel is null");
         }
         return stageMenuBarModel;
+    }
+
+    public static WorkspaceModel getWorkspaceModel() {
+        WorkspaceModel workspaceModel = app.workspaceModel;
+        if (workspaceModel == null) {
+            throw new IllegalStateException("workspaceModel is null");
+        }
+        return workspaceModel;
+    }
+
+    public static ShareModel getShareModel() {
+        ShareModel shareModel = app.shareModel;
+        if (shareModel == null) {
+            throw new IllegalStateException("shareModel is null");
+        }
+        return shareModel;
     }
 
     public static AppModel getAppModel() {
