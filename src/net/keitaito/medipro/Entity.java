@@ -7,6 +7,7 @@ import java.util.List;
 
 import net.keitaito.medipro.gameover.GameOverModel;
 import net.keitaito.medipro.save.SaveData;
+import net.keitaito.medipro.save.SaveManager;
 import net.keitaito.medipro.save.WorldSaveData;
 import net.keitaito.medipro.stage.StageModel;
 import net.keitaito.medipro.stage.StageView;
@@ -260,7 +261,7 @@ public class Entity {
 
     }
 
-    public void targetGoalAction() throws IOException {
+    public void targetGoalAction() {
         this.velX = 0;
         this.velY = 0;
         this.accX = 0;
@@ -272,7 +273,7 @@ public class Entity {
         WorldSaveData worldSaveData = new WorldSaveData();
         worldSaveData.setChecked(true);
         worldSaveData.setInput(App.getInputModel().getText());
-        SaveData saveData = App.getSaveData();
+        SaveData saveData = SaveManager.load();
         if (stageLevel == 1) {
             saveData.setWorldSaveData1(worldSaveData);
         } else if (stageLevel == 2) {
@@ -290,7 +291,11 @@ public class Entity {
         } else if (stageLevel == 8) {
             saveData.setWorldSaveData8(worldSaveData);
         }
-        App.getSaveManager().save(saveData);
+        try {
+            SaveManager.save(saveData);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

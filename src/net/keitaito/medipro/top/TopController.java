@@ -23,7 +23,7 @@ public class TopController implements ActionListener {
         switch (command) {
             case "New Game Start":
                 App.getLevelModel().setSelectedLevel(1);
-                App.getInputModel().setInputText();
+                App.getInputModel().loadInputText();
                 App.getStageModel().setWorld(App.worldLevel1);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                 App.getGameOverModel().setOpen(false);

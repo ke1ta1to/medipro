@@ -7,7 +7,7 @@ public class WorldSaveData implements Serializable {
     private static final long serialVersionUID = 3811643340731509827L;
 
     private boolean checked;
-    private String input;
+    private String input = "";
 
     public boolean isChecked() {
         return checked;
@@ -18,9 +18,6 @@ public class WorldSaveData implements Serializable {
     }
 
     public String getInput() {
-        if (input == null) {
-            return "";
-        }
         return input;
     }
 

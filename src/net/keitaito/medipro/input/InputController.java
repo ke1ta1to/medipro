@@ -10,12 +10,10 @@ import net.keitaito.medipro.IKeyAction;
 import net.keitaito.medipro.commands.Command;
 import net.keitaito.medipro.commands.CommandStore;
 import net.keitaito.medipro.helpdialog.HelpDialogModel;
-import net.keitaito.medipro.worlds.World;
 
 public class InputController {
 
     private final InputModel model;
-    private String inputText = "";
 
     public InputController(InputModel inputModel) {
         this.model = inputModel;
@@ -24,8 +22,7 @@ public class InputController {
 
     private void handleChangeWorld(PropertyChangeEvent evt) {
         System.out.println("handleChangeWorld");
-        World world = (World) evt.getNewValue();
-        model.setInputText();
+        model.loadInputText();
     }
 
     public InputModel getModel() {
@@ -65,10 +62,6 @@ public class InputController {
             }
         });
         thread.start();
-    }
-
-    public String getInputText() {
-        return inputText;
     }
 
 }

@@ -4,6 +4,7 @@ import java.beans.PropertyChangeSupport;
 
 import net.keitaito.medipro.App;
 import net.keitaito.medipro.save.SaveData;
+import net.keitaito.medipro.save.SaveManager;
 
 public class InputModel {
 
@@ -29,10 +30,10 @@ public class InputModel {
         pcs.firePropertyChange("text", old, text);
     }
 
-    public void setInputText() {
+    public void loadInputText() {
         String inputText = "";
         int stageLevel = App.getLevelModel().getSelectedLevel();
-        SaveData saveData = App.getSaveData();
+        SaveData saveData = SaveManager.load();
         System.out.println("stageLevel: " + stageLevel);
         if (stageLevel == 1) {
             inputText = saveData.getWorldSaveData1().getInput();

@@ -2,7 +2,6 @@ package net.keitaito.medipro.tiles;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.io.IOException;
 
 import net.keitaito.medipro.Entity;
 import net.keitaito.medipro.worlds.World;
@@ -30,10 +29,6 @@ public class GoalTile extends Tile {
     @Override
     public void onCollide(Entity target) {
         target.setGoal(true);
-        try {
-            target.targetGoalAction();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        target.targetGoalAction();
     }
 }
