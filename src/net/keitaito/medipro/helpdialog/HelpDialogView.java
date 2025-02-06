@@ -8,6 +8,8 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -82,25 +84,33 @@ public class HelpDialogView extends JPanel {
 
     private JPanel CreateContentsPanel() {
         JPanel panel = new JPanel();
-        java.util.List<String> commands = java.util.Arrays.asList(
+        panel.setOpaque(false);
+        List<String> commands = Arrays.asList(
                 "left : 右に動き続ける",
                 "right : 左に動き続ける",
                 "jump : ジャンプする",
                 "wait",
                 "stop : 左右の動きを止める",
                 "hook",
-                "unhook : hookを離す");
+                "unhook : フックを離す");
         panel.setLayout(new GridLayout(commands.size(), 1));
         panel.setPreferredSize(new Dimension(WIDTH, HEIGHT - 100));
 
         for (String command : commands) {
             if (command.equals("wait")) {
-                JButton commandButton = new JButton(command);
+                JPanel explainPanel = new JPanel();
+                explainPanel.setOpaque(false);
+                JLabel commandLabel = new JLabel(command + " : 処理を停止する");
+                commandLabel.setFont(Fonts.STICK_FONT.deriveFont(20.0f));
+                commandLabel.setHorizontalAlignment(JLabel.CENTER);
+                explainPanel.add(commandLabel);
+                JButton commandButton = new JButton("▼");
                 commandButton.setFont(Fonts.STICK_FONT.deriveFont(20.0f));
                 commandButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         JPanel newPanel = new JPanel();
+                        newPanel.setOpaque(false);
                         newPanel.setLayout(new BorderLayout());
                         JLabel commandNameLabel = new JLabel(command);
                         commandNameLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -108,6 +118,7 @@ public class HelpDialogView extends JPanel {
                         newPanel.add(commandNameLabel, BorderLayout.NORTH);
 
                         JLabel descriptionLabel = new JLabel();
+                        descriptionLabel.setOpaque(false);
                         descriptionLabel
                                 .setText("<html><div style='text-align: left; line-height: 1.5; font-size: 14px;'>"
                                         + "<b>wait</b>は指定した時間だけ<br>"
@@ -137,14 +148,22 @@ public class HelpDialogView extends JPanel {
                         cardLayout.show(cardPanel, command);
                     }
                 });
-                panel.add(commandButton);
+                explainPanel.add(commandButton);
+                panel.add(explainPanel);
             } else if (command.equals("hook")) {
-                JButton commandButton = new JButton(command);
+                JPanel explainPanel = new JPanel();
+                explainPanel.setOpaque(false);
+                JLabel commandLabel = new JLabel(command + " : フックを飛ばす");
+                commandLabel.setFont(Fonts.STICK_FONT.deriveFont(20.0f));
+                commandLabel.setHorizontalAlignment(JLabel.CENTER);
+                explainPanel.add(commandLabel);
+                JButton commandButton = new JButton("▼");
                 commandButton.setFont(Fonts.STICK_FONT.deriveFont(20.0f));
                 commandButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         JPanel newPanel = new JPanel();
+                        newPanel.setOpaque(false);
                         newPanel.setLayout(new BorderLayout());
                         JLabel commandNameLabel = new JLabel(command);
                         commandNameLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -182,7 +201,8 @@ public class HelpDialogView extends JPanel {
                         cardLayout.show(cardPanel, command);
                     }
                 });
-                panel.add(commandButton);
+                explainPanel.add(commandButton);
+                panel.add(explainPanel);
             } else {
                 JLabel commandLabel = new JLabel(command);
                 commandLabel.setFont(Fonts.STICK_FONT.deriveFont(20.0f));

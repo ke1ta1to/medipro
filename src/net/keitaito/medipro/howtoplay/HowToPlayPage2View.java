@@ -6,6 +6,8 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import net.keitaito.medipro.utils.Fonts;
+
 public class HowToPlayPage2View extends JPanel {
 
     private final HowToPlayPage2Model model;
@@ -16,7 +18,7 @@ public class HowToPlayPage2View extends JPanel {
         this.controller = controller;
 
         JLabel titleLabel = new JLabel("testPage2", JLabel.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 36));
+        titleLabel.setFont(Fonts.STICK_FONT.deriveFont(40f));
         add(titleLabel, BorderLayout.NORTH);
     }
 

@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import net.keitaito.medipro.utils.Fonts;
+
 public class HowToPlayView extends JPanel {
 
     private final JPanel parent;
@@ -20,7 +22,7 @@ public class HowToPlayView extends JPanel {
         setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
         JLabel titleLabel = new JLabel("How To Play", JLabel.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 36));
+        titleLabel.setFont(Fonts.STICK_FONT.deriveFont(40f));
         add(titleLabel, BorderLayout.NORTH);
 
         CardLayout cardLayout = new CardLayout();
@@ -29,15 +31,17 @@ public class HowToPlayView extends JPanel {
 
         JButton backButton = new JButton("前のページへ");
         backButton.addActionListener(controller::handleClickBackButton);
+        backButton.setFont(Fonts.STICK_FONT.deriveFont(15f));
         add(backButton, BorderLayout.WEST);
 
         JButton nextButton = new JButton("次のページへ");
         nextButton.addActionListener(controller::handleClickNextButton);
+        nextButton.setFont(Fonts.STICK_FONT.deriveFont(15f));
         add(nextButton, BorderLayout.EAST);
 
         JPanel exitPanel = new JPanel(new GridLayout(1, 1, 15, 30));
         JButton exitButton = new JButton("Exit");
-        exitButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        exitButton.setFont(Fonts.STICK_FONT.deriveFont(40f));
         exitButton.setActionCommand("exit");
         exitButton.addActionListener(controller::handleClickExitButton);
         exitPanel.add(exitButton);

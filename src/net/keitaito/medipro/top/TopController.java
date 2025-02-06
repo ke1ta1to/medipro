@@ -41,6 +41,9 @@ public class TopController implements ActionListener {
             case "How to Play":
                 App.getAppModel().setPageName(AppModel.PAGE_HOW_TO_PLAY);
                 break;
+            case "Achievement":
+                App.getAppModel().setPageName(AppModel.PAGE_ACHIEVEMENT);
+                break;
 
             default:
                 throw new IllegalArgumentException("Unknown command: " + command);
