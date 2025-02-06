@@ -58,6 +58,7 @@ public class StageModel implements IKeyAction {
     private final Image characterRightWalkHat2 = loadImage("R_walk_hat_2.png");
     private final Image characterStop = loadImage("risaju.png");
     private final Image characterRightJump = loadImage("R_jump_hat.png");
+    private final Image characterDeath = loadImage("risajyu_death.png");
 
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
@@ -305,7 +306,9 @@ public class StageModel implements IKeyAction {
             entity.setElapsedSinceStop(0);
         }
         // 速度や中空かを見て、キャラクターの画像を変更する
-        if (!entity.isOnGround()) {
+        if (!entity.isAlive()) {
+            entity.setImage(characterDeath);
+        } else if (!entity.isOnGround()) {
             if (entity.getVelX() > 0) {
                 entity.setImage(characterRightJump);
             } else {
