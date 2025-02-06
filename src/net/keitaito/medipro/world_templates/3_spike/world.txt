@@ -5,10 +5,10 @@
 *                                      T
 *                                      T
 *                 *********            T
-*                          **            T
-*                       GDD**            T
-*                       DDD**            T
-*                       DDD**            T
+*                          **          T
+*                       GDD**          T
+*                       DDD**          T
+*                       DDD**          T
 *                 *********            T
 *                                      T
 *                                      T
