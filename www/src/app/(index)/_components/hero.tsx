@@ -24,15 +24,18 @@ export function Hero() {
         />
       </NextLink>
       <div className="mt-12 max-w-lg px-4 text-sm">
-        ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文ここに紹介文
+        りさプロはコードベースでアクションを決定し、ゴールを目指す1画面アクションゲームです。
       </div>
       <div className="mt-16 flex gap-4">
-        <HeroButton className="bg-primary-500 text-white" href="#">
-          ダウンロード
+        <HeroButton
+          className="bg-primary-500 text-white"
+          href="#ゲームをプレイ"
+        >
+          ゲームをプレイ
         </HeroButton>
-        <HeroButton className="border border-primary-500" href="#">
+        {/* <HeroButton className="border border-primary-500" href="#">
           あそびかた
-        </HeroButton>
+        </HeroButton> */}
       </div>
     </div>
   );
