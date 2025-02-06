@@ -2,7 +2,6 @@ package net.keitaito.medipro.howtoplay;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.beans.PropertyChangeEvent;
 
