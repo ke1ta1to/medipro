@@ -27,6 +27,8 @@ public class TopController implements ActionListener {
                 App.getLevelModel().setSelectedLevel(1);
                 App.getGameOverModel().setOpen(false);
                 App.getGameClearModel().setOpen(false);
+                App.getSoundModel().update("nc399501_StageBGM.wav");
+                App.getSoundModel().loop();
                 break;
 
             case "Level Select":
