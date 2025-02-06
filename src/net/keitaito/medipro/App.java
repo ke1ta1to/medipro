@@ -64,7 +64,6 @@ import net.keitaito.medipro.workspace.WorkspaceModel;
 import net.keitaito.medipro.workspace.WorkspaceView;
 import net.keitaito.medipro.worlds.World;
 import net.keitaito.medipro.worlds.WorldLoader;
-import net.keitaito.medipro.sound.SoundModel;
 
 public class App {
 
