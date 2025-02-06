@@ -20,6 +20,7 @@ public class TopController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
+        App.getSeModel().play();
         switch (command) {
             case "New Game Start":
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
@@ -27,8 +28,8 @@ public class TopController implements ActionListener {
                 App.getLevelModel().setSelectedLevel(1);
                 App.getGameOverModel().setOpen(false);
                 App.getGameClearModel().setOpen(false);
-                App.getSoundModel().update("nc399501_StageBGM.wav");
-                App.getSoundModel().loop();
+                App.getBgmModel().update("nc399501_StageBGM.wav");
+                App.getBgmModel().loop();
                 break;
 
             case "Level Select":

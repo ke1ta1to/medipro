@@ -96,7 +96,8 @@ public class App {
     private SaveManager saveManager;
     private GameOverModel gameOverModel;
     private GameClearModel gameClearModel;
-    private SoundModel soundModel;
+    private SoundModel bgmModel;
+    private SoundModel seModel;
 
     public void start() {
         System.out.println("Application started");
@@ -207,12 +208,21 @@ public class App {
         appFrame.setLocationRelativeTo(null);
         appFrame.setVisible(true);
 
-        soundModel = new SoundModel("nc400405_BGM.wav");
-        soundModel.loop();
+        bgmModel = new SoundModel("nc400405_BGM.wav");
+        bgmModel.loop();
+        seModel = new SoundModel("nc254757_決定_クリック.wav");
     }
 
-    public static SoundModel getSoundModel() {
-        SoundModel soundModel = app.soundModel;
+    public static SoundModel getBgmModel() {
+        SoundModel soundModel = app.bgmModel;
+        if (soundModel == null) {
+            throw new IllegalStateException("soundModel is null");
+        }
+        return soundModel;
+    }
+
+    public static SoundModel getSeModel() {
+        SoundModel soundModel = app.seModel;
         if (soundModel == null) {
             throw new IllegalStateException("soundModel is null");
         }
