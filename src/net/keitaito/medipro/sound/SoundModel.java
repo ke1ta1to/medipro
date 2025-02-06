@@ -49,6 +49,11 @@ public class SoundModel {
         }
     }
 
+    public void setVolume(float volume) { // ボリューム幅は0.0～1.0
+        FloatControl control = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        control.setValue(volume);
+    }
+
     /*
      * public static void main(String[] args) {
      * SEPlayer se = new SEPlayer("se.wav");
