@@ -16,6 +16,17 @@ public class SaveData implements Serializable {
     private WorldSaveData worldSaveData7;
     private WorldSaveData worldSaveData8;
 
+    public void destroySave() {
+        worldSaveData1 = null;
+        worldSaveData2 = null;
+        worldSaveData3 = null;
+        worldSaveData4 = null;
+        worldSaveData5 = null;
+        worldSaveData6 = null;
+        worldSaveData7 = null;
+        worldSaveData8 = null;
+    }
+
     public WorldSaveData getWorldSaveData1() {
         if (worldSaveData1 == null) {
             worldSaveData1 = new WorldSaveData();
