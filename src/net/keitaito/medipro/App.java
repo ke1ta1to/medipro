@@ -51,6 +51,7 @@ import net.keitaito.medipro.setting.SettingView;
 import net.keitaito.medipro.share.ShareController;
 import net.keitaito.medipro.share.ShareModel;
 import net.keitaito.medipro.share.ShareView;
+import net.keitaito.medipro.sound.SoundModel;
 import net.keitaito.medipro.stage.StageController;
 import net.keitaito.medipro.stage.StageModel;
 import net.keitaito.medipro.stage.StageView;
@@ -97,6 +98,8 @@ public class App {
     private SaveManager saveManager;
     private GameOverModel gameOverModel;
     private GameClearModel gameClearModel;
+    private SoundModel bgmModel;
+    private SoundModel seModel;
     private ShareModel shareModel;
 
     public void start() {
@@ -213,6 +216,25 @@ public class App {
         appFrame.setLocationRelativeTo(null);
         appFrame.setVisible(true);
 
+        bgmModel = new SoundModel("nc400405_BGM.wav");
+        bgmModel.loop();
+        seModel = new SoundModel("nc254757_決定_クリック.wav");
+    }
+
+    public static SoundModel getBgmModel() {
+        SoundModel soundModel = app.bgmModel;
+        if (soundModel == null) {
+            throw new IllegalStateException("soundModel is null");
+        }
+        return soundModel;
+    }
+
+    public static SoundModel getSeModel() {
+        SoundModel soundModel = app.seModel;
+        if (soundModel == null) {
+            throw new IllegalStateException("soundModel is null");
+        }
+        return soundModel;
     }
 
     public static CommandStore getCommandStore() {
