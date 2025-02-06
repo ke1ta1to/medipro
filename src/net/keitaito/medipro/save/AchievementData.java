@@ -1,65 +1,34 @@
 package net.keitaito.medipro.save;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AchievementData implements Serializable {
 
     private static final long serialVersionUID = 3811643340731509827L;
 
-    private boolean isHelloWorld;
-    private boolean isAllClear;
-    private boolean isNotUseJump;
-    private boolean isCodeMax8;
+    public static List<String> ALL_ACHIEVEMENTS = List.of("Hello World", "All Clear", "Not Use Jump", "Code Max 8");
+    private List<String> checkedAchivements = new ArrayList<>();
 
-    public AchievementData() {
-        isHelloWorld = false;
-        isAllClear = false;
-        isNotUseJump = false;
-        isCodeMax8 = false;
+    public List<String> getCheckedAchivements() {
+        return checkedAchivements;
     }
 
-    public boolean isHelloWorld() {
-        if (isHelloWorld) {
-            return false;
-        }
-        return isHelloWorld;
+    public void addCheckedAchivement(String achivement) {
+        checkedAchivements.add(achivement);
     }
 
-    public void setHelloWorld(boolean helloWorld) {
-        if (helloWorld) {
-            isHelloWorld = false;
-        }
-        isHelloWorld = helloWorld;
+    public void removeCheckedAchivement(String achivement) {
+        checkedAchivements.remove(achivement);
     }
 
-    public boolean isAllClear() {
-        if (isAllClear) {
-            return false;
-        }
-        return isAllClear;
+    public void clearCheckedAchivements() {
+        checkedAchivements.clear();
     }
 
-    public void setAllClear(boolean allClear) {
-        if (allClear) {
-            isAllClear = false;
-        }
-        isAllClear = allClear;
-    }
-
-    public boolean isNotUseJump() {
-        return isNotUseJump;
-    }
-
-    public void setNotUseJump(boolean notUseJump) {
-        isNotUseJump = notUseJump;
-    }
-
-    public boolean isCodeMax8() {
-        return isCodeMax8;
-    }
-
-    public void setCodeMax8(boolean codeMax8) {
-        isCodeMax8 = codeMax8;
+    public boolean checkAchivement(String achivement) {
+        return checkedAchivements.contains(achivement);
     }
 
 }

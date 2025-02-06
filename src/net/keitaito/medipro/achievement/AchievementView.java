@@ -1,16 +1,14 @@
 package net.keitaito.medipro.achievement;
 
-import javax.swing.JPanel;
-
-import net.keitaito.medipro.utils.Fonts;
-
 import java.awt.BorderLayout;
-import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import net.keitaito.medipro.utils.Fonts;
 
 public class AchievementView extends JPanel {
 
@@ -29,13 +27,17 @@ public class AchievementView extends JPanel {
 
         JPanel centerPanel = new JPanel(new GridLayout(2, 2));
 
-        JPanel firstAchievement = AChievement("Clear", "Hello,World!", model.isHelloWorld());
+        JPanel firstAchievement = AChievement("Clear", "Hello,World!",
+                model.getAchievementData().checkAchivement("Hello World"));
         centerPanel.add(firstAchievement);
-        JPanel secondAchievement = AChievement("Clear", "Birth of a ledgend!", model.isAllClear());
+        JPanel secondAchievement = AChievement("Clear", "Birth of a ledgend!",
+                model.getAchievementData().checkAchivement("All Clear"));
         centerPanel.add(secondAchievement);
-        JPanel thirdAchievement = AChievement("Clear", "You forgot jump command...", model.isNotUseJump());
+        JPanel thirdAchievement = AChievement("Clear", "You forgot jump command...",
+                model.getAchievementData().checkAchivement("Not Use Jump"));
         centerPanel.add(thirdAchievement);
-        JPanel fourthAchievement = AChievement("Clear", "You're master of Risapuro", model.isCodeMax8());
+        JPanel fourthAchievement = AChievement("Clear", "You're master of Risapuro",
+                model.getAchievementData().checkAchivement("Code Max 8"));
         centerPanel.add(fourthAchievement);
 
         add(centerPanel, BorderLayout.CENTER);

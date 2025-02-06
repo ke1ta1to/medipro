@@ -1,7 +1,6 @@
 package net.keitaito.medipro.howtoplay;
 
 import java.awt.BorderLayout;
-import java.awt.Font;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;

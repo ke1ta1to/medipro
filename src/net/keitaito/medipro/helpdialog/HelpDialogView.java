@@ -33,6 +33,7 @@ public class HelpDialogView extends JPanel {
         this.controller = controller;
         this.cardLayout = new CardLayout();
         this.cardPanel = new JPanel(cardLayout);
+        cardPanel.setOpaque(false); // 背景を透明にする
 
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
@@ -124,10 +125,10 @@ public class HelpDialogView extends JPanel {
                                         + "<b>wait</b>は指定した時間だけ<br>"
                                         + "処理を停止するコマンドです<br>"
                                         + "<hr>"
-                                        + "<b>wait n s:</b> n秒だけ処理を停止します<br>"
+                                        + "<b>wait &lt;n&gt;s:</b> n秒だけ処理を停止します<br>"
                                         + "例: <i>wait 1s</i> - 1秒間処理を停止<br>"
                                         + "<hr>"
-                                        + "<b>wait n ms:</b> nミリ秒だけ処理を停止します<br>"
+                                        + "<b>wait &lt;n&gt;ms:</b> nミリ秒だけ処理を停止します<br>"
                                         + "例: <i>wait 500ms</i> - 500ミリ秒間処理を停止"
                                         + "</div></html>");
                         descriptionLabel.setFont(Fonts.STICK_FONT.deriveFont(16.0f));
