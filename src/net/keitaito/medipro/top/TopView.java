@@ -30,10 +30,10 @@ public class TopView extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(15, 15, 15, 15);
 
-        String[] buttonLabels = { "New Game Start", "Level Select", "Setting", "How to Play" };
+        String[] buttonLabels = { "New Game Start", "Level Select", "Setting", "How to Play", "Achievement" };
         for (int i = 0; i < buttonLabels.length; i++) {
             JButton button = new TitleButton(buttonLabels[i]);
-            button.setPreferredSize(new Dimension(200, 60));
+            button.setPreferredSize(new Dimension(200, 40));
             button.setActionCommand(buttonLabels[i]);
             button.addActionListener(controller);
 

@@ -1,10 +1,11 @@
 package net.keitaito.medipro.howtoplay;
 
 import java.awt.BorderLayout;
-import java.awt.Font;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import net.keitaito.medipro.utils.Fonts;
 
 public class HowToPlayPage1View extends JPanel {
 
@@ -16,7 +17,7 @@ public class HowToPlayPage1View extends JPanel {
         this.controller = controller;
 
         JLabel titleLabel = new JLabel("testPage1", JLabel.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 36));
+        titleLabel.setFont(Fonts.STICK_FONT.deriveFont(40f));
         add(titleLabel, BorderLayout.NORTH);
 
     }
