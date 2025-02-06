@@ -1,8 +1,14 @@
 package net.keitaito.medipro.sound;
 
-import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class SoundModel {
     private Clip clip;
@@ -14,38 +20,49 @@ public class SoundModel {
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
             clip = AudioSystem.getClip();
             clip.open(audioStream);
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            // e.printStackTrace();
         }
     }
 
     public void play() {
-        if (clip.isRunning()) {
-            clip.stop(); // 再生中なら停止してリセット
+        if (clip != null) {
+            try {
+                if (clip.isRunning()) {
+                    clip.stop(); // 再生中なら停止してリセット
+                }
+                clip.setFramePosition(0); // 先頭から再生
+                clip.start();
+            } catch (IllegalArgumentException e) {
+            }
         }
-        clip.setFramePosition(0); // 先頭から再生
-        clip.start();
     }
 
     public void loop() { // ループ再生
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        if (clip != null) {
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        }
     }
 
     public void stop() {
-        clip.stop();
+        if (clip != null) {
+            clip.stop();
+        }
     }
 
     public void update(String filePath) {
-        if (clip.isRunning()) {
-            clip.stop();
-        }
-        try {
-            File soundFile = new File(DEFAULT_FILE_PATH + filePath);
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
-            clip = AudioSystem.getClip();
-            clip.open(audioStream);
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
+        if (clip != null) {
+            if (clip.isRunning()) {
+                clip.stop();
+            }
+            try {
+                File soundFile = new File(DEFAULT_FILE_PATH + filePath);
+                AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
+                clip = AudioSystem.getClip();
+                clip.open(audioStream);
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                e.printStackTrace();
+            }
         }
     }
 
