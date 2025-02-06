@@ -53,34 +53,42 @@ public class StageMenuView extends JPanel {
             App.getGameClearModel().setOpen(false);
             switch (selectedStage) {
                 case "stage1":
+                    App.getLevelModel().setSelectedLevel(1);
                     App.getStageModel().setWorld(App.worldLevel1);
                     App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                     break;
                 case "stage2":
+                    App.getLevelModel().setSelectedLevel(2);
                     App.getStageModel().setWorld(App.worldLevel2);
                     App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                     break;
                 case "stage3":
+                    App.getLevelModel().setSelectedLevel(3);
                     App.getStageModel().setWorld(App.worldLevel3);
                     App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                     break;
                 case "stage4":
+                    App.getLevelModel().setSelectedLevel(4);
                     App.getStageModel().setWorld(App.worldLevel4);
                     App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                     break;
                 case "stage5":
+                    App.getLevelModel().setSelectedLevel(5);
                     App.getStageModel().setWorld(App.worldLevel5);
                     App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                     break;
                 case "stage6":
+                    App.getLevelModel().setSelectedLevel(6);
                     App.getStageModel().setWorld(App.worldLevel6);
                     App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                     break;
                 case "stage7":
+                    App.getLevelModel().setSelectedLevel(7);
                     App.getStageModel().setWorld(App.worldLevel7);
                     App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                     break;
                 case "stage8":
+                    App.getLevelModel().setSelectedLevel(8);
                     App.getStageModel().setWorld(App.worldLevel8);
                     App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                     break;

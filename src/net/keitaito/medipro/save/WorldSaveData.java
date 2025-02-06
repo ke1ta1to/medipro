@@ -18,6 +18,9 @@ public class WorldSaveData implements Serializable {
     }
 
     public String getInput() {
+        if (input == null) {
+            return "";
+        }
         return input;
     }
 

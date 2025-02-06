@@ -27,9 +27,9 @@ public final class SaveManager {
             SaveData data = (SaveData) ois.readObject();
             return data;
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            SaveData data = new SaveData();
+            return data;
         }
-        return null;
     }
 
 }

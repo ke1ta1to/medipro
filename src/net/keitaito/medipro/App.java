@@ -44,6 +44,7 @@ import net.keitaito.medipro.level.LevelView;
 import net.keitaito.medipro.menubar.MenuBarController;
 import net.keitaito.medipro.menubar.MenuBarModel;
 import net.keitaito.medipro.menubar.MenuBarView;
+import net.keitaito.medipro.save.SaveData;
 import net.keitaito.medipro.save.SaveManager;
 import net.keitaito.medipro.setting.SettingController;
 import net.keitaito.medipro.setting.SettingModel;
@@ -78,6 +79,8 @@ public class App {
     public static World worldLevel7;
     public static World worldLevel8;
 
+    private SaveData saveData;
+
     private CommandStore commandStore;
 
     private StageMenuModel stageMenuModel;
@@ -99,6 +102,8 @@ public class App {
         System.out.println("Application started");
 
         saveManager = new SaveManager();
+        saveData = new SaveData();
+        saveData = SaveManager.load();
 
         commandStore = new CommandStore();
         commandStore.addCommand(new RightCommand());
@@ -220,6 +225,14 @@ public class App {
             throw new IllegalStateException("stageMenuModel is null");
         }
         return stageMenuModel;
+    }
+
+    public static SaveData getSaveData() {
+        SaveData saveData = app.saveData;
+        if (saveData == null) {
+            throw new IllegalStateException("worldSaveData is null");
+        }
+        return saveData;
     }
 
     public static HelpDialogModel getHelpDialogModel() {

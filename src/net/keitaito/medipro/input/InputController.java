@@ -15,16 +15,17 @@ import net.keitaito.medipro.worlds.World;
 public class InputController {
 
     private final InputModel model;
+    private String inputText = "";
 
     public InputController(InputModel inputModel) {
         this.model = inputModel;
-
         App.getStageModel().addPropertyChangeListener("world", this::handleChangeWorld);
     }
 
     private void handleChangeWorld(PropertyChangeEvent evt) {
+        System.out.println("handleChangeWorld");
         World world = (World) evt.getNewValue();
-        model.setText(world.getExampleCommand());
+        model.setInputText();
     }
 
     public InputModel getModel() {
@@ -64,6 +65,10 @@ public class InputController {
             }
         });
         thread.start();
+    }
+
+    public String getInputText() {
+        return inputText;
     }
 
 }
