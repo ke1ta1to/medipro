@@ -109,7 +109,7 @@ public class StageView extends JPanel implements MouseListener {
 
     public void setGameClearView(GameClearView view) {
         this.gameClearView = view;
-        view.setBounds(250, 300, GameClearView.WIDTH, GameClearView.HEIGHT);
+        view.setBounds(200, 150, GameClearView.WIDTH, GameClearView.HEIGHT);
         view.setVisible(view.getModel().isOpen());
         add(view);
     }

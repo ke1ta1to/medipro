@@ -75,7 +75,7 @@ export class MediproServerAppStack extends cdk.Stack {
     });
 
     const funcUrl = func.addFunctionUrl({
-      authType: lambda.FunctionUrlAuthType.AWS_IAM,
+      authType: lambda.FunctionUrlAuthType.NONE,
     });
 
     new cdk.CfnOutput(this, "MediproServerFunctionUrl", {
@@ -107,8 +107,7 @@ export class MediproServerAppStack extends cdk.Stack {
       "MediproServerDistribution",
       {
         defaultBehavior: {
-          origin:
-            cfn_origins.FunctionUrlOrigin.withOriginAccessControl(funcUrl),
+          origin: new cfn_origins.FunctionUrlOrigin(funcUrl),
           viewerProtocolPolicy: cfn.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
           cachePolicy: cfn.CachePolicy.CACHING_DISABLED,
           originRequestPolicy:

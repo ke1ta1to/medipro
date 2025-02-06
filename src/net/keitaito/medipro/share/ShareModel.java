@@ -66,6 +66,22 @@ public class ShareModel {
             List<Inputs> inputs = gson.fromJson(response.body(), new TypeToken<Collection<Inputs>>() {
             }.getType());
             setInputs(inputs);
+            System.out.println(inputs);
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void registerInputs(Inputs input) {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(ENDPOINT))
+                .POST(
+                        HttpRequest.BodyPublishers.ofString(gson.toJson(input)))
+                .header("Content-Type", "application/json").build();
+
+        try {
+            client.send(request, HttpResponse.BodyHandlers.ofString());
+            loadInputs();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
