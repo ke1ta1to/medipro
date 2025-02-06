@@ -16,7 +16,21 @@ public class SaveData implements Serializable {
     private WorldSaveData worldSaveData7;
     private WorldSaveData worldSaveData8;
 
+    public void destroySave() {
+        worldSaveData1 = null;
+        worldSaveData2 = null;
+        worldSaveData3 = null;
+        worldSaveData4 = null;
+        worldSaveData5 = null;
+        worldSaveData6 = null;
+        worldSaveData7 = null;
+        worldSaveData8 = null;
+    }
+
     public WorldSaveData getWorldSaveData1() {
+        if (worldSaveData1 == null) {
+            worldSaveData1 = new WorldSaveData();
+        }
         return worldSaveData1;
     }
 
@@ -25,6 +39,9 @@ public class SaveData implements Serializable {
     }
 
     public WorldSaveData getWorldSaveData2() {
+        if (worldSaveData2 == null) {
+            worldSaveData2 = new WorldSaveData();
+        }
         return worldSaveData2;
     }
 
@@ -33,6 +50,9 @@ public class SaveData implements Serializable {
     }
 
     public WorldSaveData getWorldSaveData3() {
+        if (worldSaveData3 == null) {
+            worldSaveData3 = new WorldSaveData();
+        }
         return worldSaveData3;
     }
 
@@ -41,6 +61,9 @@ public class SaveData implements Serializable {
     }
 
     public WorldSaveData getWorldSaveData4() {
+        if (worldSaveData4 == null) {
+            worldSaveData4 = new WorldSaveData();
+        }
         return worldSaveData4;
     }
 
@@ -49,6 +72,9 @@ public class SaveData implements Serializable {
     }
 
     public WorldSaveData getWorldSaveData5() {
+        if (worldSaveData5 == null) {
+            worldSaveData5 = new WorldSaveData();
+        }
         return worldSaveData5;
     }
 
@@ -57,6 +83,9 @@ public class SaveData implements Serializable {
     }
 
     public WorldSaveData getWorldSaveData6() {
+        if (worldSaveData6 == null) {
+            worldSaveData6 = new WorldSaveData();
+        }
         return worldSaveData6;
     }
 
@@ -65,6 +94,9 @@ public class SaveData implements Serializable {
     }
 
     public WorldSaveData getWorldSaveData7() {
+        if (worldSaveData7 == null) {
+            worldSaveData7 = new WorldSaveData();
+        }
         return worldSaveData7;
     }
 
@@ -73,6 +105,9 @@ public class SaveData implements Serializable {
     }
 
     public WorldSaveData getWorldSaveData8() {
+        if (worldSaveData8 == null) {
+            worldSaveData8 = new WorldSaveData();
+        }
         return worldSaveData8;
     }
 

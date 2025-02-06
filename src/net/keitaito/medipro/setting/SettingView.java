@@ -19,6 +19,19 @@ public class SettingView extends JPanel {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 36));
         add(titleLabel, BorderLayout.NORTH);
         // TODO: 設定画面の詳細の作成
+        JPanel centerPanel = new JPanel(new GridLayout(2, 1, 10, 10));
+
+        JLabel saveLabel = new JLabel("セーブ機能リセット", JLabel.CENTER);
+        saveLabel.setFont(new Font("Arial", Font.PLAIN, 24));
+        centerPanel.add(saveLabel);
+
+        JButton destroySaveButton = new JButton("セーブ機能を破壊する");
+        destroySaveButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        destroySaveButton.setActionCommand("destroy");
+        destroySaveButton.addActionListener(controller::handleClickDestroySave);
+        centerPanel.add(destroySaveButton);
+
+        add(centerPanel, BorderLayout.CENTER);
 
         JPanel exitPanel = new JPanel(new GridLayout(1, 1, 15, 30));
         JButton exitButton = new JButton("Exit");
