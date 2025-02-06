@@ -1,13 +1,15 @@
 package net.keitaito.medipro.level;
 
 public class LevelModel {
-    private String selectedLevel;
 
-    public String getSelectedLevel() {
+    private int selectedLevel = 0;
+
+    public int getSelectedLevel() {
         return selectedLevel;
     }
 
-    public void setSelectedLevel(String selectedLevel) {
+    public void setSelectedLevel(int selectedLevel) {
         this.selectedLevel = selectedLevel;
     }
+
 }

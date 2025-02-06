@@ -4,10 +4,12 @@ import java.awt.event.ActionEvent;
 
 import net.keitaito.medipro.App;
 import net.keitaito.medipro.app.AppModel;
+import net.keitaito.medipro.level.LevelModel;
 
 public class MenuBarController {
 
     private final MenuBarModel model;
+    private final LevelModel levelModel = App.getLevelModel();
 
     public MenuBarController(MenuBarModel model) {
         this.model = model;
@@ -31,34 +33,42 @@ public class MenuBarController {
         String stageNumber = event.getActionCommand();
         switch (stageNumber) {
             case "1":
+                levelModel.setSelectedLevel(1);
                 App.getStageModel().setWorld(App.worldLevel1);
                 break;
 
             case "2":
+                levelModel.setSelectedLevel(2);
                 App.getStageModel().setWorld(App.worldLevel2);
                 break;
 
             case "3":
+                levelModel.setSelectedLevel(3);
                 App.getStageModel().setWorld(App.worldLevel3);
                 break;
 
             case "4":
+                levelModel.setSelectedLevel(4);
                 App.getStageModel().setWorld(App.worldLevel4);
                 break;
 
             case "5":
+                levelModel.setSelectedLevel(5);
                 App.getStageModel().setWorld(App.worldLevel5);
                 break;
 
             case "6":
+                levelModel.setSelectedLevel(6);
                 App.getStageModel().setWorld(App.worldLevel6);
                 break;
 
             case "7":
+                levelModel.setSelectedLevel(7);
                 App.getStageModel().setWorld(App.worldLevel7);
                 break;
 
             case "8":
+                levelModel.setSelectedLevel(8);
                 App.getStageModel().setWorld(App.worldLevel8);
                 break;
 

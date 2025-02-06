@@ -3,24 +3,22 @@ package net.keitaito.medipro.tiles;
 import java.awt.Graphics;
 import java.awt.Image;
 
-import javax.swing.ImageIcon;
-
-import net.keitaito.medipro.App;
 import net.keitaito.medipro.Entity;
 import net.keitaito.medipro.worlds.World;
 
-public class GoalTile extends AirTile {
+public class GoalTile extends Tile {
 
-    private Image image = new ImageIcon(getClass().getClassLoader().getResource(
-            "net/keitaito/medipro/images/GoalFlag.png")).getImage();
+    private Image image;
 
     public GoalTile(int x, int y) {
         super(x, y);
+
+        image = loadImage("GoalTile.png");
     }
 
     @Override
-    public void draw(Graphics g) {
-        g.drawImage(image, getX(), getY(), World.TILE_SIZE, World.TILE_SIZE, null);
+    public void draw(Graphics g, int stageLevel) {
+        g.drawImage(image, getX(), getY(), World.TILE_SIZE * 3, World.TILE_SIZE * 3, null);
     }
 
     @Override
@@ -30,9 +28,7 @@ public class GoalTile extends AirTile {
 
     @Override
     public void onCollide(Entity target) {
-        // TODO: ゴールした際の処理
-        System.out.println("Goal!");
-        App.getStageModel().reset();
-        App.getStageModel().getWorld().resetState();
+        target.setGoal(true);
+        target.targetGoalAction();
     }
 }

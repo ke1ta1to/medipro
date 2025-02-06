@@ -3,21 +3,20 @@ package net.keitaito.medipro.tiles;
 import java.awt.Graphics;
 import java.awt.Image;
 
-import javax.swing.ImageIcon;
-
 import net.keitaito.medipro.worlds.World;
 
 public class RockTile extends Tile {
 
-    private Image image = new ImageIcon(getClass().getClassLoader().getResource(
-            "net/keitaito/medipro/images/Rock.png")).getImage();
+    private Image image;
 
     public RockTile(int x, int y) {
         super(x, y);
+
+        image = loadImage("RockTile.png");
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics g, int stageLevel) {
         g.drawImage(image, getX(), getY(), World.TILE_SIZE, World.TILE_SIZE, null);
     }
 

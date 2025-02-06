@@ -15,6 +15,8 @@ import javax.swing.Timer;
 import net.keitaito.medipro.App;
 import net.keitaito.medipro.Entity;
 import net.keitaito.medipro.Vector2;
+import net.keitaito.medipro.gameclear.GameClearView;
+import net.keitaito.medipro.gameover.GameOverView;
 import net.keitaito.medipro.helpdialog.HelpDialogView;
 import net.keitaito.medipro.stagemenu.StageMenuView;
 import net.keitaito.medipro.utils.Fonts;
@@ -30,6 +32,10 @@ public class StageView extends JPanel implements MouseListener {
     private StageMenuView stageMenuView;
 
     private HelpDialogView helpDialogView;
+
+    private GameOverView gameOverView;
+
+    private GameClearView gameClearView;
 
     public StageView(StageModel model, StageController controller) {
         this.model = model;
@@ -58,6 +64,10 @@ public class StageView extends JPanel implements MouseListener {
 
         App.getStageMenuModel().addPropertyChangeListener("open", this::handleChangeMenuOpened);
 
+        App.getGameOverModel().addPropertyChangeListener("open", this::handleChangeGameOverOpened);
+
+        App.getGameClearModel().addPropertyChangeListener("open", this::handleChangeGameClearOpened);
+
         // 30fps
         Timer timer = new Timer(1000 / 30, (e) -> {
             repaint();
@@ -75,6 +85,20 @@ public class StageView extends JPanel implements MouseListener {
     public void setHelpDialogView(HelpDialogView view) {
         this.helpDialogView = view;
         view.setBounds(10, 10, HelpDialogView.WIDTH, HelpDialogView.HEIGHT);
+        view.setVisible(view.getModel().isOpen());
+        add(view);
+    }
+
+    public void setGameOverView(GameOverView view) {
+        this.gameOverView = view;
+        view.setBounds(250, 300, GameOverView.WIDTH, GameOverView.HEIGHT);
+        view.setVisible(view.getModel().isOpen());
+        add(view);
+    }
+
+    public void setGameClearView(GameClearView view) {
+        this.gameClearView = view;
+        view.setBounds(250, 300, GameClearView.WIDTH, GameClearView.HEIGHT);
         view.setVisible(view.getModel().isOpen());
         add(view);
     }
@@ -99,6 +123,26 @@ public class StageView extends JPanel implements MouseListener {
         }
     }
 
+    private void handleChangeGameOverOpened(PropertyChangeEvent event) {
+        if ((boolean) event.getNewValue()) {
+            gameOverView.setVisible(true);
+            gameOverView.requestFocus();
+        } else {
+            gameOverView.setVisible(false);
+            requestFocus();
+        }
+    }
+
+    private void handleChangeGameClearOpened(PropertyChangeEvent event) {
+        if ((boolean) event.getNewValue()) {
+            gameClearView.setVisible(true);
+            gameClearView.requestFocus();
+        } else {
+            gameClearView.setVisible(false);
+            requestFocus();
+        }
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -111,7 +155,7 @@ public class StageView extends JPanel implements MouseListener {
         for (int i = 0; i < model.getWorld().getTiles().length; i++) {
             for (int j = 0; j < model.getWorld().getTiles()[i].length; j++) {
                 if (model.getWorld().getTiles()[i][j] != null) {
-                    model.getWorld().getTiles()[i][j].draw(g);
+                    model.getWorld().getTiles()[i][j].draw(g, App.getLevelModel().getSelectedLevel());
                 }
             }
         }

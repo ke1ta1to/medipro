@@ -1,5 +1,6 @@
 package net.keitaito.medipro.save;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -22,14 +23,23 @@ public final class SaveManager {
     }
 
     public static SaveData load() {
+        File file = new File(fileName);
+        if (!file.exists()) {
+            try {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         try (FileInputStream fis = new FileInputStream(fileName);
                 ObjectInputStream ois = new ObjectInputStream(fis);) {
             SaveData data = (SaveData) ois.readObject();
             return data;
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            SaveData data = new SaveData();
+            return data;
         }
-        return null;
     }
 
 }

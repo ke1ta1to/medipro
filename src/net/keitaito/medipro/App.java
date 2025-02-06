@@ -17,6 +17,12 @@ import net.keitaito.medipro.commands.RightCommand;
 import net.keitaito.medipro.commands.StopCommand;
 import net.keitaito.medipro.commands.UnhookCommand;
 import net.keitaito.medipro.commands.WaitCommand;
+import net.keitaito.medipro.gameclear.GameClearController;
+import net.keitaito.medipro.gameclear.GameClearModel;
+import net.keitaito.medipro.gameclear.GameClearView;
+import net.keitaito.medipro.gameover.GameOverController;
+import net.keitaito.medipro.gameover.GameOverModel;
+import net.keitaito.medipro.gameover.GameOverView;
 import net.keitaito.medipro.helpdialog.HelpDialogController;
 import net.keitaito.medipro.helpdialog.HelpDialogModel;
 import net.keitaito.medipro.helpdialog.HelpDialogView;
@@ -86,6 +92,8 @@ public class App {
     private SettingModel settingModel;
     private HowToPlayModel howToPlayModel;
     private SaveManager saveManager;
+    private GameOverModel gameOverModel;
+    private GameClearModel gameClearModel;
 
     public void start() {
         System.out.println("Application started");
@@ -111,6 +119,14 @@ public class App {
         HelpDialogController helpDialogController = new HelpDialogController(helpDialogModel);
         HelpDialogView helpDialogView = new HelpDialogView(helpDialogModel, helpDialogController);
 
+        gameOverModel = new GameOverModel();
+        GameOverController gameOverController = new GameOverController(gameOverModel);
+        GameOverView gameOverView = new GameOverView(gameOverModel, gameOverController);
+
+        gameClearModel = new GameClearModel();
+        GameClearController gameClearController = new GameClearController(gameClearModel);
+        GameClearView gameClearView = new GameClearView(gameClearModel, gameClearController);
+
         stageModel = new StageModel();
         voidWorld = WorldLoader.loadWorld(stageModel, "0_void");
         worldLevel1 = WorldLoader.loadWorld(stageModel, "1_tutorial");
@@ -123,10 +139,18 @@ public class App {
         worldLevel8 = WorldLoader.loadWorld(stageModel, "8_null");
         stageModel.setWorld(voidWorld);
 
+        levelModel = new LevelModel();
+        levelModel.setSelectedLevel(1);
+        LevelController levelController = new LevelController(levelModel);
+        LevelView levelView = new LevelView(levelModel, levelController);
+
+        stageModel.setWorld(worldLevel1);
         StageController stageController = new StageController(stageModel);
         StageView stageView = new StageView(stageModel, stageController);
         stageView.setStageMenuView(stageMenuView);
         stageView.setHelpDialogView(helpDialogView);
+        stageView.setGameOverView(gameOverView);
+        stageView.setGameClearView(gameClearView);
 
         inputModel = new InputModel();
         InputController inputController = new InputController(inputModel);
@@ -142,9 +166,9 @@ public class App {
         TopController topController = new TopController(topModel);
         TopView topView = new TopView(topModel, topController);
 
-        levelModel = new LevelModel();
-        LevelController levelController = new LevelController(levelModel);
-        LevelView levelView = new LevelView(levelModel, levelController);
+        settingModel = new SettingModel();
+        SettingController settingController = new SettingController(settingModel);
+        SettingView settingView = new SettingView(settingModel, settingController);
 
         HowToPlayPage1Model howToPlayPage1Model = new HowToPlayPage1Model();
         HowToPlayPage1Controller howToPlayPage1Controller = new HowToPlayPage1Controller(howToPlayPage1Model);
@@ -159,10 +183,6 @@ public class App {
         HowToPlayView howToPlayView = new HowToPlayView(howToPlayModel, howToPlayController);
         howToPlayView.addPage(howToPlayPage1View, HowToPlayModel.PAGE_NO1);
         howToPlayView.addPage(howToPlayPage2View, HowToPlayModel.PAGE_NO2);
-
-        settingModel = new SettingModel();
-        SettingController settingController = new SettingController(settingModel);
-        SettingView settingView = new SettingView(settingModel, settingController);
 
         appModel = new AppModel();
         AppController appController = new AppController(appModel);
@@ -208,6 +228,22 @@ public class App {
             throw new IllegalStateException("helpDialogModel is null");
         }
         return helpDialogModel;
+    }
+
+    public static GameOverModel getGameOverModel() {
+        GameOverModel gameOverModel = app.gameOverModel;
+        if (gameOverModel == null) {
+            throw new IllegalStateException("gameOverModel is null");
+        }
+        return gameOverModel;
+    }
+
+    public static GameClearModel getGameClearModel() {
+        GameClearModel gameClearModel = app.gameClearModel;
+        if (gameClearModel == null) {
+            throw new IllegalStateException("gameClearModel is null");
+        }
+        return gameClearModel;
     }
 
     public static StageModel getStageModel() {
