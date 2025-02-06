@@ -296,6 +296,7 @@ public class Entity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        App.getAchievementModel().checkAll();
     }
 
     @Override

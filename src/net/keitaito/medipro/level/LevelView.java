@@ -2,7 +2,6 @@ package net.keitaito.medipro.level;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 
@@ -78,7 +77,7 @@ public class LevelView extends JPanel {
 
         JPanel exitPanel = new JPanel(new GridLayout(1, 1, 15, 30));
         JButton exitButton = new JButton("Exit");
-        exitButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        exitButton.setFont(Fonts.STICK_FONT.deriveFont(40f));
         exitButton.setActionCommand("exit");
         exitButton.addActionListener(controller);
         exitPanel.add(exitButton);

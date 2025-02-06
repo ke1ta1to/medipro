@@ -5,6 +5,9 @@ import java.io.IOException;
 
 import javax.swing.SwingUtilities;
 
+import net.keitaito.medipro.achievement.AchievementController;
+import net.keitaito.medipro.achievement.AchievementModel;
+import net.keitaito.medipro.achievement.AchievementView;
 import net.keitaito.medipro.app.AppController;
 import net.keitaito.medipro.app.AppFrame;
 import net.keitaito.medipro.app.AppModel;
@@ -93,6 +96,7 @@ public class App {
     private AppModel appModel;
     private TopModel topModel;
     private LevelModel levelModel;
+    private AchievementModel achievementModel;
     private SettingModel settingModel;
     private HowToPlayModel howToPlayModel;
     private SaveManager saveManager;
@@ -151,6 +155,10 @@ public class App {
         LevelController levelController = new LevelController(levelModel);
         LevelView levelView = new LevelView(levelModel, levelController);
 
+        achievementModel = new AchievementModel();
+        AchievementController achievementController = new AchievementController(achievementModel);
+        AchievementView achievementView = new AchievementView(achievementModel, achievementController);
+
         shareModel = new ShareModel();
         ShareController shareController = new ShareController(shareModel);
         ShareView shareView = new ShareView(shareModel, shareController);
@@ -205,6 +213,7 @@ public class App {
         appView.addView(levelView, AppModel.PAGE_LEVEL_SELECT);
         appView.addView(howToPlayView, AppModel.PAGE_HOW_TO_PLAY);
         appView.addView(settingView, AppModel.PAGE_SETTING);
+        appView.addView(achievementView, AppModel.PAGE_ACHIEVEMENT);
         ((CardLayout) appView.getLayout()).show(appView, AppModel.PAGE_TITLE);
 
         MenuBarModel menuBarModel = new MenuBarModel();
@@ -339,6 +348,14 @@ public class App {
             throw new IllegalStateException("levelModel is null");
         }
         return levelModel;
+    }
+
+    public static AchievementModel getAchievementModel() {
+        AchievementModel achievementModel = app.achievementModel;
+        if (achievementModel == null) {
+            throw new IllegalStateException("achievementModel is null");
+        }
+        return achievementModel;
     }
 
     public static SettingModel getSettingModel() {
