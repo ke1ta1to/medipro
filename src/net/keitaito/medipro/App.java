@@ -218,8 +218,9 @@ public class App {
 
         MenuBarModel menuBarModel = new MenuBarModel();
         MenuBarController menuBarController = new MenuBarController(menuBarModel);
+        @SuppressWarnings("unused")
         MenuBarView menuBarView = new MenuBarView(menuBarModel, menuBarController);
-        appFrame.setJMenuBar(menuBarView);
+        // appFrame.setJMenuBar(menuBarView);
 
         appFrame.pack();
         appFrame.setLocationRelativeTo(null);

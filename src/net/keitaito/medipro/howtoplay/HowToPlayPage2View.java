@@ -20,7 +20,7 @@ public class HowToPlayPage2View extends JPanel {
 
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource(
                 "net/keitaito/medipro/howtoplay/howtoplayimages/HowToPlay2.PNG"));
-        image = icon.getImage().getScaledInstance(700, 400, Image.SCALE_SMOOTH);
+        image = icon.getImage().getScaledInstance(563, 359, Image.SCALE_SMOOTH);
 
         JLabel titleLabel = new JLabel(new ImageIcon(image), JLabel.CENTER);
         add(titleLabel, BorderLayout.NORTH);
