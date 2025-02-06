@@ -23,9 +23,10 @@ public class TopController implements ActionListener {
         App.getSeModel().play();
         switch (command) {
             case "New Game Start":
-                App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
-                App.getStageModel().setWorld(App.worldLevel1);
                 App.getLevelModel().setSelectedLevel(1);
+                App.getInputModel().loadInputText();
+                App.getStageModel().setWorld(App.worldLevel1);
+                App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
                 App.getGameOverModel().setOpen(false);
                 App.getGameClearModel().setOpen(false);
                 App.getBgmModel().update("nc399501_StageBGM.wav");

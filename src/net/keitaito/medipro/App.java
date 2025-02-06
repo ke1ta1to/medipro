@@ -48,6 +48,9 @@ import net.keitaito.medipro.save.SaveManager;
 import net.keitaito.medipro.setting.SettingController;
 import net.keitaito.medipro.setting.SettingModel;
 import net.keitaito.medipro.setting.SettingView;
+import net.keitaito.medipro.share.ShareController;
+import net.keitaito.medipro.share.ShareModel;
+import net.keitaito.medipro.share.ShareView;
 import net.keitaito.medipro.sound.SoundModel;
 import net.keitaito.medipro.stage.StageController;
 import net.keitaito.medipro.stage.StageModel;
@@ -97,6 +100,7 @@ public class App {
     private GameClearModel gameClearModel;
     private SoundModel bgmModel;
     private SoundModel seModel;
+    private ShareModel shareModel;
 
     public void start() {
         System.out.println("Application started");
@@ -147,6 +151,10 @@ public class App {
         LevelController levelController = new LevelController(levelModel);
         LevelView levelView = new LevelView(levelModel, levelController);
 
+        shareModel = new ShareModel();
+        ShareController shareController = new ShareController(shareModel);
+        ShareView shareView = new ShareView(shareModel, shareController);
+
         stageModel.setWorld(worldLevel1);
         StageController stageController = new StageController(stageModel);
         StageView stageView = new StageView(stageModel, stageController);
@@ -154,6 +162,7 @@ public class App {
         stageView.setHelpDialogView(helpDialogView);
         stageView.setGameOverView(gameOverView);
         stageView.setGameClearView(gameClearView);
+        stageView.setShareView(shareView);
 
         inputModel = new InputModel();
         InputController inputController = new InputController(inputModel);
@@ -290,6 +299,22 @@ public class App {
             throw new IllegalStateException("stageMenuBarModel is null");
         }
         return stageMenuBarModel;
+    }
+
+    public static WorkspaceModel getWorkspaceModel() {
+        WorkspaceModel workspaceModel = app.workspaceModel;
+        if (workspaceModel == null) {
+            throw new IllegalStateException("workspaceModel is null");
+        }
+        return workspaceModel;
+    }
+
+    public static ShareModel getShareModel() {
+        ShareModel shareModel = app.shareModel;
+        if (shareModel == null) {
+            throw new IllegalStateException("shareModel is null");
+        }
+        return shareModel;
     }
 
     public static AppModel getAppModel() {

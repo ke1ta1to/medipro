@@ -1,10 +1,14 @@
 package net.keitaito.medipro;
 
 import java.awt.Image;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import net.keitaito.medipro.gameover.GameOverModel;
+import net.keitaito.medipro.save.SaveData;
+import net.keitaito.medipro.save.SaveManager;
+import net.keitaito.medipro.save.WorldSaveData;
 import net.keitaito.medipro.stage.StageModel;
 import net.keitaito.medipro.stage.StageView;
 import net.keitaito.medipro.tiles.Tile;
@@ -263,6 +267,35 @@ public class Entity {
         this.accX = 0;
         this.accY = 0;
         App.getGameClearModel().setOpen(true);
+
+        // save処理
+        int stageLevel = App.getLevelModel().getSelectedLevel();
+        WorldSaveData worldSaveData = new WorldSaveData();
+        worldSaveData.setChecked(true);
+        worldSaveData.setInput(App.getInputModel().getText());
+        SaveData saveData = SaveManager.load();
+        if (stageLevel == 1) {
+            saveData.setWorldSaveData1(worldSaveData);
+        } else if (stageLevel == 2) {
+            saveData.setWorldSaveData2(worldSaveData);
+        } else if (stageLevel == 3) {
+            saveData.setWorldSaveData3(worldSaveData);
+        } else if (stageLevel == 4) {
+            saveData.setWorldSaveData4(worldSaveData);
+        } else if (stageLevel == 5) {
+            saveData.setWorldSaveData5(worldSaveData);
+        } else if (stageLevel == 6) {
+            saveData.setWorldSaveData6(worldSaveData);
+        } else if (stageLevel == 7) {
+            saveData.setWorldSaveData7(worldSaveData);
+        } else if (stageLevel == 8) {
+            saveData.setWorldSaveData8(worldSaveData);
+        }
+        try {
+            SaveManager.save(saveData);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
