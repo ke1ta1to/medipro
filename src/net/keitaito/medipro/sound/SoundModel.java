@@ -21,7 +21,6 @@ public class SoundModel {
             clip = AudioSystem.getClip();
             clip.open(audioStream);
         } catch (Exception e) {
-            // e.printStackTrace();
         }
     }
 

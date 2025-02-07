@@ -15,6 +15,7 @@ public class SaveData implements Serializable {
     private WorldSaveData worldSaveData6;
     private WorldSaveData worldSaveData7;
     private WorldSaveData worldSaveData8;
+    private AchievementData achievementData;
 
     public void destroySave() {
         worldSaveData1 = null;
@@ -25,6 +26,7 @@ public class SaveData implements Serializable {
         worldSaveData6 = null;
         worldSaveData7 = null;
         worldSaveData8 = null;
+        achievementData = null;
     }
 
     public WorldSaveData getWorldSaveData1() {
@@ -113,6 +115,17 @@ public class SaveData implements Serializable {
 
     public void setWorldSaveData8(WorldSaveData worldSaveData8) {
         this.worldSaveData8 = worldSaveData8;
+    }
+
+    public AchievementData getAchievementData() {
+        if (achievementData == null) {
+            achievementData = new AchievementData();
+        }
+        return achievementData;
+    }
+
+    public void setAchievementData(AchievementData achievementData) {
+        this.achievementData = achievementData;
     }
 
 }
