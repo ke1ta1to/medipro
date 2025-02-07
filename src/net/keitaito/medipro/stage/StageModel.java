@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 
 import com.google.gson.Gson;
 
+import net.keitaito.medipro.App;
 import net.keitaito.medipro.Entity;
 import net.keitaito.medipro.HangWire;
 import net.keitaito.medipro.IKeyAction;
@@ -232,6 +233,7 @@ public class StageModel implements IKeyAction {
         if (hasKey(KeyEvent.VK_SPACE)) {
             // 下がタイルに接している場合ジャンプ
             if (entity.isOnGround()) {
+                App.getSeModel().updatePlay("nc240705_ジャンプ.wav");
                 accY = jumpPower;
             }
         }

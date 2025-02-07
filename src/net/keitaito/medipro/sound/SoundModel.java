@@ -13,10 +13,12 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class SoundModel {
     private Clip clip;
     private final String DEFAULT_FILE_PATH = "src/net/keitaito/medipro/sound/sound_sources/";
+    private String filePath;
 
     public SoundModel(String filePath) {
         try {
-            File soundFile = new File(DEFAULT_FILE_PATH + filePath);
+            this.filePath = filePath;
+            File soundFile = new File(DEFAULT_FILE_PATH + this.filePath);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
             clip = AudioSystem.getClip();
             clip.open(audioStream);
@@ -54,15 +56,26 @@ public class SoundModel {
             if (clip.isRunning()) {
                 clip.stop();
             }
-            try {
-                File soundFile = new File(DEFAULT_FILE_PATH + filePath);
-                AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
-                clip = AudioSystem.getClip();
-                clip.open(audioStream);
-            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-                e.printStackTrace();
+            if (this.filePath.equals(filePath)) {
+                clip.setFramePosition(0);
+            } else {
+                this.filePath = filePath;
+                try {
+                    File soundFile = new File(DEFAULT_FILE_PATH + this.filePath);
+                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
+                    clip = AudioSystem.getClip();
+                    clip.open(audioStream);
+                    clip.setFramePosition(0);
+                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                    e.printStackTrace();
+                }
             }
         }
+    }
+
+    public void updatePlay(String filePath) {
+        update(filePath);
+        play();
     }
 
     public void setVolume(float volume) { // ボリューム幅は0.0～1.0
