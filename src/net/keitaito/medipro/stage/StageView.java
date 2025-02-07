@@ -67,7 +67,7 @@ public class StageView extends JPanel implements MouseListener {
         add(openMenuButtonPanel);
 
         setPreferredSize(new Dimension(StageView.WIDTH, StageView.HEIGHT));
-        addKeyListener(controller);
+        // addKeyListener(controller);
         setFocusable(true);
         addMouseListener(this);
 
