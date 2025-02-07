@@ -32,6 +32,7 @@ public class SoundModel {
                 if (clip.isRunning()) {
                     clip.stop(); // 再生中なら停止してリセット
                 }
+                setVolume(0.0f); // ボリュームを0にして再生
                 clip.setFramePosition(0); // 先頭から再生
                 clip.start();
             } catch (IllegalArgumentException e) {
@@ -41,6 +42,7 @@ public class SoundModel {
 
     public void loop() { // ループ再生
         if (clip != null) {
+            setVolume(0.83f);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         }
     }
@@ -78,9 +80,17 @@ public class SoundModel {
         play();
     }
 
-    public void setVolume(float volume) { // ボリューム幅は0.0～1.0
-        FloatControl control = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        control.setValue(volume);
+    public void setVolume(float volume) {
+        if (clip != null) {
+            FloatControl control = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            float min = control.getMinimum(); // 例: -80.0f dB
+            float max = control.getMaximum(); // 例: 6.0f dB
+            System.out.println(min + "~" + max);
+
+            // 0.0 ~ 1.0 の範囲を dB の範囲にマッピング
+            float gain = min + (max - min) * volume;
+            control.setValue(gain);
+        }
     }
 
     /*
