@@ -75,8 +75,9 @@ medipro
 
 | コマンド      | 内容                             | オプション                                 |
 | ------------- | -------------------------------- | ------------------------------------------ |
-| move [option] | x 軸方向に移動する。             | left:左方向,right:右方向                   |
+| [option] | x 軸方向に移動する。             | left:左方向,right:右方向                   |
 | wait [option] | [option]までの処理を止めておく。 | n:(n \in Z),on grounded:地面につくまで待つ |
 | stop          | 移動や加速を停止する。           | -                                          |
 | jump          | ジャンプする                     | -                                          |
 | hook [option] | [option]方向にフックを伸ばす。   | (up,down)+(left,right)                     |
+|unhook|フックを離す。|-|
