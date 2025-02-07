@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import net.keitaito.medipro.utils.Fonts;
+
 public class SettingView extends JPanel {
 
     public SettingView(SettingModel model, SettingController controller) {
@@ -22,11 +24,11 @@ public class SettingView extends JPanel {
         JPanel centerPanel = new JPanel(new GridLayout(2, 1, 10, 10));
 
         JLabel saveLabel = new JLabel("セーブ機能リセット", JLabel.CENTER);
-        saveLabel.setFont(new Font("Arial", Font.PLAIN, 24));
+        saveLabel.setFont(Fonts.STICK_FONT.deriveFont(40f));
         centerPanel.add(saveLabel);
 
         JButton destroySaveButton = new JButton("セーブ機能を破壊する");
-        destroySaveButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        destroySaveButton.setFont(Fonts.STICK_FONT.deriveFont(40f));
         destroySaveButton.setActionCommand("destroy");
         destroySaveButton.addActionListener(controller::handleClickDestroySave);
         centerPanel.add(destroySaveButton);
@@ -35,7 +37,7 @@ public class SettingView extends JPanel {
 
         JPanel exitPanel = new JPanel(new GridLayout(1, 1, 15, 30));
         JButton exitButton = new JButton("Exit");
-        exitButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        exitButton.setFont(Fonts.STICK_FONT.deriveFont(40f));
         exitButton.setActionCommand("exit");
         exitButton.addActionListener(controller::handleClickExit);
         exitPanel.add(exitButton);

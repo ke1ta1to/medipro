@@ -1,0 +1,5 @@
+left
+wait 420ms
+right
+wait 680ms
+left

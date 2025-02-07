@@ -5,6 +5,9 @@ import java.io.IOException;
 
 import javax.swing.SwingUtilities;
 
+import net.keitaito.medipro.achievement.AchievementController;
+import net.keitaito.medipro.achievement.AchievementModel;
+import net.keitaito.medipro.achievement.AchievementView;
 import net.keitaito.medipro.app.AppController;
 import net.keitaito.medipro.app.AppFrame;
 import net.keitaito.medipro.app.AppModel;
@@ -48,6 +51,10 @@ import net.keitaito.medipro.save.SaveManager;
 import net.keitaito.medipro.setting.SettingController;
 import net.keitaito.medipro.setting.SettingModel;
 import net.keitaito.medipro.setting.SettingView;
+import net.keitaito.medipro.share.ShareController;
+import net.keitaito.medipro.share.ShareModel;
+import net.keitaito.medipro.share.ShareView;
+import net.keitaito.medipro.sound.SoundModel;
 import net.keitaito.medipro.stage.StageController;
 import net.keitaito.medipro.stage.StageModel;
 import net.keitaito.medipro.stage.StageView;
@@ -89,11 +96,15 @@ public class App {
     private AppModel appModel;
     private TopModel topModel;
     private LevelModel levelModel;
+    private AchievementModel achievementModel;
     private SettingModel settingModel;
     private HowToPlayModel howToPlayModel;
     private SaveManager saveManager;
     private GameOverModel gameOverModel;
     private GameClearModel gameClearModel;
+    private SoundModel bgmModel;
+    private SoundModel seModel;
+    private ShareModel shareModel;
 
     public void start() {
         System.out.println("Application started");
@@ -134,15 +145,23 @@ public class App {
         worldLevel3 = WorldLoader.loadWorld(stageModel, "3_spike");
         worldLevel4 = WorldLoader.loadWorld(stageModel, "4_hook");
         worldLevel5 = WorldLoader.loadWorld(stageModel, "5_portal");
-        worldLevel6 = WorldLoader.loadWorld(stageModel, "6_null");
-        worldLevel7 = WorldLoader.loadWorld(stageModel, "7_null");
-        worldLevel8 = WorldLoader.loadWorld(stageModel, "8_null");
+        worldLevel6 = WorldLoader.loadWorld(stageModel, "6_tower");
+        worldLevel7 = WorldLoader.loadWorld(stageModel, "7_trap");
+        worldLevel8 = WorldLoader.loadWorld(stageModel, "8_fly");
         stageModel.setWorld(voidWorld);
 
         levelModel = new LevelModel();
         levelModel.setSelectedLevel(1);
         LevelController levelController = new LevelController(levelModel);
         LevelView levelView = new LevelView(levelModel, levelController);
+
+        achievementModel = new AchievementModel();
+        AchievementController achievementController = new AchievementController(achievementModel);
+        AchievementView achievementView = new AchievementView(achievementModel, achievementController);
+
+        shareModel = new ShareModel();
+        ShareController shareController = new ShareController(shareModel);
+        ShareView shareView = new ShareView(shareModel, shareController);
 
         stageModel.setWorld(worldLevel1);
         StageController stageController = new StageController(stageModel);
@@ -151,6 +170,7 @@ public class App {
         stageView.setHelpDialogView(helpDialogView);
         stageView.setGameOverView(gameOverView);
         stageView.setGameClearView(gameClearView);
+        stageView.setShareView(shareView);
 
         inputModel = new InputModel();
         InputController inputController = new InputController(inputModel);
@@ -193,17 +213,38 @@ public class App {
         appView.addView(levelView, AppModel.PAGE_LEVEL_SELECT);
         appView.addView(howToPlayView, AppModel.PAGE_HOW_TO_PLAY);
         appView.addView(settingView, AppModel.PAGE_SETTING);
+        appView.addView(achievementView, AppModel.PAGE_ACHIEVEMENT);
         ((CardLayout) appView.getLayout()).show(appView, AppModel.PAGE_TITLE);
 
         MenuBarModel menuBarModel = new MenuBarModel();
         MenuBarController menuBarController = new MenuBarController(menuBarModel);
+        @SuppressWarnings("unused")
         MenuBarView menuBarView = new MenuBarView(menuBarModel, menuBarController);
-        appFrame.setJMenuBar(menuBarView);
+        // appFrame.setJMenuBar(menuBarView);
 
         appFrame.pack();
         appFrame.setLocationRelativeTo(null);
         appFrame.setVisible(true);
 
+        bgmModel = new SoundModel("nc400405_BGM.wav");
+        bgmModel.loop();
+        seModel = new SoundModel("nc254757_決定_クリック.wav");
+    }
+
+    public static SoundModel getBgmModel() {
+        SoundModel soundModel = app.bgmModel;
+        if (soundModel == null) {
+            throw new IllegalStateException("soundModel is null");
+        }
+        return soundModel;
+    }
+
+    public static SoundModel getSeModel() {
+        SoundModel soundModel = app.seModel;
+        if (soundModel == null) {
+            throw new IllegalStateException("soundModel is null");
+        }
+        return soundModel;
     }
 
     public static CommandStore getCommandStore() {
@@ -270,6 +311,22 @@ public class App {
         return stageMenuBarModel;
     }
 
+    public static WorkspaceModel getWorkspaceModel() {
+        WorkspaceModel workspaceModel = app.workspaceModel;
+        if (workspaceModel == null) {
+            throw new IllegalStateException("workspaceModel is null");
+        }
+        return workspaceModel;
+    }
+
+    public static ShareModel getShareModel() {
+        ShareModel shareModel = app.shareModel;
+        if (shareModel == null) {
+            throw new IllegalStateException("shareModel is null");
+        }
+        return shareModel;
+    }
+
     public static AppModel getAppModel() {
         AppModel appModel = app.appModel;
         if (appModel == null) {
@@ -292,6 +349,14 @@ public class App {
             throw new IllegalStateException("levelModel is null");
         }
         return levelModel;
+    }
+
+    public static AchievementModel getAchievementModel() {
+        AchievementModel achievementModel = app.achievementModel;
+        if (achievementModel == null) {
+            throw new IllegalStateException("achievementModel is null");
+        }
+        return achievementModel;
     }
 
     public static SettingModel getSettingModel() {

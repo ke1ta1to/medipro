@@ -7,6 +7,7 @@ public class AppModel {
     public static final String PAGE_TITLE = "title";
     public static final String PAGE_WORKSPACE = "workspace";
     public static final String PAGE_LEVEL_SELECT = "level-select";
+    public static final String PAGE_ACHIEVEMENT = "achievement";
     public static final String PAGE_SETTING = "setting";
     public static final String PAGE_HOW_TO_PLAY = "how-to-play";
 

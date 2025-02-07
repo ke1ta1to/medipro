@@ -18,6 +18,7 @@ import net.keitaito.medipro.Vector2;
 import net.keitaito.medipro.gameclear.GameClearView;
 import net.keitaito.medipro.gameover.GameOverView;
 import net.keitaito.medipro.helpdialog.HelpDialogView;
+import net.keitaito.medipro.share.ShareView;
 import net.keitaito.medipro.stagemenu.StageMenuView;
 import net.keitaito.medipro.utils.Fonts;
 
@@ -37,6 +38,8 @@ public class StageView extends JPanel implements MouseListener {
 
     private GameClearView gameClearView;
 
+    private ShareView shareView;
+
     public StageView(StageModel model, StageController controller) {
         this.model = model;
         this.controller = controller;
@@ -45,12 +48,18 @@ public class StageView extends JPanel implements MouseListener {
 
         JButton openMenuButton = new JButton("メニュー");
         openMenuButton.setFont(Fonts.STICK_FONT.deriveFont(20.0f));
+        openMenuButton.addActionListener(controller::handleClickOpenMenuButton);
+
+        JButton openShareButton = new JButton("みんなの回答");
+        openShareButton.setFont(Fonts.STICK_FONT.deriveFont(20.0f));
+        openShareButton.addActionListener(controller::handleClickOpenShareButton);
+
         JPanel openMenuButtonPanel = new JPanel();
         openMenuButtonPanel.setOpaque(false);
         openMenuButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        openMenuButtonPanel.add(openShareButton);
         openMenuButtonPanel.add(openMenuButton);
         openMenuButtonPanel.setSize(openMenuButtonPanel.getPreferredSize());
-        openMenuButton.addActionListener(controller::handleClickOpenMenuButton);
 
         App.getHelpDialogModel().addPropertyChangeListener("open", this::handleChangeHelpOpened);
 
@@ -58,7 +67,7 @@ public class StageView extends JPanel implements MouseListener {
         add(openMenuButtonPanel);
 
         setPreferredSize(new Dimension(StageView.WIDTH, StageView.HEIGHT));
-        addKeyListener(controller);
+        // addKeyListener(controller);
         setFocusable(true);
         addMouseListener(this);
 
@@ -67,6 +76,8 @@ public class StageView extends JPanel implements MouseListener {
         App.getGameOverModel().addPropertyChangeListener("open", this::handleChangeGameOverOpened);
 
         App.getGameClearModel().addPropertyChangeListener("open", this::handleChangeGameClearOpened);
+
+        App.getShareModel().addPropertyChangeListener("open", this::handleChangeShareOpened);
 
         // 30fps
         Timer timer = new Timer(1000 / 30, (e) -> {
@@ -98,7 +109,14 @@ public class StageView extends JPanel implements MouseListener {
 
     public void setGameClearView(GameClearView view) {
         this.gameClearView = view;
-        view.setBounds(250, 300, GameClearView.WIDTH, GameClearView.HEIGHT);
+        view.setBounds(200, 150, GameClearView.WIDTH, GameClearView.HEIGHT);
+        view.setVisible(view.getModel().isOpen());
+        add(view);
+    }
+
+    public void setShareView(ShareView view) {
+        this.shareView = view;
+        view.setBounds(80, 60, ShareView.WIDTH, ShareView.HEIGHT);
         view.setVisible(view.getModel().isOpen());
         add(view);
     }
@@ -139,6 +157,16 @@ public class StageView extends JPanel implements MouseListener {
             gameClearView.requestFocus();
         } else {
             gameClearView.setVisible(false);
+            requestFocus();
+        }
+    }
+
+    private void handleChangeShareOpened(PropertyChangeEvent event) {
+        if ((boolean) event.getNewValue()) {
+            shareView.setVisible(true);
+            shareView.requestFocus();
+        } else {
+            shareView.setVisible(false);
             requestFocus();
         }
     }
