@@ -1,6 +1,7 @@
 package net.keitaito.medipro.top;
 
 import java.awt.BorderLayout;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -29,6 +30,7 @@ public class TopView extends JPanel {
         add(gameNameLabel, BorderLayout.NORTH);
 
         JPanel buttonPanel = new JPanel(new GridBagLayout());
+        buttonPanel.setOpaque(false);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(15, 15, 15, 15);
@@ -54,6 +56,14 @@ public class TopView extends JPanel {
 
         add(buttonPanel, BorderLayout.CENTER);
 
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        ImageIcon icon = new ImageIcon(
+                getClass().getClassLoader().getResource("net/keitaito/medipro/images/background.png"));
+        g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
     }
 
 }

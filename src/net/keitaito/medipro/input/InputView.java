@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.beans.PropertyChangeEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -38,13 +39,25 @@ public class InputView extends JPanel {
 
         add(scrollPane, BorderLayout.CENTER);
 
-        helpButton = new JButton("？");
+        helpButton = new JButton();
         helpButton.setFont(Fonts.STICK_FONT.deriveFont(Font.PLAIN, 24));
         helpButton.addActionListener(controller::handleHelp);
+        helpButton.setOpaque(false);
+        helpButton.setContentAreaFilled(false);
+        helpButton.setBorderPainted(false);
+        ImageIcon helpIcon = new ImageIcon(
+                getClass().getClassLoader().getResource("net/keitaito/medipro/images/hatena.png"));
+        helpButton.setIcon(helpIcon);
 
-        JButton submitButton = new JButton("実行");
+        JButton submitButton = new JButton();
         submitButton.setFont(Fonts.STICK_FONT.deriveFont(Font.PLAIN, 24));
         submitButton.addActionListener(controller::handleSubmit);
+        submitButton.setOpaque(false);
+        submitButton.setContentAreaFilled(false);
+        submitButton.setBorderPainted(false);
+        ImageIcon submitIcon = new ImageIcon(
+                getClass().getClassLoader().getResource("net/keitaito/medipro/images/execute.png"));
+        submitButton.setIcon(submitIcon);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BorderLayout());
