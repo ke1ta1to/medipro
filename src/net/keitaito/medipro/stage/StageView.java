@@ -79,6 +79,9 @@ public class StageView extends JPanel implements MouseListener {
 
         App.getShareModel().addPropertyChangeListener("open", this::handleChangeShareOpened);
 
+        // backgroundImage = new ImageIcon(
+        // getClass().getClassLoader().getResource("net/keitaito/medipro/images/background.png")).getImage();
+
         // 30fps
         Timer timer = new Timer(1000 / 30, (e) -> {
             repaint();
@@ -176,7 +179,7 @@ public class StageView extends JPanel implements MouseListener {
         super.paintComponent(g);
 
         // 背景の描画
-        g.setColor(Color.WHITE);
+        g.setColor(new Color(230, 230, 230));
         g.fillRect(0, 0, getWidth(), getHeight());
 
         // ステージの描画
