@@ -32,7 +32,7 @@ public class SoundModel {
                 if (clip.isRunning()) {
                     clip.stop(); // 再生中なら停止してリセット
                 }
-                setVolume(0.0f); // ボリュームを0にして再生
+                setVolume(0.6f); // ボリュームを0にして再生
                 clip.setFramePosition(0); // 先頭から再生
                 clip.start();
             } catch (IllegalArgumentException e) {
@@ -42,7 +42,7 @@ public class SoundModel {
 
     public void loop() { // ループ再生
         if (clip != null) {
-            setVolume(0.83f);
+            setVolume(0.6f);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         }
     }
@@ -83,12 +83,16 @@ public class SoundModel {
     public void setVolume(float volume) {
         if (clip != null) {
             FloatControl control = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            float min = control.getMinimum(); // 例: -80.0f dB
-            float max = control.getMaximum(); // 例: 6.0f dB
-            System.out.println(min + "~" + max);
+            float min = control.getMinimum(); // 例: -80.0 dB
+            float max = control.getMaximum(); // 例: 6.0 dB
 
-            // 0.0 ~ 1.0 の範囲を dB の範囲にマッピング
-            float gain = min + (max - min) * volume;
+            // 人間の聴覚に合うように対数スケールで変換
+            float gain;
+            if (volume <= 0.0f) {
+                gain = min; // 0.0 の場合は最小音量
+            } else {
+                gain = (float) (min + (max - min) * Math.log10(1 + 9 * volume));
+            }
             control.setValue(gain);
         }
     }
