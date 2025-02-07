@@ -16,12 +16,11 @@ public class SoundModel {
 
     public SoundModel(String filePath) {
         try {
-            // File soundFile = new File(DEFAULT_FILE_PATH + filePath);
-            // AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
-            // clip = AudioSystem.getClip();
-            // clip.open(audioStream);
+            File soundFile = new File(DEFAULT_FILE_PATH + filePath);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
+            clip = AudioSystem.getClip();
+            clip.open(audioStream);
         } catch (Exception e) {
-            // e.printStackTrace();
         }
     }
 

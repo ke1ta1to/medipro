@@ -23,8 +23,8 @@ I                                      I
 I                                      I
 I                                      I
 I  S                                GDDI
-I                 RR                DDDI
-I                 RR                DDDI
+I                 **                DDDI
+I                 **                DDDI
 I********************TT****************I
 IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
