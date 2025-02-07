@@ -32,7 +32,7 @@ public class SoundModel {
                 if (clip.isRunning()) {
                     clip.stop(); // 再生中なら停止してリセット
                 }
-                setVolume(0.6f); // ボリュームを0にして再生
+                setVolume(1.0f); // 仮
                 clip.setFramePosition(0); // 先頭から再生
                 clip.start();
             } catch (IllegalArgumentException e) {
@@ -42,7 +42,7 @@ public class SoundModel {
 
     public void loop() { // ループ再生
         if (clip != null) {
-            setVolume(0.6f);
+            setVolume(0.6f); // 仮
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         }
     }
