@@ -145,9 +145,9 @@ public class App {
         worldLevel3 = WorldLoader.loadWorld(stageModel, "3_spike");
         worldLevel4 = WorldLoader.loadWorld(stageModel, "4_hook");
         worldLevel5 = WorldLoader.loadWorld(stageModel, "5_portal");
-        worldLevel6 = WorldLoader.loadWorld(stageModel, "6_null");
-        worldLevel7 = WorldLoader.loadWorld(stageModel, "7_null");
-        worldLevel8 = WorldLoader.loadWorld(stageModel, "8_null");
+        worldLevel6 = WorldLoader.loadWorld(stageModel, "6_tower");
+        worldLevel7 = WorldLoader.loadWorld(stageModel, "7_trap");
+        worldLevel8 = WorldLoader.loadWorld(stageModel, "8_fly");
         stageModel.setWorld(voidWorld);
 
         levelModel = new LevelModel();
