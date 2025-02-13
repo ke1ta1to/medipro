@@ -34,12 +34,13 @@ public class WarpTile extends Tile {
     }
 
     @Override
-    public void onCollide(Entity target) {
+    public boolean onCollide(Entity target) {
         target.setPosX(otherPoint.getX() - (target.getWidth() / 2));
         target.setPosY(otherPoint.getY() - (target.getHeight() / 2));
         this.isCollided = true;
         otherPoint.setIsCollided(true);
 
+        return false;
     }
 
     public void setWarpPoint(WarpTile otherPoint) {

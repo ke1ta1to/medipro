@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 import net.keitaito.medipro.worlds.World;
+import net.keitaito.medipro.Entity;
 
 public class RockTile extends Tile {
 
@@ -22,6 +23,11 @@ public class RockTile extends Tile {
 
     @Override
     public boolean isSolid() {
+        return true;
+    }
+
+    @Override
+    public boolean onCollide(Entity target) {
         return true;
     }
 

@@ -57,6 +57,7 @@ public abstract class Tile {
      * 
      * @param target 衝突したエンティティ
      */
-    public void onCollide(Entity target) {
+    public boolean onCollide(Entity target) {
+        return false;
     }
 }

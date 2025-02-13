@@ -31,7 +31,7 @@ public class BoostTile extends Tile {
     }
 
     @Override
-    public void onCollide(Entity target) {
+    public boolean onCollide(Entity target) {
         // 速度と加速度を変更
         /*
          * if (target.getVelX() < 0.5) {
@@ -42,7 +42,7 @@ public class BoostTile extends Tile {
          */
         // ブーストされている場合は何もしない
         if (isBoosted) {
-            return;
+            return false;
         }
         System.out.println("BoostTile!!!");
         target.setVelX(target.getVelX() * 2);
@@ -50,6 +50,8 @@ public class BoostTile extends Tile {
             target.setVelY(target.getVelY() * 2);
         }
         isBoosted = true;
+
+        return false;
     }
 
     public void reset() {
