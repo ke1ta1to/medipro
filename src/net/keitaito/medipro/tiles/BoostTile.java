@@ -9,6 +9,7 @@ import net.keitaito.medipro.worlds.World;
 public class BoostTile extends Tile {
     private Image thornImage = loadImage("GoalFlag.png");
     private boolean isBoosted = false;
+    private int numBoosted = 0;
 
     public BoostTile(int x, int y) {
         super(x, y);
@@ -41,11 +42,12 @@ public class BoostTile extends Tile {
          * }
          */
         // ブーストされている場合は何もしない
-        if (this.isBoosted) {
+        if (numBoosted > 0) {
             System.out.println("BoostTile: isBoosted");
             return false;
         }
-        System.out.println("BoostTile!!!");
+        System.out.println("BoostTile!!!" + numBoosted);
+        numBoosted++;
         target.setVelX(target.getVelX() * 2);
         if (target.getVelY() > 0) {
             target.setVelY(target.getVelY() * 2);
