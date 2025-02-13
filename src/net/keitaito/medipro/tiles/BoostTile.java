@@ -41,7 +41,8 @@ public class BoostTile extends Tile {
          * }
          */
         // ブーストされている場合は何もしない
-        if (isBoosted) {
+        if (this.isBoosted) {
+            System.out.println("BoostTile: isBoosted");
             return false;
         }
         System.out.println("BoostTile!!!");
@@ -49,7 +50,7 @@ public class BoostTile extends Tile {
         if (target.getVelY() > 0) {
             target.setVelY(target.getVelY() * 2);
         }
-        isBoosted = true;
+        this.isBoosted = true;
 
         return false;
     }
