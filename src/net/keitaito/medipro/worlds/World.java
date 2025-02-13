@@ -5,6 +5,7 @@ import java.awt.Image;
 import net.keitaito.medipro.stage.StageModel;
 import net.keitaito.medipro.stage.StageView;
 import net.keitaito.medipro.tiles.AirTile;
+import net.keitaito.medipro.tiles.BoostTile;
 import net.keitaito.medipro.tiles.GoalTile;
 import net.keitaito.medipro.tiles.RockTile;
 import net.keitaito.medipro.tiles.StartTile;
@@ -76,7 +77,8 @@ public class World {
                     } else {
                         warpTiles[1] = (WarpTile) tiles[x][y];
                     }
-
+                } else if (c == ('B')) {
+                    tiles[x][y] = new BoostTile(x * TILE_SIZE, y * TILE_SIZE);
                 } else {
                     tiles[x][y] = new AirTile(x * TILE_SIZE, y * TILE_SIZE);
                 }

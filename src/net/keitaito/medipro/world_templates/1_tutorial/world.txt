@@ -25,6 +25,6 @@ I                                      I
 I  S                                GDDI
 I                 **                DDDI
 I                 **                DDDI
-I********************TT****************I
+I*******BBBB*********TT****************I
 IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
