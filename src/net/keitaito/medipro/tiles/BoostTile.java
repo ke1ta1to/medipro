@@ -17,7 +17,9 @@ public class BoostTile extends Tile {
     @Override
     public void draw(Graphics g, int stageLevel) {
         // thornImage = loadImage("ThornTile.png", stageLevel);
-        g.drawImage(thornImage, getX(), getY(), World.TILE_SIZE, World.TILE_SIZE, null);
+        if (!isBoosted) {
+            g.drawImage(thornImage, getX(), getY(), World.TILE_SIZE, World.TILE_SIZE, null);
+        }
     }
 
     @Override
@@ -45,6 +47,10 @@ public class BoostTile extends Tile {
             target.setVelY(target.getVelY() * 2);
         }
         isBoosted = true;
+    }
+
+    public void reset() {
+        isBoosted = false;
     }
 
 }
