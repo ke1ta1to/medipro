@@ -24,6 +24,9 @@ public class BoostTile extends Tile {
 
     @Override
     public boolean isSolid() {
+        if (isBoosted) {
+            return false;
+        }
         return true;
     }
 
