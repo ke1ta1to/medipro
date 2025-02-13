@@ -50,6 +50,8 @@ public class InputController {
         CommandStore commandStore = App.getCommandStore();
         Thread thread = new Thread(() -> {
             try {
+                Command firstCommand = commandStore.getCommand("wait 150ms");
+                firstCommand.execute(keyAction, "wait 150ms");
                 String[] lines = model.getText().split("\n");
                 for (String line : lines) {
                     Command command = commandStore.getCommand(line);

@@ -51,7 +51,7 @@ public class InputView extends JPanel {
 
         JButton submitButton = new JButton();
         submitButton.setFont(Fonts.STICK_FONT.deriveFont(Font.PLAIN, 24));
-        submitButton.addActionListener(controller::handleSubmit);
+        submitButton.addActionListener(controller::handleSubmit); // ボタンが押されたときの処理を登録
         submitButton.setOpaque(false);
         submitButton.setContentAreaFilled(false);
         submitButton.setBorderPainted(false);
