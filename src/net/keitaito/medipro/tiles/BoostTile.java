@@ -42,23 +42,24 @@ public class BoostTile extends Tile {
          * }
          */
         // ブーストされている場合は何もしない
-        if (numBoosted > 0) {
+        if (numBoosted > 0) { // isBoostedで動かすとうまくいかない
             System.out.println("BoostTile: isBoosted");
             return false;
         }
-        System.out.println("BoostTile!!!" + numBoosted);
+        System.out.println("BoostTile!!!: " + numBoosted);
         numBoosted++;
         target.setVelX(target.getVelX() * 2);
         if (target.getVelY() > 0) {
             target.setVelY(target.getVelY() * 2);
         }
-        this.isBoosted = true;
+        isBoosted = true;
 
         return false;
     }
 
     public void reset() {
         isBoosted = false;
+        numBoosted = 0;
     }
 
 }
