@@ -30,7 +30,7 @@ public class TopController implements ActionListener {
                 App.getGameOverModel().setOpen(false);
                 App.getGameClearModel().setOpen(false);
                 App.getBgmModel().update("nc399501_StageBGM.wav");
-                App.getBgmModel().loop();
+                // App.getBgmModel().loop();
                 break;
 
             case "Level Select":

@@ -1,10 +1,13 @@
 package net.keitaito.medipro.worlds;
 
 import java.awt.Image;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.keitaito.medipro.stage.StageModel;
 import net.keitaito.medipro.stage.StageView;
 import net.keitaito.medipro.tiles.AirTile;
+import net.keitaito.medipro.tiles.BoostTile;
 import net.keitaito.medipro.tiles.GoalTile;
 import net.keitaito.medipro.tiles.RockTile;
 import net.keitaito.medipro.tiles.StartTile;
@@ -36,6 +39,7 @@ public class World {
     private final Tile[][] tiles;
 
     private final WarpTile[] warpTiles = new WarpTile[2];
+    private final List<Tile> boostTiles;
 
     public World(StageModel stageModel, String rawWorld, String exampleCommand, Image thumbnail,
             WorldMetadata metadata) {
@@ -47,6 +51,7 @@ public class World {
         tiles = new Tile[StageView.WIDTH / TILE_SIZE][StageView.HEIGHT / TILE_SIZE];
 
         String[] lines = rawWorld.split("\n");
+        boostTiles = new ArrayList<>();
 
         for (int y = 0; y < StageView.HEIGHT / TILE_SIZE; y++) {
             for (int x = 0; x < StageView.WIDTH / TILE_SIZE; x++) {
@@ -76,7 +81,9 @@ public class World {
                     } else {
                         warpTiles[1] = (WarpTile) tiles[x][y];
                     }
-
+                } else if (c == ('B')) {
+                    tiles[x][y] = new BoostTile(x * TILE_SIZE, y * TILE_SIZE);
+                    boostTiles.add(tiles[x][y]);
                 } else {
                     tiles[x][y] = new AirTile(x * TILE_SIZE, y * TILE_SIZE);
                 }
@@ -135,6 +142,9 @@ public class World {
             if (warpTile != null) {
                 warpTile.setIsCollided(false);
             }
+        }
+        for (Tile boostTile : boostTiles) {
+            ((BoostTile) boostTile).reset();
         }
     }
 

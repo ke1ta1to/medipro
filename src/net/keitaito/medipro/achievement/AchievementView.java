@@ -2,8 +2,10 @@ package net.keitaito.medipro.achievement;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Graphics;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -63,4 +65,11 @@ public class AchievementView extends JPanel {
         return panel;
     }
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        ImageIcon icon = new ImageIcon(
+                getClass().getClassLoader().getResource("net/keitaito/medipro/images/background.png"));
+        g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
+    }
 }

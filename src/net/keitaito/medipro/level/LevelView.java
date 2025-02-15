@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -83,5 +84,13 @@ public class LevelView extends JPanel {
         exitPanel.add(exitButton);
         add(exitPanel, BorderLayout.SOUTH);
 
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        ImageIcon icon = new ImageIcon(
+                getClass().getClassLoader().getResource("net/keitaito/medipro/images/background.png"));
+        g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
     }
 }

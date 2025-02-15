@@ -27,8 +27,10 @@ public class GoalTile extends Tile {
     }
 
     @Override
-    public void onCollide(Entity target) {
+    public boolean onCollide(Entity target) {
         target.setGoal(true);
         target.targetGoalAction();
+
+        return true;
     }
 }

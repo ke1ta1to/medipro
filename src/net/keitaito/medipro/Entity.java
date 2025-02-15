@@ -63,6 +63,7 @@ public class Entity {
 
     public void setVelX(double velX) {
         this.velX = velX;
+        boolean isCollided = false;
 
         if (this.posX + this.velX < 0) {
             this.velX = 0;
@@ -74,17 +75,25 @@ public class Entity {
 
         Tile[] leftTiles = getCollisionTileOnLeft(this.posX + this.velX);
         if (leftTiles != null) {
-            this.velX = 0;
             for (Tile leftTile : leftTiles) {
-                leftTile.onCollide(this);
+                if (leftTile.onCollide(this)) {
+                    isCollided = true;
+                }
+            }
+            if (isCollided) {
+                this.velX = 0;
             }
         }
 
         Tile[] rightTiles = getCollisionOnRight(this.posX + this.velX);
         if (rightTiles != null) {
-            this.velX = 0;
             for (Tile right : rightTiles) {
-                right.onCollide(this);
+                if (right.onCollide(this)) {
+                    isCollided = true;
+                }
+            }
+            if (isCollided) {
+                this.velX = 0;
             }
         }
 
@@ -100,6 +109,7 @@ public class Entity {
 
     public void setVelY(double velY) {
         this.velY = velY;
+        boolean isCollided = false;
 
         if (this.posY + this.velY < 0) {
             this.velY = 0;
@@ -114,17 +124,25 @@ public class Entity {
 
         Tile[] topTiles = getCollisionOnTop(this.posY + this.velY);
         if (topTiles != null) {
-            this.velY = 0;
             for (Tile topTile : topTiles) {
-                topTile.onCollide(this);
+                if (topTile.onCollide(this)) {
+                    isCollided = true;
+                }
+            }
+            if (isCollided) {
+                this.velY = 0;
             }
         }
 
         Tile[] bottomTiles = getCollisionOnBottom(this.posY + this.velY);
         if (bottomTiles != null) {
-            this.velY = 0;
             for (Tile bottomTile : bottomTiles) {
-                bottomTile.onCollide(this);
+                if (bottomTile.onCollide(this)) {
+                    isCollided = true;
+                }
+            }
+            if (isCollided) {
+                this.velY = 0;
             }
             this.isOnGround = true;
         } else {

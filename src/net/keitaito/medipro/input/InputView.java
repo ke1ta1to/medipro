@@ -35,6 +35,10 @@ public class InputView extends JPanel {
         textArea = new JTextArea();
         textArea.setFont(Fonts.MPLUS1CODE_FONT.deriveFont(Font.PLAIN, 16));
         textArea.getDocument().addDocumentListener(controller.getTextChangeListener(textArea));
+        textArea.setBackground(new Color(0xf5f4e4));// テキストの背景色をf5f4e4に設定
+        // textArea.setForeground(Color.WHITE); // テキストの文字色を白に設定
+        // textArea.setCaretColor(Color.WHITE); // キャレットの色を白に設定
+        // 行番号を表示する （未実装）
         JScrollPane scrollPane = new JScrollPane(textArea);
 
         add(scrollPane, BorderLayout.CENTER);
@@ -51,7 +55,7 @@ public class InputView extends JPanel {
 
         JButton submitButton = new JButton();
         submitButton.setFont(Fonts.STICK_FONT.deriveFont(Font.PLAIN, 24));
-        submitButton.addActionListener(controller::handleSubmit);
+        submitButton.addActionListener(controller::handleSubmit); // ボタンが押されたときの処理を登録
         submitButton.setOpaque(false);
         submitButton.setContentAreaFilled(false);
         submitButton.setBorderPainted(false);
@@ -61,7 +65,8 @@ public class InputView extends JPanel {
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BorderLayout());
-        buttonPanel.setBackground(Color.WHITE);
+        // ボタンの背景色を2e3648に設定
+        buttonPanel.setBackground(new Color(0x2e3648));
         buttonPanel.add(helpButton, BorderLayout.EAST);
         buttonPanel.add(submitButton, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);

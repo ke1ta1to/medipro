@@ -3,8 +3,10 @@ package net.keitaito.medipro.setting;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Graphics;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -42,5 +44,13 @@ public class SettingView extends JPanel {
         exitButton.addActionListener(controller::handleClickExit);
         exitPanel.add(exitButton);
         add(exitPanel, BorderLayout.SOUTH);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        ImageIcon icon = new ImageIcon(
+                getClass().getClassLoader().getResource("net/keitaito/medipro/images/background.png"));
+        g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
     }
 }

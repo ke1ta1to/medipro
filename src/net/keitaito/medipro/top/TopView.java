@@ -25,7 +25,7 @@ public class TopView extends JPanel {
         ImageIcon titleIcon = new ImageIcon(
                 getClass().getClassLoader().getResource("net/keitaito/medipro/images/title.png"));
         // サイズを調整
-        titleIcon = new ImageIcon(titleIcon.getImage().getScaledInstance(500, 100, java.awt.Image.SCALE_SMOOTH));
+        titleIcon = new ImageIcon(titleIcon.getImage().getScaledInstance(600, 120, java.awt.Image.SCALE_SMOOTH));
         gameNameLabel.setIcon(titleIcon);
         add(gameNameLabel, BorderLayout.NORTH);
 
@@ -33,7 +33,7 @@ public class TopView extends JPanel {
         buttonPanel.setOpaque(false);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(15, 15, 15, 15);
+        gbc.insets = new Insets(0, 15, 0, 15); // 余白
 
         String[] buttonLabels = { "New Game Start", "Level Select", "Setting", "How to Play", "Achievement" };
         for (int i = 0; i < buttonLabels.length; i++) {
@@ -44,7 +44,8 @@ public class TopView extends JPanel {
             ImageIcon icon = new ImageIcon(
                     getClass().getClassLoader().getResource("net/keitaito/medipro/images/"
                             + buttonLabels[i].toLowerCase() + ".png"));
-            button.setIcon(icon);
+            // サイズを調整
+            button.setIcon(new ImageIcon(icon.getImage().getScaledInstance(300, 60, java.awt.Image.SCALE_SMOOTH)));
             // button.setPreferredSize(new Dimension(200, 40));
             button.setActionCommand(buttonLabels[i]);
             button.addActionListener(controller);

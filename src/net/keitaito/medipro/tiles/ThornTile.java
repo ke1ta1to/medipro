@@ -25,9 +25,11 @@ public class ThornTile extends Tile {
     }
 
     @Override
-    public void onCollide(Entity target) {
+    public boolean onCollide(Entity target) {
         target.setAlive(false);
         target.targetDeathAction();
+
+        return true;
     }
 
 }

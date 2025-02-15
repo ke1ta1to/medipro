@@ -3,9 +3,11 @@ package net.keitaito.medipro.howtoplay;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.GridLayout;
+import java.awt.Graphics;
 import java.beans.PropertyChangeEvent;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -56,6 +58,14 @@ public class HowToPlayView extends JPanel {
     private void updatePage(PropertyChangeEvent evt) {
         CardLayout cardLayout = (CardLayout) parent.getLayout();
         cardLayout.show(parent, (String) evt.getNewValue());
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        ImageIcon icon = new ImageIcon(
+                getClass().getClassLoader().getResource("net/keitaito/medipro/images/background.png"));
+        g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
     }
 
 }

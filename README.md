@@ -31,6 +31,8 @@ medipro
             │   ├── menubar/ # メニューバー (MVC)
             │   ├── save/ # セーブデータ管理
             │   ├── setting/ # 設定画面 (MVC)
+            │   ├── sound/ # ゲーム内音楽
+            │   |   └── sound_sources/ # ゲームで使用する音楽
             │   ├── stage/ # ステージ画面 (MVC)
             │   ├── stagemenu/ # ステージメニュー (MVC)
             │   ├── stagemenubar/ # ステージメニューバー (MVC)
