@@ -1,5 +1,8 @@
 package net.keitaito.medipro.linenumber;
 
-public class LineNumberModel {
+import javax.swing.JComponent;
+import javax.swing.JTextArea;
+
+public class LineNumberModel extends JComponent {
 
 }
