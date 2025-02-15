@@ -38,6 +38,7 @@ public class InputView extends JPanel {
         textArea.setBackground(new Color(0xf5f4e4));// テキストの背景色をf5f4e4に設定
         // textArea.setForeground(Color.WHITE); // テキストの文字色を白に設定
         // textArea.setCaretColor(Color.WHITE); // キャレットの色を白に設定
+        // 行番号を表示する （未実装）
         JScrollPane scrollPane = new JScrollPane(textArea);
 
         add(scrollPane, BorderLayout.CENTER);
