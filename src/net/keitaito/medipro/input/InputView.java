@@ -35,9 +35,9 @@ public class InputView extends JPanel {
         textArea = new JTextArea();
         textArea.setFont(Fonts.MPLUS1CODE_FONT.deriveFont(Font.PLAIN, 16));
         textArea.getDocument().addDocumentListener(controller.getTextChangeListener(textArea));
-        textArea.setBackground(new Color(0x1E, 0x1E, 0x1E)); // テキストの背景色を#1E1E1Eに設定
-        textArea.setForeground(Color.WHITE); // テキストの文字色を白に設定
-        textArea.setCaretColor(Color.WHITE); // キャレットの色を白に設定
+        textArea.setBackground(new Color(0xf5f4e4));// テキストの背景色をf5f4e4に設定
+        // textArea.setForeground(Color.WHITE); // テキストの文字色を白に設定
+        // textArea.setCaretColor(Color.WHITE); // キャレットの色を白に設定
         JScrollPane scrollPane = new JScrollPane(textArea);
 
         add(scrollPane, BorderLayout.CENTER);
@@ -64,7 +64,8 @@ public class InputView extends JPanel {
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BorderLayout());
-        buttonPanel.setBackground(Color.BLACK); // ボタンの背景色を黒に設定
+        // ボタンの背景色を2e3648に設定
+        buttonPanel.setBackground(new Color(0x2e3648));
         buttonPanel.add(helpButton, BorderLayout.EAST);
         buttonPanel.add(submitButton, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);

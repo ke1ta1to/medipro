@@ -179,7 +179,9 @@ public class StageView extends JPanel implements MouseListener {
         super.paintComponent(g);
 
         // 背景の描画
-        g.setColor(new Color(230, 230, 230));
+        // g.setColor(new Color(230, 230, 230));
+        // 背景色をrgb(46, 54, 72)に変更
+        g.setColor(new Color(46, 54, 72));
         g.fillRect(0, 0, getWidth(), getHeight());
 
         // ステージの描画
