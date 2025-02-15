@@ -7,7 +7,7 @@ import net.keitaito.medipro.Entity;
 import net.keitaito.medipro.worlds.World;
 
 public class BoostTile extends Tile {
-    private Image thornImage = loadImage("GoalFlag.png");
+    private Image thornImage = loadImage("BoostTile.png");
     private boolean isBoosted = false;
     private int numBoosted = 0;
 

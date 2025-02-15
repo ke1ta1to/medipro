@@ -97,6 +97,10 @@ public class SoundModel {
         }
     }
 
+    public void mute() { // 仮
+        setVolume(0.0f);
+    }
+
     /*
      * public static void main(String[] args) {
      * SEPlayer se = new SEPlayer("se.wav");

@@ -21,9 +21,9 @@ public class GoalDummyTile extends Tile {
 
     @Override
     public boolean onCollide(Entity target) {
-        target.setGoal(true);
-        target.targetGoalAction();
+        // target.setGoal(true);
+        // target.targetGoalAction();
 
-        return true;
+        return false;
     }
 }
