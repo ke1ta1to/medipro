@@ -91,4 +91,8 @@ public class InputModel {
         this.fm = this.textArea.getFontMetrics(this.textArea.getFont());
         return this.fm;
     }
+
+    public int getStringWidth(String text) {
+        return this.fm.stringWidth(text);
+    }
 }

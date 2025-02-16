@@ -121,14 +121,22 @@ public class InputView extends JPanel {
         g.fillRect(0, y, getWidth(), this.lineHeight);
     }
 
-    // 指定された「行まで」の文字列をハイライトする
+    // 指定された「行まで」の文字列のみをハイライトする
     public void setMultiLineCharacterColor(Graphics g, Color color, int line) {
         model.setInputTextData(textArea);
         this.startOffset = model.getStartOffset();
         this.lineHeight = model.getLineHeight();
-        int y = this.startOffset + line * this.lineHeight;
+        int y = this.startOffset;
         g.setColor(color);
-        g.fillRect(0, 0, getWidth(), y);
+        String[] lines = textArea.getText().split("\n"); // 改行で分割
+
+        for (int i = 0; i < line; i++) {
+            int width = this.model.getStringWidth(lines[i]);
+            y = this.startOffset + i * this.lineHeight;
+            g.fillRect(0, y, width, this.lineHeight); // ハイライト
+            g.setColor(Color.BLACK);
+            g.drawString(lines[i], 0, y);
+        }
     }
 
     // 指定された「行」の文字列をハイライトする
@@ -138,6 +146,11 @@ public class InputView extends JPanel {
         this.lineHeight = model.getLineHeight();
         int y = this.startOffset + line * this.lineHeight;
         g.setColor(color);
-        g.fillRect(0, y, getWidth(), this.lineHeight);
+        String[] lines = textArea.getText().split("\n"); // 改行で分割
+
+        int width = this.model.getStringWidth(lines[line]);
+        g.fillRect(0, y, width, this.lineHeight);
+        g.setColor(Color.BLACK);
+        g.drawString(lines[line], 0, y);
     }
 }
