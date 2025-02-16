@@ -1,28 +1,20 @@
 package net.keitaito.medipro.linenumber;
 
-import javax.swing.JComponent;
-import javax.swing.JTextArea;
-import javax.swing.event.DocumentListener;
-
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import javax.swing.text.Element;
-import java.awt.Color;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
-import java.awt.FontMetrics;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.Element;
+import java.awt.*;
 
 public class LineNumberView extends JComponent {
     private final JTextArea textArea;
 
     public LineNumberView(JTextArea textArea) {
         this.textArea = textArea;
-        this.textArea.setFont(textArea.getFont());
-        this.textArea.setForeground(Color.RED); // 行番号の色を赤に設定
-        this.textArea.setPreferredSize(new Dimension(30, 60)); // 横幅30px
+        setPreferredSize(new Dimension(40, Integer.MAX_VALUE)); // 横幅40px
+        setFont(textArea.getFont());
 
-        // JTextAreaの変更を監視して再描画
+        // 行番号の自動更新
         textArea.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -52,7 +44,7 @@ public class LineNumberView extends JComponent {
 
         FontMetrics fm = textArea.getFontMetrics(textArea.getFont());
         int lineHeight = fm.getHeight();
-        int startOffset = textArea.getInsets().top + fm.getAscent(); // 行の開始位置を調整
+        int startOffset = textArea.getInsets().top + fm.getAscent();
         Element root = textArea.getDocument().getDefaultRootElement();
 
         // 背景を塗る（視認性向上）
@@ -60,7 +52,7 @@ public class LineNumberView extends JComponent {
         g2.fillRect(0, 0, getWidth(), getHeight());
 
         // 行番号の描画
-        g2.setColor(Color.BLUE);
+        g2.setColor(Color.GRAY);
         for (int i = 0; i < root.getElementCount(); i++) {
             int y = startOffset + i * lineHeight;
             g2.drawString(String.valueOf(i + 1), 5, y);
