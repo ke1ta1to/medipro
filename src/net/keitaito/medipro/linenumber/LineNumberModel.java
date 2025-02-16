@@ -1,8 +1,48 @@
 package net.keitaito.medipro.linenumber;
 
+import java.awt.FontMetrics;
+
+import javax.swing.text.Element;
 import javax.swing.JComponent;
 import javax.swing.JTextArea;
 
 public class LineNumberModel extends JComponent {
+    private Element root;
+    private FontMetrics fm;
+    private int lineHeight;
+    private int startOffset;
+    private JTextArea textArea;
 
+    public LineNumberModel(JTextArea textArea) {
+        this.textArea = textArea;
+        this.fm = textArea.getFontMetrics(this.textArea.getFont());
+        this.lineHeight = this.fm.getHeight();
+        this.root = this.textArea.getDocument().getDefaultRootElement();
+        this.startOffset = 0;
+    }
+
+    public Element getRoot() {
+        this.root = this.textArea.getDocument().getDefaultRootElement();
+        return this.root;
+    }
+
+    public Element getRoot(JTextArea textArea) {
+        this.root = textArea.getDocument().getDefaultRootElement();
+        return this.root;
+    }
+
+    public int getStartOffset() {
+        this.startOffset = this.textArea.getInsets().top + this.fm.getAscent();
+        return this.startOffset;
+    }
+
+    public int getLineHeight(JTextArea textArea) {
+        this.lineHeight = this.fm.getHeight();
+        return this.lineHeight;
+    }
+
+    public FontMetrics getFontMetrics(JTextArea textArea) {
+        this.fm = textArea.getFontMetrics(textArea.getFont());
+        return this.fm;
+    }
 }

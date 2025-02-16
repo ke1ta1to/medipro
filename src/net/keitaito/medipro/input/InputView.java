@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.beans.PropertyChangeEvent;
 
 import javax.swing.ImageIcon;
@@ -11,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 
 import net.keitaito.medipro.linenumber.LineNumberView;
 import net.keitaito.medipro.utils.Fonts;
@@ -39,9 +42,9 @@ public class InputView extends JPanel {
         textArea.setBackground(new Color(0xf5f4e4));// テキストの背景色をf5f4e4に設定
         // textArea.setForeground(Color.WHITE); // テキストの文字色を白に設定
         // textArea.setCaretColor(Color.WHITE); // キャレットの色を白に設定
-        // 行番号を表示する （未実装）
         JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setRowHeaderView(new LineNumberView(textArea)); // ← 行番号を設定
+        scrollPane.setRowHeaderView(new LineNumberView(textArea)); // 行番号を表示
+        textArea.setLineWrap(true); // テキストがコンポーネントの幅を超えたときに折り返す
 
         add(scrollPane, BorderLayout.CENTER);
 
@@ -91,4 +94,18 @@ public class InputView extends JPanel {
         }
     }
 
+    /*
+     * // 指定された「行まで」の文字色を指定したものに変更
+     * protected void setMultiLineCharacterColor(Graphics g, Color color, int line)
+     * {
+     * FontMetrics fm = textArea.getFontMetrics(textArea.getFont());
+     * int lineHeight = fm.getHeight();
+     * int startOffset = textArea.getInsets().top + fm.getAscent();
+     * int y = startOffset + line * lineHeight;
+     * g.setColor(color);
+     * for (int i = 0; i < root.getElement(line).getEndOffset(); i++) {
+     * g.drawString(String.valueOf(i + 1), 5, y);
+     * }
+     * }
+     */
 }

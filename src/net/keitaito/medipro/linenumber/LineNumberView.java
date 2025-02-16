@@ -13,12 +13,17 @@ import javax.swing.JComponent;
 import javax.swing.JTextArea;
 import javax.swing.text.Element;
 
+import net.keitaito.medipro.linenumber.LineNumberModel;
+
 public class LineNumberView extends JComponent {
     private final JTextArea textArea;
+    private Element root;
+    private LineNumberModel model;
 
     public LineNumberView(JTextArea textArea) {
         this.textArea = textArea;
-        setPreferredSize(new Dimension(40, Integer.MAX_VALUE)); // 横幅40px
+        this.model = new LineNumberModel(textArea);
+        setPreferredSize(new Dimension(40, 0)); // 横幅40px
         setFont(textArea.getFont());
 
         // 行番号の自動更新
@@ -49,12 +54,11 @@ public class LineNumberView extends JComponent {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        FontMetrics fm = textArea.getFontMetrics(textArea.getFont());
-        int lineHeight = fm.getHeight();
-        int startOffset = textArea.getInsets().top + fm.getAscent();
-        Element root = textArea.getDocument().getDefaultRootElement();
+        int lineHeight = this.model.getLineHeight(textArea); // 行の高さ
+        int startOffset = this.model.getStartOffset(); // 開始オフセット
+        this.root = this.model.getRoot(); // ルート要素
 
-        // 背景を塗る（視認性向上）
+        // 背景を塗る
         g2.setColor(new Color(245, 244, 228)); // textAreaと同じ背景色
         g2.fillRect(0, 0, getWidth(), getHeight());
 
@@ -64,5 +68,25 @@ public class LineNumberView extends JComponent {
             int y = startOffset + i * lineHeight;
             g2.drawString(String.valueOf(i + 1), 5, y);
         }
+    }
+
+    // 指定された「行まで」の文字色を変更
+    protected void setMultiLineCharacterColor(Graphics g, Color color, int row) {
+        int lineHeight = model.getLineHeight(textArea);
+        int startOffset = model.getStartOffset();
+        int y = startOffset + row * lineHeight;
+        g.setColor(color);
+        for (int i = 0; i < root.getElement(row).getEndOffset(); i++) {
+            g.drawString(String.valueOf(i + 1), 5, y);
+        }
+    }
+
+    // 指定された「行」の文字色を変更
+    protected void setSingleLineCharacterColor(Graphics g, Color color, int row) {
+        int lineHeight = model.getLineHeight(textArea);
+        int startOffset = model.getStartOffset();
+        int y = startOffset + row * lineHeight;
+        g.setColor(color);
+        g.drawString(String.valueOf(row + 1), 5, y);
     }
 }
