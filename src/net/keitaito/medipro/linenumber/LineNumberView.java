@@ -19,8 +19,8 @@ public class LineNumberView extends JComponent {
     private final JTextArea textArea;
     private Element root;
     private LineNumberModel model;
-    int lineHeight;
-    int startOffset;
+    private int lineHeight;
+    private int startOffset;
 
     public LineNumberView(JTextArea textArea) {
         this.textArea = textArea;
@@ -65,41 +65,38 @@ public class LineNumberView extends JComponent {
 
         // 行番号の描画
         g2.setColor(Color.GRAY);
-        int i;
-        for (i = 0; i < root.getElementCount(); i++) {
+        for (int i = 0; i < root.getElementCount(); i++) {
             int y = this.startOffset + i * this.lineHeight;
             g2.drawString(String.valueOf(i + 1), 5, y);
         }
-
-        setMultiLineBackgroundColor(g2, Color.RED, i - 1);
     }
 
-    // 指定された「行まで」の文字色を変更
-    protected void setMultiLineCharacterColor(Graphics g, Color color, int row) {
-        int y = this.startOffset + row * this.lineHeight;
+    // 指定された「行まで」の文字色を変更rgb(226, 226, 210)
+    protected void setMultiLineCharacterColor(Graphics g, Color color, int line) {
+        int y = this.startOffset + line * this.lineHeight;
         g.setColor(color);
-        for (int i = 0; i < root.getElement(row).getEndOffset(); i++) {
+        for (int i = 0; i < root.getElement(line).getEndOffset(); i++) {
             g.drawString(String.valueOf(i + 1), 5, y);
         }
     }
 
     // 指定された「行」の文字色を変更
-    protected void setSingleLineCharacterColor(Graphics g, Color color, int row) {
-        int y = this.startOffset + row * this.lineHeight;
+    protected void setSingleLineCharacterColor(Graphics g, Color color, int line) {
+        int y = this.startOffset + line * this.lineHeight;
         g.setColor(color);
-        g.drawString(String.valueOf(row + 1), 5, y);
+        g.drawString(String.valueOf(line + 1), 5, y);
     }
 
     // 指定した「行まで」の背景色を変更
-    protected void setMultiLineBackgroundColor(Graphics g, Color color, int row) {
-        int y = this.startOffset + row * this.lineHeight;
+    protected void setMultiLineBackgroundColor(Graphics g, Color color, int line) {
+        int y = this.startOffset + line * this.lineHeight;
         g.setColor(color);
         g.fillRect(0, 0, getWidth(), y);
     }
 
     // 指定した「行」の背景色を変更
-    protected void setSingleLineBackgroundColor(Graphics g, Color color, int row) {
-        int y = this.startOffset + row * this.lineHeight;
+    protected void setSingleLineBackgroundColor(Graphics g, Color color, int line) {
+        int y = this.startOffset + line * this.lineHeight;
         g.setColor(color);
         g.fillRect(0, y - this.lineHeight, getWidth(), this.lineHeight);
     }

@@ -18,7 +18,7 @@ public class LineNumberModel extends JComponent {
         this.fm = textArea.getFontMetrics(this.textArea.getFont());
         this.lineHeight = this.fm.getHeight();
         this.root = this.textArea.getDocument().getDefaultRootElement();
-        this.startOffset = 0;
+        this.startOffset = this.textArea.getInsets().top + this.fm.getAscent();
     }
 
     public Element getRoot() {

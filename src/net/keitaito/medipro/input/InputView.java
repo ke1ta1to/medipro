@@ -14,7 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
+import javax.swing.text.Element;
 
+import net.keitaito.medipro.linenumber.LineNumberModel;
 import net.keitaito.medipro.linenumber.LineNumberView;
 import net.keitaito.medipro.utils.Fonts;
 
@@ -26,6 +28,10 @@ public class InputView extends JPanel {
     private final JTextArea textArea;
 
     private final JButton helpButton;
+
+    private Element root;
+    private int lineHeight;
+    private int startOffset;
 
     public InputView(InputModel model, InputController controller) {
         this.model = model;
@@ -39,12 +45,14 @@ public class InputView extends JPanel {
         textArea = new JTextArea();
         textArea.setFont(Fonts.MPLUS1CODE_FONT.deriveFont(Font.PLAIN, 16));
         textArea.getDocument().addDocumentListener(controller.getTextChangeListener(textArea));
-        textArea.setBackground(new Color(0xf5f4e4));// テキストの背景色をf5f4e4に設定
+        textArea.setBackground(new Color(245, 244, 228));// テキストの背景色をrgb(245,244,228)に設定
         // textArea.setForeground(Color.WHITE); // テキストの文字色を白に設定
         // textArea.setCaretColor(Color.WHITE); // キャレットの色を白に設定
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setRowHeaderView(new LineNumberView(textArea)); // 行番号を表示
         textArea.setLineWrap(true); // テキストがコンポーネントの幅を超えたときに折り返す
+
+        model.setInputTextData(textArea);
 
         add(scrollPane, BorderLayout.CENTER);
 
@@ -70,8 +78,7 @@ public class InputView extends JPanel {
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BorderLayout());
-        // ボタンの背景色を2e3648に設定
-        buttonPanel.setBackground(new Color(0x2e3648));
+        buttonPanel.setBackground(new Color(0x2e3648)); // ボタンの背景色を2e3648に設定
         buttonPanel.add(helpButton, BorderLayout.EAST);
         buttonPanel.add(submitButton, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
@@ -94,18 +101,43 @@ public class InputView extends JPanel {
         }
     }
 
-    /*
-     * // 指定された「行まで」の文字色を指定したものに変更
-     * protected void setMultiLineCharacterColor(Graphics g, Color color, int line)
-     * {
-     * FontMetrics fm = textArea.getFontMetrics(textArea.getFont());
-     * int lineHeight = fm.getHeight();
-     * int startOffset = textArea.getInsets().top + fm.getAscent();
-     * int y = startOffset + line * lineHeight;
-     * g.setColor(color);
-     * for (int i = 0; i < root.getElement(line).getEndOffset(); i++) {
-     * g.drawString(String.valueOf(i + 1), 5, y);
-     * }
-     * }
-     */
+    // 指定された「行まで」の背景色を変更する
+    public void setMultiLineBackgroundColor(Graphics g, Color color, int line) {
+        model.setInputTextData(textArea);
+        this.startOffset = model.getStartOffset();
+        this.lineHeight = model.getLineHeight();
+        int y = this.startOffset + line * this.lineHeight;
+        g.setColor(color);
+        g.fillRect(0, 0, getWidth(), y);
+    }
+
+    // 指定された「行」の背景色を変更する
+    public void setSingleLineBackgroundColor(Graphics g, Color color, int line) {
+        model.setInputTextData(textArea);
+        this.startOffset = model.getStartOffset();
+        this.lineHeight = model.getLineHeight();
+        int y = this.startOffset + line * this.lineHeight;
+        g.setColor(color);
+        g.fillRect(0, y, getWidth(), this.lineHeight);
+    }
+
+    // 指定された「行まで」の文字列をハイライトする
+    public void setMultiLineCharacterColor(Graphics g, Color color, int line) {
+        model.setInputTextData(textArea);
+        this.startOffset = model.getStartOffset();
+        this.lineHeight = model.getLineHeight();
+        int y = this.startOffset + line * this.lineHeight;
+        g.setColor(color);
+        g.fillRect(0, 0, getWidth(), y);
+    }
+
+    // 指定された「行」の文字列をハイライトする
+    public void setSingleLineCharacterColor(Graphics g, Color color, int line) {
+        model.setInputTextData(textArea);
+        this.startOffset = model.getStartOffset();
+        this.lineHeight = model.getLineHeight();
+        int y = this.startOffset + line * this.lineHeight;
+        g.setColor(color);
+        g.fillRect(0, y, getWidth(), this.lineHeight);
+    }
 }
