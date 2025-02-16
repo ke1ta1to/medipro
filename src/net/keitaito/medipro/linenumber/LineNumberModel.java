@@ -27,7 +27,8 @@ public class LineNumberModel extends JComponent {
     }
 
     public Element getRoot(JTextArea textArea) {
-        this.root = textArea.getDocument().getDefaultRootElement();
+        this.textArea = textArea;
+        this.root = this.textArea.getDocument().getDefaultRootElement();
         return this.root;
     }
 
@@ -36,13 +37,13 @@ public class LineNumberModel extends JComponent {
         return this.startOffset;
     }
 
-    public int getLineHeight(JTextArea textArea) {
+    public int getLineHeight() {
         this.lineHeight = this.fm.getHeight();
         return this.lineHeight;
     }
 
-    public FontMetrics getFontMetrics(JTextArea textArea) {
-        this.fm = textArea.getFontMetrics(textArea.getFont());
+    public FontMetrics getFontMetrics() {
+        this.fm = this.textArea.getFontMetrics(this.textArea.getFont());
         return this.fm;
     }
 }
