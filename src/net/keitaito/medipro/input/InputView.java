@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import net.keitaito.medipro.linenumber.LineNumberView;
 import net.keitaito.medipro.utils.Fonts;
 
 public class InputView extends JPanel {
@@ -40,6 +41,7 @@ public class InputView extends JPanel {
         // textArea.setCaretColor(Color.WHITE); // キャレットの色を白に設定
         // 行番号を表示する （未実装）
         JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setRowHeaderView(new LineNumberView(textArea)); // ← 行番号を設定
 
         add(scrollPane, BorderLayout.CENTER);
 
