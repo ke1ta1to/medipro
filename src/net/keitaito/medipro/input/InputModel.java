@@ -5,6 +5,7 @@ import java.beans.PropertyChangeSupport;
 import javax.swing.JTextArea;
 import javax.swing.text.Element;
 import java.awt.FontMetrics;
+import java.awt.Graphics;
 
 import net.keitaito.medipro.App;
 import net.keitaito.medipro.save.SaveData;
@@ -94,5 +95,17 @@ public class InputModel {
 
     public int getStringWidth(String text) {
         return this.fm.stringWidth(text);
+    }
+
+    // InputViewのupdateを呼び出す
+    public void update(int line) {
+        pcs.firePropertyChange("update", null, line);
+        System.out.println("update");
+    }
+
+    // InputViewのresetを呼び出す
+    public void reset() {
+        pcs.firePropertyChange("reset", null, null);
+        System.out.println("reset");
     }
 }

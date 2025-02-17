@@ -50,16 +50,17 @@ public class InputController {
         CommandStore commandStore = App.getCommandStore();
         Thread thread = new Thread(() -> {
             try {
+                model.reset();
                 Command firstCommand = commandStore.getCommand("wait 150ms");
                 firstCommand.execute(keyAction, "wait 150ms");
                 String[] lines = model.getText().split("\n");
-                int i = 1;
+                int i = 0;
                 for (String line : lines) {
+                    model.update(i++); // 行番号を更新
                     Command command = commandStore.getCommand(line);
                     if (command != null) {
                         command.execute(keyAction, line);
                     }
-                    i++;
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

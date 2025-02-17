@@ -28,6 +28,7 @@ public class InputView extends JPanel {
 
     private int lineHeight;
     private int startOffset;
+    private int currentLine = -1; // 現在強調表示されている行
 
     public InputView(InputModel model, InputController controller) {
         this.model = model;
@@ -49,6 +50,11 @@ public class InputView extends JPanel {
         textArea.setLineWrap(true); // テキストがコンポーネントの幅を超えたときに折り返す
 
         model.setInputTextData(textArea);
+
+        model.addPropertyChangeListener("update", evt -> {
+            currentLine = (int) evt.getNewValue();
+            repaint(); // 再描画をトリガー
+        });
 
         add(scrollPane, BorderLayout.CENTER);
 
@@ -80,6 +86,14 @@ public class InputView extends JPanel {
         add(buttonPanel, BorderLayout.SOUTH);
 
         model.addPropertyChangeListener("text", this::updateText);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (currentLine >= 0) {
+            update(g, currentLine);
+        }
     }
 
     public InputModel getModel() {
@@ -118,40 +132,42 @@ public class InputView extends JPanel {
     }
 
     // 指定された「行まで」の文字列のみをハイライトする
-    public void setMultiLineCharacterColor(Graphics g, Color color, int line) {
+    public void setMultiLineHighlight(Graphics g, Color color1, Color color2, int line) {
+        if (line < 0)
+            return;
         model.setInputTextData(textArea);
         this.startOffset = model.getStartOffset();
         this.lineHeight = model.getLineHeight();
         int y = this.startOffset;
-        g.setColor(color);
+        g.setColor(color1);
         String[] lines = textArea.getText().split("\n"); // 改行で分割
 
+        g.setColor(color2);
         for (int i = 0; i < line; i++) {
             int width = this.model.getStringWidth(lines[i]);
             y = this.startOffset + i * this.lineHeight;
             g.fillRect(0, y, width, this.lineHeight); // ハイライト
-            g.setColor(Color.BLACK);
             g.drawString(lines[i], 0, y);
         }
     }
 
     // 指定された「行」の文字列をハイライトする
-    public void setSingleLineCharacterColor(Graphics g, Color color, int line) {
+    public void setSingleLineHighlight(Graphics g, Color color1, Color color2, int line) {
         model.setInputTextData(textArea);
         this.startOffset = model.getStartOffset();
         this.lineHeight = model.getLineHeight();
         int y = this.startOffset + line * this.lineHeight;
-        g.setColor(color);
+        g.setColor(color1);
         String[] lines = textArea.getText().split("\n"); // 改行で分割
 
         int width = this.model.getStringWidth(lines[line]);
         g.fillRect(0, y, width, this.lineHeight);
-        g.setColor(Color.BLACK);
+        g.setColor(color2);
         g.drawString(lines[line], 0, y);
     }
 
     // テキストエリアの背景色,ハイライトをリセットする
-    public void resetColor(Graphics g) {
+    public void reset(Graphics g) {
         model.setInputTextData(textArea);
         this.startOffset = model.getStartOffset();
         this.lineHeight = model.getLineHeight();
@@ -162,18 +178,14 @@ public class InputView extends JPanel {
         textArea.setText(textArea.getText());
     }
 
-    // テキストエリアの背景色,ハイライトを更新する
+    // 読み込まれる行が更新される度に呼び出されるコードの強調表示を行う
     public void update(Graphics g, int line) {
-        model.setInputTextData(textArea);
-        this.startOffset = model.getStartOffset();
-        this.lineHeight = model.getLineHeight();
-        setMultiLineBackgroundColor(g, new Color(226, 226, 210), line);
+        setMultiLineBackgroundColor(g, new Color(226, 226, 210), line); // rgb(226, 226, 210)
         g.setColor(Color.BLACK);
-        String[] lines = textArea.getText().split("\n");
-
-        for (int i = 0; i < lines.length; i++) {
-            int y = this.startOffset + i * this.lineHeight;
-            g.drawString(lines[i], 0, y);
-        }
+        // rgb(218, 171, 181) rgb(114, 86, 97)
+        setMultiLineHighlight(g, new Color(218, 171, 181), new Color(114, 86, 97), line - 1);
+        // rgb(200, 92, 122) rgb(117, 67, 79)
+        setSingleLineHighlight(g, new Color(200, 92, 122), new Color(117, 67, 79), line);
+        System.out.println("実行中の行: " + line);
     }
 }
