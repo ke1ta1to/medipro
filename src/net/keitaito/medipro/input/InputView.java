@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.beans.PropertyChangeEvent;
 
@@ -14,9 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
-import javax.swing.text.Element;
 
-import net.keitaito.medipro.linenumber.LineNumberModel;
 import net.keitaito.medipro.linenumber.LineNumberView;
 import net.keitaito.medipro.utils.Fonts;
 
@@ -29,7 +26,6 @@ public class InputView extends JPanel {
 
     private final JButton helpButton;
 
-    private Element root;
     private int lineHeight;
     private int startOffset;
 
@@ -152,5 +148,32 @@ public class InputView extends JPanel {
         g.fillRect(0, y, width, this.lineHeight);
         g.setColor(Color.BLACK);
         g.drawString(lines[line], 0, y);
+    }
+
+    // テキストエリアの背景色,ハイライトをリセットする
+    public void resetColor(Graphics g) {
+        model.setInputTextData(textArea);
+        this.startOffset = model.getStartOffset();
+        this.lineHeight = model.getLineHeight();
+        g.setColor(new Color(245, 244, 228));
+        g.fillRect(0, 0, getWidth(), getHeight());
+
+        textArea.setForeground(Color.BLACK);
+        textArea.setText(textArea.getText());
+    }
+
+    // テキストエリアの背景色,ハイライトを更新する
+    public void update(Graphics g, int line) {
+        model.setInputTextData(textArea);
+        this.startOffset = model.getStartOffset();
+        this.lineHeight = model.getLineHeight();
+        setMultiLineBackgroundColor(g, new Color(226, 226, 210), line);
+        g.setColor(Color.BLACK);
+        String[] lines = textArea.getText().split("\n");
+
+        for (int i = 0; i < lines.length; i++) {
+            int y = this.startOffset + i * this.lineHeight;
+            g.drawString(lines[i], 0, y);
+        }
     }
 }

@@ -53,11 +53,13 @@ public class InputController {
                 Command firstCommand = commandStore.getCommand("wait 150ms");
                 firstCommand.execute(keyAction, "wait 150ms");
                 String[] lines = model.getText().split("\n");
+                int i = 1;
                 for (String line : lines) {
                     Command command = commandStore.getCommand(line);
                     if (command != null) {
                         command.execute(keyAction, line);
                     }
+                    i++;
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

@@ -100,4 +100,27 @@ public class LineNumberView extends JComponent {
         g.setColor(color);
         g.fillRect(0, y - this.lineHeight, getWidth(), this.lineHeight);
     }
+
+    public void resetColor(Graphics g) {
+        g.setColor(new Color(245, 244, 228));
+        g.fillRect(0, 0, getWidth(), getHeight());
+
+        g.setColor(Color.GRAY);
+        for (int i = 0; i < root.getElementCount(); i++) {
+            int y = this.startOffset + i * this.lineHeight;
+            g.drawString(String.valueOf(i + 1), 5, y);
+        }
+    }
+
+    public void update(Graphics g, int line) {
+        setMultiLineBackgroundColor(g, new Color(226, 226, 210), line);
+        // 行番号の描画
+        g.setColor(Color.GRAY);
+        for (int i = 0; i < root.getElementCount(); i++) {
+            int y = this.startOffset + i * this.lineHeight;
+            g.drawString(String.valueOf(i + 1), 5, y);
+        }
+
+        repaint();
+    }
 }
