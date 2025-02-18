@@ -19,6 +19,7 @@ public class InputModel {
     private int lineHeight;
     private int startOffset;
     private JTextArea textArea;
+    private int currentLine = 0; // 現在の行番号を保持
 
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
@@ -97,10 +98,10 @@ public class InputModel {
         return this.fm.stringWidth(text);
     }
 
-    // InputViewのupdateを呼び出す
-    public void update(int line) {
-        pcs.firePropertyChange("update", null, line);
-        System.out.println("update");
+    public void update() {
+        pcs.firePropertyChange("update", null, currentLine);
+        System.out.println("update: " + currentLine);
+        currentLine++; // 次の行へ移動
     }
 
     // InputViewのresetを呼び出す

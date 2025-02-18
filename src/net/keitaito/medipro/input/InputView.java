@@ -52,8 +52,13 @@ public class InputView extends JPanel {
         model.setInputTextData(textArea);
 
         model.addPropertyChangeListener("update", evt -> {
-            currentLine = (int) evt.getNewValue();
-            repaint(); // 再描画をトリガー
+            Object newValue = evt.getNewValue();
+            if (newValue instanceof Integer) {
+                currentLine = (int) newValue;
+                repaint(); // 再描画をトリガー
+            } else {
+                System.err.println("Warning: Received null or invalid line number in update event.");
+            }
         });
 
         add(scrollPane, BorderLayout.CENTER);
@@ -92,7 +97,7 @@ public class InputView extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (currentLine >= 0) {
-            update(g, currentLine);
+            update(g);
         }
     }
 
@@ -176,16 +181,18 @@ public class InputView extends JPanel {
 
         textArea.setForeground(Color.BLACK);
         textArea.setText(textArea.getText());
+        // currentLine = -1;
     }
 
     // 読み込まれる行が更新される度に呼び出されるコードの強調表示を行う
-    public void update(Graphics g, int line) {
-        setMultiLineBackgroundColor(g, new Color(226, 226, 210), line); // rgb(226, 226, 210)
+    public void update(Graphics g) {
+        setMultiLineBackgroundColor(g, new Color(226, 226, 210), currentLine); // rgb(226, 226, 210)
         g.setColor(Color.BLACK);
         // rgb(218, 171, 181) rgb(114, 86, 97)
-        setMultiLineHighlight(g, new Color(218, 171, 181), new Color(114, 86, 97), line - 1);
+        setMultiLineHighlight(g, new Color(218, 171, 181), new Color(114, 86, 97), currentLine - 1);
         // rgb(200, 92, 122) rgb(117, 67, 79)
-        setSingleLineHighlight(g, new Color(200, 92, 122), new Color(117, 67, 79), line);
-        System.out.println("実行中の行: " + line);
+        setSingleLineHighlight(g, new Color(200, 92, 122), new Color(117, 67, 79), currentLine);
+        System.out.println("実行中の行: " + currentLine);
+        // currentLine++;
     }
 }
