@@ -13,7 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextPane;
+//import javax.swing.JTextPane; // JTextPaneを使えばテキストエリアの背景色を変更できたが、今回はJTextAreaを使う
 
 import net.keitaito.medipro.linenumber.LineNumberView;
 import net.keitaito.medipro.utils.Fonts;
@@ -27,8 +27,6 @@ public class InputView extends JPanel {
 
     private final JButton helpButton;
 
-    private int lineHeight;
-    private int startOffset;
     private int currentLine = -1; // 現在強調表示されている行
     private int highlightLine = -1; // ハイライトする1行
     private int highlightUntilLine = -1; // ここまでの行をハイライト
@@ -70,7 +68,7 @@ public class InputView extends JPanel {
             }
         });
 
-        model.addPropertyChangeListener("reset", evt -> {
+        model.addPropertyChangeListener("reset", evt -> { // この機能はJTextAreaでは実装不可能なものを含んでいたので、削除
             Graphics g = getGraphics();
             reset(g);
         });
@@ -111,23 +109,26 @@ public class InputView extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        int lineHeight = textArea.getFontMetrics(textArea.getFont()).getHeight();
-        int startOffset = textArea.getInsets().top;
-
-        // g.setColor(new Color(226, 226, 210)); // マルチライン用の背景色rgb(226, 226, 210)
-        g.setColor(Color.BLUE);
-        if (highlightUntilLine >= 0) {
-            int y = startOffset + highlightUntilLine * lineHeight;
-            g.fillRect(0, 0, getWidth(), y);
-            System.out.println("paintComponent: " + highlightUntilLine);
-        }
-
-        // 使う予定なし
-        g.setColor(new Color(200, 92, 122)); // シングルライン用の背景色rgb(200, 92, 122)
-        if (highlightLine >= 0) {
-            int y = startOffset + highlightLine * lineHeight;
-            g.fillRect(0, y, getWidth(), lineHeight);
-        }
+        // この機能はtextAreaを操作しているわけではないので、意味がない
+        /*
+         * int lineHeight = textArea.getFontMetrics(textArea.getFont()).getHeight();
+         * int startOffset = textArea.getInsets().top;
+         * 
+         * 
+         * // g.setColor(new Color(226, 226, 210)); // マルチライン用の背景色rgb(226, 226, 210)
+         * g.setColor(Color.BLUE);
+         * if (highlightUntilLine >= 0) {
+         * int y = startOffset + highlightUntilLine * lineHeight;
+         * g.fillRect(0, 0, getWidth(), y);
+         * System.out.println("paintComponent: " + highlightUntilLine);
+         * }
+         * 
+         * g.setColor(new Color(200, 92, 122)); // シングルライン用の背景色rgb(200, 92, 122)
+         * if (highlightLine >= 0) {
+         * int y = startOffset + highlightLine * lineHeight;
+         * g.fillRect(0, y, getWidth(), lineHeight);
+         * }
+         */
     }
 
     public InputModel getModel() {

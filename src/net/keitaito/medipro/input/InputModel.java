@@ -5,7 +5,6 @@ import java.beans.PropertyChangeSupport;
 import javax.swing.JTextArea;
 import javax.swing.text.Element;
 import java.awt.FontMetrics;
-import java.awt.Graphics;
 
 import net.keitaito.medipro.App;
 import net.keitaito.medipro.save.SaveData;
