@@ -54,10 +54,16 @@ public class InputView extends JPanel {
         model.addPropertyChangeListener("update", evt -> {
             Object newValue = evt.getNewValue();
             if (newValue instanceof Integer) {
-                currentLine = (int) newValue;
-                repaint(); // 再描画をトリガー
-            } else {
-                System.err.println("Warning: Received null or invalid line number in update event.");
+                int newLine = (int) newValue;
+                int maxLines = textArea.getText().split("\n").length; // 現在の行数を取得
+
+                if (newLine < maxLines) { // 範囲外のインデックスにアクセスしない
+                    currentLine = newLine;
+                    highlightLine(currentLine);
+                    repaint(); // 再描画をトリガー
+                } else {
+                    System.err.println("Warning: currentLine exceeds maxLines: " + newLine);
+                }
             }
         });
 
@@ -194,5 +200,23 @@ public class InputView extends JPanel {
         setSingleLineHighlight(g, new Color(200, 92, 122), new Color(117, 67, 79), currentLine);
         System.out.println("実行中の行: " + currentLine);
         // currentLine++;
+    }
+
+    private void highlightLine(int line) {
+        try {
+            String[] lines = textArea.getText().split("\n");
+            if (line >= lines.length)
+                return; // 範囲外の行にはアクセスしない
+
+            textArea.getHighlighter().removeAllHighlights(); // 既存のハイライトを削除
+            int startOffset = textArea.getLineStartOffset(line);
+            int endOffset = textArea.getLineEndOffset(line);
+
+            textArea.getHighlighter().addHighlight(startOffset, endOffset,
+                    new javax.swing.text.DefaultHighlighter.DefaultHighlightPainter(new Color(200, 92, 122)));
+            // 行をrgb(200, 92, 122)でハイライト
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -106,6 +106,7 @@ public class InputModel {
 
     // InputViewのresetを呼び出す
     public void reset() {
+        currentLine = 0;
         pcs.firePropertyChange("reset", null, null);
         System.out.println("reset");
     }
