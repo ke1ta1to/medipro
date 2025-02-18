@@ -30,6 +30,8 @@ public class InputView extends JPanel {
     private int lineHeight;
     private int startOffset;
     private int currentLine = -1; // 現在強調表示されている行
+    private int highlightLine = -1; // ハイライトする1行
+    private int highlightUntilLine = -1; // ここまでの行をハイライト
 
     public InputView(InputModel model, InputController controller) {
         this.model = model;
@@ -60,7 +62,7 @@ public class InputView extends JPanel {
 
                 if (newLine < maxLines) { // 範囲外のインデックスにアクセスしない
                     currentLine = newLine;
-                    highlightLine(currentLine);
+                    update(currentLine);
                     repaint(); // 再描画をトリガー
                 } else {
                     System.err.println("Warning: currentLine exceeds maxLines: " + newLine);
@@ -103,8 +105,21 @@ public class InputView extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (currentLine >= 0) {
-            update(g);
+
+        int lineHeight = textArea.getFontMetrics(textArea.getFont()).getHeight();
+        int startOffset = textArea.getInsets().top;
+
+        g.setColor(new Color(226, 226, 210)); // マルチライン用の背景色rgb(226, 226, 210)
+        if (highlightUntilLine >= 0) {
+            int y = startOffset + highlightUntilLine * lineHeight;
+            g.fillRect(0, 0, getWidth(), y);
+        }
+
+        // 使う予定なし
+        g.setColor(new Color(200, 92, 122)); // シングルライン用の背景色rgb(200, 92, 122)
+        if (highlightLine >= 0) {
+            int y = startOffset + highlightLine * lineHeight;
+            g.fillRect(0, y, getWidth(), lineHeight);
         }
     }
 
@@ -124,58 +139,15 @@ public class InputView extends JPanel {
     }
 
     // 指定された「行まで」の背景色を変更する
-    public void setMultiLineBackgroundColor(Graphics g, Color color, int line) {
-        model.setInputTextData(textArea);
-        this.startOffset = model.getStartOffset();
-        this.lineHeight = model.getLineHeight();
-        int y = this.startOffset + line * this.lineHeight;
-        g.setColor(color);
-        g.fillRect(0, 0, getWidth(), y);
+    public void setMultiLineBackgroundColor(int line) {
+        this.highlightUntilLine = line;
+        repaint(); // 再描画をトリガー
     }
 
     // 指定された「行」の背景色を変更する
-    public void setSingleLineBackgroundColor(Graphics g, Color color, int line) {
-        model.setInputTextData(textArea);
-        this.startOffset = model.getStartOffset();
-        this.lineHeight = model.getLineHeight();
-        int y = this.startOffset + line * this.lineHeight;
-        g.setColor(color);
-        g.fillRect(0, y, getWidth(), this.lineHeight);
-    }
-
-    // 指定された「行まで」の文字列のみをハイライトする
-    public void setMultiLineHighlight(Graphics g, Color color1, Color color2, int line) {
-        if (line < 0)
-            return;
-        model.setInputTextData(textArea);
-        this.startOffset = model.getStartOffset();
-        this.lineHeight = model.getLineHeight();
-        int y = this.startOffset;
-        g.setColor(color1);
-        String[] lines = textArea.getText().split("\n"); // 改行で分割
-
-        g.setColor(color2);
-        for (int i = 0; i < line; i++) {
-            int width = this.model.getStringWidth(lines[i]);
-            y = this.startOffset + i * this.lineHeight;
-            g.fillRect(0, y, width, this.lineHeight); // ハイライト
-            g.drawString(lines[i], 0, y);
-        }
-    }
-
-    // 指定された「行」の文字列をハイライトする
-    public void setSingleLineHighlight(Graphics g, Color color1, Color color2, int line) {
-        model.setInputTextData(textArea);
-        this.startOffset = model.getStartOffset();
-        this.lineHeight = model.getLineHeight();
-        int y = this.startOffset + line * this.lineHeight;
-        g.setColor(color1);
-        String[] lines = textArea.getText().split("\n"); // 改行で分割
-
-        int width = this.model.getStringWidth(lines[line]);
-        g.fillRect(0, y, width, this.lineHeight);
-        g.setColor(color2);
-        g.drawString(lines[line], 0, y);
+    public void setSingleLineBackgroundColor(int line) {
+        this.highlightLine = line;
+        repaint(); // 再描画をトリガー
     }
 
     // テキストエリアの背景色,ハイライトをリセットする
@@ -192,15 +164,9 @@ public class InputView extends JPanel {
     }
 
     // 読み込まれる行が更新される度に呼び出されるコードの強調表示を行う
-    public void update(Graphics g) {
-        setMultiLineBackgroundColor(g, new Color(226, 226, 210), currentLine); // rgb(226, 226, 210)
-        g.setColor(Color.BLACK);
-        // rgb(218, 171, 181) rgb(114, 86, 97)
-        setMultiLineHighlight(g, new Color(218, 171, 181), new Color(114, 86, 97), currentLine - 1);
-        // rgb(200, 92, 122) rgb(117, 67, 79)
-        setSingleLineHighlight(g, new Color(200, 92, 122), new Color(117, 67, 79), currentLine);
-        System.out.println("実行中の行: " + currentLine);
-        // currentLine++;
+    public void update(int line) {
+        setMultiLineBackgroundColor(line);
+        highlightLine(line);
     }
 
     private void highlightLine(int line) {
