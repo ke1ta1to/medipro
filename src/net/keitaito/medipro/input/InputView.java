@@ -70,6 +70,11 @@ public class InputView extends JPanel {
             }
         });
 
+        model.addPropertyChangeListener("reset", evt -> {
+            Graphics g = getGraphics();
+            reset(g);
+        });
+
         add(scrollPane, BorderLayout.CENTER);
 
         helpButton = new JButton();
@@ -152,16 +157,18 @@ public class InputView extends JPanel {
 
     // テキストエリアの背景色,ハイライトをリセットする
     public void reset(Graphics g) {
-        model.setInputTextData(textArea);
-        this.startOffset = model.getStartOffset();
-        this.lineHeight = model.getLineHeight();
-        g.setColor(new Color(245, 244, 228));
-        g.fillRect(0, 0, getWidth(), getHeight());
-
-        textArea.setForeground(Color.BLACK);
-        textArea.setText(textArea.getText());
-        // currentLine = -1;
-        System.out.println("Reset");
+        /*
+         * model.setInputTextData(textArea);
+         * this.startOffset = model.getStartOffset();
+         * this.lineHeight = model.getLineHeight();
+         * g.setColor(new Color(245, 244, 228));
+         * g.fillRect(0, 0, getWidth(), getHeight());
+         * 
+         * textArea.setForeground(Color.BLACK);
+         * textArea.setText(textArea.getText());
+         * // currentLine = -1;
+         * System.out.println("Reset");
+         */
     }
 
     // 読み込まれる行が更新される度に呼び出されるコードの強調表示を行う
