@@ -29,6 +29,8 @@ public class LevelController implements ActionListener {
                 App.getInputModel().loadInputText();
                 App.getStageModel().setWorld(App.worldLevel1);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
+                App.getBgmModel().update("nc399501_StageBGM.wav");
+                App.getBgmModel().loop();
                 break;
 
             case "2":
@@ -36,6 +38,8 @@ public class LevelController implements ActionListener {
                 App.getInputModel().loadInputText();
                 App.getStageModel().setWorld(App.worldLevel2);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
+                App.getBgmModel().update("nc399501_StageBGM.wav");
+                App.getBgmModel().loop();
                 break;
 
             case "3":
@@ -43,6 +47,8 @@ public class LevelController implements ActionListener {
                 App.getInputModel().loadInputText();
                 App.getStageModel().setWorld(App.worldLevel3);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
+                App.getBgmModel().update("nc399501_StageBGM.wav");
+                App.getBgmModel().loop();
                 break;
 
             case "4":
@@ -50,6 +56,8 @@ public class LevelController implements ActionListener {
                 App.getInputModel().loadInputText();
                 App.getStageModel().setWorld(App.worldLevel4);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
+                App.getBgmModel().update("nc399501_StageBGM.wav");
+                App.getBgmModel().loop();
                 break;
 
             case "5":
@@ -57,6 +65,8 @@ public class LevelController implements ActionListener {
                 App.getInputModel().loadInputText();
                 App.getStageModel().setWorld(App.worldLevel5);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
+                App.getBgmModel().update("nc399501_StageBGM.wav");
+                App.getBgmModel().loop();
                 break;
 
             case "6":
@@ -64,6 +74,8 @@ public class LevelController implements ActionListener {
                 App.getInputModel().loadInputText();
                 App.getStageModel().setWorld(App.worldLevel6);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
+                App.getBgmModel().update("nc399501_StageBGM.wav");
+                App.getBgmModel().loop();
                 break;
 
             case "7":
@@ -71,6 +83,8 @@ public class LevelController implements ActionListener {
                 App.getInputModel().loadInputText();
                 App.getStageModel().setWorld(App.worldLevel7);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
+                App.getBgmModel().update("nc399501_StageBGM.wav");
+                App.getBgmModel().loop();
                 break;
 
             case "8":
@@ -78,6 +92,8 @@ public class LevelController implements ActionListener {
                 App.getInputModel().loadInputText();
                 App.getStageModel().setWorld(App.worldLevel8);
                 App.getAppModel().setPageName(AppModel.PAGE_WORKSPACE);
+                App.getBgmModel().update("nc399501_StageBGM.wav");
+                App.getBgmModel().loop();
                 break;
 
             case "exit":

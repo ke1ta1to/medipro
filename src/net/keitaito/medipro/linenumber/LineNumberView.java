@@ -2,7 +2,6 @@ package net.keitaito.medipro.linenumber;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -12,8 +11,6 @@ import javax.swing.event.DocumentListener;
 import javax.swing.JComponent;
 import javax.swing.JTextArea;
 import javax.swing.text.Element;
-
-import net.keitaito.medipro.linenumber.LineNumberModel;
 
 public class LineNumberView extends JComponent {
     private final JTextArea textArea;
