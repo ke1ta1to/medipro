@@ -100,7 +100,7 @@ public class InputModel {
 
     public void update() {
         pcs.firePropertyChange("update", null, currentLine);
-        System.out.println("update: " + currentLine);
+        // System.out.println("update: " + currentLine);
         currentLine++; // 次の行へ移動
     }
 
