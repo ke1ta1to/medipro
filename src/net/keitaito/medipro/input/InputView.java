@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.beans.PropertyChangeEvent;
 
+import javax.swing.text.DefaultHighlighter;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -204,19 +205,34 @@ public class InputView extends JPanel {
 
     private void highlightLine(int line) {
         try {
-            String[] lines = textArea.getText().split("\n");
-            if (line >= lines.length)
-                return; // 範囲外の行にはアクセスしない
-
             textArea.getHighlighter().removeAllHighlights(); // 既存のハイライトを削除
+            String[] lines = textArea.getText().split("\n");
+
+            if (line >= lines.length)
+                return; // 範囲外なら何もしない
+
+            // すでに処理した行をピンク rgb(218, 171, 181) でハイライト
+            if (line > 0) {
+                int startOffset = textArea.getLineStartOffset(0);
+                int endOffset = textArea.getLineEndOffset(line - 1);
+
+                textArea.getHighlighter().addHighlight(startOffset, endOffset,
+                        new DefaultHighlighter.DefaultHighlightPainter(new Color(218, 171, 181)));
+                System.out.println("ハイライト（過去の行）: 0 〜 " + (line - 1));
+            }
+
+            // 現在の行を赤 rgb(200, 92, 122) でハイライト
             int startOffset = textArea.getLineStartOffset(line);
             int endOffset = textArea.getLineEndOffset(line);
 
             textArea.getHighlighter().addHighlight(startOffset, endOffset,
-                    new javax.swing.text.DefaultHighlighter.DefaultHighlightPainter(new Color(200, 92, 122)));
-            // 行をrgb(200, 92, 122)でハイライト
+                    new DefaultHighlighter.DefaultHighlightPainter(new Color(200, 92, 122)));
+            System.out.println("ハイライト（現在の行）: " + line);
+
         } catch (Exception e) {
+            System.err.println("エラー発生: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
 }

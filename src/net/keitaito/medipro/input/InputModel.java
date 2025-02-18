@@ -106,7 +106,7 @@ public class InputModel {
 
     // InputViewのresetを呼び出す
     public void reset() {
-        currentLine = 0;
+        currentLine = 0; // 行番号をリセット
         pcs.firePropertyChange("reset", null, null);
         System.out.println("reset");
     }
