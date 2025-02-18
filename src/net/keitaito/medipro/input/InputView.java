@@ -109,10 +109,12 @@ public class InputView extends JPanel {
         int lineHeight = textArea.getFontMetrics(textArea.getFont()).getHeight();
         int startOffset = textArea.getInsets().top;
 
-        g.setColor(new Color(226, 226, 210)); // マルチライン用の背景色rgb(226, 226, 210)
+        // g.setColor(new Color(226, 226, 210)); // マルチライン用の背景色rgb(226, 226, 210)
+        g.setColor(Color.BLUE);
         if (highlightUntilLine >= 0) {
             int y = startOffset + highlightUntilLine * lineHeight;
             g.fillRect(0, 0, getWidth(), y);
+            System.out.println("paintComponent: " + highlightUntilLine);
         }
 
         // 使う予定なし
@@ -141,13 +143,11 @@ public class InputView extends JPanel {
     // 指定された「行まで」の背景色を変更する
     public void setMultiLineBackgroundColor(int line) {
         this.highlightUntilLine = line;
-        repaint(); // 再描画をトリガー
     }
 
     // 指定された「行」の背景色を変更する
     public void setSingleLineBackgroundColor(int line) {
         this.highlightLine = line;
-        repaint(); // 再描画をトリガー
     }
 
     // テキストエリアの背景色,ハイライトをリセットする
@@ -161,6 +161,7 @@ public class InputView extends JPanel {
         textArea.setForeground(Color.BLACK);
         textArea.setText(textArea.getText());
         // currentLine = -1;
+        System.out.println("Reset");
     }
 
     // 読み込まれる行が更新される度に呼び出されるコードの強調表示を行う
@@ -184,7 +185,7 @@ public class InputView extends JPanel {
 
                 textArea.getHighlighter().addHighlight(startOffset, endOffset,
                         new DefaultHighlighter.DefaultHighlightPainter(new Color(218, 171, 181)));
-                System.out.println("ハイライト（過去の行）: 0 〜 " + (line - 1));
+                // System.out.println("ハイライト（過去の行）: 0 - " + (line - 1));
             }
 
             // 現在の行を赤 rgb(200, 92, 122) でハイライト
@@ -193,7 +194,7 @@ public class InputView extends JPanel {
 
             textArea.getHighlighter().addHighlight(startOffset, endOffset,
                     new DefaultHighlighter.DefaultHighlightPainter(new Color(200, 92, 122)));
-            System.out.println("ハイライト（現在の行）: " + line);
+            // System.out.println("ハイライト（現在の行）: " + line);
 
         } catch (Exception e) {
             System.err.println("エラー発生: " + e.getMessage());

@@ -108,6 +108,6 @@ public class InputModel {
     public void reset() {
         currentLine = 0; // 行番号をリセット
         pcs.firePropertyChange("reset", null, null);
-        System.out.println("reset");
+        // System.out.println("reset");
     }
 }
