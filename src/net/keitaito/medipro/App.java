@@ -227,8 +227,7 @@ public class App {
         appFrame.setVisible(true);
 
         bgmModel = new SoundModel("nc400405_BGM.wav");
-        bgmModel.setVolume(0.0f); // うるさいので
-        // bgmModel.loop();
+        bgmModel.loop();
         seModel = new SoundModel("nc254757_決定_クリック.wav");
     }
 

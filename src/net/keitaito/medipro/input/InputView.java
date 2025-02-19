@@ -4,14 +4,18 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.beans.PropertyChangeEvent;
 
+import javax.swing.text.DefaultHighlighter;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+//import javax.swing.JTextPane; // JTextPaneを使えばテキストエリアの背景色を変更できたが、今回はJTextAreaを使う
 
+import net.keitaito.medipro.linenumber.LineNumberView;
 import net.keitaito.medipro.utils.Fonts;
 
 public class InputView extends JPanel {
@@ -22,6 +26,10 @@ public class InputView extends JPanel {
     private final JTextArea textArea;
 
     private final JButton helpButton;
+
+    private int currentLine = -1; // 現在強調表示されている行
+    private int highlightLine = -1; // ハイライトする1行
+    private int highlightUntilLine = -1; // ここまでの行をハイライト
 
     public InputView(InputModel model, InputController controller) {
         this.model = model;
@@ -35,11 +43,35 @@ public class InputView extends JPanel {
         textArea = new JTextArea();
         textArea.setFont(Fonts.MPLUS1CODE_FONT.deriveFont(Font.PLAIN, 16));
         textArea.getDocument().addDocumentListener(controller.getTextChangeListener(textArea));
-        textArea.setBackground(new Color(0xf5f4e4));// テキストの背景色をf5f4e4に設定
+        textArea.setBackground(new Color(245, 244, 228));// テキストの背景色をrgb(245,244,228)に設定
         // textArea.setForeground(Color.WHITE); // テキストの文字色を白に設定
         // textArea.setCaretColor(Color.WHITE); // キャレットの色を白に設定
-        // 行番号を表示する （未実装）
         JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setRowHeaderView(new LineNumberView(textArea)); // 行番号を表示
+        textArea.setLineWrap(true); // テキストがコンポーネントの幅を超えたときに折り返す
+
+        model.setInputTextData(textArea);
+
+        model.addPropertyChangeListener("update", evt -> {
+            Object newValue = evt.getNewValue();
+            if (newValue instanceof Integer) {
+                int newLine = (int) newValue;
+                int maxLines = textArea.getText().split("\n").length; // 現在の行数を取得
+
+                if (newLine < maxLines) { // 範囲外のインデックスにアクセスしない
+                    currentLine = newLine;
+                    update(currentLine);
+                    repaint(); // 再描画をトリガー
+                } else {
+                    System.err.println("Warning: currentLine exceeds maxLines: " + newLine);
+                }
+            }
+        });
+
+        model.addPropertyChangeListener("reset", evt -> { // この機能はJTextAreaでは実装不可能なものを含んでいたので、削除
+            Graphics g = getGraphics();
+            reset(g);
+        });
 
         add(scrollPane, BorderLayout.CENTER);
 
@@ -65,13 +97,38 @@ public class InputView extends JPanel {
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BorderLayout());
-        // ボタンの背景色を2e3648に設定
-        buttonPanel.setBackground(new Color(0x2e3648));
+        buttonPanel.setBackground(new Color(0x2e3648)); // ボタンの背景色を2e3648に設定
         buttonPanel.add(helpButton, BorderLayout.EAST);
         buttonPanel.add(submitButton, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
         model.addPropertyChangeListener("text", this::updateText);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        // この機能はtextAreaを操作しているわけではないので、意味がない
+        /*
+         * int lineHeight = textArea.getFontMetrics(textArea.getFont()).getHeight();
+         * int startOffset = textArea.getInsets().top;
+         * 
+         * 
+         * // g.setColor(new Color(226, 226, 210)); // マルチライン用の背景色rgb(226, 226, 210)
+         * g.setColor(Color.BLUE);
+         * if (highlightUntilLine >= 0) {
+         * int y = startOffset + highlightUntilLine * lineHeight;
+         * g.fillRect(0, 0, getWidth(), y);
+         * System.out.println("paintComponent: " + highlightUntilLine);
+         * }
+         * 
+         * g.setColor(new Color(200, 92, 122)); // シングルライン用の背景色rgb(200, 92, 122)
+         * if (highlightLine >= 0) {
+         * int y = startOffset + highlightLine * lineHeight;
+         * g.fillRect(0, y, getWidth(), lineHeight);
+         * }
+         */
     }
 
     public InputModel getModel() {
@@ -86,6 +143,70 @@ public class InputView extends JPanel {
         String newText = (String) evt.getNewValue();
         if (!textArea.getText().equals(newText)) {
             textArea.setText((String) evt.getNewValue());
+        }
+    }
+
+    // 指定された「行まで」の背景色を変更する
+    public void setMultiLineBackgroundColor(int line) {
+        this.highlightUntilLine = line;
+    }
+
+    // 指定された「行」の背景色を変更する
+    public void setSingleLineBackgroundColor(int line) {
+        this.highlightLine = line;
+    }
+
+    // テキストエリアの背景色,ハイライトをリセットする
+    public void reset(Graphics g) {
+        /*
+         * model.setInputTextData(textArea);
+         * this.startOffset = model.getStartOffset();
+         * this.lineHeight = model.getLineHeight();
+         * g.setColor(new Color(245, 244, 228));
+         * g.fillRect(0, 0, getWidth(), getHeight());
+         * 
+         * textArea.setForeground(Color.BLACK);
+         * textArea.setText(textArea.getText());
+         * // currentLine = -1;
+         * System.out.println("Reset");
+         */
+    }
+
+    // 読み込まれる行が更新される度に呼び出されるコードの強調表示を行う
+    public void update(int line) {
+        setMultiLineBackgroundColor(line);
+        highlightLine(line);
+    }
+
+    private void highlightLine(int line) {
+        try {
+            textArea.getHighlighter().removeAllHighlights(); // 既存のハイライトを削除
+            String[] lines = textArea.getText().split("\n");
+
+            if (line >= lines.length)
+                return; // 範囲外なら何もしない
+
+            // すでに処理した行をピンク rgb(218, 171, 181) でハイライト
+            if (line > 0) {
+                int startOffset = textArea.getLineStartOffset(0);
+                int endOffset = textArea.getLineEndOffset(line - 1);
+
+                textArea.getHighlighter().addHighlight(startOffset, endOffset,
+                        new DefaultHighlighter.DefaultHighlightPainter(new Color(218, 171, 181)));
+                // System.out.println("ハイライト（過去の行）: 0 - " + (line - 1));
+            }
+
+            // 現在の行を赤 rgb(200, 92, 122) でハイライト
+            int startOffset = textArea.getLineStartOffset(line);
+            int endOffset = textArea.getLineEndOffset(line);
+
+            textArea.getHighlighter().addHighlight(startOffset, endOffset,
+                    new DefaultHighlighter.DefaultHighlightPainter(new Color(200, 92, 122)));
+            // System.out.println("ハイライト（現在の行）: " + line);
+
+        } catch (Exception e) {
+            System.err.println("エラー発生: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

@@ -2,6 +2,10 @@ package net.keitaito.medipro.input;
 
 import java.beans.PropertyChangeSupport;
 
+import javax.swing.JTextArea;
+import javax.swing.text.Element;
+import java.awt.FontMetrics;
+
 import net.keitaito.medipro.App;
 import net.keitaito.medipro.save.SaveData;
 import net.keitaito.medipro.save.SaveManager;
@@ -9,6 +13,12 @@ import net.keitaito.medipro.save.SaveManager;
 public class InputModel {
 
     private String text;
+    private Element root;
+    private FontMetrics fm;
+    private int lineHeight;
+    private int startOffset;
+    private JTextArea textArea;
+    private int currentLine = 0; // 現在の行番号を保持
 
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
@@ -55,4 +65,48 @@ public class InputModel {
         setText(inputText);
     }
 
+    public void setInputTextData(JTextArea textArea) {
+        this.textArea = textArea;
+        this.fm = textArea.getFontMetrics(this.textArea.getFont());
+        this.lineHeight = this.fm.getHeight();
+        this.root = this.textArea.getDocument().getDefaultRootElement();
+        this.startOffset = this.textArea.getInsets().top + this.fm.getAscent();
+    }
+
+    public Element getRoot() {
+        this.root = this.textArea.getDocument().getDefaultRootElement();
+        return this.root;
+    }
+
+    public int getStartOffset() {
+        this.startOffset = this.textArea.getInsets().top + this.fm.getAscent();
+        return this.startOffset;
+    }
+
+    public int getLineHeight() {
+        this.lineHeight = this.fm.getHeight();
+        return this.lineHeight;
+    }
+
+    public FontMetrics getFontMetrics() {
+        this.fm = this.textArea.getFontMetrics(this.textArea.getFont());
+        return this.fm;
+    }
+
+    public int getStringWidth(String text) {
+        return this.fm.stringWidth(text);
+    }
+
+    public void update() {
+        pcs.firePropertyChange("update", null, currentLine);
+        // System.out.println("update: " + currentLine);
+        currentLine++; // 次の行へ移動
+    }
+
+    // InputViewのresetを呼び出す
+    public void reset() {
+        currentLine = 0; // 行番号をリセット
+        pcs.firePropertyChange("reset", null, null);
+        // System.out.println("reset");
+    }
 }

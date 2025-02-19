@@ -36,7 +36,7 @@ public class StageMenuController {
     public void handleClickExit(ActionEvent e) {
         App.getAppModel().setPageName(AppModel.PAGE_TITLE);
         App.getBgmModel().update("nc400405_BGM.wav");
-        // App.getBgmModel().loop();
+        App.getBgmModel().loop();
         App.getSeModel().update("nc254757_決定_クリック.wav");
         model.setOpen(false);
 
