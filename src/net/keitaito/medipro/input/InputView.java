@@ -60,7 +60,7 @@ public class InputView extends JPanel {
         submitButton.setContentAreaFilled(false);
         submitButton.setBorderPainted(false);
         ImageIcon submitIcon = new ImageIcon(
-                getClass().getClassLoader().getResource("net/keitaito/medipro/images/execute.png"));
+                getClass().getClassLoader().getResource("net/keitaito/medipro/images/EXECUTE.png"));
         submitButton.setIcon(submitIcon);
 
         JPanel buttonPanel = new JPanel();

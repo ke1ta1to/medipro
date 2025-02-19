@@ -43,7 +43,7 @@ public class TopView extends JPanel {
             button.setBorderPainted(false);
             ImageIcon icon = new ImageIcon(
                     getClass().getClassLoader().getResource("net/keitaito/medipro/images/"
-                            + buttonLabels[i].toLowerCase() + ".png"));
+                            + buttonLabels[i] + ".png"));
             // サイズを調整
             button.setIcon(new ImageIcon(icon.getImage().getScaledInstance(300, 60, java.awt.Image.SCALE_SMOOTH)));
             // button.setPreferredSize(new Dimension(200, 40));
